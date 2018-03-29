@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psn.dao.LdapmMpwWbPsnWorkDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbPsnWork">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSN_WORK" jdbcType="VARCHAR" property="pkPsnWork" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="PSN_UID" jdbcType="VARCHAR" property="psnUid" />
+    <result column="BUSICORP" jdbcType="VARCHAR" property="busicorp" />
+    <result column="BUSIDEPT" jdbcType="VARCHAR" property="busidept" />
+    <result column="PK_OM_JOB" jdbcType="VARCHAR" property="pkOmJob" />
+    <result column="JOBNAME" jdbcType="VARCHAR" property="jobname" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="PK_CORP" jdbcType="VARCHAR" property="pkCorp" />
+    <result column="JOBTYPE" jdbcType="VARCHAR" property="jobtype" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="QUALINAME" jdbcType="VARCHAR" property="qualiname" />
+    <result column="QUALILEVEL" jdbcType="VARCHAR" property="qualilevel" />
+    <result column="PSN_STATUS" jdbcType="DECIMAL" property="psnStatus" />
+    <result column="PSN_TYPE" jdbcType="DECIMAL" property="psnType" />
+    <result column="PK_CT" jdbcType="VARCHAR" property="pkCt" />
+    <result column="ORGREMARK" jdbcType="VARCHAR" property="orgremark" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="DEF_NUM1" jdbcType="DECIMAL" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="DECIMAL" property="defNum2" />
+    <result column="DEF_NUM3" jdbcType="DECIMAL" property="defNum3" />
+    <result column="DEF_NUM4" jdbcType="DECIMAL" property="defNum4" />
+    <result column="DEF_NUM5" jdbcType="DECIMAL" property="defNum5" />
+    <result column="RECORDNUM" jdbcType="DECIMAL" property="recordnum" />
+    <result column="ISSCEO" jdbcType="VARCHAR" property="issceo" />
+    <result column="WBBEGINDATE" jdbcType="VARCHAR" property="wbbegindate" />
+    <result column="WBENDDATE" jdbcType="VARCHAR" property="wbenddate" />
+    <result column="DATASOURCES" jdbcType="VARCHAR" property="datasources" />
+    <result column="GLOBAL_RECORDNUM" jdbcType="VARCHAR" property="globalRecordnum" />
+    <result column="PK_HCMPSN_WORK" jdbcType="VARCHAR" property="pkHcmpsnWork" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_PSN_WORK (MONTH_ID, UNIT_ID, PK_PSN_WORK,
+    PK_PSN_MSG, PSN_UID, BUSICORP,
+    BUSIDEPT, PK_OM_JOB, JOBNAME,
+    BEGINDATE, PK_CORP, JOBTYPE,
+    ENDDATE, QUALINAME, QUALILEVEL,
+    PSN_STATUS, PSN_TYPE, PK_CT,
+    ORGREMARK, REMARK, TS,
+    DR, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_NUM1, DEF_NUM2, DEF_NUM3,
+    DEF_NUM4, DEF_NUM5, RECORDNUM,
+    ISSCEO, WBBEGINDATE, WBENDDATE,
+    DATASOURCES, GLOBAL_RECORDNUM, PK_HCMPSN_WORK
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsnWork,jdbcType=VARCHAR},
+      #{item.pkPsnMsg,jdbcType=VARCHAR}, #{item.psnUid,jdbcType=VARCHAR}, #{item.busicorp,jdbcType=VARCHAR},
+      #{item.busidept,jdbcType=VARCHAR}, #{item.pkOmJob,jdbcType=VARCHAR}, #{item.jobname,jdbcType=VARCHAR},
+      #{item.begindate,jdbcType=VARCHAR}, #{item.pkCorp,jdbcType=VARCHAR}, #{item.jobtype,jdbcType=VARCHAR},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.qualiname,jdbcType=VARCHAR}, #{item.qualilevel,jdbcType=VARCHAR},
+      #{item.psnStatus,jdbcType=DECIMAL}, #{item.psnType,jdbcType=DECIMAL}, #{item.pkCt,jdbcType=VARCHAR},
+      #{item.orgremark,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR},
+      #{item.defStr3,jdbcType=VARCHAR}, #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR},
+      #{item.defNum1,jdbcType=DECIMAL}, #{item.defNum2,jdbcType=DECIMAL}, #{item.defNum3,jdbcType=DECIMAL},
+      #{item.defNum4,jdbcType=DECIMAL}, #{item.defNum5,jdbcType=DECIMAL}, #{item.recordnum,jdbcType=DECIMAL},
+      #{item.issceo,jdbcType=VARCHAR}, #{item.wbbegindate,jdbcType=VARCHAR}, #{item.wbenddate,jdbcType=VARCHAR},
+      #{item.datasources,jdbcType=VARCHAR}, #{item.globalRecordnum,jdbcType=VARCHAR}, #{item.pkHcmpsnWork,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbPsnWork">
+    insert into LDAPM_MPW_WB_PSN_WORK (MONTH_ID, UNIT_ID, PK_PSN_WORK, 
+      PK_PSN_MSG, PSN_UID, BUSICORP, 
+      BUSIDEPT, PK_OM_JOB, JOBNAME, 
+      BEGINDATE, PK_CORP, JOBTYPE, 
+      ENDDATE, QUALINAME, QUALILEVEL, 
+      PSN_STATUS, PSN_TYPE, PK_CT, 
+      ORGREMARK, REMARK, TS, 
+      DR, DEF_STR1, DEF_STR2, 
+      DEF_STR3, DEF_STR4, DEF_STR5, 
+      DEF_NUM1, DEF_NUM2, DEF_NUM3, 
+      DEF_NUM4, DEF_NUM5, RECORDNUM, 
+      ISSCEO, WBBEGINDATE, WBENDDATE, 
+      DATASOURCES, GLOBAL_RECORDNUM, PK_HCMPSN_WORK
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsnWork,jdbcType=VARCHAR}, 
+      #{pkPsnMsg,jdbcType=VARCHAR}, #{psnUid,jdbcType=VARCHAR}, #{busicorp,jdbcType=VARCHAR}, 
+      #{busidept,jdbcType=VARCHAR}, #{pkOmJob,jdbcType=VARCHAR}, #{jobname,jdbcType=VARCHAR}, 
+      #{begindate,jdbcType=VARCHAR}, #{pkCorp,jdbcType=VARCHAR}, #{jobtype,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{qualiname,jdbcType=VARCHAR}, #{qualilevel,jdbcType=VARCHAR}, 
+      #{psnStatus,jdbcType=DECIMAL}, #{psnType,jdbcType=DECIMAL}, #{pkCt,jdbcType=VARCHAR}, 
+      #{orgremark,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=DECIMAL}, #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR}, 
+      #{defStr3,jdbcType=VARCHAR}, #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR}, 
+      #{defNum1,jdbcType=DECIMAL}, #{defNum2,jdbcType=DECIMAL}, #{defNum3,jdbcType=DECIMAL}, 
+      #{defNum4,jdbcType=DECIMAL}, #{defNum5,jdbcType=DECIMAL}, #{recordnum,jdbcType=DECIMAL}, 
+      #{issceo,jdbcType=VARCHAR}, #{wbbegindate,jdbcType=VARCHAR}, #{wbenddate,jdbcType=VARCHAR}, 
+      #{datasources,jdbcType=VARCHAR}, #{globalRecordnum,jdbcType=VARCHAR}, #{pkHcmpsnWork,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbPsnWork">
+    insert into LDAPM_MPW_WB_PSN_WORK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsnWork != null">
+        PK_PSN_WORK,
+      </if>
+      <if test="pkPsnMsg != null">
+        PK_PSN_MSG,
+      </if>
+      <if test="psnUid != null">
+        PSN_UID,
+      </if>
+      <if test="busicorp != null">
+        BUSICORP,
+      </if>
+      <if test="busidept != null">
+        BUSIDEPT,
+      </if>
+      <if test="pkOmJob != null">
+        PK_OM_JOB,
+      </if>
+      <if test="jobname != null">
+        JOBNAME,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="pkCorp != null">
+        PK_CORP,
+      </if>
+      <if test="jobtype != null">
+        JOBTYPE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="qualiname != null">
+        QUALINAME,
+      </if>
+      <if test="qualilevel != null">
+        QUALILEVEL,
+      </if>
+      <if test="psnStatus != null">
+        PSN_STATUS,
+      </if>
+      <if test="psnType != null">
+        PSN_TYPE,
+      </if>
+      <if test="pkCt != null">
+        PK_CT,
+      </if>
+      <if test="orgremark != null">
+        ORGREMARK,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+      <if test="defNum3 != null">
+        DEF_NUM3,
+      </if>
+      <if test="defNum4 != null">
+        DEF_NUM4,
+      </if>
+      <if test="defNum5 != null">
+        DEF_NUM5,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="issceo != null">
+        ISSCEO,
+      </if>
+      <if test="wbbegindate != null">
+        WBBEGINDATE,
+      </if>
+      <if test="wbenddate != null">
+        WBENDDATE,
+      </if>
+      <if test="datasources != null">
+        DATASOURCES,
+      </if>
+      <if test="globalRecordnum != null">
+        GLOBAL_RECORDNUM,
+      </if>
+      <if test="pkHcmpsnWork != null">
+        PK_HCMPSN_WORK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnWork != null">
+        #{pkPsnWork,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnMsg != null">
+        #{pkPsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="psnUid != null">
+        #{psnUid,jdbcType=VARCHAR},
+      </if>
+      <if test="busicorp != null">
+        #{busicorp,jdbcType=VARCHAR},
+      </if>
+      <if test="busidept != null">
+        #{busidept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOmJob != null">
+        #{pkOmJob,jdbcType=VARCHAR},
+      </if>
+      <if test="jobname != null">
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCorp != null">
+        #{pkCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="jobtype != null">
+        #{jobtype,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="qualiname != null">
+        #{qualiname,jdbcType=VARCHAR},
+      </if>
+      <if test="qualilevel != null">
+        #{qualilevel,jdbcType=VARCHAR},
+      </if>
+      <if test="psnStatus != null">
+        #{psnStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="psnType != null">
+        #{psnType,jdbcType=DECIMAL},
+      </if>
+      <if test="pkCt != null">
+        #{pkCt,jdbcType=VARCHAR},
+      </if>
+      <if test="orgremark != null">
+        #{orgremark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum3 != null">
+        #{defNum3,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum4 != null">
+        #{defNum4,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum5 != null">
+        #{defNum5,jdbcType=DECIMAL},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="issceo != null">
+        #{issceo,jdbcType=VARCHAR},
+      </if>
+      <if test="wbbegindate != null">
+        #{wbbegindate,jdbcType=VARCHAR},
+      </if>
+      <if test="wbenddate != null">
+        #{wbenddate,jdbcType=VARCHAR},
+      </if>
+      <if test="datasources != null">
+        #{datasources,jdbcType=VARCHAR},
+      </if>
+      <if test="globalRecordnum != null">
+        #{globalRecordnum,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHcmpsnWork != null">
+        #{pkHcmpsnWork,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

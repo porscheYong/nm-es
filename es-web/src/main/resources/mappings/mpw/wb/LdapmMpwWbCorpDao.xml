@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.wb.dao.LdapmMpwWbCorpDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwWbCorp" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_CORP" property="pkCorp" jdbcType="VARCHAR" />
+    <result column="UNITCODE" property="unitcode" jdbcType="VARCHAR" />
+    <result column="UNITNAME" property="unitname" jdbcType="VARCHAR" />
+    <result column="LEGALBODYCODE" property="legalbodycode" jdbcType="VARCHAR" />
+    <result column="TAXCODE" property="taxcode" jdbcType="VARCHAR" />
+    <result column="BUSILICENSE" property="busilicense" jdbcType="VARCHAR" />
+    <result column="REGION" property="region" jdbcType="VARCHAR" />
+    <result column="SALEADDR" property="saleaddr" jdbcType="VARCHAR" />
+    <result column="REGCAPITAL" property="regcapital" jdbcType="DECIMAL" />
+    <result column="CORPTYPE" property="corptype" jdbcType="VARCHAR" />
+    <result column="QUALIFICATION" property="qualification" jdbcType="VARCHAR" />
+    <result column="BUSISCOPE" property="busiscope" jdbcType="VARCHAR" />
+    <result column="BUSIREGION" property="busiregion" jdbcType="VARCHAR" />
+    <result column="DEF_STR1" property="defStr1" jdbcType="VARCHAR" />
+    <result column="DEF_STR2" property="defStr2" jdbcType="VARCHAR" />
+    <result column="DEF_STR3" property="defStr3" jdbcType="VARCHAR" />
+    <result column="DEF_STR4" property="defStr4" jdbcType="VARCHAR" />
+    <result column="DEF_STR5" property="defStr5" jdbcType="VARCHAR" />
+    <result column="DEF_STR6" property="defStr6" jdbcType="VARCHAR" />
+    <result column="DEF_STR7" property="defStr7" jdbcType="VARCHAR" />
+    <result column="DEF_STR8" property="defStr8" jdbcType="VARCHAR" />
+    <result column="DEF_NUM1" property="defNum1" jdbcType="DECIMAL" />
+    <result column="DEF_NUM2" property="defNum2" jdbcType="DECIMAL" />
+    <result column="PK_ORG" property="pkOrg" jdbcType="VARCHAR" />
+    <result column="PK_GROUP" property="pkGroup" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_CORP (MONTH_ID, UNIT_ID, PK_CORP,
+    UNITCODE, UNITNAME, LEGALBODYCODE,
+    TAXCODE, BUSILICENSE, REGION,
+    SALEADDR, REGCAPITAL, CORPTYPE,
+    QUALIFICATION, BUSISCOPE, BUSIREGION,
+    DEF_STR1, DEF_STR2, DEF_STR3,
+    DEF_STR4, DEF_STR5, DEF_STR6,
+    DEF_STR7, DEF_STR8, DEF_NUM1,
+    DEF_NUM2, PK_ORG, PK_GROUP,
+    TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkCorp,jdbcType=VARCHAR},
+      #{item.unitcode,jdbcType=VARCHAR}, #{item.unitname,jdbcType=VARCHAR}, #{item.legalbodycode,jdbcType=VARCHAR},
+      #{item.taxcode,jdbcType=VARCHAR}, #{item.busilicense,jdbcType=VARCHAR}, #{item.region,jdbcType=VARCHAR},
+      #{item.saleaddr,jdbcType=VARCHAR}, #{item.regcapital,jdbcType=DECIMAL}, #{item.corptype,jdbcType=VARCHAR},
+      #{item.qualification,jdbcType=VARCHAR}, #{item.busiscope,jdbcType=VARCHAR}, #{item.busiregion,jdbcType=VARCHAR},
+      #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR}, #{item.defStr3,jdbcType=VARCHAR},
+      #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR}, #{item.defStr6,jdbcType=VARCHAR},
+      #{item.defStr7,jdbcType=VARCHAR}, #{item.defStr8,jdbcType=VARCHAR}, #{item.defNum1,jdbcType=DECIMAL},
+      #{item.defNum2,jdbcType=DECIMAL}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbCorp" >
+    insert into LDAPM_MPW_WB_CORP (MONTH_ID, UNIT_ID, PK_CORP, 
+      UNITCODE, UNITNAME, LEGALBODYCODE, 
+      TAXCODE, BUSILICENSE, REGION, 
+      SALEADDR, REGCAPITAL, CORPTYPE, 
+      QUALIFICATION, BUSISCOPE, BUSIREGION, 
+      DEF_STR1, DEF_STR2, DEF_STR3, 
+      DEF_STR4, DEF_STR5, DEF_STR6, 
+      DEF_STR7, DEF_STR8, DEF_NUM1, 
+      DEF_NUM2, PK_ORG, PK_GROUP, 
+      TS, DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkCorp,jdbcType=VARCHAR}, 
+      #{unitcode,jdbcType=VARCHAR}, #{unitname,jdbcType=VARCHAR}, #{legalbodycode,jdbcType=VARCHAR}, 
+      #{taxcode,jdbcType=VARCHAR}, #{busilicense,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{saleaddr,jdbcType=VARCHAR}, #{regcapital,jdbcType=DECIMAL}, #{corptype,jdbcType=VARCHAR}, 
+      #{qualification,jdbcType=VARCHAR}, #{busiscope,jdbcType=VARCHAR}, #{busiregion,jdbcType=VARCHAR}, 
+      #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR}, #{defStr3,jdbcType=VARCHAR}, 
+      #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR}, #{defStr6,jdbcType=VARCHAR}, 
+      #{defStr7,jdbcType=VARCHAR}, #{defStr8,jdbcType=VARCHAR}, #{defNum1,jdbcType=DECIMAL}, 
+      #{defNum2,jdbcType=DECIMAL}, #{pkOrg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbCorp" >
+    insert into LDAPM_MPW_WB_CORP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkCorp != null" >
+        PK_CORP,
+      </if>
+      <if test="unitcode != null" >
+        UNITCODE,
+      </if>
+      <if test="unitname != null" >
+        UNITNAME,
+      </if>
+      <if test="legalbodycode != null" >
+        LEGALBODYCODE,
+      </if>
+      <if test="taxcode != null" >
+        TAXCODE,
+      </if>
+      <if test="busilicense != null" >
+        BUSILICENSE,
+      </if>
+      <if test="region != null" >
+        REGION,
+      </if>
+      <if test="saleaddr != null" >
+        SALEADDR,
+      </if>
+      <if test="regcapital != null" >
+        REGCAPITAL,
+      </if>
+      <if test="corptype != null" >
+        CORPTYPE,
+      </if>
+      <if test="qualification != null" >
+        QUALIFICATION,
+      </if>
+      <if test="busiscope != null" >
+        BUSISCOPE,
+      </if>
+      <if test="busiregion != null" >
+        BUSIREGION,
+      </if>
+      <if test="defStr1 != null" >
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null" >
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null" >
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null" >
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null" >
+        DEF_STR5,
+      </if>
+      <if test="defStr6 != null" >
+        DEF_STR6,
+      </if>
+      <if test="defStr7 != null" >
+        DEF_STR7,
+      </if>
+      <if test="defStr8 != null" >
+        DEF_STR8,
+      </if>
+      <if test="defNum1 != null" >
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null" >
+        DEF_NUM2,
+      </if>
+      <if test="pkOrg != null" >
+        PK_ORG,
+      </if>
+      <if test="pkGroup != null" >
+        PK_GROUP,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCorp != null" >
+        #{pkCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="unitcode != null" >
+        #{unitcode,jdbcType=VARCHAR},
+      </if>
+      <if test="unitname != null" >
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="legalbodycode != null" >
+        #{legalbodycode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxcode != null" >
+        #{taxcode,jdbcType=VARCHAR},
+      </if>
+      <if test="busilicense != null" >
+        #{busilicense,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="saleaddr != null" >
+        #{saleaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="regcapital != null" >
+        #{regcapital,jdbcType=DECIMAL},
+      </if>
+      <if test="corptype != null" >
+        #{corptype,jdbcType=VARCHAR},
+      </if>
+      <if test="qualification != null" >
+        #{qualification,jdbcType=VARCHAR},
+      </if>
+      <if test="busiscope != null" >
+        #{busiscope,jdbcType=VARCHAR},
+      </if>
+      <if test="busiregion != null" >
+        #{busiregion,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr1 != null" >
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null" >
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null" >
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null" >
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null" >
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr6 != null" >
+        #{defStr6,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr7 != null" >
+        #{defStr7,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr8 != null" >
+        #{defStr8,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null" >
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null" >
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="pkOrg != null" >
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null" >
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

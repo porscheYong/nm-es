@@ -1,0 +1,1128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.hi.dao.LdapmMpwHiStapplyDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiStapply">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_HI_STAPPLY" jdbcType="VARCHAR" property="pkHiStapply" />
+    <result column="ADDREASON" jdbcType="VARCHAR" property="addreason" />
+    <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate" />
+    <result column="APPROVE_NOTE" jdbcType="VARCHAR" property="approveNote" />
+    <result column="APPROVE_STATE" jdbcType="DECIMAL" property="approveState" />
+    <result column="APPROVE_TIME" jdbcType="VARCHAR" property="approveTime" />
+    <result column="APPROVER" jdbcType="VARCHAR" property="approver" />
+    <result column="ASSGID" jdbcType="DECIMAL" property="assgid" />
+    <result column="BILL_CODE" jdbcType="VARCHAR" property="billCode" />
+    <result column="BILLMAKER" jdbcType="VARCHAR" property="billmaker" />
+    <result column="BUSINESS_TYPE" jdbcType="VARCHAR" property="businessType" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="EFFECTDATE" jdbcType="VARCHAR" property="effectdate" />
+    <result column="FUN_CODE" jdbcType="VARCHAR" property="funCode" />
+    <result column="IFADDBLACK" jdbcType="VARCHAR" property="ifaddblack" />
+    <result column="IFADDPSNCHG" jdbcType="VARCHAR" property="ifaddpsnchg" />
+    <result column="IFENDPART" jdbcType="VARCHAR" property="ifendpart" />
+    <result column="IFSYNWORK" jdbcType="VARCHAR" property="ifsynwork" />
+    <result column="ISDISABLEPSN" jdbcType="VARCHAR" property="isdisablepsn" />
+    <result column="ISHRSSBILL" jdbcType="VARCHAR" property="ishrssbill" />
+    <result column="ISNEEDFILE" jdbcType="VARCHAR" property="isneedfile" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="NEWDEPOSEMODE" jdbcType="VARCHAR" property="newdeposemode" />
+    <result column="NEWJOBMODE" jdbcType="VARCHAR" property="newjobmode" />
+    <result column="NEWMEMO" jdbcType="VARCHAR" property="newmemo" />
+    <result column="NEWOCCUPATION" jdbcType="VARCHAR" property="newoccupation" />
+    <result column="NEWPK_DEPT" jdbcType="VARCHAR" property="newpkDept" />
+    <result column="NEWPK_JOB" jdbcType="VARCHAR" property="newpkJob" />
+    <result column="NEWPK_JOB_TYPE" jdbcType="VARCHAR" property="newpkJobType" />
+    <result column="NEWPK_JOBGRADE" jdbcType="VARCHAR" property="newpkJobgrade" />
+    <result column="NEWPK_JOBRANK" jdbcType="VARCHAR" property="newpkJobrank" />
+    <result column="NEWPK_ORG" jdbcType="VARCHAR" property="newpkOrg" />
+    <result column="NEWPK_POST" jdbcType="VARCHAR" property="newpkPost" />
+    <result column="NEWPK_POSTSERIES" jdbcType="VARCHAR" property="newpkPostseries" />
+    <result column="NEWPK_PSNCL" jdbcType="VARCHAR" property="newpkPsncl" />
+    <result column="NEWPOSTSTAT" jdbcType="VARCHAR" property="newpoststat" />
+    <result column="NEWSERIES" jdbcType="VARCHAR" property="newseries" />
+    <result column="NEWWORKTYPE" jdbcType="VARCHAR" property="newworktype" />
+    <result column="OLDDEPOSEMODE" jdbcType="VARCHAR" property="olddeposemode" />
+    <result column="OLDJOBMODE" jdbcType="VARCHAR" property="oldjobmode" />
+    <result column="OLDMEMO" jdbcType="VARCHAR" property="oldmemo" />
+    <result column="OLDOCCUPATION" jdbcType="VARCHAR" property="oldoccupation" />
+    <result column="OLDPK_DEPT" jdbcType="VARCHAR" property="oldpkDept" />
+    <result column="OLDPK_JOB" jdbcType="VARCHAR" property="oldpkJob" />
+    <result column="OLDPK_JOB_TYPE" jdbcType="VARCHAR" property="oldpkJobType" />
+    <result column="OLDPK_JOBGRADE" jdbcType="VARCHAR" property="oldpkJobgrade" />
+    <result column="OLDPK_JOBRANK" jdbcType="VARCHAR" property="oldpkJobrank" />
+    <result column="OLDPK_ORG" jdbcType="VARCHAR" property="oldpkOrg" />
+    <result column="OLDPK_POST" jdbcType="VARCHAR" property="oldpkPost" />
+    <result column="OLDPK_POSTSERIES" jdbcType="VARCHAR" property="oldpkPostseries" />
+    <result column="OLDPK_PSNCL" jdbcType="VARCHAR" property="oldpkPsncl" />
+    <result column="OLDPOSTSTAT" jdbcType="VARCHAR" property="oldpoststat" />
+    <result column="OLDSERIES" jdbcType="VARCHAR" property="oldseries" />
+    <result column="OLDWORKTYPE" jdbcType="VARCHAR" property="oldworktype" />
+    <result column="PK_BILLTYPE" jdbcType="VARCHAR" property="pkBilltype" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_HI_ORG" jdbcType="VARCHAR" property="pkHiOrg" />
+    <result column="PK_OLD_HI_ORG" jdbcType="VARCHAR" property="pkOldHiOrg" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="PK_TRNSTYPE" jdbcType="VARCHAR" property="pkTrnstype" />
+    <result column="SREASON" jdbcType="VARCHAR" property="sreason" />
+    <result column="STAPPLY_MODE" jdbcType="DECIMAL" property="stapplyMode" />
+    <result column="TRANSTYPE" jdbcType="VARCHAR" property="transtype" />
+    <result column="TRANSTYPEID" jdbcType="VARCHAR" property="transtypeid" />
+    <result column="TRIAL_FLAG" jdbcType="VARCHAR" property="trialFlag" />
+    <result column="TRIAL_UNIT" jdbcType="DECIMAL" property="trialUnit" />
+    <result column="TRIALBEGINDATE" jdbcType="VARCHAR" property="trialbegindate" />
+    <result column="TRIALDAYS" jdbcType="DECIMAL" property="trialdays" />
+    <result column="TRIALENDDATE" jdbcType="VARCHAR" property="trialenddate" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="OLDJOBGLBDEF1" jdbcType="VARCHAR" property="oldjobglbdef1" />
+    <result column="NEWJOBGLBDEF1" jdbcType="VARCHAR" property="newjobglbdef1" />
+    <result column="OLDJOBGLBDEF2" jdbcType="VARCHAR" property="oldjobglbdef2" />
+    <result column="NEWJOBGLBDEF2" jdbcType="VARCHAR" property="newjobglbdef2" />
+    <result column="OLDJOBGLBDEF3" jdbcType="VARCHAR" property="oldjobglbdef3" />
+    <result column="NEWJOBGLBDEF3" jdbcType="VARCHAR" property="newjobglbdef3" />
+    <result column="OLDJOBGLBDEF4" jdbcType="VARCHAR" property="oldjobglbdef4" />
+    <result column="NEWJOBGLBDEF4" jdbcType="VARCHAR" property="newjobglbdef4" />
+    <result column="OLDJOBGLBDEF5" jdbcType="VARCHAR" property="oldjobglbdef5" />
+    <result column="NEWJOBGLBDEF5" jdbcType="VARCHAR" property="newjobglbdef5" />
+    <result column="OLDJOBGLBDEF6" jdbcType="VARCHAR" property="oldjobglbdef6" />
+    <result column="NEWJOBGLBDEF6" jdbcType="VARCHAR" property="newjobglbdef6" />
+    <result column="OLDJOBGLBDEF7" jdbcType="VARCHAR" property="oldjobglbdef7" />
+    <result column="NEWJOBGLBDEF7" jdbcType="VARCHAR" property="newjobglbdef7" />
+    <result column="OLDJOBGLBDEF8" jdbcType="VARCHAR" property="oldjobglbdef8" />
+    <result column="NEWJOBGLBDEF8" jdbcType="VARCHAR" property="newjobglbdef8" />
+    <result column="OLDJOBGLBDEF9" jdbcType="VARCHAR" property="oldjobglbdef9" />
+    <result column="NEWJOBGLBDEF9" jdbcType="VARCHAR" property="newjobglbdef9" />
+    <result column="OLDJOBGLBDEF10" jdbcType="VARCHAR" property="oldjobglbdef10" />
+    <result column="NEWJOBGLBDEF10" jdbcType="VARCHAR" property="newjobglbdef10" />
+    <result column="OLDJOBGLBDEF13" jdbcType="VARCHAR" property="oldjobglbdef13" />
+    <result column="NEWJOBGLBDEF13" jdbcType="VARCHAR" property="newjobglbdef13" />
+    <result column="OLDJOBGLBDEF14" jdbcType="VARCHAR" property="oldjobglbdef14" />
+    <result column="NEWJOBGLBDEF14" jdbcType="VARCHAR" property="newjobglbdef14" />
+    <result column="OLDJOBGLBDEF15" jdbcType="VARCHAR" property="oldjobglbdef15" />
+    <result column="NEWJOBGLBDEF15" jdbcType="VARCHAR" property="newjobglbdef15" />
+    <result column="OLDJOBGLBDEF16" jdbcType="VARCHAR" property="oldjobglbdef16" />
+    <result column="NEWJOBGLBDEF16" jdbcType="VARCHAR" property="newjobglbdef16" />
+    <result column="OLDJOBGLBDEF17" jdbcType="VARCHAR" property="oldjobglbdef17" />
+    <result column="NEWJOBGLBDEF17" jdbcType="VARCHAR" property="newjobglbdef17" />
+    <result column="OLDJOBGLBDEF18" jdbcType="VARCHAR" property="oldjobglbdef18" />
+    <result column="NEWJOBGLBDEF18" jdbcType="VARCHAR" property="newjobglbdef18" />
+    <result column="OLDJOBGLBDEF19" jdbcType="VARCHAR" property="oldjobglbdef19" />
+    <result column="NEWJOBGLBDEF19" jdbcType="VARCHAR" property="newjobglbdef19" />
+    <result column="OLDJOBGLBDEF20" jdbcType="VARCHAR" property="oldjobglbdef20" />
+    <result column="NEWJOBGLBDEF20" jdbcType="VARCHAR" property="newjobglbdef20" />
+    <result column="OLDJOBGLBDEF21" jdbcType="VARCHAR" property="oldjobglbdef21" />
+    <result column="NEWJOBGLBDEF21" jdbcType="VARCHAR" property="newjobglbdef21" />
+    <result column="OLDJOBGLBDEF22" jdbcType="VARCHAR" property="oldjobglbdef22" />
+    <result column="NEWJOBGLBDEF22" jdbcType="VARCHAR" property="newjobglbdef22" />
+    <result column="OLDJOBGLBDEF23" jdbcType="VARCHAR" property="oldjobglbdef23" />
+    <result column="NEWJOBGLBDEF23" jdbcType="VARCHAR" property="newjobglbdef23" />
+    <result column="OLDJOBGLBDEF24" jdbcType="VARCHAR" property="oldjobglbdef24" />
+    <result column="NEWJOBGLBDEF24" jdbcType="VARCHAR" property="newjobglbdef24" />
+    <result column="ISSYNCGLBDEF11" jdbcType="VARCHAR" property="issyncglbdef11" />
+    <result column="OLDJOBGLBDEF27" jdbcType="VARCHAR" property="oldjobglbdef27" />
+    <result column="NEWJOBGLBDEF27" jdbcType="VARCHAR" property="newjobglbdef27" />
+    <result column="OLDJOBGLBDEF25" jdbcType="VARCHAR" property="oldjobglbdef25" />
+    <result column="NEWJOBGLBDEF25" jdbcType="VARCHAR" property="newjobglbdef25" />
+    <result column="OLDJOBGLBDEF26" jdbcType="VARCHAR" property="oldjobglbdef26" />
+    <result column="NEWJOBGLBDEF26" jdbcType="VARCHAR" property="newjobglbdef26" />
+    <result column="OLDJOBGLBDEF28" jdbcType="VARCHAR" property="oldjobglbdef28" />
+    <result column="NEWJOBGLBDEF28" jdbcType="VARCHAR" property="newjobglbdef28" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into LDAPM_MPW_HI_STAPPLY (MONTH_ID, UNIT_ID, PK_HI_STAPPLY,
+    ADDREASON, APPLY_DATE, APPROVE_NOTE,
+    APPROVE_STATE, APPROVE_TIME, APPROVER,
+    ASSGID, BILL_CODE, BILLMAKER,
+    BUSINESS_TYPE, CREATIONTIME, CREATOR,
+    DR, EFFECTDATE, FUN_CODE,
+    IFADDBLACK, IFADDPSNCHG, IFENDPART,
+    IFSYNWORK, ISDISABLEPSN, ISHRSSBILL,
+    ISNEEDFILE, MEMO, MODIFIEDTIME,
+    MODIFIER, NEWDEPOSEMODE, NEWJOBMODE,
+    NEWMEMO, NEWOCCUPATION, NEWPK_DEPT,
+    NEWPK_JOB, NEWPK_JOB_TYPE, NEWPK_JOBGRADE,
+    NEWPK_JOBRANK, NEWPK_ORG, NEWPK_POST,
+    NEWPK_POSTSERIES, NEWPK_PSNCL, NEWPOSTSTAT,
+    NEWSERIES, NEWWORKTYPE, OLDDEPOSEMODE,
+    OLDJOBMODE, OLDMEMO, OLDOCCUPATION,
+    OLDPK_DEPT, OLDPK_JOB, OLDPK_JOB_TYPE,
+    OLDPK_JOBGRADE, OLDPK_JOBRANK, OLDPK_ORG,
+    OLDPK_POST, OLDPK_POSTSERIES, OLDPK_PSNCL,
+    OLDPOSTSTAT, OLDSERIES, OLDWORKTYPE,
+    PK_BILLTYPE, PK_GROUP, PK_HI_ORG,
+    PK_OLD_HI_ORG, PK_ORG, PK_PSNDOC,
+    PK_PSNJOB, PK_PSNORG, PK_TRNSTYPE,
+    SREASON, STAPPLY_MODE, TRANSTYPE,
+    TRANSTYPEID, TRIAL_FLAG, TRIAL_UNIT,
+    TRIALBEGINDATE, TRIALDAYS, TRIALENDDATE,
+    TS, OLDJOBGLBDEF1, NEWJOBGLBDEF1,
+    OLDJOBGLBDEF2, NEWJOBGLBDEF2, OLDJOBGLBDEF3,
+    NEWJOBGLBDEF3, OLDJOBGLBDEF4, NEWJOBGLBDEF4,
+    OLDJOBGLBDEF5, NEWJOBGLBDEF5, OLDJOBGLBDEF6,
+    NEWJOBGLBDEF6, OLDJOBGLBDEF7, NEWJOBGLBDEF7,
+    OLDJOBGLBDEF8, NEWJOBGLBDEF8, OLDJOBGLBDEF9,
+    NEWJOBGLBDEF9, OLDJOBGLBDEF10, NEWJOBGLBDEF10,
+    OLDJOBGLBDEF13, NEWJOBGLBDEF13, OLDJOBGLBDEF14,
+    NEWJOBGLBDEF14, OLDJOBGLBDEF15, NEWJOBGLBDEF15,
+    OLDJOBGLBDEF16, NEWJOBGLBDEF16, OLDJOBGLBDEF17,
+    NEWJOBGLBDEF17, OLDJOBGLBDEF18, NEWJOBGLBDEF18,
+    OLDJOBGLBDEF19, NEWJOBGLBDEF19, OLDJOBGLBDEF20,
+    NEWJOBGLBDEF20, OLDJOBGLBDEF21, NEWJOBGLBDEF21,
+    OLDJOBGLBDEF22, NEWJOBGLBDEF22, OLDJOBGLBDEF23,
+    NEWJOBGLBDEF23, OLDJOBGLBDEF24, NEWJOBGLBDEF24,
+    ISSYNCGLBDEF11, OLDJOBGLBDEF27, NEWJOBGLBDEF27,
+    OLDJOBGLBDEF25, NEWJOBGLBDEF25, OLDJOBGLBDEF26,
+    NEWJOBGLBDEF26, OLDJOBGLBDEF28, NEWJOBGLBDEF28
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkHiStapply,jdbcType=VARCHAR},
+      #{item.addreason,jdbcType=VARCHAR}, #{item.applyDate,jdbcType=VARCHAR}, #{item.approveNote,jdbcType=VARCHAR},
+      #{item.approveState,jdbcType=DECIMAL}, #{item.approveTime,jdbcType=VARCHAR}, #{item.approver,jdbcType=VARCHAR},
+      #{item.assgid,jdbcType=DECIMAL}, #{item.billCode,jdbcType=VARCHAR}, #{item.billmaker,jdbcType=VARCHAR},
+      #{item.businessType,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.effectdate,jdbcType=VARCHAR}, #{item.funCode,jdbcType=VARCHAR},
+      #{item.ifaddblack,jdbcType=VARCHAR}, #{item.ifaddpsnchg,jdbcType=VARCHAR}, #{item.ifendpart,jdbcType=VARCHAR},
+      #{item.ifsynwork,jdbcType=VARCHAR}, #{item.isdisablepsn,jdbcType=VARCHAR}, #{item.ishrssbill,jdbcType=VARCHAR},
+      #{item.isneedfile,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR}, #{item.newdeposemode,jdbcType=VARCHAR}, #{item.newjobmode,jdbcType=VARCHAR},
+      #{item.newmemo,jdbcType=VARCHAR}, #{item.newoccupation,jdbcType=VARCHAR}, #{item.newpkDept,jdbcType=VARCHAR},
+      #{item.newpkJob,jdbcType=VARCHAR}, #{item.newpkJobType,jdbcType=VARCHAR}, #{item.newpkJobgrade,jdbcType=VARCHAR},
+      #{item.newpkJobrank,jdbcType=VARCHAR}, #{item.newpkOrg,jdbcType=VARCHAR}, #{item.newpkPost,jdbcType=VARCHAR},
+      #{item.newpkPostseries,jdbcType=VARCHAR}, #{item.newpkPsncl,jdbcType=VARCHAR}, #{item.newpoststat,jdbcType=VARCHAR},
+      #{item.newseries,jdbcType=VARCHAR}, #{item.newworktype,jdbcType=VARCHAR}, #{item.olddeposemode,jdbcType=VARCHAR},
+      #{item.oldjobmode,jdbcType=VARCHAR}, #{item.oldmemo,jdbcType=VARCHAR}, #{item.oldoccupation,jdbcType=VARCHAR},
+      #{item.oldpkDept,jdbcType=VARCHAR}, #{item.oldpkJob,jdbcType=VARCHAR}, #{item.oldpkJobType,jdbcType=VARCHAR},
+      #{item.oldpkJobgrade,jdbcType=VARCHAR}, #{item.oldpkJobrank,jdbcType=VARCHAR}, #{item.oldpkOrg,jdbcType=VARCHAR},
+      #{item.oldpkPost,jdbcType=VARCHAR}, #{item.oldpkPostseries,jdbcType=VARCHAR}, #{item.oldpkPsncl,jdbcType=VARCHAR},
+      #{item.oldpoststat,jdbcType=VARCHAR}, #{item.oldseries,jdbcType=VARCHAR}, #{item.oldworktype,jdbcType=VARCHAR},
+      #{item.pkBilltype,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkHiOrg,jdbcType=VARCHAR},
+      #{item.pkOldHiOrg,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR},
+      #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR}, #{item.pkTrnstype,jdbcType=VARCHAR},
+      #{item.sreason,jdbcType=VARCHAR}, #{item.stapplyMode,jdbcType=DECIMAL}, #{item.transtype,jdbcType=VARCHAR},
+      #{item.transtypeid,jdbcType=VARCHAR}, #{item.trialFlag,jdbcType=VARCHAR}, #{item.trialUnit,jdbcType=DECIMAL},
+      #{item.trialbegindate,jdbcType=VARCHAR}, #{item.trialdays,jdbcType=DECIMAL}, #{item.trialenddate,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.oldjobglbdef1,jdbcType=VARCHAR}, #{item.newjobglbdef1,jdbcType=VARCHAR},
+      #{item.oldjobglbdef2,jdbcType=VARCHAR}, #{item.newjobglbdef2,jdbcType=VARCHAR}, #{item.oldjobglbdef3,jdbcType=VARCHAR},
+      #{item.newjobglbdef3,jdbcType=VARCHAR}, #{item.oldjobglbdef4,jdbcType=VARCHAR}, #{item.newjobglbdef4,jdbcType=VARCHAR},
+      #{item.oldjobglbdef5,jdbcType=VARCHAR}, #{item.newjobglbdef5,jdbcType=VARCHAR}, #{item.oldjobglbdef6,jdbcType=VARCHAR},
+      #{item.newjobglbdef6,jdbcType=VARCHAR}, #{item.oldjobglbdef7,jdbcType=VARCHAR}, #{item.newjobglbdef7,jdbcType=VARCHAR},
+      #{item.oldjobglbdef8,jdbcType=VARCHAR}, #{item.newjobglbdef8,jdbcType=VARCHAR}, #{item.oldjobglbdef9,jdbcType=VARCHAR},
+      #{item.newjobglbdef9,jdbcType=VARCHAR}, #{item.oldjobglbdef10,jdbcType=VARCHAR}, #{item.newjobglbdef10,jdbcType=VARCHAR},
+      #{item.oldjobglbdef13,jdbcType=VARCHAR}, #{item.newjobglbdef13,jdbcType=VARCHAR}, #{item.oldjobglbdef14,jdbcType=VARCHAR},
+      #{item.newjobglbdef14,jdbcType=VARCHAR}, #{item.oldjobglbdef15,jdbcType=VARCHAR}, #{item.newjobglbdef15,jdbcType=VARCHAR},
+      #{item.oldjobglbdef16,jdbcType=VARCHAR}, #{item.newjobglbdef16,jdbcType=VARCHAR}, #{item.oldjobglbdef17,jdbcType=VARCHAR},
+      #{item.newjobglbdef17,jdbcType=VARCHAR}, #{item.oldjobglbdef18,jdbcType=VARCHAR}, #{item.newjobglbdef18,jdbcType=VARCHAR},
+      #{item.oldjobglbdef19,jdbcType=VARCHAR}, #{item.newjobglbdef19,jdbcType=VARCHAR}, #{item.oldjobglbdef20,jdbcType=VARCHAR},
+      #{item.newjobglbdef20,jdbcType=VARCHAR}, #{item.oldjobglbdef21,jdbcType=VARCHAR}, #{item.newjobglbdef21,jdbcType=VARCHAR},
+      #{item.oldjobglbdef22,jdbcType=VARCHAR}, #{item.newjobglbdef22,jdbcType=VARCHAR}, #{item.oldjobglbdef23,jdbcType=VARCHAR},
+      #{item.newjobglbdef23,jdbcType=VARCHAR}, #{item.oldjobglbdef24,jdbcType=VARCHAR}, #{item.newjobglbdef24,jdbcType=VARCHAR},
+      #{item.issyncglbdef11,jdbcType=VARCHAR}, #{item.oldjobglbdef27,jdbcType=VARCHAR}, #{item.newjobglbdef27,jdbcType=VARCHAR},
+      #{item.oldjobglbdef25,jdbcType=VARCHAR}, #{item.newjobglbdef25,jdbcType=VARCHAR}, #{item.oldjobglbdef26,jdbcType=VARCHAR},
+      #{item.newjobglbdef26,jdbcType=VARCHAR}, #{item.oldjobglbdef28,jdbcType=VARCHAR}, #{item.newjobglbdef28,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="LdapmMpwHiStapply">
+    insert into LDAPM_MPW_HI_STAPPLY (MONTH_ID, UNIT_ID, PK_HI_STAPPLY,
+      ADDREASON, APPLY_DATE, APPROVE_NOTE,
+      APPROVE_STATE, APPROVE_TIME, APPROVER,
+      ASSGID, BILL_CODE, BILLMAKER,
+      BUSINESS_TYPE, CREATIONTIME, CREATOR,
+      DR, EFFECTDATE, FUN_CODE,
+      IFADDBLACK, IFADDPSNCHG, IFENDPART,
+      IFSYNWORK, ISDISABLEPSN, ISHRSSBILL,
+      ISNEEDFILE, MEMO, MODIFIEDTIME,
+      MODIFIER, NEWDEPOSEMODE, NEWJOBMODE,
+      NEWMEMO, NEWOCCUPATION, NEWPK_DEPT,
+      NEWPK_JOB, NEWPK_JOB_TYPE, NEWPK_JOBGRADE,
+      NEWPK_JOBRANK, NEWPK_ORG, NEWPK_POST,
+      NEWPK_POSTSERIES, NEWPK_PSNCL, NEWPOSTSTAT,
+      NEWSERIES, NEWWORKTYPE, OLDDEPOSEMODE,
+      OLDJOBMODE, OLDMEMO, OLDOCCUPATION,
+      OLDPK_DEPT, OLDPK_JOB, OLDPK_JOB_TYPE,
+      OLDPK_JOBGRADE, OLDPK_JOBRANK, OLDPK_ORG,
+      OLDPK_POST, OLDPK_POSTSERIES, OLDPK_PSNCL,
+      OLDPOSTSTAT, OLDSERIES, OLDWORKTYPE,
+      PK_BILLTYPE, PK_GROUP, PK_HI_ORG,
+      PK_OLD_HI_ORG, PK_ORG, PK_PSNDOC,
+      PK_PSNJOB, PK_PSNORG, PK_TRNSTYPE,
+      SREASON, STAPPLY_MODE, TRANSTYPE,
+      TRANSTYPEID, TRIAL_FLAG, TRIAL_UNIT,
+      TRIALBEGINDATE, TRIALDAYS, TRIALENDDATE,
+      TS, OLDJOBGLBDEF1, NEWJOBGLBDEF1,
+      OLDJOBGLBDEF2, NEWJOBGLBDEF2, OLDJOBGLBDEF3,
+      NEWJOBGLBDEF3, OLDJOBGLBDEF4, NEWJOBGLBDEF4,
+      OLDJOBGLBDEF5, NEWJOBGLBDEF5, OLDJOBGLBDEF6,
+      NEWJOBGLBDEF6, OLDJOBGLBDEF7, NEWJOBGLBDEF7,
+      OLDJOBGLBDEF8, NEWJOBGLBDEF8, OLDJOBGLBDEF9,
+      NEWJOBGLBDEF9, OLDJOBGLBDEF10, NEWJOBGLBDEF10,
+      OLDJOBGLBDEF13, NEWJOBGLBDEF13, OLDJOBGLBDEF14,
+      NEWJOBGLBDEF14, OLDJOBGLBDEF15, NEWJOBGLBDEF15,
+      OLDJOBGLBDEF16, NEWJOBGLBDEF16, OLDJOBGLBDEF17,
+      NEWJOBGLBDEF17, OLDJOBGLBDEF18, NEWJOBGLBDEF18,
+      OLDJOBGLBDEF19, NEWJOBGLBDEF19, OLDJOBGLBDEF20,
+      NEWJOBGLBDEF20, OLDJOBGLBDEF21, NEWJOBGLBDEF21,
+      OLDJOBGLBDEF22, NEWJOBGLBDEF22, OLDJOBGLBDEF23,
+      NEWJOBGLBDEF23, OLDJOBGLBDEF24, NEWJOBGLBDEF24,
+      ISSYNCGLBDEF11, OLDJOBGLBDEF27, NEWJOBGLBDEF27,
+      OLDJOBGLBDEF25, NEWJOBGLBDEF25, OLDJOBGLBDEF26,
+      NEWJOBGLBDEF26, OLDJOBGLBDEF28, NEWJOBGLBDEF28
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkHiStapply,jdbcType=VARCHAR},
+      #{addreason,jdbcType=VARCHAR}, #{applyDate,jdbcType=VARCHAR}, #{approveNote,jdbcType=VARCHAR},
+      #{approveState,jdbcType=DECIMAL}, #{approveTime,jdbcType=VARCHAR}, #{approver,jdbcType=VARCHAR},
+      #{assgid,jdbcType=DECIMAL}, #{billCode,jdbcType=VARCHAR}, #{billmaker,jdbcType=VARCHAR},
+      #{businessType,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL}, #{effectdate,jdbcType=VARCHAR}, #{funCode,jdbcType=VARCHAR},
+      #{ifaddblack,jdbcType=VARCHAR}, #{ifaddpsnchg,jdbcType=VARCHAR}, #{ifendpart,jdbcType=VARCHAR},
+      #{ifsynwork,jdbcType=VARCHAR}, #{isdisablepsn,jdbcType=VARCHAR}, #{ishrssbill,jdbcType=VARCHAR},
+      #{isneedfile,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR},
+      #{modifier,jdbcType=VARCHAR}, #{newdeposemode,jdbcType=VARCHAR}, #{newjobmode,jdbcType=VARCHAR},
+      #{newmemo,jdbcType=VARCHAR}, #{newoccupation,jdbcType=VARCHAR}, #{newpkDept,jdbcType=VARCHAR},
+      #{newpkJob,jdbcType=VARCHAR}, #{newpkJobType,jdbcType=VARCHAR}, #{newpkJobgrade,jdbcType=VARCHAR},
+      #{newpkJobrank,jdbcType=VARCHAR}, #{newpkOrg,jdbcType=VARCHAR}, #{newpkPost,jdbcType=VARCHAR},
+      #{newpkPostseries,jdbcType=VARCHAR}, #{newpkPsncl,jdbcType=VARCHAR}, #{newpoststat,jdbcType=VARCHAR},
+      #{newseries,jdbcType=VARCHAR}, #{newworktype,jdbcType=VARCHAR}, #{olddeposemode,jdbcType=VARCHAR},
+      #{oldjobmode,jdbcType=VARCHAR}, #{oldmemo,jdbcType=VARCHAR}, #{oldoccupation,jdbcType=VARCHAR},
+      #{oldpkDept,jdbcType=VARCHAR}, #{oldpkJob,jdbcType=VARCHAR}, #{oldpkJobType,jdbcType=VARCHAR},
+      #{oldpkJobgrade,jdbcType=VARCHAR}, #{oldpkJobrank,jdbcType=VARCHAR}, #{oldpkOrg,jdbcType=VARCHAR},
+      #{oldpkPost,jdbcType=VARCHAR}, #{oldpkPostseries,jdbcType=VARCHAR}, #{oldpkPsncl,jdbcType=VARCHAR},
+      #{oldpoststat,jdbcType=VARCHAR}, #{oldseries,jdbcType=VARCHAR}, #{oldworktype,jdbcType=VARCHAR},
+      #{pkBilltype,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkHiOrg,jdbcType=VARCHAR},
+      #{pkOldHiOrg,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR},
+      #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR}, #{pkTrnstype,jdbcType=VARCHAR},
+      #{sreason,jdbcType=VARCHAR}, #{stapplyMode,jdbcType=DECIMAL}, #{transtype,jdbcType=VARCHAR},
+      #{transtypeid,jdbcType=VARCHAR}, #{trialFlag,jdbcType=VARCHAR}, #{trialUnit,jdbcType=DECIMAL},
+      #{trialbegindate,jdbcType=VARCHAR}, #{trialdays,jdbcType=DECIMAL}, #{trialenddate,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{oldjobglbdef1,jdbcType=VARCHAR}, #{newjobglbdef1,jdbcType=VARCHAR},
+      #{oldjobglbdef2,jdbcType=VARCHAR}, #{newjobglbdef2,jdbcType=VARCHAR}, #{oldjobglbdef3,jdbcType=VARCHAR},
+      #{newjobglbdef3,jdbcType=VARCHAR}, #{oldjobglbdef4,jdbcType=VARCHAR}, #{newjobglbdef4,jdbcType=VARCHAR},
+      #{oldjobglbdef5,jdbcType=VARCHAR}, #{newjobglbdef5,jdbcType=VARCHAR}, #{oldjobglbdef6,jdbcType=VARCHAR},
+      #{newjobglbdef6,jdbcType=VARCHAR}, #{oldjobglbdef7,jdbcType=VARCHAR}, #{newjobglbdef7,jdbcType=VARCHAR},
+      #{oldjobglbdef8,jdbcType=VARCHAR}, #{newjobglbdef8,jdbcType=VARCHAR}, #{oldjobglbdef9,jdbcType=VARCHAR},
+      #{newjobglbdef9,jdbcType=VARCHAR}, #{oldjobglbdef10,jdbcType=VARCHAR}, #{newjobglbdef10,jdbcType=VARCHAR},
+      #{oldjobglbdef13,jdbcType=VARCHAR}, #{newjobglbdef13,jdbcType=VARCHAR}, #{oldjobglbdef14,jdbcType=VARCHAR},
+      #{newjobglbdef14,jdbcType=VARCHAR}, #{oldjobglbdef15,jdbcType=VARCHAR}, #{newjobglbdef15,jdbcType=VARCHAR},
+      #{oldjobglbdef16,jdbcType=VARCHAR}, #{newjobglbdef16,jdbcType=VARCHAR}, #{oldjobglbdef17,jdbcType=VARCHAR},
+      #{newjobglbdef17,jdbcType=VARCHAR}, #{oldjobglbdef18,jdbcType=VARCHAR}, #{newjobglbdef18,jdbcType=VARCHAR},
+      #{oldjobglbdef19,jdbcType=VARCHAR}, #{newjobglbdef19,jdbcType=VARCHAR}, #{oldjobglbdef20,jdbcType=VARCHAR},
+      #{newjobglbdef20,jdbcType=VARCHAR}, #{oldjobglbdef21,jdbcType=VARCHAR}, #{newjobglbdef21,jdbcType=VARCHAR},
+      #{oldjobglbdef22,jdbcType=VARCHAR}, #{newjobglbdef22,jdbcType=VARCHAR}, #{oldjobglbdef23,jdbcType=VARCHAR},
+      #{newjobglbdef23,jdbcType=VARCHAR}, #{oldjobglbdef24,jdbcType=VARCHAR}, #{newjobglbdef24,jdbcType=VARCHAR},
+      #{issyncglbdef11,jdbcType=VARCHAR}, #{oldjobglbdef27,jdbcType=VARCHAR}, #{newjobglbdef27,jdbcType=VARCHAR},
+      #{oldjobglbdef25,jdbcType=VARCHAR}, #{newjobglbdef25,jdbcType=VARCHAR}, #{oldjobglbdef26,jdbcType=VARCHAR},
+      #{newjobglbdef26,jdbcType=VARCHAR}, #{oldjobglbdef28,jdbcType=VARCHAR}, #{newjobglbdef28,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiStapply">
+    insert into LDAPM_MPW_HI_STAPPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkHiStapply != null">
+        PK_HI_STAPPLY,
+      </if>
+      <if test="addreason != null">
+        ADDREASON,
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE,
+      </if>
+      <if test="approveNote != null">
+        APPROVE_NOTE,
+      </if>
+      <if test="approveState != null">
+        APPROVE_STATE,
+      </if>
+      <if test="approveTime != null">
+        APPROVE_TIME,
+      </if>
+      <if test="approver != null">
+        APPROVER,
+      </if>
+      <if test="assgid != null">
+        ASSGID,
+      </if>
+      <if test="billCode != null">
+        BILL_CODE,
+      </if>
+      <if test="billmaker != null">
+        BILLMAKER,
+      </if>
+      <if test="businessType != null">
+        BUSINESS_TYPE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="effectdate != null">
+        EFFECTDATE,
+      </if>
+      <if test="funCode != null">
+        FUN_CODE,
+      </if>
+      <if test="ifaddblack != null">
+        IFADDBLACK,
+      </if>
+      <if test="ifaddpsnchg != null">
+        IFADDPSNCHG,
+      </if>
+      <if test="ifendpart != null">
+        IFENDPART,
+      </if>
+      <if test="ifsynwork != null">
+        IFSYNWORK,
+      </if>
+      <if test="isdisablepsn != null">
+        ISDISABLEPSN,
+      </if>
+      <if test="ishrssbill != null">
+        ISHRSSBILL,
+      </if>
+      <if test="isneedfile != null">
+        ISNEEDFILE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="newdeposemode != null">
+        NEWDEPOSEMODE,
+      </if>
+      <if test="newjobmode != null">
+        NEWJOBMODE,
+      </if>
+      <if test="newmemo != null">
+        NEWMEMO,
+      </if>
+      <if test="newoccupation != null">
+        NEWOCCUPATION,
+      </if>
+      <if test="newpkDept != null">
+        NEWPK_DEPT,
+      </if>
+      <if test="newpkJob != null">
+        NEWPK_JOB,
+      </if>
+      <if test="newpkJobType != null">
+        NEWPK_JOB_TYPE,
+      </if>
+      <if test="newpkJobgrade != null">
+        NEWPK_JOBGRADE,
+      </if>
+      <if test="newpkJobrank != null">
+        NEWPK_JOBRANK,
+      </if>
+      <if test="newpkOrg != null">
+        NEWPK_ORG,
+      </if>
+      <if test="newpkPost != null">
+        NEWPK_POST,
+      </if>
+      <if test="newpkPostseries != null">
+        NEWPK_POSTSERIES,
+      </if>
+      <if test="newpkPsncl != null">
+        NEWPK_PSNCL,
+      </if>
+      <if test="newpoststat != null">
+        NEWPOSTSTAT,
+      </if>
+      <if test="newseries != null">
+        NEWSERIES,
+      </if>
+      <if test="newworktype != null">
+        NEWWORKTYPE,
+      </if>
+      <if test="olddeposemode != null">
+        OLDDEPOSEMODE,
+      </if>
+      <if test="oldjobmode != null">
+        OLDJOBMODE,
+      </if>
+      <if test="oldmemo != null">
+        OLDMEMO,
+      </if>
+      <if test="oldoccupation != null">
+        OLDOCCUPATION,
+      </if>
+      <if test="oldpkDept != null">
+        OLDPK_DEPT,
+      </if>
+      <if test="oldpkJob != null">
+        OLDPK_JOB,
+      </if>
+      <if test="oldpkJobType != null">
+        OLDPK_JOB_TYPE,
+      </if>
+      <if test="oldpkJobgrade != null">
+        OLDPK_JOBGRADE,
+      </if>
+      <if test="oldpkJobrank != null">
+        OLDPK_JOBRANK,
+      </if>
+      <if test="oldpkOrg != null">
+        OLDPK_ORG,
+      </if>
+      <if test="oldpkPost != null">
+        OLDPK_POST,
+      </if>
+      <if test="oldpkPostseries != null">
+        OLDPK_POSTSERIES,
+      </if>
+      <if test="oldpkPsncl != null">
+        OLDPK_PSNCL,
+      </if>
+      <if test="oldpoststat != null">
+        OLDPOSTSTAT,
+      </if>
+      <if test="oldseries != null">
+        OLDSERIES,
+      </if>
+      <if test="oldworktype != null">
+        OLDWORKTYPE,
+      </if>
+      <if test="pkBilltype != null">
+        PK_BILLTYPE,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkHiOrg != null">
+        PK_HI_ORG,
+      </if>
+      <if test="pkOldHiOrg != null">
+        PK_OLD_HI_ORG,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="pkTrnstype != null">
+        PK_TRNSTYPE,
+      </if>
+      <if test="sreason != null">
+        SREASON,
+      </if>
+      <if test="stapplyMode != null">
+        STAPPLY_MODE,
+      </if>
+      <if test="transtype != null">
+        TRANSTYPE,
+      </if>
+      <if test="transtypeid != null">
+        TRANSTYPEID,
+      </if>
+      <if test="trialFlag != null">
+        TRIAL_FLAG,
+      </if>
+      <if test="trialUnit != null">
+        TRIAL_UNIT,
+      </if>
+      <if test="trialbegindate != null">
+        TRIALBEGINDATE,
+      </if>
+      <if test="trialdays != null">
+        TRIALDAYS,
+      </if>
+      <if test="trialenddate != null">
+        TRIALENDDATE,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="oldjobglbdef1 != null">
+        OLDJOBGLBDEF1,
+      </if>
+      <if test="newjobglbdef1 != null">
+        NEWJOBGLBDEF1,
+      </if>
+      <if test="oldjobglbdef2 != null">
+        OLDJOBGLBDEF2,
+      </if>
+      <if test="newjobglbdef2 != null">
+        NEWJOBGLBDEF2,
+      </if>
+      <if test="oldjobglbdef3 != null">
+        OLDJOBGLBDEF3,
+      </if>
+      <if test="newjobglbdef3 != null">
+        NEWJOBGLBDEF3,
+      </if>
+      <if test="oldjobglbdef4 != null">
+        OLDJOBGLBDEF4,
+      </if>
+      <if test="newjobglbdef4 != null">
+        NEWJOBGLBDEF4,
+      </if>
+      <if test="oldjobglbdef5 != null">
+        OLDJOBGLBDEF5,
+      </if>
+      <if test="newjobglbdef5 != null">
+        NEWJOBGLBDEF5,
+      </if>
+      <if test="oldjobglbdef6 != null">
+        OLDJOBGLBDEF6,
+      </if>
+      <if test="newjobglbdef6 != null">
+        NEWJOBGLBDEF6,
+      </if>
+      <if test="oldjobglbdef7 != null">
+        OLDJOBGLBDEF7,
+      </if>
+      <if test="newjobglbdef7 != null">
+        NEWJOBGLBDEF7,
+      </if>
+      <if test="oldjobglbdef8 != null">
+        OLDJOBGLBDEF8,
+      </if>
+      <if test="newjobglbdef8 != null">
+        NEWJOBGLBDEF8,
+      </if>
+      <if test="oldjobglbdef9 != null">
+        OLDJOBGLBDEF9,
+      </if>
+      <if test="newjobglbdef9 != null">
+        NEWJOBGLBDEF9,
+      </if>
+      <if test="oldjobglbdef10 != null">
+        OLDJOBGLBDEF10,
+      </if>
+      <if test="newjobglbdef10 != null">
+        NEWJOBGLBDEF10,
+      </if>
+      <if test="oldjobglbdef13 != null">
+        OLDJOBGLBDEF13,
+      </if>
+      <if test="newjobglbdef13 != null">
+        NEWJOBGLBDEF13,
+      </if>
+      <if test="oldjobglbdef14 != null">
+        OLDJOBGLBDEF14,
+      </if>
+      <if test="newjobglbdef14 != null">
+        NEWJOBGLBDEF14,
+      </if>
+      <if test="oldjobglbdef15 != null">
+        OLDJOBGLBDEF15,
+      </if>
+      <if test="newjobglbdef15 != null">
+        NEWJOBGLBDEF15,
+      </if>
+      <if test="oldjobglbdef16 != null">
+        OLDJOBGLBDEF16,
+      </if>
+      <if test="newjobglbdef16 != null">
+        NEWJOBGLBDEF16,
+      </if>
+      <if test="oldjobglbdef17 != null">
+        OLDJOBGLBDEF17,
+      </if>
+      <if test="newjobglbdef17 != null">
+        NEWJOBGLBDEF17,
+      </if>
+      <if test="oldjobglbdef18 != null">
+        OLDJOBGLBDEF18,
+      </if>
+      <if test="newjobglbdef18 != null">
+        NEWJOBGLBDEF18,
+      </if>
+      <if test="oldjobglbdef19 != null">
+        OLDJOBGLBDEF19,
+      </if>
+      <if test="newjobglbdef19 != null">
+        NEWJOBGLBDEF19,
+      </if>
+      <if test="oldjobglbdef20 != null">
+        OLDJOBGLBDEF20,
+      </if>
+      <if test="newjobglbdef20 != null">
+        NEWJOBGLBDEF20,
+      </if>
+      <if test="oldjobglbdef21 != null">
+        OLDJOBGLBDEF21,
+      </if>
+      <if test="newjobglbdef21 != null">
+        NEWJOBGLBDEF21,
+      </if>
+      <if test="oldjobglbdef22 != null">
+        OLDJOBGLBDEF22,
+      </if>
+      <if test="newjobglbdef22 != null">
+        NEWJOBGLBDEF22,
+      </if>
+      <if test="oldjobglbdef23 != null">
+        OLDJOBGLBDEF23,
+      </if>
+      <if test="newjobglbdef23 != null">
+        NEWJOBGLBDEF23,
+      </if>
+      <if test="oldjobglbdef24 != null">
+        OLDJOBGLBDEF24,
+      </if>
+      <if test="newjobglbdef24 != null">
+        NEWJOBGLBDEF24,
+      </if>
+      <if test="issyncglbdef11 != null">
+        ISSYNCGLBDEF11,
+      </if>
+      <if test="oldjobglbdef27 != null">
+        OLDJOBGLBDEF27,
+      </if>
+      <if test="newjobglbdef27 != null">
+        NEWJOBGLBDEF27,
+      </if>
+      <if test="oldjobglbdef25 != null">
+        OLDJOBGLBDEF25,
+      </if>
+      <if test="newjobglbdef25 != null">
+        NEWJOBGLBDEF25,
+      </if>
+      <if test="oldjobglbdef26 != null">
+        OLDJOBGLBDEF26,
+      </if>
+      <if test="newjobglbdef26 != null">
+        NEWJOBGLBDEF26,
+      </if>
+      <if test="oldjobglbdef28 != null">
+        OLDJOBGLBDEF28,
+      </if>
+      <if test="newjobglbdef28 != null">
+        NEWJOBGLBDEF28,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHiStapply != null">
+        #{pkHiStapply,jdbcType=VARCHAR},
+      </if>
+      <if test="addreason != null">
+        #{addreason,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="approveNote != null">
+        #{approveNote,jdbcType=VARCHAR},
+      </if>
+      <if test="approveState != null">
+        #{approveState,jdbcType=DECIMAL},
+      </if>
+      <if test="approveTime != null">
+        #{approveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null">
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="assgid != null">
+        #{assgid,jdbcType=DECIMAL},
+      </if>
+      <if test="billCode != null">
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billmaker != null">
+        #{billmaker,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="effectdate != null">
+        #{effectdate,jdbcType=VARCHAR},
+      </if>
+      <if test="funCode != null">
+        #{funCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifaddblack != null">
+        #{ifaddblack,jdbcType=VARCHAR},
+      </if>
+      <if test="ifaddpsnchg != null">
+        #{ifaddpsnchg,jdbcType=VARCHAR},
+      </if>
+      <if test="ifendpart != null">
+        #{ifendpart,jdbcType=VARCHAR},
+      </if>
+      <if test="ifsynwork != null">
+        #{ifsynwork,jdbcType=VARCHAR},
+      </if>
+      <if test="isdisablepsn != null">
+        #{isdisablepsn,jdbcType=VARCHAR},
+      </if>
+      <if test="ishrssbill != null">
+        #{ishrssbill,jdbcType=VARCHAR},
+      </if>
+      <if test="isneedfile != null">
+        #{isneedfile,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="newdeposemode != null">
+        #{newdeposemode,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobmode != null">
+        #{newjobmode,jdbcType=VARCHAR},
+      </if>
+      <if test="newmemo != null">
+        #{newmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="newoccupation != null">
+        #{newoccupation,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkDept != null">
+        #{newpkDept,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkJob != null">
+        #{newpkJob,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkJobType != null">
+        #{newpkJobType,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkJobgrade != null">
+        #{newpkJobgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkJobrank != null">
+        #{newpkJobrank,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkOrg != null">
+        #{newpkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkPost != null">
+        #{newpkPost,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkPostseries != null">
+        #{newpkPostseries,jdbcType=VARCHAR},
+      </if>
+      <if test="newpkPsncl != null">
+        #{newpkPsncl,jdbcType=VARCHAR},
+      </if>
+      <if test="newpoststat != null">
+        #{newpoststat,jdbcType=VARCHAR},
+      </if>
+      <if test="newseries != null">
+        #{newseries,jdbcType=VARCHAR},
+      </if>
+      <if test="newworktype != null">
+        #{newworktype,jdbcType=VARCHAR},
+      </if>
+      <if test="olddeposemode != null">
+        #{olddeposemode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobmode != null">
+        #{oldjobmode,jdbcType=VARCHAR},
+      </if>
+      <if test="oldmemo != null">
+        #{oldmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="oldoccupation != null">
+        #{oldoccupation,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkDept != null">
+        #{oldpkDept,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkJob != null">
+        #{oldpkJob,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkJobType != null">
+        #{oldpkJobType,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkJobgrade != null">
+        #{oldpkJobgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkJobrank != null">
+        #{oldpkJobrank,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkOrg != null">
+        #{oldpkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkPost != null">
+        #{oldpkPost,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkPostseries != null">
+        #{oldpkPostseries,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpkPsncl != null">
+        #{oldpkPsncl,jdbcType=VARCHAR},
+      </if>
+      <if test="oldpoststat != null">
+        #{oldpoststat,jdbcType=VARCHAR},
+      </if>
+      <if test="oldseries != null">
+        #{oldseries,jdbcType=VARCHAR},
+      </if>
+      <if test="oldworktype != null">
+        #{oldworktype,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBilltype != null">
+        #{pkBilltype,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHiOrg != null">
+        #{pkHiOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOldHiOrg != null">
+        #{pkOldHiOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTrnstype != null">
+        #{pkTrnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="sreason != null">
+        #{sreason,jdbcType=VARCHAR},
+      </if>
+      <if test="stapplyMode != null">
+        #{stapplyMode,jdbcType=DECIMAL},
+      </if>
+      <if test="transtype != null">
+        #{transtype,jdbcType=VARCHAR},
+      </if>
+      <if test="transtypeid != null">
+        #{transtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="trialFlag != null">
+        #{trialFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="trialUnit != null">
+        #{trialUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="trialbegindate != null">
+        #{trialbegindate,jdbcType=VARCHAR},
+      </if>
+      <if test="trialdays != null">
+        #{trialdays,jdbcType=DECIMAL},
+      </if>
+      <if test="trialenddate != null">
+        #{trialenddate,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef1 != null">
+        #{oldjobglbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef1 != null">
+        #{newjobglbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef2 != null">
+        #{oldjobglbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef2 != null">
+        #{newjobglbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef3 != null">
+        #{oldjobglbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef3 != null">
+        #{newjobglbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef4 != null">
+        #{oldjobglbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef4 != null">
+        #{newjobglbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef5 != null">
+        #{oldjobglbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef5 != null">
+        #{newjobglbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef6 != null">
+        #{oldjobglbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef6 != null">
+        #{newjobglbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef7 != null">
+        #{oldjobglbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef7 != null">
+        #{newjobglbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef8 != null">
+        #{oldjobglbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef8 != null">
+        #{newjobglbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef9 != null">
+        #{oldjobglbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef9 != null">
+        #{newjobglbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef10 != null">
+        #{oldjobglbdef10,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef10 != null">
+        #{newjobglbdef10,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef13 != null">
+        #{oldjobglbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef13 != null">
+        #{newjobglbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef14 != null">
+        #{oldjobglbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef14 != null">
+        #{newjobglbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef15 != null">
+        #{oldjobglbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef15 != null">
+        #{newjobglbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef16 != null">
+        #{oldjobglbdef16,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef16 != null">
+        #{newjobglbdef16,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef17 != null">
+        #{oldjobglbdef17,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef17 != null">
+        #{newjobglbdef17,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef18 != null">
+        #{oldjobglbdef18,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef18 != null">
+        #{newjobglbdef18,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef19 != null">
+        #{oldjobglbdef19,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef19 != null">
+        #{newjobglbdef19,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef20 != null">
+        #{oldjobglbdef20,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef20 != null">
+        #{newjobglbdef20,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef21 != null">
+        #{oldjobglbdef21,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef21 != null">
+        #{newjobglbdef21,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef22 != null">
+        #{oldjobglbdef22,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef22 != null">
+        #{newjobglbdef22,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef23 != null">
+        #{oldjobglbdef23,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef23 != null">
+        #{newjobglbdef23,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef24 != null">
+        #{oldjobglbdef24,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef24 != null">
+        #{newjobglbdef24,jdbcType=VARCHAR},
+      </if>
+      <if test="issyncglbdef11 != null">
+        #{issyncglbdef11,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef27 != null">
+        #{oldjobglbdef27,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef27 != null">
+        #{newjobglbdef27,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef25 != null">
+        #{oldjobglbdef25,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef25 != null">
+        #{newjobglbdef25,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef26 != null">
+        #{oldjobglbdef26,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef26 != null">
+        #{newjobglbdef26,jdbcType=VARCHAR},
+      </if>
+      <if test="oldjobglbdef28 != null">
+        #{oldjobglbdef28,jdbcType=VARCHAR},
+      </if>
+      <if test="newjobglbdef28 != null">
+        #{newjobglbdef28,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.info.dao.PsnDocRetireDao">
+
+    <sql id="psnDocRetireColumns">
+        t.GLBDEF4,
+        t.GLBDEF5,
+        t.MEMO
+    </sql>
+
+    <select id="findList" resultType="PsnDocRetire">
+        SELECT
+        rowid as "id",
+        <include refid="psnDocRetireColumns"/>
+        FROM LDAPM_MPW_HI_PSNDOC_RETIRE T
+        where 1=1 and
+        REGEXP_LIKE(t.GLBDEF4,'.([a-z]+|[A-Z])')
+         AND <![CDATA[ rownum<100 ]]>
+    </select>
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO LDAPM_MPW_HI_PSNDOC_RETIRE(
+        id,city_code
+        )
+        select SEQ_CITY_INDEX.NEXTVAL,cd.* from(
+        <foreach collection="list" item="item" index="index"  close=")" open="(" separator="union">
+            select
+            #{item.cityCode,jdbcType=VARCHAR},
+            #{item.cityName,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="psn" 循环List的每条的结果集
+             collection="list" -->
+        <foreach collection="list" separator=";" item="psn" index="index" open="begin" close=";end;">
+            update LDAPM_MPW_HI_PSNDOC_RETIRE t
+            set
+                t.GLBDEF4 = #{psn.glbdef4,jdbcType=VARCHAR},
+                t.GLBDEF5 = #{psn.glbdef5,jdbcType=VARCHAR},
+                t.MEMO = #{psn.memo,jdbcType=VARCHAR}
+            where rowid = #{psn.id}
+        </foreach>
+    </update>
+
+</mapper>

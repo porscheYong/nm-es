@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.tel.dao.LdapmMpwTelJobAssignCorpDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwTelJobAssignCorp">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_JOB_ASSIGN" jdbcType="VARCHAR" property="pkJobAssign" />
+    <result column="CHOOSE" jdbcType="VARCHAR" property="choose" />
+    <result column="OPERATOR" jdbcType="VARCHAR" property="operator" />
+    <result column="OPERATE_ORG" jdbcType="VARCHAR" property="operateOrg" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="OWNER_ORG" jdbcType="VARCHAR" property="ownerOrg" />
+    <result column="PK_OM_JOB" jdbcType="VARCHAR" property="pkOmJob" />
+    <result column="POSTCODE" jdbcType="VARCHAR" property="postcode" />
+    <result column="SUPORIOR" jdbcType="VARCHAR" property="suporior" />
+    <result column="ASSIGN_DATE" jdbcType="VARCHAR" property="assignDate" />
+    <result column="REVOKE_DATE" jdbcType="VARCHAR" property="revokeDate" />
+    <result column="PK_POSTSERIES" jdbcType="VARCHAR" property="pkPostseries" />
+    <result column="ASSIGN_STATUS" jdbcType="DECIMAL" property="assignStatus" />
+    <result column="DEF1" jdbcType="VARCHAR" property="def1" />
+    <result column="DEF2" jdbcType="VARCHAR" property="def2" />
+    <result column="DEF3" jdbcType="VARCHAR" property="def3" />
+    <result column="DEF4" jdbcType="VARCHAR" property="def4" />
+    <result column="DEF5" jdbcType="VARCHAR" property="def5" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+  </resultMap>
+
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_TEL_JOB_ASSIGN_CORP (MONTH_ID, UNIT_ID, PK_JOB_ASSIGN,
+    CHOOSE, OPERATOR, OPERATE_ORG,
+    PK_ORG, OWNER_ORG, PK_OM_JOB,
+    POSTCODE, SUPORIOR, ASSIGN_DATE,
+    REVOKE_DATE, PK_POSTSERIES, ASSIGN_STATUS,
+    DEF1, DEF2, DEF3, DEF4,
+    DEF5, PK_GROUP, TS,
+    DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL},#{item.unitId,jdbcType=VARCHAR},#{item.pkJobAssign,jdbcType=VARCHAR},
+      #{item.choose,jdbcType=VARCHAR},#{item.operator,jdbcType=VARCHAR},#{item.operateOrg,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR},#{item.ownerOrg,jdbcType=VARCHAR},#{item.pkOmJob,jdbcType=VARCHAR},
+      #{item.postcode,jdbcType=VARCHAR},#{item.suporior,jdbcType=VARCHAR},#{item.assignDate,jdbcType=VARCHAR},
+      #{item.revokeDate,jdbcType=VARCHAR},#{item.pkPostseries,jdbcType=VARCHAR},#{item.assignStatus,jdbcType=DECIMAL},
+      #{item.def1,jdbcType=VARCHAR},#{item.def2,jdbcType=VARCHAR},#{item.def3,jdbcType=VARCHAR},#{item.def4,jdbcType=VARCHAR},
+      #{item.def5,jdbcType=VARCHAR},#{item.pkGroup,jdbcType=VARCHAR},#{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="LdapmMpwTelJobAssignCorp">
+    insert into LDAPM_MPW_TEL_JOB_ASSIGN_CORP (MONTH_ID, UNIT_ID, PK_JOB_ASSIGN,
+      CHOOSE, OPERATOR, OPERATE_ORG,
+      PK_ORG, OWNER_ORG, PK_OM_JOB,
+      POSTCODE, SUPORIOR, ASSIGN_DATE,
+      REVOKE_DATE, PK_POSTSERIES, ASSIGN_STATUS,
+      DEF1, DEF2, DEF3, DEF4,
+      DEF5, PK_GROUP, TS,
+      DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkJobAssign,jdbcType=VARCHAR},
+      #{choose,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{operateOrg,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{ownerOrg,jdbcType=VARCHAR}, #{pkOmJob,jdbcType=VARCHAR},
+      #{postcode,jdbcType=VARCHAR}, #{suporior,jdbcType=VARCHAR}, #{assignDate,jdbcType=VARCHAR},
+      #{revokeDate,jdbcType=VARCHAR}, #{pkPostseries,jdbcType=VARCHAR}, #{assignStatus,jdbcType=DECIMAL},
+      #{def1,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR},
+      #{def5,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwTelJobAssignCorp">
+    insert into LDAPM_MPW_TEL_JOB_ASSIGN_CORP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkJobAssign != null">
+        PK_JOB_ASSIGN,
+      </if>
+      <if test="choose != null">
+        CHOOSE,
+      </if>
+      <if test="operator != null">
+        OPERATOR,
+      </if>
+      <if test="operateOrg != null">
+        OPERATE_ORG,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="ownerOrg != null">
+        OWNER_ORG,
+      </if>
+      <if test="pkOmJob != null">
+        PK_OM_JOB,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="suporior != null">
+        SUPORIOR,
+      </if>
+      <if test="assignDate != null">
+        ASSIGN_DATE,
+      </if>
+      <if test="revokeDate != null">
+        REVOKE_DATE,
+      </if>
+      <if test="pkPostseries != null">
+        PK_POSTSERIES,
+      </if>
+      <if test="assignStatus != null">
+        ASSIGN_STATUS,
+      </if>
+      <if test="def1 != null">
+        DEF1,
+      </if>
+      <if test="def2 != null">
+        DEF2,
+      </if>
+      <if test="def3 != null">
+        DEF3,
+      </if>
+      <if test="def4 != null">
+        DEF4,
+      </if>
+      <if test="def5 != null">
+        DEF5,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkJobAssign != null">
+        #{pkJobAssign,jdbcType=VARCHAR},
+      </if>
+      <if test="choose != null">
+        #{choose,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operateOrg != null">
+        #{operateOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerOrg != null">
+        #{ownerOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOmJob != null">
+        #{pkOmJob,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="suporior != null">
+        #{suporior,jdbcType=VARCHAR},
+      </if>
+      <if test="assignDate != null">
+        #{assignDate,jdbcType=VARCHAR},
+      </if>
+      <if test="revokeDate != null">
+        #{revokeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPostseries != null">
+        #{pkPostseries,jdbcType=VARCHAR},
+      </if>
+      <if test="assignStatus != null">
+        #{assignStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+      <if test="def5 != null">
+        #{def5,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

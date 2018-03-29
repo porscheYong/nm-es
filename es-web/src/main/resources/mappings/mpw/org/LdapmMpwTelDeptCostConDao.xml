@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.org.dao.LdapmMpwTelDeptCostConDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwTelDeptCostCon">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_DEPT_COST_CON" jdbcType="VARCHAR" property="pkDeptCostCon" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_DEPT" jdbcType="VARCHAR" property="pkDept" />
+    <result column="PK_COST" jdbcType="VARCHAR" property="pkCost" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_TEL_DEPT_COST_CON (MONTH_ID, UNIT_ID, PK_DEPT_COST_CON,
+    PK_ORG, PK_DEPT, PK_COST,
+    DEF_STR1, DEF_STR2, DEF_STR3,
+    DEF_STR4, DEF_STR5, PK_GROUP,
+    TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkDeptCostCon,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkDept,jdbcType=VARCHAR}, #{item.pkCost,jdbcType=VARCHAR},
+      #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR}, #{item.defStr3,jdbcType=VARCHAR},
+      #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwTelDeptCostCon">
+    insert into LDAPM_MPW_TEL_DEPT_COST_CON (MONTH_ID, UNIT_ID, PK_DEPT_COST_CON,
+      PK_ORG, PK_DEPT, PK_COST,
+      DEF_STR1, DEF_STR2, DEF_STR3,
+      DEF_STR4, DEF_STR5, PK_GROUP,
+      TS, DR, LOAD_DATE, ETL_DAY,
+      LOCAL_PARTITION_ID)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkDeptCostCon,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, #{pkCost,jdbcType=VARCHAR},
+      #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR}, #{defStr3,jdbcType=VARCHAR},
+      #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwTelDeptCostCon">
+    insert into LDAPM_MPW_TEL_DEPT_COST_CON
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkDeptCostCon != null">
+        PK_DEPT_COST_CON,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkDept != null">
+        PK_DEPT,
+      </if>
+      <if test="pkCost != null">
+        PK_COST,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDeptCostCon != null">
+        #{pkDeptCostCon,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDept != null">
+        #{pkDept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCost != null">
+        #{pkCost,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

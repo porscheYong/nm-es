@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psn.dao.LdapmMpwWbPsnTramsgDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbPsnTramsg">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSN_TRAMSG" jdbcType="VARCHAR" property="pkPsnTramsg" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="TRA_CLASS" jdbcType="VARCHAR" property="traClass" />
+    <result column="TRA_LEVEL" jdbcType="VARCHAR" property="traLevel" />
+    <result column="TRA_ACT" jdbcType="VARCHAR" property="traAct" />
+    <result column="TRA_COURSE" jdbcType="VARCHAR" property="traCourse" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="TRA_TIME" jdbcType="VARCHAR" property="traTime" />
+    <result column="TRA_MODE" jdbcType="VARCHAR" property="traMode" />
+    <result column="TRA_OBJECTIVE" jdbcType="VARCHAR" property="traObjective" />
+    <result column="TRA_CONTENT_CLASS" jdbcType="VARCHAR" property="traContentClass" />
+    <result column="TRA_LOCATION" jdbcType="VARCHAR" property="traLocation" />
+    <result column="TRA_RESULT" jdbcType="VARCHAR" property="traResult" />
+    <result column="CERTNAME" jdbcType="VARCHAR" property="certname" />
+    <result column="CERTUNIT" jdbcType="VARCHAR" property="certunit" />
+    <result column="CERTCODE" jdbcType="VARCHAR" property="certcode" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="DEF_NUM1" jdbcType="DECIMAL" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="DECIMAL" property="defNum2" />
+    <result column="DEF_NUM3" jdbcType="DECIMAL" property="defNum3" />
+    <result column="DEF_NUM4" jdbcType="DECIMAL" property="defNum4" />
+    <result column="DEF_NUM5" jdbcType="DECIMAL" property="defNum5" />
+    <result column="TRA_CODE" jdbcType="VARCHAR" property="traCode" />
+    <result column="TRA_METHOD" jdbcType="VARCHAR" property="traMethod" />
+    <result column="TRA_CONTENT" jdbcType="VARCHAR" property="traContent" />
+    <result column="TRA_VALIDITY" jdbcType="VARCHAR" property="traValidity" />
+    <result column="TRA_SIGN_DATE" jdbcType="VARCHAR" property="traSignDate" />
+    <result column="TRA_HOST_UNIT" jdbcType="VARCHAR" property="traHostUnit" />
+    <result column="TRA_CO_ORGANIZER" jdbcType="VARCHAR" property="traCoOrganizer" />
+    <result column="TRA_UNDERTAKING_UNIT" jdbcType="VARCHAR" property="traUndertakingUnit" />
+    <result column="TRA_LEA_EVALUATION_RESULTS" jdbcType="DECIMAL" property="traLeaEvaluationResults" />
+    <result column="TRA_PERFORMANCE_RESULTS" jdbcType="DECIMAL" property="traPerformanceResults" />
+    <result column="TRA_CERTIFICATE_LEVEL" jdbcType="VARCHAR" property="traCertificateLevel" />
+    <result column="ONLINE_UNIVERSITY_PK" jdbcType="VARCHAR" property="onlineUniversityPk" />
+    <result column="TRA_HOST_UNIT_PK" jdbcType="VARCHAR" property="traHostUnitPk" />
+    <result column="TRA_HOST_DEPT_PK" jdbcType="VARCHAR" property="traHostDeptPk" />
+    <result column="TRA_CARD_UNIT_PK" jdbcType="VARCHAR" property="traCardUnitPk" />
+    <result column="TRA_CARD_DEPT_PK" jdbcType="VARCHAR" property="traCardDeptPk" />
+    <result column="TRA_FILE_UNIT_PK" jdbcType="VARCHAR" property="traFileUnitPk" />
+    <result column="TRA_FILE_DEPT_PK" jdbcType="VARCHAR" property="traFileDeptPk" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_PSN_TRAMSG (MONTH_ID, UNIT_ID, PK_PSN_TRAMSG,
+    PK_PSN_MSG, TRA_CLASS, TRA_LEVEL,
+    TRA_ACT, TRA_COURSE, BEGINDATE,
+    ENDDATE, TRA_TIME, TRA_MODE,
+    TRA_OBJECTIVE, TRA_CONTENT_CLASS, TRA_LOCATION,
+    TRA_RESULT, CERTNAME, CERTUNIT,
+    CERTCODE, REMARK, TS,
+    DR, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_NUM1, DEF_NUM2, DEF_NUM3,
+    DEF_NUM4, DEF_NUM5, TRA_CODE,
+    TRA_METHOD, TRA_CONTENT, TRA_VALIDITY,
+    TRA_SIGN_DATE, TRA_HOST_UNIT, TRA_CO_ORGANIZER,
+    TRA_UNDERTAKING_UNIT, TRA_LEA_EVALUATION_RESULTS,
+    TRA_PERFORMANCE_RESULTS, TRA_CERTIFICATE_LEVEL,
+    ONLINE_UNIVERSITY_PK, TRA_HOST_UNIT_PK, TRA_HOST_DEPT_PK,
+    TRA_CARD_UNIT_PK, TRA_CARD_DEPT_PK, TRA_FILE_UNIT_PK,
+    TRA_FILE_DEPT_PK)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsnTramsg,jdbcType=VARCHAR}, #{item.pkPsnMsg,jdbcType=VARCHAR}, #{item.traClass,jdbcType=VARCHAR}, #{item.traLevel,jdbcType=VARCHAR},
+      #{item.traAct,jdbcType=VARCHAR}, #{item.traCourse,jdbcType=VARCHAR}, #{item.begindate,jdbcType=VARCHAR},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.traTime,jdbcType=VARCHAR}, #{item.traMode,jdbcType=VARCHAR},
+      #{item.traObjective,jdbcType=VARCHAR}, #{item.traContentClass,jdbcType=VARCHAR}, #{item.traLocation,jdbcType=VARCHAR},
+      #{item.traResult,jdbcType=VARCHAR}, #{item.certname,jdbcType=VARCHAR}, #{item.certunit,jdbcType=VARCHAR},
+      #{item.certcode,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR},
+      #{item.defStr3,jdbcType=VARCHAR}, #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR},
+      #{item.defNum1,jdbcType=DECIMAL}, #{item.defNum2,jdbcType=DECIMAL}, #{item.defNum3,jdbcType=DECIMAL},
+      #{item.defNum4,jdbcType=DECIMAL}, #{item.defNum5,jdbcType=DECIMAL}, #{item.traCode,jdbcType=VARCHAR},
+      #{item.traMethod,jdbcType=VARCHAR}, #{item.traContent,jdbcType=VARCHAR}, #{item.traValidity,jdbcType=VARCHAR},
+      #{item.traSignDate,jdbcType=VARCHAR}, #{item.traHostUnit,jdbcType=VARCHAR}, #{item.traCoOrganizer,jdbcType=VARCHAR},
+      #{item.traUndertakingUnit,jdbcType=VARCHAR}, #{item.traLeaEvaluationResults,jdbcType=DECIMAL},
+      #{item.traPerformanceResults,jdbcType=DECIMAL}, #{item.traCertificateLevel,jdbcType=VARCHAR},
+      #{item.onlineUniversityPk,jdbcType=VARCHAR}, #{item.traHostUnitPk,jdbcType=VARCHAR}, #{item.traHostDeptPk,jdbcType=VARCHAR},
+      #{item.traCardUnitPk,jdbcType=VARCHAR}, #{item.traCardDeptPk,jdbcType=VARCHAR}, #{item.traFileUnitPk,jdbcType=VARCHAR},
+      #{item.traFileDeptPk,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+
+  <insert id="insert" parameterType="LdapmMpwWbPsnTramsg">
+    insert into LDAPM_MPW_WB_PSN_TRAMSG (MONTH_ID, UNIT_ID, PK_PSN_TRAMSG,
+    PK_PSN_MSG, TRA_CLASS, TRA_LEVEL,
+    TRA_ACT, TRA_COURSE, BEGINDATE,
+    ENDDATE, TRA_TIME, TRA_MODE,
+    TRA_OBJECTIVE, TRA_CONTENT_CLASS, TRA_LOCATION,
+    TRA_RESULT, CERTNAME, CERTUNIT,
+    CERTCODE, REMARK, TS,
+    DR, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_NUM1, DEF_NUM2, DEF_NUM3,
+    DEF_NUM4, DEF_NUM5, TRA_CODE,
+    TRA_METHOD, TRA_CONTENT, TRA_VALIDITY,
+    TRA_SIGN_DATE, TRA_HOST_UNIT, TRA_CO_ORGANIZER,
+    TRA_UNDERTAKING_UNIT, TRA_LEA_EVALUATION_RESULTS,
+    TRA_PERFORMANCE_RESULTS, TRA_CERTIFICATE_LEVEL,
+    ONLINE_UNIVERSITY_PK, TRA_HOST_UNIT_PK, TRA_HOST_DEPT_PK,
+    TRA_CARD_UNIT_PK, TRA_CARD_DEPT_PK, TRA_FILE_UNIT_PK,
+    TRA_FILE_DEPT_PK)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsnTramsg,jdbcType=VARCHAR},
+    #{pkPsnMsg,jdbcType=VARCHAR}, #{traClass,jdbcType=VARCHAR}, #{traLevel,jdbcType=VARCHAR},
+    #{traAct,jdbcType=VARCHAR}, #{traCourse,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR},
+    #{enddate,jdbcType=VARCHAR}, #{traTime,jdbcType=VARCHAR}, #{traMode,jdbcType=VARCHAR},
+    #{traObjective,jdbcType=VARCHAR}, #{traContentClass,jdbcType=VARCHAR}, #{traLocation,jdbcType=VARCHAR},
+    #{traResult,jdbcType=VARCHAR}, #{certname,jdbcType=VARCHAR}, #{certunit,jdbcType=VARCHAR},
+    #{certcode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+    #{dr,jdbcType=DECIMAL}, #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR},
+    #{defStr3,jdbcType=VARCHAR}, #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR},
+    #{defNum1,jdbcType=DECIMAL}, #{defNum2,jdbcType=DECIMAL}, #{defNum3,jdbcType=DECIMAL},
+    #{defNum4,jdbcType=DECIMAL}, #{defNum5,jdbcType=DECIMAL}, #{traCode,jdbcType=VARCHAR},
+    #{traMethod,jdbcType=VARCHAR}, #{traContent,jdbcType=VARCHAR}, #{traValidity,jdbcType=VARCHAR},
+    #{traSignDate,jdbcType=VARCHAR}, #{traHostUnit,jdbcType=VARCHAR}, #{traCoOrganizer,jdbcType=VARCHAR},
+    #{traUndertakingUnit,jdbcType=VARCHAR}, #{traLeaEvaluationResults,jdbcType=DECIMAL},
+    #{traPerformanceResults,jdbcType=DECIMAL}, #{traCertificateLevel,jdbcType=VARCHAR},
+    #{onlineUniversityPk,jdbcType=VARCHAR}, #{traHostUnitPk,jdbcType=VARCHAR}, #{traHostDeptPk,jdbcType=VARCHAR},
+    #{traCardUnitPk,jdbcType=VARCHAR}, #{traCardDeptPk,jdbcType=VARCHAR}, #{traFileUnitPk,jdbcType=VARCHAR},
+    #{traFileDeptPk,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbPsnTramsg">
+    insert into LDAPM_MPW_WB_PSN_TRAMSG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsnTramsg != null">
+        PK_PSN_TRAMSG,
+      </if>
+      <if test="pkPsnMsg != null">
+        PK_PSN_MSG,
+      </if>
+      <if test="traClass != null">
+        TRA_CLASS,
+      </if>
+      <if test="traLevel != null">
+        TRA_LEVEL,
+      </if>
+      <if test="traAct != null">
+        TRA_ACT,
+      </if>
+      <if test="traCourse != null">
+        TRA_COURSE,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="traTime != null">
+        TRA_TIME,
+      </if>
+      <if test="traMode != null">
+        TRA_MODE,
+      </if>
+      <if test="traObjective != null">
+        TRA_OBJECTIVE,
+      </if>
+      <if test="traContentClass != null">
+        TRA_CONTENT_CLASS,
+      </if>
+      <if test="traLocation != null">
+        TRA_LOCATION,
+      </if>
+      <if test="traResult != null">
+        TRA_RESULT,
+      </if>
+      <if test="certname != null">
+        CERTNAME,
+      </if>
+      <if test="certunit != null">
+        CERTUNIT,
+      </if>
+      <if test="certcode != null">
+        CERTCODE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+      <if test="defNum3 != null">
+        DEF_NUM3,
+      </if>
+      <if test="defNum4 != null">
+        DEF_NUM4,
+      </if>
+      <if test="defNum5 != null">
+        DEF_NUM5,
+      </if>
+      <if test="traCode != null">
+        TRA_CODE,
+      </if>
+      <if test="traMethod != null">
+        TRA_METHOD,
+      </if>
+      <if test="traContent != null">
+        TRA_CONTENT,
+      </if>
+      <if test="traValidity != null">
+        TRA_VALIDITY,
+      </if>
+      <if test="traSignDate != null">
+        TRA_SIGN_DATE,
+      </if>
+      <if test="traHostUnit != null">
+        TRA_HOST_UNIT,
+      </if>
+      <if test="traCoOrganizer != null">
+        TRA_CO_ORGANIZER,
+      </if>
+      <if test="traUndertakingUnit != null">
+        TRA_UNDERTAKING_UNIT,
+      </if>
+      <if test="traLeaEvaluationResults != null">
+        TRA_LEA_EVALUATION_RESULTS,
+      </if>
+      <if test="traPerformanceResults != null">
+        TRA_PERFORMANCE_RESULTS,
+      </if>
+      <if test="traCertificateLevel != null">
+        TRA_CERTIFICATE_LEVEL,
+      </if>
+      <if test="onlineUniversityPk != null">
+        ONLINE_UNIVERSITY_PK,
+      </if>
+      <if test="traHostUnitPk != null">
+        TRA_HOST_UNIT_PK,
+      </if>
+      <if test="traHostDeptPk != null">
+        TRA_HOST_DEPT_PK,
+      </if>
+      <if test="traCardUnitPk != null">
+        TRA_CARD_UNIT_PK,
+      </if>
+      <if test="traCardDeptPk != null">
+        TRA_CARD_DEPT_PK,
+      </if>
+      <if test="traFileUnitPk != null">
+        TRA_FILE_UNIT_PK,
+      </if>
+      <if test="traFileDeptPk != null">
+        TRA_FILE_DEPT_PK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnTramsg != null">
+        #{pkPsnTramsg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnMsg != null">
+        #{pkPsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="traClass != null">
+        #{traClass,jdbcType=VARCHAR},
+      </if>
+      <if test="traLevel != null">
+        #{traLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="traAct != null">
+        #{traAct,jdbcType=VARCHAR},
+      </if>
+      <if test="traCourse != null">
+        #{traCourse,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="traTime != null">
+        #{traTime,jdbcType=VARCHAR},
+      </if>
+      <if test="traMode != null">
+        #{traMode,jdbcType=VARCHAR},
+      </if>
+      <if test="traObjective != null">
+        #{traObjective,jdbcType=VARCHAR},
+      </if>
+      <if test="traContentClass != null">
+        #{traContentClass,jdbcType=VARCHAR},
+      </if>
+      <if test="traLocation != null">
+        #{traLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="traResult != null">
+        #{traResult,jdbcType=VARCHAR},
+      </if>
+      <if test="certname != null">
+        #{certname,jdbcType=VARCHAR},
+      </if>
+      <if test="certunit != null">
+        #{certunit,jdbcType=VARCHAR},
+      </if>
+      <if test="certcode != null">
+        #{certcode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum3 != null">
+        #{defNum3,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum4 != null">
+        #{defNum4,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum5 != null">
+        #{defNum5,jdbcType=DECIMAL},
+      </if>
+      <if test="traCode != null">
+        #{traCode,jdbcType=VARCHAR},
+      </if>
+      <if test="traMethod != null">
+        #{traMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="traContent != null">
+        #{traContent,jdbcType=VARCHAR},
+      </if>
+      <if test="traValidity != null">
+        #{traValidity,jdbcType=VARCHAR},
+      </if>
+      <if test="traSignDate != null">
+        #{traSignDate,jdbcType=VARCHAR},
+      </if>
+      <if test="traHostUnit != null">
+        #{traHostUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="traCoOrganizer != null">
+        #{traCoOrganizer,jdbcType=VARCHAR},
+      </if>
+      <if test="traUndertakingUnit != null">
+        #{traUndertakingUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="traLeaEvaluationResults != null">
+        #{traLeaEvaluationResults,jdbcType=DECIMAL},
+      </if>
+      <if test="traPerformanceResults != null">
+        #{traPerformanceResults,jdbcType=DECIMAL},
+      </if>
+      <if test="traCertificateLevel != null">
+        #{traCertificateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineUniversityPk != null">
+        #{onlineUniversityPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traHostUnitPk != null">
+        #{traHostUnitPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traHostDeptPk != null">
+        #{traHostDeptPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traCardUnitPk != null">
+        #{traCardUnitPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traCardDeptPk != null">
+        #{traCardDeptPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traFileUnitPk != null">
+        #{traFileUnitPk,jdbcType=VARCHAR},
+      </if>
+      <if test="traFileDeptPk != null">
+        #{traFileDeptPk,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.post.dao.LdapmMpwOmPostseriesDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwOmPostseries">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="FATHER_PK" jdbcType="VARCHAR" property="fatherPk" />
+    <result column="INNERCODE" jdbcType="VARCHAR" property="innercode" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_POSTSERIES" jdbcType="VARCHAR" property="pkPostseries" />
+    <result column="POSTSERIESCODE" jdbcType="VARCHAR" property="postseriescode" />
+    <result column="POSTSERIESDESC" jdbcType="VARCHAR" property="postseriesdesc" />
+    <result column="POSTSERIESNAME" jdbcType="VARCHAR" property="postseriesname" />
+    <result column="SEQ" jdbcType="VARCHAR" property="seq" />
+    <result column="POSTSERIESNAME2" jdbcType="VARCHAR" property="postseriesname2" />
+    <result column="POSTSERIESNAME3" jdbcType="VARCHAR" property="postseriesname3" />
+    <result column="POSTSERIESNAME4" jdbcType="VARCHAR" property="postseriesname4" />
+    <result column="POSTSERIESNAME5" jdbcType="VARCHAR" property="postseriesname5" />
+    <result column="POSTSERIESNAME6" jdbcType="VARCHAR" property="postseriesname6" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_OM_POSTSERIES (MONTH_ID, UNIT_ID, CREATIONTIME,
+    CREATOR, ENABLESTATE, FATHER_PK,
+    INNERCODE, MODIFIEDTIME, MODIFIER,
+    PK_GROUP, PK_ORG, PK_POSTSERIES,
+    POSTSERIESCODE, POSTSERIESDESC, POSTSERIESNAME,
+    SEQ, POSTSERIESNAME2, POSTSERIESNAME3,
+    POSTSERIESNAME4, POSTSERIESNAME5, POSTSERIESNAME6,
+    TS, DR, DATAORIGINFLAG
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.enablestate,jdbcType=DECIMAL}, #{item.fatherPk,jdbcType=VARCHAR},
+      #{item.innercode,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPostseries,jdbcType=VARCHAR},
+      #{item.postseriescode,jdbcType=VARCHAR}, #{item.postseriesdesc,jdbcType=VARCHAR}, #{item.postseriesname,jdbcType=VARCHAR},
+      #{item.seq,jdbcType=VARCHAR}, #{item.postseriesname2,jdbcType=VARCHAR}, #{item.postseriesname3,jdbcType=VARCHAR},
+      #{item.postseriesname4,jdbcType=VARCHAR}, #{item.postseriesname5,jdbcType=VARCHAR}, #{item.postseriesname6,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.dataoriginflag,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwOmPostseries">
+    insert into LDAPM_MPW_OM_POSTSERIES (MONTH_ID, UNIT_ID, CREATIONTIME,
+      CREATOR, ENABLESTATE, FATHER_PK,
+      INNERCODE, MODIFIEDTIME, MODIFIER,
+      PK_GROUP, PK_ORG, PK_POSTSERIES,
+      POSTSERIESCODE, POSTSERIESDESC, POSTSERIESNAME,
+      SEQ, POSTSERIESNAME2, POSTSERIESNAME3,
+      POSTSERIESNAME4, POSTSERIESNAME5, POSTSERIESNAME6,
+      TS, DR, DATAORIGINFLAG
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{enablestate,jdbcType=DECIMAL}, #{fatherPk,jdbcType=VARCHAR},
+      #{innercode,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR},
+      #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkPostseries,jdbcType=VARCHAR},
+      #{postseriescode,jdbcType=VARCHAR}, #{postseriesdesc,jdbcType=VARCHAR}, #{postseriesname,jdbcType=VARCHAR},
+      #{seq,jdbcType=VARCHAR}, #{postseriesname2,jdbcType=VARCHAR}, #{postseriesname3,jdbcType=VARCHAR},
+      #{postseriesname4,jdbcType=VARCHAR}, #{postseriesname5,jdbcType=VARCHAR}, #{postseriesname6,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{dataoriginflag,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwOmPostseries">
+    insert into LDAPM_MPW_OM_POSTSERIES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="fatherPk != null">
+        FATHER_PK,
+      </if>
+      <if test="innercode != null">
+        INNERCODE,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPostseries != null">
+        PK_POSTSERIES,
+      </if>
+      <if test="postseriescode != null">
+        POSTSERIESCODE,
+      </if>
+      <if test="postseriesdesc != null">
+        POSTSERIESDESC,
+      </if>
+      <if test="postseriesname != null">
+        POSTSERIESNAME,
+      </if>
+      <if test="seq != null">
+        SEQ,
+      </if>
+      <if test="postseriesname2 != null">
+        POSTSERIESNAME2,
+      </if>
+      <if test="postseriesname3 != null">
+        POSTSERIESNAME3,
+      </if>
+      <if test="postseriesname4 != null">
+        POSTSERIESNAME4,
+      </if>
+      <if test="postseriesname5 != null">
+        POSTSERIESNAME5,
+      </if>
+      <if test="postseriesname6 != null">
+        POSTSERIESNAME6,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="fatherPk != null">
+        #{fatherPk,jdbcType=VARCHAR},
+      </if>
+      <if test="innercode != null">
+        #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPostseries != null">
+        #{pkPostseries,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriescode != null">
+        #{postseriescode,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesdesc != null">
+        #{postseriesdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname != null">
+        #{postseriesname,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname2 != null">
+        #{postseriesname2,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname3 != null">
+        #{postseriesname3,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname4 != null">
+        #{postseriesname4,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname5 != null">
+        #{postseriesname5,jdbcType=VARCHAR},
+      </if>
+      <if test="postseriesname6 != null">
+        #{postseriesname6,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="dataoriginflag != null">
+        #{dataoriginflag,jdbcType=DECIMAL},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

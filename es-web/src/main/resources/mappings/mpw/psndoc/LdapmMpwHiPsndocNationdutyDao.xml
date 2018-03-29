@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocNationdutyDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocNationduty">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="OCCUPATION" jdbcType="VARCHAR" property="occupation" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CERTIFICATENUM" jdbcType="VARCHAR" property="certificatenum" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="WORKLEVEL" jdbcType="VARCHAR" property="worklevel" />
+    <result column="WORKUNITNAME" jdbcType="VARCHAR" property="workunitname" />
+    <result column="WORKDATE" jdbcType="VARCHAR" property="workdate" />
+    <result column="ISTOP" jdbcType="VARCHAR" property="istop" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="WORKNAME" jdbcType="VARCHAR" property="workname" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="OCCUPTYPE" jdbcType="VARCHAR" property="occuptype" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="RECORDNUM" jdbcType="VARCHAR" property="recordnum" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_NATIONDUTY (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    OCCUPATION, CREATIONTIME, GLBDEF6,
+    CREATOR, CERTIFICATENUM, MODIFIER,
+    WORKLEVEL, WORKUNITNAME, WORKDATE,
+    ISTOP, GLBDEF5, MODIFIEDTIME,
+    PK_PSNORG, PK_GROUP, WORKNAME,
+    GLBDEF4, PK_ORG, PK_PSNDOC,
+    TS, DR, LASTFLAG, OCCUPTYPE,
+    PK_PSNJOB, RECORDNUM)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.occupation,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.glbdef6,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.certificatenum,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.worklevel,jdbcType=VARCHAR}, #{item.workunitname,jdbcType=VARCHAR}, #{item.workdate,jdbcType=VARCHAR},
+      #{item.istop,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.pkPsnorg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.workname,jdbcType=VARCHAR},
+      #{item.glbdef4,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.lastflag,jdbcType=VARCHAR}, #{item.occuptype,jdbcType=VARCHAR},
+      #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.recordnum,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocNationduty">
+    insert into LDAPM_MPW_HI_PSNDOC_NATIONDUTY (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+      OCCUPATION, CREATIONTIME, GLBDEF6,
+      CREATOR, CERTIFICATENUM, MODIFIER,
+      WORKLEVEL, WORKUNITNAME, WORKDATE,
+      ISTOP, GLBDEF5, MODIFIEDTIME,
+      PK_PSNORG, PK_GROUP, WORKNAME,
+      GLBDEF4, PK_ORG, PK_PSNDOC,
+      TS, DR, LASTFLAG, OCCUPTYPE,
+      PK_PSNJOB, RECORDNUM)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR},
+      #{occupation,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{certificatenum,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR},
+      #{worklevel,jdbcType=VARCHAR}, #{workunitname,jdbcType=VARCHAR}, #{workdate,jdbcType=VARCHAR},
+      #{istop,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR},
+      #{pkPsnorg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{workname,jdbcType=VARCHAR},
+      #{glbdef4,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{lastflag,jdbcType=VARCHAR}, #{occuptype,jdbcType=VARCHAR},
+      #{pkPsnjob,jdbcType=VARCHAR}, #{recordnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocNationduty">
+    insert into LDAPM_MPW_HI_PSNDOC_NATIONDUTY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="occupation != null">
+        OCCUPATION,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="certificatenum != null">
+        CERTIFICATENUM,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="worklevel != null">
+        WORKLEVEL,
+      </if>
+      <if test="workunitname != null">
+        WORKUNITNAME,
+      </if>
+      <if test="workdate != null">
+        WORKDATE,
+      </if>
+      <if test="istop != null">
+        ISTOP,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="workname != null">
+        WORKNAME,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="occuptype != null">
+        OCCUPTYPE,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null">
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="certificatenum != null">
+        #{certificatenum,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="worklevel != null">
+        #{worklevel,jdbcType=VARCHAR},
+      </if>
+      <if test="workunitname != null">
+        #{workunitname,jdbcType=VARCHAR},
+      </if>
+      <if test="workdate != null">
+        #{workdate,jdbcType=VARCHAR},
+      </if>
+      <if test="istop != null">
+        #{istop,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="workname != null">
+        #{workname,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="occuptype != null">
+        #{occuptype,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+
+</mapper>

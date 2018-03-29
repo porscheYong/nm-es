@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.hi.dao.LdapmMpwHiExchangeapplyDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiExchangeapply">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_EXCHANGE" jdbcType="VARCHAR" property="pkExchange" />
+    <result column="BILL_CODE" jdbcType="VARCHAR" property="billCode" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="GLBDEF10" jdbcType="VARCHAR" property="glbdef10" />
+    <result column="GLBDEF11" jdbcType="VARCHAR" property="glbdef11" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_BILLTYPE" jdbcType="VARCHAR" property="pkBilltype" />
+    <result column="TRANSTYPEID" jdbcType="VARCHAR" property="transtypeid" />
+    <result column="TRANSTYPE" jdbcType="VARCHAR" property="transtype" />
+    <result column="BILLMAKER" jdbcType="VARCHAR" property="billmaker" />
+    <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate" />
+    <result column="APPROVE_STATE" jdbcType="DECIMAL" property="approveState" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="APPROVER" jdbcType="VARCHAR" property="approver" />
+    <result column="APPROVE_TIME" jdbcType="VARCHAR" property="approveTime" />
+    <result column="APPROVE_NOTE" jdbcType="VARCHAR" property="approveNote" />
+    <result column="GLBDEF12" jdbcType="VARCHAR" property="glbdef12" />
+    <result column="GLBDEF13" jdbcType="VARCHAR" property="glbdef13" />
+    <result column="GLBDEF14" jdbcType="VARCHAR" property="glbdef14" />
+    <result column="GLBDEF15" jdbcType="VARCHAR" property="glbdef15" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="PK_PSNCL" jdbcType="VARCHAR" property="pkPsncl" />
+    <result column="IFSYNWORK" jdbcType="VARCHAR" property="ifsynwork" />
+    <result column="PK_HI_HRORG" jdbcType="VARCHAR" property="pkHiHrorg" />
+    <result column="POSTSTATE" jdbcType="VARCHAR" property="poststate" />
+    <result column="ISSYNCGLBDEF11" jdbcType="VARCHAR" property="issyncglbdef11" />
+    <result column="VLEADERPOSITION" jdbcType="VARCHAR" property="vleaderposition" />
+    <result column="VDUTYDEPT" jdbcType="VARCHAR" property="vdutydept" />
+    <result column="WORKDIRECT" jdbcType="VARCHAR" property="workdirect" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into LDAPM_MPW_HI_EXCHANGEAPPLY (MONTH_ID, UNIT_ID, PK_EXCHANGE,
+    BILL_CODE, GLBDEF1, BEGINDATE,
+    ENDDATE, GLBDEF2, GLBDEF8,
+    GLBDEF9, GLBDEF10, GLBDEF11,
+    GLBDEF7, PK_PSNJOB, CREATOR,
+    CREATIONTIME, MODIFIER, MODIFIEDTIME,
+    PK_PSNDOC, PK_BILLTYPE, TRANSTYPEID,
+    TRANSTYPE, BILLMAKER, APPLY_DATE,
+    APPROVE_STATE, PK_GROUP, PK_ORG,
+    APPROVER, APPROVE_TIME, APPROVE_NOTE,
+    GLBDEF12, GLBDEF13, GLBDEF14,
+    GLBDEF15, TS, DR, PK_PSNCL,
+    IFSYNWORK, PK_HI_HRORG, POSTSTATE,
+    ISSYNCGLBDEF11, VLEADERPOSITION, VDUTYDEPT,
+    WORKDIRECT)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkExchange,jdbcType=VARCHAR},
+      #{item.billCode,jdbcType=VARCHAR}, #{item.glbdef1,jdbcType=VARCHAR}, #{item.begindate,jdbcType=VARCHAR},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.glbdef2,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR},
+      #{item.glbdef9,jdbcType=VARCHAR}, #{item.glbdef10,jdbcType=VARCHAR}, #{item.glbdef11,jdbcType=VARCHAR},
+      #{item.glbdef7,jdbcType=VARCHAR}, #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.pkBilltype,jdbcType=VARCHAR}, #{item.transtypeid,jdbcType=VARCHAR},
+      #{item.transtype,jdbcType=VARCHAR}, #{item.billmaker,jdbcType=VARCHAR}, #{item.applyDate,jdbcType=VARCHAR},
+      #{item.approveState,jdbcType=DECIMAL}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.approver,jdbcType=VARCHAR}, #{item.approveTime,jdbcType=VARCHAR}, #{item.approveNote,jdbcType=VARCHAR},
+      #{item.glbdef12,jdbcType=VARCHAR}, #{item.glbdef13,jdbcType=VARCHAR}, #{item.glbdef14,jdbcType=VARCHAR},
+      #{item.glbdef15,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.pkPsncl,jdbcType=VARCHAR},
+      #{item.ifsynwork,jdbcType=VARCHAR}, #{item.pkHiHrorg,jdbcType=VARCHAR}, #{item.poststate,jdbcType=VARCHAR},
+      #{item.issyncglbdef11,jdbcType=VARCHAR}, #{item.vleaderposition,jdbcType=VARCHAR}, #{item.vdutydept,jdbcType=VARCHAR},
+      #{item.workdirect,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="LdapmMpwHiExchangeapply">
+    insert into LDAPM_MPW_HI_EXCHANGEAPPLY (MONTH_ID, UNIT_ID, PK_EXCHANGE,
+      BILL_CODE, GLBDEF1, BEGINDATE,
+      ENDDATE, GLBDEF2, GLBDEF8,
+      GLBDEF9, GLBDEF10, GLBDEF11,
+      GLBDEF7, PK_PSNJOB, CREATOR,
+      CREATIONTIME, MODIFIER, MODIFIEDTIME,
+      PK_PSNDOC, PK_BILLTYPE, TRANSTYPEID,
+      TRANSTYPE, BILLMAKER, APPLY_DATE,
+      APPROVE_STATE, PK_GROUP, PK_ORG,
+      APPROVER, APPROVE_TIME, APPROVE_NOTE,
+      GLBDEF12, GLBDEF13, GLBDEF14,
+      GLBDEF15, TS, DR, PK_PSNCL,
+      IFSYNWORK, PK_HI_HRORG, POSTSTATE,
+      ISSYNCGLBDEF11, VLEADERPOSITION, VDUTYDEPT,
+      WORKDIRECT)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkExchange,jdbcType=VARCHAR},
+      #{billCode,jdbcType=VARCHAR}, #{glbdef1,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR},
+      #{enddate,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR},
+      #{glbdef9,jdbcType=VARCHAR}, #{glbdef10,jdbcType=VARCHAR}, #{glbdef11,jdbcType=VARCHAR},
+      #{glbdef7,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR},
+      #{creationtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR},
+      #{pkPsndoc,jdbcType=VARCHAR}, #{pkBilltype,jdbcType=VARCHAR}, #{transtypeid,jdbcType=VARCHAR},
+      #{transtype,jdbcType=VARCHAR}, #{billmaker,jdbcType=VARCHAR}, #{applyDate,jdbcType=VARCHAR},
+      #{approveState,jdbcType=DECIMAL}, #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},
+      #{approver,jdbcType=VARCHAR}, #{approveTime,jdbcType=VARCHAR}, #{approveNote,jdbcType=VARCHAR},
+      #{glbdef12,jdbcType=VARCHAR}, #{glbdef13,jdbcType=VARCHAR}, #{glbdef14,jdbcType=VARCHAR},
+      #{glbdef15,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{pkPsncl,jdbcType=VARCHAR},
+      #{ifsynwork,jdbcType=VARCHAR}, #{pkHiHrorg,jdbcType=VARCHAR}, #{poststate,jdbcType=VARCHAR},
+      #{issyncglbdef11,jdbcType=VARCHAR}, #{vleaderposition,jdbcType=VARCHAR}, #{vdutydept,jdbcType=VARCHAR},
+      #{workdirect,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiExchangeapply">
+    insert into LDAPM_MPW_HI_EXCHANGEAPPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkExchange != null">
+        PK_EXCHANGE,
+      </if>
+      <if test="billCode != null">
+        BILL_CODE,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="glbdef10 != null">
+        GLBDEF10,
+      </if>
+      <if test="glbdef11 != null">
+        GLBDEF11,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkBilltype != null">
+        PK_BILLTYPE,
+      </if>
+      <if test="transtypeid != null">
+        TRANSTYPEID,
+      </if>
+      <if test="transtype != null">
+        TRANSTYPE,
+      </if>
+      <if test="billmaker != null">
+        BILLMAKER,
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE,
+      </if>
+      <if test="approveState != null">
+        APPROVE_STATE,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="approver != null">
+        APPROVER,
+      </if>
+      <if test="approveTime != null">
+        APPROVE_TIME,
+      </if>
+      <if test="approveNote != null">
+        APPROVE_NOTE,
+      </if>
+      <if test="glbdef12 != null">
+        GLBDEF12,
+      </if>
+      <if test="glbdef13 != null">
+        GLBDEF13,
+      </if>
+      <if test="glbdef14 != null">
+        GLBDEF14,
+      </if>
+      <if test="glbdef15 != null">
+        GLBDEF15,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="pkPsncl != null">
+        PK_PSNCL,
+      </if>
+      <if test="ifsynwork != null">
+        IFSYNWORK,
+      </if>
+      <if test="pkHiHrorg != null">
+        PK_HI_HRORG,
+      </if>
+      <if test="poststate != null">
+        POSTSTATE,
+      </if>
+      <if test="issyncglbdef11 != null">
+        ISSYNCGLBDEF11,
+      </if>
+      <if test="vleaderposition != null">
+        VLEADERPOSITION,
+      </if>
+      <if test="vdutydept != null">
+        VDUTYDEPT,
+      </if>
+      <if test="workdirect != null">
+        WORKDIRECT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkExchange != null">
+        #{pkExchange,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null">
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef10 != null">
+        #{glbdef10,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef11 != null">
+        #{glbdef11,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBilltype != null">
+        #{pkBilltype,jdbcType=VARCHAR},
+      </if>
+      <if test="transtypeid != null">
+        #{transtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="transtype != null">
+        #{transtype,jdbcType=VARCHAR},
+      </if>
+      <if test="billmaker != null">
+        #{billmaker,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="approveState != null">
+        #{approveState,jdbcType=DECIMAL},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null">
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="approveTime != null">
+        #{approveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="approveNote != null">
+        #{approveNote,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef12 != null">
+        #{glbdef12,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef13 != null">
+        #{glbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef14 != null">
+        #{glbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef15 != null">
+        #{glbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="pkPsncl != null">
+        #{pkPsncl,jdbcType=VARCHAR},
+      </if>
+      <if test="ifsynwork != null">
+        #{ifsynwork,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHiHrorg != null">
+        #{pkHiHrorg,jdbcType=VARCHAR},
+      </if>
+      <if test="poststate != null">
+        #{poststate,jdbcType=VARCHAR},
+      </if>
+      <if test="issyncglbdef11 != null">
+        #{issyncglbdef11,jdbcType=VARCHAR},
+      </if>
+      <if test="vleaderposition != null">
+        #{vleaderposition,jdbcType=VARCHAR},
+      </if>
+      <if test="vdutydept != null">
+        #{vdutydept,jdbcType=VARCHAR},
+      </if>
+      <if test="workdirect != null">
+        #{workdirect,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

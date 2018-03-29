@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.hi.dao.LdapmMpwHrTrnstypeDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHrTrnstype">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_TRNSTYPE" jdbcType="VARCHAR" property="pkTrnstype" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="ISHRSS" jdbcType="VARCHAR" property="ishrss" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="SYSTYPEFLAG" jdbcType="VARCHAR" property="systypeflag" />
+    <result column="TRNSEVENT" jdbcType="DECIMAL" property="trnsevent" />
+    <result column="TRNSTYPECODE" jdbcType="VARCHAR" property="trnstypecode" />
+    <result column="TRNSTYPENAME" jdbcType="VARCHAR" property="trnstypename" />
+    <result column="TRNSTYPENAME2" jdbcType="VARCHAR" property="trnstypename2" />
+    <result column="TRNSTYPENAME3" jdbcType="VARCHAR" property="trnstypename3" />
+    <result column="TRNSTYPENAME4" jdbcType="VARCHAR" property="trnstypename4" />
+    <result column="TRNSTYPENAME5" jdbcType="VARCHAR" property="trnstypename5" />
+    <result column="TRNSTYPENAME6" jdbcType="VARCHAR" property="trnstypename6" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HR_TRNSTYPE (MONTH_ID, UNIT_ID, PK_TRNSTYPE,
+    CREATIONTIME, CREATOR, DR,
+    ENABLESTATE, ISHRSS, MEMO,
+    MODIFIEDTIME, MODIFIER, PK_GROUP,
+    PK_ORG, SYSTYPEFLAG, TRNSEVENT,
+    TRNSTYPECODE, TRNSTYPENAME, TRNSTYPENAME2,
+    TRNSTYPENAME3, TRNSTYPENAME4, TRNSTYPENAME5,
+    TRNSTYPENAME6, TS)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkTrnstype,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.enablestate,jdbcType=DECIMAL}, #{item.ishrss,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.systypeflag,jdbcType=VARCHAR}, #{item.trnsevent,jdbcType=DECIMAL},
+      #{item.trnstypecode,jdbcType=VARCHAR}, #{item.trnstypename,jdbcType=VARCHAR}, #{item.trnstypename2,jdbcType=VARCHAR},
+      #{item.trnstypename3,jdbcType=VARCHAR}, #{item.trnstypename4,jdbcType=VARCHAR}, #{item.trnstypename5,jdbcType=VARCHAR},
+      #{item.trnstypename6,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHrTrnstype">
+    insert into LDAPM_MPW_HR_TRNSTYPE (MONTH_ID, UNIT_ID, PK_TRNSTYPE,
+      CREATIONTIME, CREATOR, DR,
+      ENABLESTATE, ISHRSS, MEMO,
+      MODIFIEDTIME, MODIFIER, PK_GROUP,
+      PK_ORG, SYSTYPEFLAG, TRNSEVENT,
+      TRNSTYPECODE, TRNSTYPENAME, TRNSTYPENAME2,
+      TRNSTYPENAME3, TRNSTYPENAME4, TRNSTYPENAME5,
+      TRNSTYPENAME6, TS)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkTrnstype,jdbcType=VARCHAR},
+      #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL},
+      #{enablestate,jdbcType=DECIMAL}, #{ishrss,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR},
+      #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{systypeflag,jdbcType=VARCHAR}, #{trnsevent,jdbcType=DECIMAL},
+      #{trnstypecode,jdbcType=VARCHAR}, #{trnstypename,jdbcType=VARCHAR}, #{trnstypename2,jdbcType=VARCHAR},
+      #{trnstypename3,jdbcType=VARCHAR}, #{trnstypename4,jdbcType=VARCHAR}, #{trnstypename5,jdbcType=VARCHAR},
+      #{trnstypename6,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHrTrnstype">
+    insert into LDAPM_MPW_HR_TRNSTYPE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkTrnstype != null">
+        PK_TRNSTYPE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="ishrss != null">
+        ISHRSS,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="systypeflag != null">
+        SYSTYPEFLAG,
+      </if>
+      <if test="trnsevent != null">
+        TRNSEVENT,
+      </if>
+      <if test="trnstypecode != null">
+        TRNSTYPECODE,
+      </if>
+      <if test="trnstypename != null">
+        TRNSTYPENAME,
+      </if>
+      <if test="trnstypename2 != null">
+        TRNSTYPENAME2,
+      </if>
+      <if test="trnstypename3 != null">
+        TRNSTYPENAME3,
+      </if>
+      <if test="trnstypename4 != null">
+        TRNSTYPENAME4,
+      </if>
+      <if test="trnstypename5 != null">
+        TRNSTYPENAME5,
+      </if>
+      <if test="trnstypename6 != null">
+        TRNSTYPENAME6,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTrnstype != null">
+        #{pkTrnstype,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="ishrss != null">
+        #{ishrss,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="systypeflag != null">
+        #{systypeflag,jdbcType=VARCHAR},
+      </if>
+      <if test="trnsevent != null">
+        #{trnsevent,jdbcType=DECIMAL},
+      </if>
+      <if test="trnstypecode != null">
+        #{trnstypecode,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename != null">
+        #{trnstypename,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename2 != null">
+        #{trnstypename2,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename3 != null">
+        #{trnstypename3,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename4 != null">
+        #{trnstypename4,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename5 != null">
+        #{trnstypename5,jdbcType=VARCHAR},
+      </if>
+      <if test="trnstypename6 != null">
+        #{trnstypename6,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

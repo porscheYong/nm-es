@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.info.dao.BmDataDao">
+
+    <sql id="bmDataColumns">
+        t.BMACCOUNTNO
+    </sql>
+
+    <select id="findList" resultType="BmData">
+        SELECT
+        rowid as "id",
+        <include refid="bmDataColumns"/>
+        FROM LDAPM_MPW_BM_DATA T
+        where 1=1 and
+        REGEXP_LIKE(t.BMACCOUNTNO,'.([a-z]+|[A-Z])')
+         AND <![CDATA[ rownum<200 ]]>
+    </select>
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        INSERT INTO LDAPM_MPW_BM_DATA(
+        id,city_code
+        )
+        select SEQ_CITY_INDEX.NEXTVAL,cd.* from(
+        <foreach collection="list" item="item" index="index"  close=")" open="(" separator="union">
+            select
+            #{item.bmAccountNo,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="psn" 循环List的每条的结果集
+             collection="list" -->
+        <foreach collection="list" separator=";" item="psn" index="index" open="begin" close=";end;">
+            update LDAPM_MPW_BM_DATA t
+            set
+                t.BMACCOUNTNO = #{psn.bmAccountNo,jdbcType=VARCHAR}
+            where rowid = #{psn.id}
+        </foreach>
+    </update>
+
+</mapper>

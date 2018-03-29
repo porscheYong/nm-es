@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.ct.dao.LdapmMpwWbCtManageDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbCtManage">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_CT_MANAGE" jdbcType="VARCHAR" property="pkCtManage" />
+    <result column="CT_CODE" jdbcType="VARCHAR" property="ctCode" />
+    <result column="CT_NAME" jdbcType="VARCHAR" property="ctName" />
+    <result column="MANAGER_UNIT" jdbcType="VARCHAR" property="managerUnit" />
+    <result column="MANAGER_NAME" jdbcType="VARCHAR" property="managerName" />
+    <result column="MANAGER_CODE" jdbcType="VARCHAR" property="managerCode" />
+    <result column="CT_MONEY" jdbcType="DECIMAL" property="ctMoney" />
+    <result column="CT_TYPE" jdbcType="VARCHAR" property="ctType" />
+    <result column="CT_BEGIN_DATE" jdbcType="VARCHAR" property="ctBeginDate" />
+    <result column="CT_END_DATE" jdbcType="VARCHAR" property="ctEndDate" />
+    <result column="POSTPONE_FLAG" jdbcType="VARCHAR" property="postponeFlag" />
+    <result column="POSTPONE_DATE" jdbcType="VARCHAR" property="postponeDate" />
+    <result column="TEMPLATE_TYPE" jdbcType="VARCHAR" property="templateType" />
+    <result column="CT_CODE_OLD" jdbcType="VARCHAR" property="ctCodeOld" />
+    <result column="ISMONEY" jdbcType="VARCHAR" property="ismoney" />
+    <result column="CONTMONEY" jdbcType="DECIMAL" property="contmoney" />
+    <result column="CHANGEMONEY" jdbcType="DECIMAL" property="changemoney" />
+    <result column="SUPPLIER_CODE" jdbcType="VARCHAR" property="supplierCode" />
+    <result column="NEW_MARK" jdbcType="VARCHAR" property="newMark" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="DEF_STR6" jdbcType="VARCHAR" property="defStr6" />
+    <result column="DEF_STR7" jdbcType="VARCHAR" property="defStr7" />
+    <result column="DEF_STR8" jdbcType="VARCHAR" property="defStr8" />
+    <result column="DEF_NUM1" jdbcType="DECIMAL" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="DECIMAL" property="defNum2" />
+    <result column="DEF_NUM3" jdbcType="DECIMAL" property="defNum3" />
+    <result column="DEF_NUM4" jdbcType="DECIMAL" property="defNum4" />
+    <result column="DEF_NUM5" jdbcType="DECIMAL" property="defNum5" />
+    <result column="PK_CORP" jdbcType="VARCHAR" property="pkCorp" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="CTMANAGER" jdbcType="VARCHAR" property="ctmanager" />
+    <result column="OPERATE_TYPE" jdbcType="DECIMAL" property="operateType" />
+    <result column="CTFLAG" jdbcType="VARCHAR" property="ctflag" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_CT_MANAGE (MONTH_ID, UNIT_ID, PK_CT_MANAGE,
+    CT_CODE, CT_NAME, MANAGER_UNIT,
+    MANAGER_NAME, MANAGER_CODE, CT_MONEY,
+    CT_TYPE, CT_BEGIN_DATE, CT_END_DATE,
+    POSTPONE_FLAG, POSTPONE_DATE, TEMPLATE_TYPE,
+    CT_CODE_OLD, ISMONEY, CONTMONEY,
+    CHANGEMONEY, SUPPLIER_CODE, NEW_MARK,
+    DEF_STR1, DEF_STR2, DEF_STR3,
+    DEF_STR4, DEF_STR5, DEF_STR6,
+    DEF_STR7, DEF_STR8, DEF_NUM1,
+    DEF_NUM2, DEF_NUM3, DEF_NUM4,
+    DEF_NUM5, PK_CORP, TS,
+    DR, CTMANAGER, OPERATE_TYPE,
+    CTFLAG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkCtManage,jdbcType=VARCHAR},
+      #{item.ctCode,jdbcType=VARCHAR}, #{item.ctName,jdbcType=VARCHAR}, #{item.managerUnit,jdbcType=VARCHAR},
+      #{item.managerName,jdbcType=VARCHAR}, #{item.managerCode,jdbcType=VARCHAR}, #{item.ctMoney,jdbcType=DECIMAL},
+      #{item.ctType,jdbcType=VARCHAR}, #{item.ctBeginDate,jdbcType=VARCHAR}, #{item.ctEndDate,jdbcType=VARCHAR},
+      #{item.postponeFlag,jdbcType=VARCHAR}, #{item.postponeDate,jdbcType=VARCHAR}, #{item.templateType,jdbcType=VARCHAR},
+      #{item.ctCodeOld,jdbcType=VARCHAR}, #{item.ismoney,jdbcType=VARCHAR}, #{item.contmoney,jdbcType=DECIMAL},
+      #{item.changemoney,jdbcType=DECIMAL}, #{item.supplierCode,jdbcType=VARCHAR}, #{item.newMark,jdbcType=VARCHAR},
+      #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR}, #{item.defStr3,jdbcType=VARCHAR},
+      #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR}, #{item.defStr6,jdbcType=VARCHAR},
+      #{item.defStr7,jdbcType=VARCHAR}, #{item.defStr8,jdbcType=VARCHAR}, #{item.defNum1,jdbcType=DECIMAL},
+      #{item.defNum2,jdbcType=DECIMAL}, #{item.defNum3,jdbcType=DECIMAL}, #{item.defNum4,jdbcType=DECIMAL},
+      #{item.defNum5,jdbcType=DECIMAL}, #{item.pkCorp,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.ctmanager,jdbcType=VARCHAR}, #{item.operateType,jdbcType=DECIMAL},
+      #{item.ctflag,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbCtManage">
+    insert into LDAPM_MPW_WB_CT_MANAGE (MONTH_ID, UNIT_ID, PK_CT_MANAGE,
+      CT_CODE, CT_NAME, MANAGER_UNIT,
+      MANAGER_NAME, MANAGER_CODE, CT_MONEY,
+      CT_TYPE, CT_BEGIN_DATE, CT_END_DATE,
+      POSTPONE_FLAG, POSTPONE_DATE, TEMPLATE_TYPE,
+      CT_CODE_OLD, ISMONEY, CONTMONEY,
+      CHANGEMONEY, SUPPLIER_CODE, NEW_MARK,
+      DEF_STR1, DEF_STR2, DEF_STR3,
+      DEF_STR4, DEF_STR5, DEF_STR6,
+      DEF_STR7, DEF_STR8, DEF_NUM1,
+      DEF_NUM2, DEF_NUM3, DEF_NUM4,
+      DEF_NUM5, PK_CORP, TS,
+      DR, CTMANAGER, OPERATE_TYPE,
+      CTFLAG)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkCtManage,jdbcType=VARCHAR},
+      #{ctCode,jdbcType=VARCHAR}, #{ctName,jdbcType=VARCHAR}, #{managerUnit,jdbcType=VARCHAR},
+      #{managerName,jdbcType=VARCHAR}, #{managerCode,jdbcType=VARCHAR}, #{ctMoney,jdbcType=DECIMAL},
+      #{ctType,jdbcType=VARCHAR}, #{ctBeginDate,jdbcType=VARCHAR}, #{ctEndDate,jdbcType=VARCHAR},
+      #{postponeFlag,jdbcType=VARCHAR}, #{postponeDate,jdbcType=VARCHAR}, #{templateType,jdbcType=VARCHAR},
+      #{ctCodeOld,jdbcType=VARCHAR}, #{ismoney,jdbcType=VARCHAR}, #{contmoney,jdbcType=DECIMAL},
+      #{changemoney,jdbcType=DECIMAL}, #{supplierCode,jdbcType=VARCHAR}, #{newMark,jdbcType=VARCHAR},
+      #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR}, #{defStr3,jdbcType=VARCHAR},
+      #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR}, #{defStr6,jdbcType=VARCHAR},
+      #{defStr7,jdbcType=VARCHAR}, #{defStr8,jdbcType=VARCHAR}, #{defNum1,jdbcType=DECIMAL},
+      #{defNum2,jdbcType=DECIMAL}, #{defNum3,jdbcType=DECIMAL}, #{defNum4,jdbcType=DECIMAL},
+      #{defNum5,jdbcType=DECIMAL}, #{pkCorp,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL}, #{ctmanager,jdbcType=VARCHAR}, #{operateType,jdbcType=DECIMAL},
+      #{ctflag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbCtManage">
+    insert into LDAPM_MPW_WB_CT_MANAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkCtManage != null">
+        PK_CT_MANAGE,
+      </if>
+      <if test="ctCode != null">
+        CT_CODE,
+      </if>
+      <if test="ctName != null">
+        CT_NAME,
+      </if>
+      <if test="managerUnit != null">
+        MANAGER_UNIT,
+      </if>
+      <if test="managerName != null">
+        MANAGER_NAME,
+      </if>
+      <if test="managerCode != null">
+        MANAGER_CODE,
+      </if>
+      <if test="ctMoney != null">
+        CT_MONEY,
+      </if>
+      <if test="ctType != null">
+        CT_TYPE,
+      </if>
+      <if test="ctBeginDate != null">
+        CT_BEGIN_DATE,
+      </if>
+      <if test="ctEndDate != null">
+        CT_END_DATE,
+      </if>
+      <if test="postponeFlag != null">
+        POSTPONE_FLAG,
+      </if>
+      <if test="postponeDate != null">
+        POSTPONE_DATE,
+      </if>
+      <if test="templateType != null">
+        TEMPLATE_TYPE,
+      </if>
+      <if test="ctCodeOld != null">
+        CT_CODE_OLD,
+      </if>
+      <if test="ismoney != null">
+        ISMONEY,
+      </if>
+      <if test="contmoney != null">
+        CONTMONEY,
+      </if>
+      <if test="changemoney != null">
+        CHANGEMONEY,
+      </if>
+      <if test="supplierCode != null">
+        SUPPLIER_CODE,
+      </if>
+      <if test="newMark != null">
+        NEW_MARK,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defStr6 != null">
+        DEF_STR6,
+      </if>
+      <if test="defStr7 != null">
+        DEF_STR7,
+      </if>
+      <if test="defStr8 != null">
+        DEF_STR8,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+      <if test="defNum3 != null">
+        DEF_NUM3,
+      </if>
+      <if test="defNum4 != null">
+        DEF_NUM4,
+      </if>
+      <if test="defNum5 != null">
+        DEF_NUM5,
+      </if>
+      <if test="pkCorp != null">
+        PK_CORP,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="ctmanager != null">
+        CTMANAGER,
+      </if>
+      <if test="operateType != null">
+        OPERATE_TYPE,
+      </if>
+      <if test="ctflag != null">
+        CTFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCtManage != null">
+        #{pkCtManage,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCode != null">
+        #{ctCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ctName != null">
+        #{ctName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerUnit != null">
+        #{managerUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="managerName != null">
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerCode != null">
+        #{managerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ctMoney != null">
+        #{ctMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="ctType != null">
+        #{ctType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctBeginDate != null">
+        #{ctBeginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ctEndDate != null">
+        #{ctEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="postponeFlag != null">
+        #{postponeFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="postponeDate != null">
+        #{postponeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="templateType != null">
+        #{templateType,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCodeOld != null">
+        #{ctCodeOld,jdbcType=VARCHAR},
+      </if>
+      <if test="ismoney != null">
+        #{ismoney,jdbcType=VARCHAR},
+      </if>
+      <if test="contmoney != null">
+        #{contmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="changemoney != null">
+        #{changemoney,jdbcType=DECIMAL},
+      </if>
+      <if test="supplierCode != null">
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="newMark != null">
+        #{newMark,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr6 != null">
+        #{defStr6,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr7 != null">
+        #{defStr7,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr8 != null">
+        #{defStr8,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum3 != null">
+        #{defNum3,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum4 != null">
+        #{defNum4,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum5 != null">
+        #{defNum5,jdbcType=DECIMAL},
+      </if>
+      <if test="pkCorp != null">
+        #{pkCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="ctmanager != null">
+        #{ctmanager,jdbcType=VARCHAR},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=DECIMAL},
+      </if>
+      <if test="ctflag != null">
+        #{ctflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

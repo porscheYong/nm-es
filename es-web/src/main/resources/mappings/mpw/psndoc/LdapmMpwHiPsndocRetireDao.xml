@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocRetireDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocRetire">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="ALLOWANCE" jdbcType="DECIMAL" property="allowance" />
+    <result column="APPROVEFLAG" jdbcType="DECIMAL" property="approveflag" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="OTHERFEE" jdbcType="DECIMAL" property="otherfee" />
+    <result column="PENSION" jdbcType="DECIMAL" property="pension" />
+    <result column="PERIOD" jdbcType="VARCHAR" property="period" />
+    <result column="PK_CORP" jdbcType="VARCHAR" property="pkCorp" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="RECORDNUM" jdbcType="VARCHAR" property="recordnum" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="GLBDEF10" jdbcType="VARCHAR" property="glbdef10" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_RETIRE (MONTH_ID, UNIT_ID, ALLOWANCE,
+    APPROVEFLAG, BEGINDATE, CREATIONTIME,
+    CREATOR, DR, ENDDATE,
+    GLBDEF1, GLBDEF2, GLBDEF3,
+    GLBDEF4, GLBDEF5, LASTFLAG,
+    MEMO, MODIFIEDTIME, MODIFIER,
+    OTHERFEE, PENSION, PERIOD,
+    PK_CORP, PK_GROUP, PK_ORG,
+    PK_PSNDOC, PK_PSNDOC_SUB, PK_PSNORG,
+    RECORDNUM, TS, GLBDEF6,
+    GLBDEF7, GLBDEF8, GLBDEF9,
+    GLBDEF10)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.allowance,jdbcType=DECIMAL},
+      #{item.approveflag,jdbcType=DECIMAL}, #{item.begindate,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.enddate,jdbcType=VARCHAR},
+      #{item.glbdef1,jdbcType=VARCHAR}, #{item.glbdef2,jdbcType=VARCHAR}, #{item.glbdef3,jdbcType=VARCHAR},
+      #{item.glbdef4,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR},
+      #{item.memo,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.otherfee,jdbcType=DECIMAL}, #{item.pension,jdbcType=DECIMAL}, #{item.period,jdbcType=VARCHAR},
+      #{item.pkCorp,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR},
+      #{item.recordnum,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.glbdef6,jdbcType=VARCHAR},
+      #{item.glbdef7,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR}, #{item.glbdef9,jdbcType=VARCHAR},
+      #{item.glbdef10,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocRetire">
+    insert into LDAPM_MPW_HI_PSNDOC_RETIRE (MONTH_ID, UNIT_ID, ALLOWANCE,
+      APPROVEFLAG, BEGINDATE, CREATIONTIME,
+      CREATOR, DR, ENDDATE,
+      GLBDEF1, GLBDEF2, GLBDEF3,
+      GLBDEF4, GLBDEF5, LASTFLAG,
+      MEMO, MODIFIEDTIME, MODIFIER,
+      OTHERFEE, PENSION, PERIOD,
+      PK_CORP, PK_GROUP, PK_ORG,
+      PK_PSNDOC, PK_PSNDOC_SUB, PK_PSNORG,
+      RECORDNUM, TS, GLBDEF6,
+      GLBDEF7, GLBDEF8, GLBDEF9,
+      GLBDEF10)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{allowance,jdbcType=DECIMAL},
+      #{approveflag,jdbcType=DECIMAL}, #{begindate,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{enddate,jdbcType=VARCHAR},
+      #{glbdef1,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{glbdef3,jdbcType=VARCHAR},
+      #{glbdef4,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR},
+      #{otherfee,jdbcType=DECIMAL}, #{pension,jdbcType=DECIMAL}, #{period,jdbcType=VARCHAR},
+      #{pkCorp,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},
+      #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR},
+      #{recordnum,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR},
+      #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, #{glbdef9,jdbcType=VARCHAR},
+      #{glbdef10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocRetire">
+    insert into LDAPM_MPW_HI_PSNDOC_RETIRE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="allowance != null">
+        ALLOWANCE,
+      </if>
+      <if test="approveflag != null">
+        APPROVEFLAG,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="otherfee != null">
+        OTHERFEE,
+      </if>
+      <if test="pension != null">
+        PENSION,
+      </if>
+      <if test="period != null">
+        PERIOD,
+      </if>
+      <if test="pkCorp != null">
+        PK_CORP,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="glbdef10 != null">
+        GLBDEF10,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="allowance != null">
+        #{allowance,jdbcType=DECIMAL},
+      </if>
+      <if test="approveflag != null">
+        #{approveflag,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="otherfee != null">
+        #{otherfee,jdbcType=DECIMAL},
+      </if>
+      <if test="pension != null">
+        #{pension,jdbcType=DECIMAL},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCorp != null">
+        #{pkCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef10 != null">
+        #{glbdef10,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

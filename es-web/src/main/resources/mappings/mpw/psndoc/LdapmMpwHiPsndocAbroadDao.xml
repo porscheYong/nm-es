@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocAbroadDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocAbroad" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_PSNDOC_SUB" property="pkPsndocSub" jdbcType="VARCHAR" />
+    <result column="ABROADDATE" property="abroaddate" jdbcType="VARCHAR" />
+    <result column="ABROADWAY" property="abroadway" jdbcType="VARCHAR" />
+    <result column="PK_GROUP" property="pkGroup" jdbcType="VARCHAR" />
+    <result column="MODIFIEDTIME" property="modifiedtime" jdbcType="VARCHAR" />
+    <result column="MODIFIER" property="modifier" jdbcType="VARCHAR" />
+    <result column="CREATIONTIME" property="creationtime" jdbcType="VARCHAR" />
+    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+    <result column="ABROADPRODATE" property="abroadprodate" jdbcType="VARCHAR" />
+    <result column="ABROADOUT" property="abroadout" jdbcType="VARCHAR" />
+    <result column="ABROADAREA" property="abroadarea" jdbcType="VARCHAR" />
+    <result column="ABROADEX" property="abroadex" jdbcType="VARCHAR" />
+    <result column="ABROADRETURN" property="abroadreturn" jdbcType="VARCHAR" />
+    <result column="ABROADGROUP" property="abroadgroup" jdbcType="VARCHAR" />
+    <result column="ABROADNUMBER" property="abroadnumber" jdbcType="VARCHAR" />
+    <result column="ABROADOUTLAY" property="abroadoutlay" jdbcType="VARCHAR" />
+    <result column="ABROADPRO" property="abroadpro" jdbcType="VARCHAR" />
+    <result column="ABROADUNIT" property="abroadunit" jdbcType="VARCHAR" />
+    <result column="PK_ORG" property="pkOrg" jdbcType="VARCHAR" />
+    <result column="PK_PSNDOC" property="pkPsndoc" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+    <result column="BEGINDATE" property="begindate" jdbcType="VARCHAR" />
+    <result column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+    <result column="LASTFLAG" property="lastflag" jdbcType="VARCHAR" />
+    <result column="RECORDNUM" property="recordnum" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_ABROAD (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    ABROADDATE, ABROADWAY, PK_GROUP,
+    MODIFIEDTIME, MODIFIER, CREATIONTIME,
+    CREATOR, ABROADPRODATE, ABROADOUT,
+    ABROADAREA, ABROADEX, ABROADRETURN,
+    ABROADGROUP, ABROADNUMBER, ABROADOUTLAY,
+    ABROADPRO, ABROADUNIT, PK_ORG,
+    PK_PSNDOC, TS, DR, BEGINDATE,
+    ENDDATE, LASTFLAG, RECORDNUM
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.abroaddate,jdbcType=VARCHAR}, #{item.abroadway,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.abroadprodate,jdbcType=VARCHAR}, #{item.abroadout,jdbcType=VARCHAR},
+      #{item.abroadarea,jdbcType=VARCHAR}, #{item.abroadex,jdbcType=VARCHAR}, #{item.abroadreturn,jdbcType=VARCHAR},
+      #{item.abroadgroup,jdbcType=VARCHAR}, #{item.abroadnumber,jdbcType=VARCHAR}, #{item.abroadoutlay,jdbcType=VARCHAR},
+      #{item.abroadpro,jdbcType=VARCHAR}, #{item.abroadunit,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.begindate,jdbcType=VARCHAR},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR}, #{item.recordnum,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocAbroad" >
+    insert into LDAPM_MPW_HI_PSNDOC_ABROAD (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB, 
+      ABROADDATE, ABROADWAY, PK_GROUP, 
+      MODIFIEDTIME, MODIFIER, CREATIONTIME, 
+      CREATOR, ABROADPRODATE, ABROADOUT, 
+      ABROADAREA, ABROADEX, ABROADRETURN, 
+      ABROADGROUP, ABROADNUMBER, ABROADOUTLAY, 
+      ABROADPRO, ABROADUNIT, PK_ORG, 
+      PK_PSNDOC, TS, DR, BEGINDATE, 
+      ENDDATE, LASTFLAG, RECORDNUM
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
+      #{abroaddate,jdbcType=VARCHAR}, #{abroadway,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, 
+      #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{abroadprodate,jdbcType=VARCHAR}, #{abroadout,jdbcType=VARCHAR}, 
+      #{abroadarea,jdbcType=VARCHAR}, #{abroadex,jdbcType=VARCHAR}, #{abroadreturn,jdbcType=VARCHAR}, 
+      #{abroadgroup,jdbcType=VARCHAR}, #{abroadnumber,jdbcType=VARCHAR}, #{abroadoutlay,jdbcType=VARCHAR}, 
+      #{abroadpro,jdbcType=VARCHAR}, #{abroadunit,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, 
+      #{pkPsndoc,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{begindate,jdbcType=VARCHAR}, 
+      #{enddate,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR}, #{recordnum,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocAbroad" >
+    insert into LDAPM_MPW_HI_PSNDOC_ABROAD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null" >
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="abroaddate != null" >
+        ABROADDATE,
+      </if>
+      <if test="abroadway != null" >
+        ABROADWAY,
+      </if>
+      <if test="pkGroup != null" >
+        PK_GROUP,
+      </if>
+      <if test="modifiedtime != null" >
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="creationtime != null" >
+        CREATIONTIME,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="abroadprodate != null" >
+        ABROADPRODATE,
+      </if>
+      <if test="abroadout != null" >
+        ABROADOUT,
+      </if>
+      <if test="abroadarea != null" >
+        ABROADAREA,
+      </if>
+      <if test="abroadex != null" >
+        ABROADEX,
+      </if>
+      <if test="abroadreturn != null" >
+        ABROADRETURN,
+      </if>
+      <if test="abroadgroup != null" >
+        ABROADGROUP,
+      </if>
+      <if test="abroadnumber != null" >
+        ABROADNUMBER,
+      </if>
+      <if test="abroadoutlay != null" >
+        ABROADOUTLAY,
+      </if>
+      <if test="abroadpro != null" >
+        ABROADPRO,
+      </if>
+      <if test="abroadunit != null" >
+        ABROADUNIT,
+      </if>
+      <if test="pkOrg != null" >
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null" >
+        PK_PSNDOC,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+      <if test="begindate != null" >
+        BEGINDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="lastflag != null" >
+        LASTFLAG,
+      </if>
+      <if test="recordnum != null" >
+        RECORDNUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null" >
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="abroaddate != null" >
+        #{abroaddate,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadway != null" >
+        #{abroadway,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null" >
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadprodate != null" >
+        #{abroadprodate,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadout != null" >
+        #{abroadout,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadarea != null" >
+        #{abroadarea,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadex != null" >
+        #{abroadex,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadreturn != null" >
+        #{abroadreturn,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadgroup != null" >
+        #{abroadgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadnumber != null" >
+        #{abroadnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadoutlay != null" >
+        #{abroadoutlay,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadpro != null" >
+        #{abroadpro,jdbcType=VARCHAR},
+      </if>
+      <if test="abroadunit != null" >
+        #{abroadunit,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null" >
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null" >
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null" >
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null" >
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

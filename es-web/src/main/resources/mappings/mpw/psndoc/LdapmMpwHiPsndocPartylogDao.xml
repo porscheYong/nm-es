@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocPartylogDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocPartylog">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="PARTYNAME" jdbcType="VARCHAR" property="partyname" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="PARTYUNIT" jdbcType="VARCHAR" property="partyunit" />
+    <result column="PARTYDATE" jdbcType="VARCHAR" property="partydate" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PARTYPSN" jdbcType="VARCHAR" property="partypsn" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="VARCHAR" property="dr" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="EXREASON" jdbcType="VARCHAR" property="exreason" />
+    <result column="EXSORT" jdbcType="VARCHAR" property="exsort" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="PARTYDUEDATE" jdbcType="VARCHAR" property="partyduedate" />
+    <result column="RECORDNUM" jdbcType="VARCHAR" property="recordnum" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_PARTYLOG (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    MODIFIEDTIME, PARTYNAME, MODIFIER,
+    GLBDEF1, PARTYUNIT, PARTYDATE,
+    CREATOR, GLBDEF2, PK_ORG,
+    PARTYPSN, PK_GROUP, BEGINDATE,
+    GLBDEF3, CREATIONTIME, PK_PSNDOC,
+    TS, DR, ENDDATE, EXREASON,
+    EXSORT, LASTFLAG, PARTYDUEDATE,
+    RECORDNUM)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.partyname,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.glbdef1,jdbcType=VARCHAR}, #{item.partyunit,jdbcType=VARCHAR}, #{item.partydate,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.glbdef2,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.partypsn,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.begindate,jdbcType=VARCHAR},
+      #{item.glbdef3,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=VARCHAR}, #{item.enddate,jdbcType=VARCHAR}, #{item.exreason,jdbcType=VARCHAR},
+      #{item.exsort,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR}, #{item.partyduedate,jdbcType=VARCHAR},
+      #{item.recordnum,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocPartylog">
+    insert into LDAPM_MPW_HI_PSNDOC_PARTYLOG (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+      MODIFIEDTIME, PARTYNAME, MODIFIER,
+      GLBDEF1, PARTYUNIT, PARTYDATE,
+      CREATOR, GLBDEF2, PK_ORG,
+      PARTYPSN, PK_GROUP, BEGINDATE,
+      GLBDEF3, CREATIONTIME, PK_PSNDOC,
+      TS, DR, ENDDATE, EXREASON,
+      EXSORT, LASTFLAG, PARTYDUEDATE,
+      RECORDNUM, LOAD_DATE, ETL_DAY,
+      LOCAL_PARTITION_ID)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR},
+      #{modifiedtime,jdbcType=VARCHAR}, #{partyname,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR},
+      #{glbdef1,jdbcType=VARCHAR}, #{partyunit,jdbcType=VARCHAR}, #{partydate,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},
+      #{partypsn,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR},
+      #{glbdef3,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, #{exreason,jdbcType=VARCHAR},
+      #{exsort,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR}, #{partyduedate,jdbcType=VARCHAR},
+      #{recordnum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocPartylog">
+    insert into LDAPM_MPW_HI_PSNDOC_PARTYLOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="partyname != null">
+        PARTYNAME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="partyunit != null">
+        PARTYUNIT,
+      </if>
+      <if test="partydate != null">
+        PARTYDATE,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="partypsn != null">
+        PARTYPSN,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="exreason != null">
+        EXREASON,
+      </if>
+      <if test="exsort != null">
+        EXSORT,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="partyduedate != null">
+        PARTYDUEDATE,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="partyname != null">
+        #{partyname,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="partyunit != null">
+        #{partyunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partydate != null">
+        #{partydate,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="partypsn != null">
+        #{partypsn,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="exreason != null">
+        #{exreason,jdbcType=VARCHAR},
+      </if>
+      <if test="exsort != null">
+        #{exsort,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="partyduedate != null">
+        #{partyduedate,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+
+</mapper>

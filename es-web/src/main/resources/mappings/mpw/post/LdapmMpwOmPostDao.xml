@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.post.dao.LdapmMpwOmPostDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwOmPost">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="ABORTDATE" jdbcType="VARCHAR" property="abortdate" />
+    <result column="BUILDDATE" jdbcType="VARCHAR" property="builddate" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="EMPLOYMENT" jdbcType="VARCHAR" property="employment" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="GLBDEF10" jdbcType="VARCHAR" property="glbdef10" />
+    <result column="GLBDEF11" jdbcType="DECIMAL" property="glbdef11" />
+    <result column="GLBDEF12" jdbcType="VARCHAR" property="glbdef12" />
+    <result column="GLBDEF13" jdbcType="VARCHAR" property="glbdef13" />
+    <result column="GLBDEF14" jdbcType="VARCHAR" property="glbdef14" />
+    <result column="GLBDEF15" jdbcType="VARCHAR" property="glbdef15" />
+    <result column="GLBDEF16" jdbcType="VARCHAR" property="glbdef16" />
+    <result column="GLBDEF17" jdbcType="VARCHAR" property="glbdef17" />
+    <result column="GLBDEF18" jdbcType="VARCHAR" property="glbdef18" />
+    <result column="GLBDEF19" jdbcType="VARCHAR" property="glbdef19" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="HRCANCELDATE" jdbcType="VARCHAR" property="hrcanceldate" />
+    <result column="HRCANCELED" jdbcType="VARCHAR" property="hrcanceled" />
+    <result column="INNERCODE" jdbcType="VARCHAR" property="innercode" />
+    <result column="ISABORT" jdbcType="VARCHAR" property="isabort" />
+    <result column="ISDEPTRESPON" jdbcType="VARCHAR" property="isdeptrespon" />
+    <result column="ISKEYPOST" jdbcType="VARCHAR" property="iskeypost" />
+    <result column="ISSTD" jdbcType="VARCHAR" property="isstd" />
+    <result column="JUNIOR" jdbcType="VARCHAR" property="junior" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_DEPT" jdbcType="VARCHAR" property="pkDept" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_HRORG" jdbcType="VARCHAR" property="pkHrorg" />
+    <result column="PK_JOB" jdbcType="VARCHAR" property="pkJob" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_POST" jdbcType="VARCHAR" property="pkPost" />
+    <result column="PK_POSTSERIES" jdbcType="VARCHAR" property="pkPostseries" />
+    <result column="PK_POSTSTD" jdbcType="VARCHAR" property="pkPoststd" />
+    <result column="POSTCODE" jdbcType="VARCHAR" property="postcode" />
+    <result column="POSTNAME" jdbcType="VARCHAR" property="postname" />
+    <result column="POSTNAME2" jdbcType="VARCHAR" property="postname2" />
+    <result column="POSTNAME3" jdbcType="VARCHAR" property="postname3" />
+    <result column="POSTNAME4" jdbcType="VARCHAR" property="postname4" />
+    <result column="POSTNAME5" jdbcType="VARCHAR" property="postname5" />
+    <result column="POSTNAME6" jdbcType="VARCHAR" property="postname6" />
+    <result column="REQEDU" jdbcType="VARCHAR" property="reqedu" />
+    <result column="REQEXP" jdbcType="VARCHAR" property="reqexp" />
+    <result column="REQOTHER" jdbcType="VARCHAR" property="reqother" />
+    <result column="REQPRO" jdbcType="VARCHAR" property="reqpro" />
+    <result column="REQSEX" jdbcType="VARCHAR" property="reqsex" />
+    <result column="REQWORKTIME" jdbcType="VARCHAR" property="reqworktime" />
+    <result column="REQYOLD" jdbcType="VARCHAR" property="reqyold" />
+    <result column="SEALFLAG" jdbcType="VARCHAR" property="sealflag" />
+    <result column="SEQ" jdbcType="VARCHAR" property="seq" />
+    <result column="SUPORIOR" jdbcType="VARCHAR" property="suporior" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="WORKSUMM" jdbcType="VARCHAR" property="worksumm" />
+    <result column="WORKTYPE" jdbcType="VARCHAR" property="worktype" />
+    <result column="GLBDEF20" jdbcType="VARCHAR" property="glbdef20" />
+    <result column="GLBDEF21" jdbcType="VARCHAR" property="glbdef21" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_OM_POST (MONTH_ID, UNIT_ID, ABORTDATE,
+    BUILDDATE, CREATIONTIME, CREATOR,
+    DATAORIGINFLAG, DR, EMPLOYMENT,
+    ENABLESTATE, GLBDEF1, GLBDEF10,
+    GLBDEF11, GLBDEF12, GLBDEF13,
+    GLBDEF14, GLBDEF15, GLBDEF16,
+    GLBDEF17, GLBDEF18, GLBDEF19,
+    GLBDEF3, GLBDEF4, GLBDEF5,
+    GLBDEF6, GLBDEF7, GLBDEF8,
+    GLBDEF9, HRCANCELDATE, HRCANCELED,
+    INNERCODE, ISABORT, ISDEPTRESPON,
+    ISKEYPOST, ISSTD, JUNIOR,
+    MODIFIEDTIME, MODIFIER, PK_DEPT,
+    PK_GROUP, PK_HRORG, PK_JOB,
+    PK_ORG, PK_POST, PK_POSTSERIES,
+    PK_POSTSTD, POSTCODE, POSTNAME,
+    POSTNAME2, POSTNAME3, POSTNAME4,
+    POSTNAME5, POSTNAME6, REQEDU,
+    REQEXP, REQOTHER, REQPRO,
+    REQSEX, REQWORKTIME, REQYOLD,
+    SEALFLAG, SEQ, SUPORIOR,
+    TS, WORKSUMM, WORKTYPE,
+    GLBDEF20, GLBDEF21)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.abortdate,jdbcType=VARCHAR},
+      #{item.builddate,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+      #{item.dataoriginflag,jdbcType=DECIMAL}, #{item.dr,jdbcType=DECIMAL}, #{item.employment,jdbcType=VARCHAR},
+      #{item.enablestate,jdbcType=DECIMAL}, #{item.glbdef1,jdbcType=VARCHAR}, #{item.glbdef10,jdbcType=VARCHAR},
+      #{item.glbdef11,jdbcType=DECIMAL}, #{item.glbdef12,jdbcType=VARCHAR}, #{item.glbdef13,jdbcType=VARCHAR},
+      #{item.glbdef14,jdbcType=VARCHAR}, #{item.glbdef15,jdbcType=VARCHAR}, #{item.glbdef16,jdbcType=VARCHAR},
+      #{item.glbdef17,jdbcType=VARCHAR}, #{item.glbdef18,jdbcType=VARCHAR}, #{item.glbdef19,jdbcType=VARCHAR},
+      #{item.glbdef3,jdbcType=VARCHAR}, #{item.glbdef4,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR},
+      #{item.glbdef6,jdbcType=VARCHAR}, #{item.glbdef7,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR},
+      #{item.glbdef9,jdbcType=VARCHAR}, #{item.hrcanceldate,jdbcType=VARCHAR}, #{item.hrcanceled,jdbcType=VARCHAR},
+      #{item.innercode,jdbcType=VARCHAR}, #{item.isabort,jdbcType=VARCHAR}, #{item.isdeptrespon,jdbcType=VARCHAR},
+      #{item.iskeypost,jdbcType=VARCHAR}, #{item.isstd,jdbcType=VARCHAR}, #{item.junior,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.pkDept,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkHrorg,jdbcType=VARCHAR}, #{item.pkJob,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPost,jdbcType=VARCHAR}, #{item.pkPostseries,jdbcType=VARCHAR},
+      #{item.pkPoststd,jdbcType=VARCHAR}, #{item.postcode,jdbcType=VARCHAR}, #{item.postname,jdbcType=VARCHAR},
+      #{item.postname2,jdbcType=VARCHAR}, #{item.postname3,jdbcType=VARCHAR}, #{item.postname4,jdbcType=VARCHAR},
+      #{item.postname5,jdbcType=VARCHAR}, #{item.postname6,jdbcType=VARCHAR}, #{item.reqedu,jdbcType=VARCHAR},
+      #{item.reqexp,jdbcType=VARCHAR}, #{item.reqother,jdbcType=VARCHAR}, #{item.reqpro,jdbcType=VARCHAR},
+      #{item.reqsex,jdbcType=VARCHAR}, #{item.reqworktime,jdbcType=VARCHAR}, #{item.reqyold,jdbcType=VARCHAR},
+      #{item.sealflag,jdbcType=VARCHAR}, #{item.seq,jdbcType=VARCHAR}, #{item.suporior,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.worksumm,jdbcType=VARCHAR}, #{item.worktype,jdbcType=VARCHAR},
+      #{item.glbdef20,jdbcType=VARCHAR}, #{item.glbdef21,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwOmPost">
+    insert into LDAPM_MPW_OM_POST (MONTH_ID, UNIT_ID, ABORTDATE, 
+      BUILDDATE, CREATIONTIME, CREATOR, 
+      DATAORIGINFLAG, DR, EMPLOYMENT, 
+      ENABLESTATE, GLBDEF1, GLBDEF10, 
+      GLBDEF11, GLBDEF12, GLBDEF13, 
+      GLBDEF14, GLBDEF15, GLBDEF16, 
+      GLBDEF17, GLBDEF18, GLBDEF19, 
+      GLBDEF3, GLBDEF4, GLBDEF5, 
+      GLBDEF6, GLBDEF7, GLBDEF8, 
+      GLBDEF9, HRCANCELDATE, HRCANCELED, 
+      INNERCODE, ISABORT, ISDEPTRESPON, 
+      ISKEYPOST, ISSTD, JUNIOR, 
+      MODIFIEDTIME, MODIFIER, PK_DEPT, 
+      PK_GROUP, PK_HRORG, PK_JOB, 
+      PK_ORG, PK_POST, PK_POSTSERIES, 
+      PK_POSTSTD, POSTCODE, POSTNAME, 
+      POSTNAME2, POSTNAME3, POSTNAME4, 
+      POSTNAME5, POSTNAME6, REQEDU, 
+      REQEXP, REQOTHER, REQPRO, 
+      REQSEX, REQWORKTIME, REQYOLD, 
+      SEALFLAG, SEQ, SUPORIOR, 
+      TS, WORKSUMM, WORKTYPE, 
+      GLBDEF20, GLBDEF21)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{abortdate,jdbcType=VARCHAR}, 
+      #{builddate,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{dataoriginflag,jdbcType=DECIMAL}, #{dr,jdbcType=DECIMAL}, #{employment,jdbcType=VARCHAR}, 
+      #{enablestate,jdbcType=DECIMAL}, #{glbdef1,jdbcType=VARCHAR}, #{glbdef10,jdbcType=VARCHAR}, 
+      #{glbdef11,jdbcType=DECIMAL}, #{glbdef12,jdbcType=VARCHAR}, #{glbdef13,jdbcType=VARCHAR}, 
+      #{glbdef14,jdbcType=VARCHAR}, #{glbdef15,jdbcType=VARCHAR}, #{glbdef16,jdbcType=VARCHAR}, 
+      #{glbdef17,jdbcType=VARCHAR}, #{glbdef18,jdbcType=VARCHAR}, #{glbdef19,jdbcType=VARCHAR}, 
+      #{glbdef3,jdbcType=VARCHAR}, #{glbdef4,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, 
+      #{glbdef6,jdbcType=VARCHAR}, #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, 
+      #{glbdef9,jdbcType=VARCHAR}, #{hrcanceldate,jdbcType=VARCHAR}, #{hrcanceled,jdbcType=VARCHAR}, 
+      #{innercode,jdbcType=VARCHAR}, #{isabort,jdbcType=VARCHAR}, #{isdeptrespon,jdbcType=VARCHAR}, 
+      #{iskeypost,jdbcType=VARCHAR}, #{isstd,jdbcType=VARCHAR}, #{junior,jdbcType=VARCHAR}, 
+      #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, 
+      #{pkGroup,jdbcType=VARCHAR}, #{pkHrorg,jdbcType=VARCHAR}, #{pkJob,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkPost,jdbcType=VARCHAR}, #{pkPostseries,jdbcType=VARCHAR}, 
+      #{pkPoststd,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}, #{postname,jdbcType=VARCHAR}, 
+      #{postname2,jdbcType=VARCHAR}, #{postname3,jdbcType=VARCHAR}, #{postname4,jdbcType=VARCHAR}, 
+      #{postname5,jdbcType=VARCHAR}, #{postname6,jdbcType=VARCHAR}, #{reqedu,jdbcType=VARCHAR}, 
+      #{reqexp,jdbcType=VARCHAR}, #{reqother,jdbcType=VARCHAR}, #{reqpro,jdbcType=VARCHAR}, 
+      #{reqsex,jdbcType=VARCHAR}, #{reqworktime,jdbcType=VARCHAR}, #{reqyold,jdbcType=VARCHAR}, 
+      #{sealflag,jdbcType=VARCHAR}, #{seq,jdbcType=VARCHAR}, #{suporior,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=VARCHAR}, #{worksumm,jdbcType=VARCHAR}, #{worktype,jdbcType=VARCHAR}, 
+      #{glbdef20,jdbcType=VARCHAR}, #{glbdef21,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwOmPost">
+    insert into LDAPM_MPW_OM_POST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="abortdate != null">
+        ABORTDATE,
+      </if>
+      <if test="builddate != null">
+        BUILDDATE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dataoriginflag != null">
+        DATAORIGINFLAG,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="employment != null">
+        EMPLOYMENT,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="glbdef10 != null">
+        GLBDEF10,
+      </if>
+      <if test="glbdef11 != null">
+        GLBDEF11,
+      </if>
+      <if test="glbdef12 != null">
+        GLBDEF12,
+      </if>
+      <if test="glbdef13 != null">
+        GLBDEF13,
+      </if>
+      <if test="glbdef14 != null">
+        GLBDEF14,
+      </if>
+      <if test="glbdef15 != null">
+        GLBDEF15,
+      </if>
+      <if test="glbdef16 != null">
+        GLBDEF16,
+      </if>
+      <if test="glbdef17 != null">
+        GLBDEF17,
+      </if>
+      <if test="glbdef18 != null">
+        GLBDEF18,
+      </if>
+      <if test="glbdef19 != null">
+        GLBDEF19,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="hrcanceldate != null">
+        HRCANCELDATE,
+      </if>
+      <if test="hrcanceled != null">
+        HRCANCELED,
+      </if>
+      <if test="innercode != null">
+        INNERCODE,
+      </if>
+      <if test="isabort != null">
+        ISABORT,
+      </if>
+      <if test="isdeptrespon != null">
+        ISDEPTRESPON,
+      </if>
+      <if test="iskeypost != null">
+        ISKEYPOST,
+      </if>
+      <if test="isstd != null">
+        ISSTD,
+      </if>
+      <if test="junior != null">
+        JUNIOR,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkDept != null">
+        PK_DEPT,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkHrorg != null">
+        PK_HRORG,
+      </if>
+      <if test="pkJob != null">
+        PK_JOB,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPost != null">
+        PK_POST,
+      </if>
+      <if test="pkPostseries != null">
+        PK_POSTSERIES,
+      </if>
+      <if test="pkPoststd != null">
+        PK_POSTSTD,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="postname != null">
+        POSTNAME,
+      </if>
+      <if test="postname2 != null">
+        POSTNAME2,
+      </if>
+      <if test="postname3 != null">
+        POSTNAME3,
+      </if>
+      <if test="postname4 != null">
+        POSTNAME4,
+      </if>
+      <if test="postname5 != null">
+        POSTNAME5,
+      </if>
+      <if test="postname6 != null">
+        POSTNAME6,
+      </if>
+      <if test="reqedu != null">
+        REQEDU,
+      </if>
+      <if test="reqexp != null">
+        REQEXP,
+      </if>
+      <if test="reqother != null">
+        REQOTHER,
+      </if>
+      <if test="reqpro != null">
+        REQPRO,
+      </if>
+      <if test="reqsex != null">
+        REQSEX,
+      </if>
+      <if test="reqworktime != null">
+        REQWORKTIME,
+      </if>
+      <if test="reqyold != null">
+        REQYOLD,
+      </if>
+      <if test="sealflag != null">
+        SEALFLAG,
+      </if>
+      <if test="seq != null">
+        SEQ,
+      </if>
+      <if test="suporior != null">
+        SUPORIOR,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="worksumm != null">
+        WORKSUMM,
+      </if>
+      <if test="worktype != null">
+        WORKTYPE,
+      </if>
+      <if test="glbdef20 != null">
+        GLBDEF20,
+      </if>
+      <if test="glbdef21 != null">
+        GLBDEF21,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="abortdate != null">
+        #{abortdate,jdbcType=VARCHAR},
+      </if>
+      <if test="builddate != null">
+        #{builddate,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoriginflag != null">
+        #{dataoriginflag,jdbcType=DECIMAL},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="employment != null">
+        #{employment,jdbcType=VARCHAR},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef10 != null">
+        #{glbdef10,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef11 != null">
+        #{glbdef11,jdbcType=DECIMAL},
+      </if>
+      <if test="glbdef12 != null">
+        #{glbdef12,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef13 != null">
+        #{glbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef14 != null">
+        #{glbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef15 != null">
+        #{glbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef16 != null">
+        #{glbdef16,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef17 != null">
+        #{glbdef17,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef18 != null">
+        #{glbdef18,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef19 != null">
+        #{glbdef19,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="hrcanceldate != null">
+        #{hrcanceldate,jdbcType=VARCHAR},
+      </if>
+      <if test="hrcanceled != null">
+        #{hrcanceled,jdbcType=VARCHAR},
+      </if>
+      <if test="innercode != null">
+        #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="isabort != null">
+        #{isabort,jdbcType=VARCHAR},
+      </if>
+      <if test="isdeptrespon != null">
+        #{isdeptrespon,jdbcType=VARCHAR},
+      </if>
+      <if test="iskeypost != null">
+        #{iskeypost,jdbcType=VARCHAR},
+      </if>
+      <if test="isstd != null">
+        #{isstd,jdbcType=VARCHAR},
+      </if>
+      <if test="junior != null">
+        #{junior,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDept != null">
+        #{pkDept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHrorg != null">
+        #{pkHrorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkJob != null">
+        #{pkJob,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPost != null">
+        #{pkPost,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPostseries != null">
+        #{pkPostseries,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPoststd != null">
+        #{pkPoststd,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=VARCHAR},
+      </if>
+      <if test="postname != null">
+        #{postname,jdbcType=VARCHAR},
+      </if>
+      <if test="postname2 != null">
+        #{postname2,jdbcType=VARCHAR},
+      </if>
+      <if test="postname3 != null">
+        #{postname3,jdbcType=VARCHAR},
+      </if>
+      <if test="postname4 != null">
+        #{postname4,jdbcType=VARCHAR},
+      </if>
+      <if test="postname5 != null">
+        #{postname5,jdbcType=VARCHAR},
+      </if>
+      <if test="postname6 != null">
+        #{postname6,jdbcType=VARCHAR},
+      </if>
+      <if test="reqedu != null">
+        #{reqedu,jdbcType=VARCHAR},
+      </if>
+      <if test="reqexp != null">
+        #{reqexp,jdbcType=VARCHAR},
+      </if>
+      <if test="reqother != null">
+        #{reqother,jdbcType=VARCHAR},
+      </if>
+      <if test="reqpro != null">
+        #{reqpro,jdbcType=VARCHAR},
+      </if>
+      <if test="reqsex != null">
+        #{reqsex,jdbcType=VARCHAR},
+      </if>
+      <if test="reqworktime != null">
+        #{reqworktime,jdbcType=VARCHAR},
+      </if>
+      <if test="reqyold != null">
+        #{reqyold,jdbcType=VARCHAR},
+      </if>
+      <if test="sealflag != null">
+        #{sealflag,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="suporior != null">
+        #{suporior,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="worksumm != null">
+        #{worksumm,jdbcType=VARCHAR},
+      </if>
+      <if test="worktype != null">
+        #{worktype,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef20 != null">
+        #{glbdef20,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef21 != null">
+        #{glbdef21,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

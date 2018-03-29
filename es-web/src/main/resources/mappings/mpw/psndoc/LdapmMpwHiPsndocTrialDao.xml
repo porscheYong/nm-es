@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocTrialDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocTrial">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="ENDFLAG" jdbcType="VARCHAR" property="endflag" />
+    <result column="ASSGID" jdbcType="DECIMAL" property="assgid" />
+    <result column="TRIAL_TYPE" jdbcType="DECIMAL" property="trialType" />
+    <result column="RECORDNUM" jdbcType="DECIMAL" property="recordnum" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="TRIALRESULT" jdbcType="DECIMAL" property="trialresult" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="PK_HRORG" jdbcType="VARCHAR" property="pkHrorg" />
+    <result column="REGULARDATE" jdbcType="VARCHAR" property="regulardate" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_TRIAL (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    CREATOR, ENDFLAG, ASSGID,
+    TRIAL_TYPE, RECORDNUM, ENDDATE,
+    MODIFIEDTIME, PK_GROUP, MEMO,
+    TRIALRESULT, MODIFIER, CREATIONTIME,
+    BEGINDATE, PK_HRORG, REGULARDATE,
+    PK_PSNDOC, DR, TS, PK_ORG,
+    PK_PSNJOB, PK_PSNORG, LASTFLAG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.endflag,jdbcType=VARCHAR}, #{item.assgid,jdbcType=DECIMAL},
+      #{item.trialType,jdbcType=DECIMAL}, #{item.recordnum,jdbcType=DECIMAL}, #{item.enddate,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR},
+      #{item.trialresult,jdbcType=DECIMAL}, #{item.modifier,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.begindate,jdbcType=VARCHAR}, #{item.pkHrorg,jdbcType=VARCHAR}, #{item.regulardate,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocTrial">
+    insert into LDAPM_MPW_HI_PSNDOC_TRIAL (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB, 
+      CREATOR, ENDFLAG, ASSGID, 
+      TRIAL_TYPE, RECORDNUM, ENDDATE, 
+      MODIFIEDTIME, PK_GROUP, MEMO, 
+      TRIALRESULT, MODIFIER, CREATIONTIME, 
+      BEGINDATE, PK_HRORG, REGULARDATE, 
+      PK_PSNDOC, DR, TS, PK_ORG, 
+      PK_PSNJOB, PK_PSNORG, LASTFLAG
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{endflag,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, 
+      #{trialType,jdbcType=DECIMAL}, #{recordnum,jdbcType=DECIMAL}, #{enddate,jdbcType=VARCHAR}, 
+      #{modifiedtime,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{trialresult,jdbcType=DECIMAL}, #{modifier,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
+      #{begindate,jdbcType=VARCHAR}, #{pkHrorg,jdbcType=VARCHAR}, #{regulardate,jdbcType=VARCHAR}, 
+      #{pkPsndoc,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, 
+      #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocTrial">
+    insert into LDAPM_MPW_HI_PSNDOC_TRIAL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="endflag != null">
+        ENDFLAG,
+      </if>
+      <if test="assgid != null">
+        ASSGID,
+      </if>
+      <if test="trialType != null">
+        TRIAL_TYPE,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="trialresult != null">
+        TRIALRESULT,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="pkHrorg != null">
+        PK_HRORG,
+      </if>
+      <if test="regulardate != null">
+        REGULARDATE,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="endflag != null">
+        #{endflag,jdbcType=VARCHAR},
+      </if>
+      <if test="assgid != null">
+        #{assgid,jdbcType=DECIMAL},
+      </if>
+      <if test="trialType != null">
+        #{trialType,jdbcType=DECIMAL},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="trialresult != null">
+        #{trialresult,jdbcType=DECIMAL},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHrorg != null">
+        #{pkHrorg,jdbcType=VARCHAR},
+      </if>
+      <if test="regulardate != null">
+        #{regulardate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

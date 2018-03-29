@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocCtrtDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocCtrt">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="ASSGID" jdbcType="DECIMAL" property="assgid" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="BREACHMONEY" jdbcType="DECIMAL" property="breachmoney" />
+    <result column="CONT_UNIT" jdbcType="DECIMAL" property="contUnit" />
+    <result column="CONTID" jdbcType="DECIMAL" property="contid" />
+    <result column="CONTINUETIME" jdbcType="DECIMAL" property="continuetime" />
+    <result column="CONTMODEL" jdbcType="VARCHAR" property="contmodel" />
+    <result column="CONTRACTCODE" jdbcType="VARCHAR" property="contractcode" />
+    <result column="CONTRACTNUM" jdbcType="VARCHAR" property="contractnum" />
+    <result column="CONTTYPE" jdbcType="DECIMAL" property="conttype" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="FILEPATH" jdbcType="VARCHAR" property="filepath" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="IFPROP" jdbcType="VARCHAR" property="ifprop" />
+    <result column="IFWRITE" jdbcType="VARCHAR" property="ifwrite" />
+    <result column="ISREFER" jdbcType="VARCHAR" property="isrefer" />
+    <result column="JUDGEDATE" jdbcType="VARCHAR" property="judgedate" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="NECONOMY" jdbcType="DECIMAL" property="neconomy" />
+    <result column="PK_CONTTEXT" jdbcType="VARCHAR" property="pkConttext" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_MAJORCORP" jdbcType="VARCHAR" property="pkMajorcorp" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="PK_TERMTYPE" jdbcType="VARCHAR" property="pkTermtype" />
+    <result column="PK_UNCHREASON" jdbcType="VARCHAR" property="pkUnchreason" />
+    <result column="PRESENTER" jdbcType="DECIMAL" property="presenter" />
+    <result column="PROBEGINDATE" jdbcType="VARCHAR" property="probegindate" />
+    <result column="PROBENDDATE" jdbcType="VARCHAR" property="probenddate" />
+    <result column="PROBSALARY" jdbcType="DECIMAL" property="probsalary" />
+    <result column="PROMONTH" jdbcType="DECIMAL" property="promonth" />
+    <result column="PROP_UNIT" jdbcType="DECIMAL" property="propUnit" />
+    <result column="RECORDNUM" jdbcType="DECIMAL" property="recordnum" />
+    <result column="SIGNADDR" jdbcType="VARCHAR" property="signaddr" />
+    <result column="SIGNDATE" jdbcType="VARCHAR" property="signdate" />
+    <result column="STARTSALARY" jdbcType="DECIMAL" property="startsalary" />
+    <result column="TERMMONTH" jdbcType="DECIMAL" property="termmonth" />
+    <result column="TERMTYPE" jdbcType="VARCHAR" property="termtype" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_CTRT (MONTH_ID, UNIT_ID, ASSGID,
+    BEGINDATE, BREACHMONEY, CONT_UNIT,
+    CONTID, CONTINUETIME, CONTMODEL,
+    CONTRACTCODE, CONTRACTNUM, CONTTYPE,
+    CREATIONTIME, CREATOR, DR,
+    ENDDATE, FILEPATH, GLBDEF1,
+    GLBDEF2, IFPROP, IFWRITE,
+    ISREFER, JUDGEDATE, MEMO,
+    MODIFIEDTIME, MODIFIER, NECONOMY,
+    PK_CONTTEXT, PK_GROUP, PK_MAJORCORP,
+    PK_ORG, PK_PSNDOC, PK_PSNDOC_SUB,
+    PK_PSNJOB, PK_PSNORG, PK_TERMTYPE,
+    PK_UNCHREASON, PRESENTER, PROBEGINDATE,
+    PROBENDDATE, PROBSALARY, PROMONTH,
+    PROP_UNIT, RECORDNUM, SIGNADDR,
+    SIGNDATE, STARTSALARY, TERMMONTH,
+    TERMTYPE, TS, LASTFLAG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.assgid,jdbcType=DECIMAL},
+      #{item.begindate,jdbcType=VARCHAR}, #{item.breachmoney,jdbcType=DECIMAL}, #{item.contUnit,jdbcType=DECIMAL},
+      #{item.contid,jdbcType=DECIMAL}, #{item.continuetime,jdbcType=DECIMAL}, #{item.contmodel,jdbcType=VARCHAR},
+      #{item.contractcode,jdbcType=VARCHAR}, #{item.contractnum,jdbcType=VARCHAR}, #{item.conttype,jdbcType=DECIMAL},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.filepath,jdbcType=VARCHAR}, #{item.glbdef1,jdbcType=VARCHAR},
+      #{item.glbdef2,jdbcType=VARCHAR}, #{item.ifprop,jdbcType=VARCHAR}, #{item.ifwrite,jdbcType=VARCHAR},
+      #{item.isrefer,jdbcType=VARCHAR}, #{item.judgedate,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.neconomy,jdbcType=DECIMAL},
+      #{item.pkConttext,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkMajorcorp,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR}, #{item.pkTermtype,jdbcType=VARCHAR},
+      #{item.pkUnchreason,jdbcType=VARCHAR}, #{item.presenter,jdbcType=DECIMAL}, #{item.probegindate,jdbcType=VARCHAR},
+      #{item.probenddate,jdbcType=VARCHAR}, #{item.probsalary,jdbcType=DECIMAL}, #{item.promonth,jdbcType=DECIMAL},
+      #{item.propUnit,jdbcType=DECIMAL}, #{item.recordnum,jdbcType=DECIMAL}, #{item.signaddr,jdbcType=VARCHAR},
+      #{item.signdate,jdbcType=VARCHAR}, #{item.startsalary,jdbcType=DECIMAL}, #{item.termmonth,jdbcType=DECIMAL},
+      #{item.termtype,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocCtrt">
+    insert into LDAPM_MPW_HI_PSNDOC_CTRT (MONTH_ID, UNIT_ID, ASSGID, 
+      BEGINDATE, BREACHMONEY, CONT_UNIT, 
+      CONTID, CONTINUETIME, CONTMODEL, 
+      CONTRACTCODE, CONTRACTNUM, CONTTYPE, 
+      CREATIONTIME, CREATOR, DR, 
+      ENDDATE, FILEPATH, GLBDEF1, 
+      GLBDEF2, IFPROP, IFWRITE, 
+      ISREFER, JUDGEDATE, MEMO, 
+      MODIFIEDTIME, MODIFIER, NECONOMY, 
+      PK_CONTTEXT, PK_GROUP, PK_MAJORCORP, 
+      PK_ORG, PK_PSNDOC, PK_PSNDOC_SUB, 
+      PK_PSNJOB, PK_PSNORG, PK_TERMTYPE, 
+      PK_UNCHREASON, PRESENTER, PROBEGINDATE, 
+      PROBENDDATE, PROBSALARY, PROMONTH, 
+      PROP_UNIT, RECORDNUM, SIGNADDR, 
+      SIGNDATE, STARTSALARY, TERMMONTH, 
+      TERMTYPE, TS, LASTFLAG
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, 
+      #{begindate,jdbcType=VARCHAR}, #{breachmoney,jdbcType=DECIMAL}, #{contUnit,jdbcType=DECIMAL}, 
+      #{contid,jdbcType=DECIMAL}, #{continuetime,jdbcType=DECIMAL}, #{contmodel,jdbcType=VARCHAR}, 
+      #{contractcode,jdbcType=VARCHAR}, #{contractnum,jdbcType=VARCHAR}, #{conttype,jdbcType=DECIMAL}, 
+      #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, 
+      #{enddate,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{glbdef1,jdbcType=VARCHAR}, 
+      #{glbdef2,jdbcType=VARCHAR}, #{ifprop,jdbcType=VARCHAR}, #{ifwrite,jdbcType=VARCHAR}, 
+      #{isrefer,jdbcType=VARCHAR}, #{judgedate,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, 
+      #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{neconomy,jdbcType=DECIMAL}, 
+      #{pkConttext,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkMajorcorp,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
+      #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR}, #{pkTermtype,jdbcType=VARCHAR}, 
+      #{pkUnchreason,jdbcType=VARCHAR}, #{presenter,jdbcType=DECIMAL}, #{probegindate,jdbcType=VARCHAR}, 
+      #{probenddate,jdbcType=VARCHAR}, #{probsalary,jdbcType=DECIMAL}, #{promonth,jdbcType=DECIMAL}, 
+      #{propUnit,jdbcType=DECIMAL}, #{recordnum,jdbcType=DECIMAL}, #{signaddr,jdbcType=VARCHAR}, 
+      #{signdate,jdbcType=VARCHAR}, #{startsalary,jdbcType=DECIMAL}, #{termmonth,jdbcType=DECIMAL}, 
+      #{termtype,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocCtrt">
+    insert into LDAPM_MPW_HI_PSNDOC_CTRT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="assgid != null">
+        ASSGID,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="breachmoney != null">
+        BREACHMONEY,
+      </if>
+      <if test="contUnit != null">
+        CONT_UNIT,
+      </if>
+      <if test="contid != null">
+        CONTID,
+      </if>
+      <if test="continuetime != null">
+        CONTINUETIME,
+      </if>
+      <if test="contmodel != null">
+        CONTMODEL,
+      </if>
+      <if test="contractcode != null">
+        CONTRACTCODE,
+      </if>
+      <if test="contractnum != null">
+        CONTRACTNUM,
+      </if>
+      <if test="conttype != null">
+        CONTTYPE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="filepath != null">
+        FILEPATH,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="ifprop != null">
+        IFPROP,
+      </if>
+      <if test="ifwrite != null">
+        IFWRITE,
+      </if>
+      <if test="isrefer != null">
+        ISREFER,
+      </if>
+      <if test="judgedate != null">
+        JUDGEDATE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="neconomy != null">
+        NECONOMY,
+      </if>
+      <if test="pkConttext != null">
+        PK_CONTTEXT,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkMajorcorp != null">
+        PK_MAJORCORP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="pkTermtype != null">
+        PK_TERMTYPE,
+      </if>
+      <if test="pkUnchreason != null">
+        PK_UNCHREASON,
+      </if>
+      <if test="presenter != null">
+        PRESENTER,
+      </if>
+      <if test="probegindate != null">
+        PROBEGINDATE,
+      </if>
+      <if test="probenddate != null">
+        PROBENDDATE,
+      </if>
+      <if test="probsalary != null">
+        PROBSALARY,
+      </if>
+      <if test="promonth != null">
+        PROMONTH,
+      </if>
+      <if test="propUnit != null">
+        PROP_UNIT,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="signaddr != null">
+        SIGNADDR,
+      </if>
+      <if test="signdate != null">
+        SIGNDATE,
+      </if>
+      <if test="startsalary != null">
+        STARTSALARY,
+      </if>
+      <if test="termmonth != null">
+        TERMMONTH,
+      </if>
+      <if test="termtype != null">
+        TERMTYPE,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="assgid != null">
+        #{assgid,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="breachmoney != null">
+        #{breachmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="contUnit != null">
+        #{contUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="contid != null">
+        #{contid,jdbcType=DECIMAL},
+      </if>
+      <if test="continuetime != null">
+        #{continuetime,jdbcType=DECIMAL},
+      </if>
+      <if test="contmodel != null">
+        #{contmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="contractcode != null">
+        #{contractcode,jdbcType=VARCHAR},
+      </if>
+      <if test="contractnum != null">
+        #{contractnum,jdbcType=VARCHAR},
+      </if>
+      <if test="conttype != null">
+        #{conttype,jdbcType=DECIMAL},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null">
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="ifprop != null">
+        #{ifprop,jdbcType=VARCHAR},
+      </if>
+      <if test="ifwrite != null">
+        #{ifwrite,jdbcType=VARCHAR},
+      </if>
+      <if test="isrefer != null">
+        #{isrefer,jdbcType=VARCHAR},
+      </if>
+      <if test="judgedate != null">
+        #{judgedate,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="neconomy != null">
+        #{neconomy,jdbcType=DECIMAL},
+      </if>
+      <if test="pkConttext != null">
+        #{pkConttext,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkMajorcorp != null">
+        #{pkMajorcorp,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTermtype != null">
+        #{pkTermtype,jdbcType=VARCHAR},
+      </if>
+      <if test="pkUnchreason != null">
+        #{pkUnchreason,jdbcType=VARCHAR},
+      </if>
+      <if test="presenter != null">
+        #{presenter,jdbcType=DECIMAL},
+      </if>
+      <if test="probegindate != null">
+        #{probegindate,jdbcType=VARCHAR},
+      </if>
+      <if test="probenddate != null">
+        #{probenddate,jdbcType=VARCHAR},
+      </if>
+      <if test="probsalary != null">
+        #{probsalary,jdbcType=DECIMAL},
+      </if>
+      <if test="promonth != null">
+        #{promonth,jdbcType=DECIMAL},
+      </if>
+      <if test="propUnit != null">
+        #{propUnit,jdbcType=DECIMAL},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="signaddr != null">
+        #{signaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="signdate != null">
+        #{signdate,jdbcType=VARCHAR},
+      </if>
+      <if test="startsalary != null">
+        #{startsalary,jdbcType=DECIMAL},
+      </if>
+      <if test="termmonth != null">
+        #{termmonth,jdbcType=DECIMAL},
+      </if>
+      <if test="termtype != null">
+        #{termtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaWaclassDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWaWaclass">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="LEAVEFLAG" jdbcType="VARCHAR" property="leaveflag" />
+    <result column="PK_COUNTRY" jdbcType="VARCHAR" property="pkCountry" />
+    <result column="NAME2" jdbcType="VARCHAR" property="name2" />
+    <result column="NAME3" jdbcType="VARCHAR" property="name3" />
+    <result column="PK_WA_CLASS" jdbcType="VARCHAR" property="pkWaClass" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="SHOWFLAG" jdbcType="VARCHAR" property="showflag" />
+    <result column="TAXMODE" jdbcType="DECIMAL" property="taxmode" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PK_PERIODSCHEME" jdbcType="VARCHAR" property="pkPeriodscheme" />
+    <result column="CURRID" jdbcType="VARCHAR" property="currid" />
+    <result column="DISPLAYTAXITEM" jdbcType="VARCHAR" property="displaytaxitem" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="STARTYEAR" jdbcType="VARCHAR" property="startyear" />
+    <result column="STARTPERIOD" jdbcType="VARCHAR" property="startperiod" />
+    <result column="CYEAR" jdbcType="VARCHAR" property="cyear" />
+    <result column="CPERIOD" jdbcType="VARCHAR" property="cperiod" />
+    <result column="VOUCHERFLAG" jdbcType="VARCHAR" property="voucherflag" />
+    <result column="COLLECTFLAG" jdbcType="VARCHAR" property="collectflag" />
+    <result column="ADDFLAG" jdbcType="VARCHAR" property="addflag" />
+    <result column="CHECKFLOWFLAG" jdbcType="VARCHAR" property="checkflowflag" />
+    <result column="STOPFLAG" jdbcType="VARCHAR" property="stopflag" />
+    <result column="TAXCURRID" jdbcType="VARCHAR" property="taxcurrid" />
+    <result column="IDISPLAYORDER" jdbcType="DECIMAL" property="idisplayorder" />
+    <result column="MUTIPLEFLAG" jdbcType="VARCHAR" property="mutipleflag" />
+    <result column="NAME4" jdbcType="VARCHAR" property="name4" />
+    <result column="NAME5" jdbcType="VARCHAR" property="name5" />
+    <result column="NAME6" jdbcType="VARCHAR" property="name6" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_WACLASS (MONTH_ID, UNIT_ID, LEAVEFLAG,
+    PK_COUNTRY, NAME2, NAME3,
+    PK_WA_CLASS, PK_GROUP, SHOWFLAG,
+    TAXMODE, PK_ORG, CODE,
+    NAME, PK_PERIODSCHEME, CURRID,
+    DISPLAYTAXITEM, CREATOR, CREATIONTIME,
+    MODIFIER, MODIFIEDTIME, STARTYEAR,
+    STARTPERIOD, CYEAR, CPERIOD,
+    VOUCHERFLAG, COLLECTFLAG, ADDFLAG,
+    CHECKFLOWFLAG, STOPFLAG, TAXCURRID,
+    IDISPLAYORDER, MUTIPLEFLAG, NAME4,
+    NAME5, NAME6, TS, DR
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.leaveflag,jdbcType=VARCHAR},
+      #{item.pkCountry,jdbcType=VARCHAR}, #{item.name2,jdbcType=VARCHAR}, #{item.name3,jdbcType=VARCHAR},
+      #{item.pkWaClass,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.showflag,jdbcType=VARCHAR},
+      #{item.taxmode,jdbcType=DECIMAL}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR},
+      #{item.name,jdbcType=VARCHAR}, #{item.pkPeriodscheme,jdbcType=VARCHAR}, #{item.currid,jdbcType=VARCHAR},
+      #{item.displaytaxitem,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.startyear,jdbcType=VARCHAR},
+      #{item.startperiod,jdbcType=VARCHAR}, #{item.cyear,jdbcType=VARCHAR}, #{item.cperiod,jdbcType=VARCHAR},
+      #{item.voucherflag,jdbcType=VARCHAR}, #{item.collectflag,jdbcType=VARCHAR}, #{item.addflag,jdbcType=VARCHAR},
+      #{item.checkflowflag,jdbcType=VARCHAR}, #{item.stopflag,jdbcType=VARCHAR}, #{item.taxcurrid,jdbcType=VARCHAR},
+      #{item.idisplayorder,jdbcType=DECIMAL}, #{item.mutipleflag,jdbcType=VARCHAR}, #{item.name4,jdbcType=VARCHAR},
+      #{item.name5,jdbcType=VARCHAR}, #{item.name6,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaWaclass">
+    insert into LDAPM_MPW_WA_WACLASS (MONTH_ID, UNIT_ID, LEAVEFLAG, 
+      PK_COUNTRY, NAME2, NAME3, 
+      PK_WA_CLASS, PK_GROUP, SHOWFLAG, 
+      TAXMODE, PK_ORG, CODE, 
+      NAME, PK_PERIODSCHEME, CURRID, 
+      DISPLAYTAXITEM, CREATOR, CREATIONTIME, 
+      MODIFIER, MODIFIEDTIME, STARTYEAR, 
+      STARTPERIOD, CYEAR, CPERIOD, 
+      VOUCHERFLAG, COLLECTFLAG, ADDFLAG, 
+      CHECKFLOWFLAG, STOPFLAG, TAXCURRID, 
+      IDISPLAYORDER, MUTIPLEFLAG, NAME4, 
+      NAME5, NAME6, TS, DR
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{leaveflag,jdbcType=VARCHAR}, 
+      #{pkCountry,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
+      #{pkWaClass,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{showflag,jdbcType=VARCHAR}, 
+      #{taxmode,jdbcType=DECIMAL}, #{pkOrg,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{pkPeriodscheme,jdbcType=VARCHAR}, #{currid,jdbcType=VARCHAR}, 
+      #{displaytaxitem,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{startyear,jdbcType=VARCHAR}, 
+      #{startperiod,jdbcType=VARCHAR}, #{cyear,jdbcType=VARCHAR}, #{cperiod,jdbcType=VARCHAR}, 
+      #{voucherflag,jdbcType=VARCHAR}, #{collectflag,jdbcType=VARCHAR}, #{addflag,jdbcType=VARCHAR}, 
+      #{checkflowflag,jdbcType=VARCHAR}, #{stopflag,jdbcType=VARCHAR}, #{taxcurrid,jdbcType=VARCHAR}, 
+      #{idisplayorder,jdbcType=DECIMAL}, #{mutipleflag,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR}, #{name6,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaWaclass">
+    insert into LDAPM_MPW_WA_WACLASS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="leaveflag != null">
+        LEAVEFLAG,
+      </if>
+      <if test="pkCountry != null">
+        PK_COUNTRY,
+      </if>
+      <if test="name2 != null">
+        NAME2,
+      </if>
+      <if test="name3 != null">
+        NAME3,
+      </if>
+      <if test="pkWaClass != null">
+        PK_WA_CLASS,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="showflag != null">
+        SHOWFLAG,
+      </if>
+      <if test="taxmode != null">
+        TAXMODE,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="pkPeriodscheme != null">
+        PK_PERIODSCHEME,
+      </if>
+      <if test="currid != null">
+        CURRID,
+      </if>
+      <if test="displaytaxitem != null">
+        DISPLAYTAXITEM,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="startyear != null">
+        STARTYEAR,
+      </if>
+      <if test="startperiod != null">
+        STARTPERIOD,
+      </if>
+      <if test="cyear != null">
+        CYEAR,
+      </if>
+      <if test="cperiod != null">
+        CPERIOD,
+      </if>
+      <if test="voucherflag != null">
+        VOUCHERFLAG,
+      </if>
+      <if test="collectflag != null">
+        COLLECTFLAG,
+      </if>
+      <if test="addflag != null">
+        ADDFLAG,
+      </if>
+      <if test="checkflowflag != null">
+        CHECKFLOWFLAG,
+      </if>
+      <if test="stopflag != null">
+        STOPFLAG,
+      </if>
+      <if test="taxcurrid != null">
+        TAXCURRID,
+      </if>
+      <if test="idisplayorder != null">
+        IDISPLAYORDER,
+      </if>
+      <if test="mutipleflag != null">
+        MUTIPLEFLAG,
+      </if>
+      <if test="name4 != null">
+        NAME4,
+      </if>
+      <if test="name5 != null">
+        NAME5,
+      </if>
+      <if test="name6 != null">
+        NAME6,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveflag != null">
+        #{leaveflag,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCountry != null">
+        #{pkCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaClass != null">
+        #{pkWaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="showflag != null">
+        #{showflag,jdbcType=VARCHAR},
+      </if>
+      <if test="taxmode != null">
+        #{taxmode,jdbcType=DECIMAL},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPeriodscheme != null">
+        #{pkPeriodscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="currid != null">
+        #{currid,jdbcType=VARCHAR},
+      </if>
+      <if test="displaytaxitem != null">
+        #{displaytaxitem,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="startyear != null">
+        #{startyear,jdbcType=VARCHAR},
+      </if>
+      <if test="startperiod != null">
+        #{startperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null">
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null">
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="voucherflag != null">
+        #{voucherflag,jdbcType=VARCHAR},
+      </if>
+      <if test="collectflag != null">
+        #{collectflag,jdbcType=VARCHAR},
+      </if>
+      <if test="addflag != null">
+        #{addflag,jdbcType=VARCHAR},
+      </if>
+      <if test="checkflowflag != null">
+        #{checkflowflag,jdbcType=VARCHAR},
+      </if>
+      <if test="stopflag != null">
+        #{stopflag,jdbcType=VARCHAR},
+      </if>
+      <if test="taxcurrid != null">
+        #{taxcurrid,jdbcType=VARCHAR},
+      </if>
+      <if test="idisplayorder != null">
+        #{idisplayorder,jdbcType=DECIMAL},
+      </if>
+      <if test="mutipleflag != null">
+        #{mutipleflag,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null">
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

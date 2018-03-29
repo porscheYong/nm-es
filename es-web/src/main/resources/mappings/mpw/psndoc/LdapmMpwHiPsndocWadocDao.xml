@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocWadocDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocWadoc" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_PSNDOC_SUB" property="pkPsndocSub" jdbcType="VARCHAR" />
+    <result column="PK_PSNDOC" property="pkPsndoc" jdbcType="VARCHAR" />
+    <result column="PK_PSNJOB" property="pkPsnjob" jdbcType="VARCHAR" />
+    <result column="NEGOTIATION_WAGE" property="negotiationWage" jdbcType="VARCHAR" />
+    <result column="WORKFLOWFLAG" property="workflowflag" jdbcType="VARCHAR" />
+    <result column="BEGINDATE" property="begindate" jdbcType="VARCHAR" />
+    <result column="ENDDATE" property="enddate" jdbcType="VARCHAR" />
+    <result column="CYEAR" property="cyear" jdbcType="VARCHAR" />
+    <result column="CPERIOD" property="cperiod" jdbcType="VARCHAR" />
+    <result column="IADJUSTMATTER" property="iadjustmatter" jdbcType="DECIMAL" />
+    <result column="RECORDNUM" property="recordnum" jdbcType="DECIMAL" />
+    <result column="LASTFLAG" property="lastflag" jdbcType="VARCHAR" />
+    <result column="PK_WA_ITEM" property="pkWaItem" jdbcType="VARCHAR" />
+    <result column="PK_WA_CRT" property="pkWaCrt" jdbcType="VARCHAR" />
+    <result column="NMONEY" property="nmoney" jdbcType="DECIMAL" />
+    <result column="PK_WA_GRD" property="pkWaGrd" jdbcType="VARCHAR" />
+    <result column="WAFLAG" property="waflag" jdbcType="VARCHAR" />
+    <result column="CHANGEDATE" property="changedate" jdbcType="VARCHAR" />
+    <result column="PK_CHANGECAUSE" property="pkChangecause" jdbcType="VARCHAR" />
+    <result column="NPROBATIONWAGE" property="nprobationwage" jdbcType="DECIMAL" />
+    <result column="VBASEFILE" property="vbasefile" jdbcType="VARCHAR" />
+    <result column="VNOTE" property="vnote" jdbcType="VARCHAR" />
+    <result column="PK_ORG" property="pkOrg" jdbcType="VARCHAR" />
+    <result column="PK_GROUP" property="pkGroup" jdbcType="VARCHAR" />
+    <result column="CRITERIONVALUE" property="criterionvalue" jdbcType="DECIMAL" />
+    <result column="PK_WA_PRMLV" property="pkWaPrmlv" jdbcType="VARCHAR" />
+    <result column="PK_WA_SECLV" property="pkWaSeclv" jdbcType="VARCHAR" />
+    <result column="CRT_MIN_VALUE" property="crtMinValue" jdbcType="DECIMAL" />
+    <result column="CRT_MAX_VALUE" property="crtMaxValue" jdbcType="DECIMAL" />
+    <result column="PARTFLAG" property="partflag" jdbcType="VARCHAR" />
+    <result column="ASSGID" property="assgid" jdbcType="DECIMAL" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_WADOC (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    PK_PSNDOC, PK_PSNJOB, NEGOTIATION_WAGE,
+    WORKFLOWFLAG, BEGINDATE, ENDDATE,
+    CYEAR, CPERIOD, IADJUSTMATTER,
+    RECORDNUM, LASTFLAG, PK_WA_ITEM,
+    PK_WA_CRT, NMONEY, PK_WA_GRD,
+    WAFLAG, CHANGEDATE, PK_CHANGECAUSE,
+    NPROBATIONWAGE, VBASEFILE, VNOTE,
+    PK_ORG, PK_GROUP, CRITERIONVALUE,
+    PK_WA_PRMLV, PK_WA_SECLV, CRT_MIN_VALUE,
+    CRT_MAX_VALUE, PARTFLAG, ASSGID,
+    DR, TS)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.negotiationWage,jdbcType=VARCHAR},
+      #{item.workflowflag,jdbcType=VARCHAR}, #{item.begindate,jdbcType=VARCHAR}, #{item.enddate,jdbcType=VARCHAR},
+      #{item.cyear,jdbcType=VARCHAR}, #{item.cperiod,jdbcType=VARCHAR}, #{item.iadjustmatter,jdbcType=DECIMAL},
+      #{item.recordnum,jdbcType=DECIMAL}, #{item.lastflag,jdbcType=VARCHAR}, #{item.pkWaItem,jdbcType=VARCHAR},
+      #{item.pkWaCrt,jdbcType=VARCHAR}, #{item.nmoney,jdbcType=DECIMAL}, #{item.pkWaGrd,jdbcType=VARCHAR},
+      #{item.waflag,jdbcType=VARCHAR}, #{item.changedate,jdbcType=VARCHAR}, #{item.pkChangecause,jdbcType=VARCHAR},
+      #{item.nprobationwage,jdbcType=DECIMAL}, #{item.vbasefile,jdbcType=VARCHAR}, #{item.vnote,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.criterionvalue,jdbcType=DECIMAL},
+      #{item.pkWaPrmlv,jdbcType=VARCHAR}, #{item.pkWaSeclv,jdbcType=VARCHAR}, #{item.crtMinValue,jdbcType=DECIMAL},
+      #{item.crtMaxValue,jdbcType=DECIMAL}, #{item.partflag,jdbcType=VARCHAR}, #{item.assgid,jdbcType=DECIMAL},
+      #{item.dr,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocWadoc" >
+    insert into LDAPM_MPW_HI_PSNDOC_WADOC (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB, 
+      PK_PSNDOC, PK_PSNJOB, NEGOTIATION_WAGE, 
+      WORKFLOWFLAG, BEGINDATE, ENDDATE, 
+      CYEAR, CPERIOD, IADJUSTMATTER, 
+      RECORDNUM, LASTFLAG, PK_WA_ITEM, 
+      PK_WA_CRT, NMONEY, PK_WA_GRD, 
+      WAFLAG, CHANGEDATE, PK_CHANGECAUSE, 
+      NPROBATIONWAGE, VBASEFILE, VNOTE, 
+      PK_ORG, PK_GROUP, CRITERIONVALUE, 
+      PK_WA_PRMLV, PK_WA_SECLV, CRT_MIN_VALUE, 
+      CRT_MAX_VALUE, PARTFLAG, ASSGID, 
+      DR, TS)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
+      #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR}, #{negotiationWage,jdbcType=VARCHAR}, 
+      #{workflowflag,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, 
+      #{cyear,jdbcType=VARCHAR}, #{cperiod,jdbcType=VARCHAR}, #{iadjustmatter,jdbcType=DECIMAL}, 
+      #{recordnum,jdbcType=DECIMAL}, #{lastflag,jdbcType=VARCHAR}, #{pkWaItem,jdbcType=VARCHAR}, 
+      #{pkWaCrt,jdbcType=VARCHAR}, #{nmoney,jdbcType=DECIMAL}, #{pkWaGrd,jdbcType=VARCHAR}, 
+      #{waflag,jdbcType=VARCHAR}, #{changedate,jdbcType=VARCHAR}, #{pkChangecause,jdbcType=VARCHAR}, 
+      #{nprobationwage,jdbcType=DECIMAL}, #{vbasefile,jdbcType=VARCHAR}, #{vnote,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{criterionvalue,jdbcType=DECIMAL}, 
+      #{pkWaPrmlv,jdbcType=VARCHAR}, #{pkWaSeclv,jdbcType=VARCHAR}, #{crtMinValue,jdbcType=DECIMAL}, 
+      #{crtMaxValue,jdbcType=DECIMAL}, #{partflag,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, 
+      #{dr,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocWadoc" >
+    insert into LDAPM_MPW_HI_PSNDOC_WADOC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null" >
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="pkPsndoc != null" >
+        PK_PSNDOC,
+      </if>
+      <if test="pkPsnjob != null" >
+        PK_PSNJOB,
+      </if>
+      <if test="negotiationWage != null" >
+        NEGOTIATION_WAGE,
+      </if>
+      <if test="workflowflag != null" >
+        WORKFLOWFLAG,
+      </if>
+      <if test="begindate != null" >
+        BEGINDATE,
+      </if>
+      <if test="enddate != null" >
+        ENDDATE,
+      </if>
+      <if test="cyear != null" >
+        CYEAR,
+      </if>
+      <if test="cperiod != null" >
+        CPERIOD,
+      </if>
+      <if test="iadjustmatter != null" >
+        IADJUSTMATTER,
+      </if>
+      <if test="recordnum != null" >
+        RECORDNUM,
+      </if>
+      <if test="lastflag != null" >
+        LASTFLAG,
+      </if>
+      <if test="pkWaItem != null" >
+        PK_WA_ITEM,
+      </if>
+      <if test="pkWaCrt != null" >
+        PK_WA_CRT,
+      </if>
+      <if test="nmoney != null" >
+        NMONEY,
+      </if>
+      <if test="pkWaGrd != null" >
+        PK_WA_GRD,
+      </if>
+      <if test="waflag != null" >
+        WAFLAG,
+      </if>
+      <if test="changedate != null" >
+        CHANGEDATE,
+      </if>
+      <if test="pkChangecause != null" >
+        PK_CHANGECAUSE,
+      </if>
+      <if test="nprobationwage != null" >
+        NPROBATIONWAGE,
+      </if>
+      <if test="vbasefile != null" >
+        VBASEFILE,
+      </if>
+      <if test="vnote != null" >
+        VNOTE,
+      </if>
+      <if test="pkOrg != null" >
+        PK_ORG,
+      </if>
+      <if test="pkGroup != null" >
+        PK_GROUP,
+      </if>
+      <if test="criterionvalue != null" >
+        CRITERIONVALUE,
+      </if>
+      <if test="pkWaPrmlv != null" >
+        PK_WA_PRMLV,
+      </if>
+      <if test="pkWaSeclv != null" >
+        PK_WA_SECLV,
+      </if>
+      <if test="crtMinValue != null" >
+        CRT_MIN_VALUE,
+      </if>
+      <if test="crtMaxValue != null" >
+        CRT_MAX_VALUE,
+      </if>
+      <if test="partflag != null" >
+        PARTFLAG,
+      </if>
+      <if test="assgid != null" >
+        ASSGID,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null" >
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null" >
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null" >
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="negotiationWage != null" >
+        #{negotiationWage,jdbcType=VARCHAR},
+      </if>
+      <if test="workflowflag != null" >
+        #{workflowflag,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null" >
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null" >
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null" >
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="iadjustmatter != null" >
+        #{iadjustmatter,jdbcType=DECIMAL},
+      </if>
+      <if test="recordnum != null" >
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="lastflag != null" >
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaItem != null" >
+        #{pkWaItem,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaCrt != null" >
+        #{pkWaCrt,jdbcType=VARCHAR},
+      </if>
+      <if test="nmoney != null" >
+        #{nmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="pkWaGrd != null" >
+        #{pkWaGrd,jdbcType=VARCHAR},
+      </if>
+      <if test="waflag != null" >
+        #{waflag,jdbcType=VARCHAR},
+      </if>
+      <if test="changedate != null" >
+        #{changedate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkChangecause != null" >
+        #{pkChangecause,jdbcType=VARCHAR},
+      </if>
+      <if test="nprobationwage != null" >
+        #{nprobationwage,jdbcType=DECIMAL},
+      </if>
+      <if test="vbasefile != null" >
+        #{vbasefile,jdbcType=VARCHAR},
+      </if>
+      <if test="vnote != null" >
+        #{vnote,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null" >
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null" >
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="criterionvalue != null" >
+        #{criterionvalue,jdbcType=DECIMAL},
+      </if>
+      <if test="pkWaPrmlv != null" >
+        #{pkWaPrmlv,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaSeclv != null" >
+        #{pkWaSeclv,jdbcType=VARCHAR},
+      </if>
+      <if test="crtMinValue != null" >
+        #{crtMinValue,jdbcType=DECIMAL},
+      </if>
+      <if test="crtMaxValue != null" >
+        #{crtMaxValue,jdbcType=DECIMAL},
+      </if>
+      <if test="partflag != null" >
+        #{partflag,jdbcType=VARCHAR},
+      </if>
+      <if test="assgid != null" >
+        #{assgid,jdbcType=DECIMAL},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

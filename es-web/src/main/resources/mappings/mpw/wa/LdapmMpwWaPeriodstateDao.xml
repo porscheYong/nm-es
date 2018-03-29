@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaPeriodstateDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWaPeriodstate">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PERIODSTATE" jdbcType="VARCHAR" property="pkPeriodstate" />
+    <result column="PK_WA_CLASS" jdbcType="VARCHAR" property="pkWaClass" />
+    <result column="PK_WA_PERIOD" jdbcType="VARCHAR" property="pkWaPeriod" />
+    <result column="CHECKFLAG" jdbcType="VARCHAR" property="checkflag" />
+    <result column="ENABLEFLAG" jdbcType="VARCHAR" property="enableflag" />
+    <result column="CACULATEFLAG" jdbcType="VARCHAR" property="caculateflag" />
+    <result column="PAYOFFFLAG" jdbcType="VARCHAR" property="payoffflag" />
+    <result column="ACCOUNTMARK" jdbcType="VARCHAR" property="accountmark" />
+    <result column="OPERATORID" jdbcType="VARCHAR" property="operatorid" />
+    <result column="DACCDATE" jdbcType="VARCHAR" property="daccdate" />
+    <result column="VPAYCOMMENT" jdbcType="VARCHAR" property="vpaycomment" />
+    <result column="CPAYDATE" jdbcType="VARCHAR" property="cpaydate" />
+    <result column="CPRECLASSID" jdbcType="VARCHAR" property="cpreclassid" />
+    <result column="ISAPPROVED" jdbcType="VARCHAR" property="isapproved" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="CLASSTYPE" jdbcType="DECIMAL" property="classtype" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="SYNCEMPFLAG" jdbcType="VARCHAR" property="syncempflag" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_PERIODSTATE (MONTH_ID, UNIT_ID, PK_PERIODSTATE,
+    PK_WA_CLASS, PK_WA_PERIOD, CHECKFLAG,
+    ENABLEFLAG, CACULATEFLAG, PAYOFFFLAG,
+    ACCOUNTMARK, OPERATORID, DACCDATE,
+    VPAYCOMMENT, CPAYDATE, CPRECLASSID,
+    ISAPPROVED, PK_GROUP, PK_ORG,
+    CLASSTYPE, TS, DR, SYNCEMPFLAG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPeriodstate,jdbcType=VARCHAR},
+      #{item.pkWaClass,jdbcType=VARCHAR}, #{item.pkWaPeriod,jdbcType=VARCHAR}, #{item.checkflag,jdbcType=VARCHAR},
+      #{item.enableflag,jdbcType=VARCHAR}, #{item.caculateflag,jdbcType=VARCHAR}, #{item.payoffflag,jdbcType=VARCHAR},
+      #{item.accountmark,jdbcType=VARCHAR}, #{item.operatorid,jdbcType=VARCHAR}, #{item.daccdate,jdbcType=VARCHAR},
+      #{item.vpaycomment,jdbcType=VARCHAR}, #{item.cpaydate,jdbcType=VARCHAR}, #{item.cpreclassid,jdbcType=VARCHAR},
+      #{item.isapproved,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.classtype,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.syncempflag,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaPeriodstate">
+    insert into LDAPM_MPW_WA_PERIODSTATE (MONTH_ID, UNIT_ID, PK_PERIODSTATE, 
+      PK_WA_CLASS, PK_WA_PERIOD, CHECKFLAG, 
+      ENABLEFLAG, CACULATEFLAG, PAYOFFFLAG, 
+      ACCOUNTMARK, OPERATORID, DACCDATE, 
+      VPAYCOMMENT, CPAYDATE, CPRECLASSID, 
+      ISAPPROVED, PK_GROUP, PK_ORG, 
+      CLASSTYPE, TS, DR, SYNCEMPFLAG)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPeriodstate,jdbcType=VARCHAR}, 
+      #{pkWaClass,jdbcType=VARCHAR}, #{pkWaPeriod,jdbcType=VARCHAR}, #{checkflag,jdbcType=VARCHAR}, 
+      #{enableflag,jdbcType=VARCHAR}, #{caculateflag,jdbcType=VARCHAR}, #{payoffflag,jdbcType=VARCHAR}, 
+      #{accountmark,jdbcType=VARCHAR}, #{operatorid,jdbcType=VARCHAR}, #{daccdate,jdbcType=VARCHAR}, 
+      #{vpaycomment,jdbcType=VARCHAR}, #{cpaydate,jdbcType=VARCHAR}, #{cpreclassid,jdbcType=VARCHAR}, 
+      #{isapproved,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, 
+      #{classtype,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{syncempflag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaPeriodstate">
+    insert into LDAPM_MPW_WA_PERIODSTATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPeriodstate != null">
+        PK_PERIODSTATE,
+      </if>
+      <if test="pkWaClass != null">
+        PK_WA_CLASS,
+      </if>
+      <if test="pkWaPeriod != null">
+        PK_WA_PERIOD,
+      </if>
+      <if test="checkflag != null">
+        CHECKFLAG,
+      </if>
+      <if test="enableflag != null">
+        ENABLEFLAG,
+      </if>
+      <if test="caculateflag != null">
+        CACULATEFLAG,
+      </if>
+      <if test="payoffflag != null">
+        PAYOFFFLAG,
+      </if>
+      <if test="accountmark != null">
+        ACCOUNTMARK,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="daccdate != null">
+        DACCDATE,
+      </if>
+      <if test="vpaycomment != null">
+        VPAYCOMMENT,
+      </if>
+      <if test="cpaydate != null">
+        CPAYDATE,
+      </if>
+      <if test="cpreclassid != null">
+        CPRECLASSID,
+      </if>
+      <if test="isapproved != null">
+        ISAPPROVED,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="classtype != null">
+        CLASSTYPE,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="syncempflag != null">
+        SYNCEMPFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPeriodstate != null">
+        #{pkPeriodstate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaClass != null">
+        #{pkWaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaPeriod != null">
+        #{pkWaPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkflag != null">
+        #{checkflag,jdbcType=VARCHAR},
+      </if>
+      <if test="enableflag != null">
+        #{enableflag,jdbcType=VARCHAR},
+      </if>
+      <if test="caculateflag != null">
+        #{caculateflag,jdbcType=VARCHAR},
+      </if>
+      <if test="payoffflag != null">
+        #{payoffflag,jdbcType=VARCHAR},
+      </if>
+      <if test="accountmark != null">
+        #{accountmark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="daccdate != null">
+        #{daccdate,jdbcType=VARCHAR},
+      </if>
+      <if test="vpaycomment != null">
+        #{vpaycomment,jdbcType=VARCHAR},
+      </if>
+      <if test="cpaydate != null">
+        #{cpaydate,jdbcType=VARCHAR},
+      </if>
+      <if test="cpreclassid != null">
+        #{cpreclassid,jdbcType=VARCHAR},
+      </if>
+      <if test="isapproved != null">
+        #{isapproved,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="classtype != null">
+        #{classtype,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="syncempflag != null">
+        #{syncempflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

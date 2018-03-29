@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psn.dao.LdapmMpwWbPsnVocquaDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbPsnVocqua">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSN_VOCQUA" jdbcType="VARCHAR" property="pkPsnVocqua" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="QUALITYPE" jdbcType="VARCHAR" property="qualitype" />
+    <result column="QUALINAME" jdbcType="VARCHAR" property="qualiname" />
+    <result column="QUALILEVEL" jdbcType="VARCHAR" property="qualilevel" />
+    <result column="CERTUNIT" jdbcType="VARCHAR" property="certunit" />
+    <result column="CERTCODE" jdbcType="VARCHAR" property="certcode" />
+    <result column="GET_QUALI_DATE" jdbcType="VARCHAR" property="getQualiDate" />
+    <result column="QUALI_EFF_PERIOD" jdbcType="VARCHAR" property="qualiEffPeriod" />
+    <result column="HIGHEST_LEVEL_FLAG" jdbcType="VARCHAR" property="highestLevelFlag" />
+    <result column="JOB_QUALI_MATCH" jdbcType="VARCHAR" property="jobQualiMatch" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="DEF_NUM1" jdbcType="DECIMAL" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="DECIMAL" property="defNum2" />
+    <result column="DEF_NUM3" jdbcType="DECIMAL" property="defNum3" />
+    <result column="DEF_NUM4" jdbcType="DECIMAL" property="defNum4" />
+    <result column="DEF_NUM5" jdbcType="DECIMAL" property="defNum5" />
+    <result column="PK_OM_POST" jdbcType="VARCHAR" property="pkOmPost" />
+    <result column="THEORETICAL_RESULTS" jdbcType="DECIMAL" property="theoreticalResults" />
+    <result column="PRACTICAL_RESULTS" jdbcType="DECIMAL" property="practicalResults" />
+    <result column="FINAL_RESULTS" jdbcType="DECIMAL" property="finalResults" />
+    <result column="ENCODE_CERTIFIED_PROGRAM" jdbcType="VARCHAR" property="encodeCertifiedProgram" />
+    <result column="ENCODE_ACTIVITY_PROGRAM" jdbcType="VARCHAR" property="encodeActivityProgram" />
+    <result column="CERTDEPT" jdbcType="VARCHAR" property="certdept" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="ONLINE_UNIVERSITY_PK" jdbcType="VARCHAR" property="onlineUniversityPk" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_PSN_VOCQUA (MONTH_ID, UNIT_ID, PK_PSN_VOCQUA,
+    PK_PSN_MSG, QUALITYPE, QUALINAME,
+    QUALILEVEL, CERTUNIT, CERTCODE,
+    GET_QUALI_DATE, QUALI_EFF_PERIOD, HIGHEST_LEVEL_FLAG,
+    JOB_QUALI_MATCH, REMARK, TS,
+    DR, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_NUM1, DEF_NUM2, DEF_NUM3,
+    DEF_NUM4, DEF_NUM5, PK_OM_POST,
+    THEORETICAL_RESULTS, PRACTICAL_RESULTS, FINAL_RESULTS,
+    ENCODE_CERTIFIED_PROGRAM, ENCODE_ACTIVITY_PROGRAM,
+    CERTDEPT, PK_ORG, ONLINE_UNIVERSITY_PK
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsnVocqua,jdbcType=VARCHAR},
+      #{item.pkPsnMsg,jdbcType=VARCHAR}, #{item.qualitype,jdbcType=VARCHAR}, #{item.qualiname,jdbcType=VARCHAR},
+      #{item.qualilevel,jdbcType=VARCHAR}, #{item.certunit,jdbcType=VARCHAR}, #{item.certcode,jdbcType=VARCHAR},
+      #{item.getQualiDate,jdbcType=VARCHAR}, #{item.qualiEffPeriod,jdbcType=VARCHAR}, #{item.highestLevelFlag,jdbcType=VARCHAR},
+      #{item.jobQualiMatch,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR},
+      #{item.defStr3,jdbcType=VARCHAR}, #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR},
+      #{item.defNum1,jdbcType=DECIMAL}, #{item.defNum2,jdbcType=DECIMAL}, #{item.defNum3,jdbcType=DECIMAL},
+      #{item.defNum4,jdbcType=DECIMAL}, #{item.defNum5,jdbcType=DECIMAL}, #{item.pkOmPost,jdbcType=VARCHAR},
+      #{item.theoreticalResults,jdbcType=DECIMAL}, #{item.practicalResults,jdbcType=DECIMAL}, #{item.finalResults,jdbcType=DECIMAL},
+      #{item.encodeCertifiedProgram,jdbcType=VARCHAR}, #{item.encodeActivityProgram,jdbcType=VARCHAR},
+      #{item.certdept,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.onlineUniversityPk,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbPsnVocqua">
+    insert into LDAPM_MPW_WB_PSN_VOCQUA (MONTH_ID, UNIT_ID, PK_PSN_VOCQUA, 
+      PK_PSN_MSG, QUALITYPE, QUALINAME, 
+      QUALILEVEL, CERTUNIT, CERTCODE, 
+      GET_QUALI_DATE, QUALI_EFF_PERIOD, HIGHEST_LEVEL_FLAG, 
+      JOB_QUALI_MATCH, REMARK, TS, 
+      DR, DEF_STR1, DEF_STR2, 
+      DEF_STR3, DEF_STR4, DEF_STR5, 
+      DEF_NUM1, DEF_NUM2, DEF_NUM3, 
+      DEF_NUM4, DEF_NUM5, PK_OM_POST, 
+      THEORETICAL_RESULTS, PRACTICAL_RESULTS, FINAL_RESULTS, 
+      ENCODE_CERTIFIED_PROGRAM, ENCODE_ACTIVITY_PROGRAM, 
+      CERTDEPT, PK_ORG, ONLINE_UNIVERSITY_PK
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsnVocqua,jdbcType=VARCHAR}, 
+      #{pkPsnMsg,jdbcType=VARCHAR}, #{qualitype,jdbcType=VARCHAR}, #{qualiname,jdbcType=VARCHAR}, 
+      #{qualilevel,jdbcType=VARCHAR}, #{certunit,jdbcType=VARCHAR}, #{certcode,jdbcType=VARCHAR}, 
+      #{getQualiDate,jdbcType=VARCHAR}, #{qualiEffPeriod,jdbcType=VARCHAR}, #{highestLevelFlag,jdbcType=VARCHAR}, 
+      #{jobQualiMatch,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=DECIMAL}, #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR}, 
+      #{defStr3,jdbcType=VARCHAR}, #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR}, 
+      #{defNum1,jdbcType=DECIMAL}, #{defNum2,jdbcType=DECIMAL}, #{defNum3,jdbcType=DECIMAL}, 
+      #{defNum4,jdbcType=DECIMAL}, #{defNum5,jdbcType=DECIMAL}, #{pkOmPost,jdbcType=VARCHAR}, 
+      #{theoreticalResults,jdbcType=DECIMAL}, #{practicalResults,jdbcType=DECIMAL}, #{finalResults,jdbcType=DECIMAL}, 
+      #{encodeCertifiedProgram,jdbcType=VARCHAR}, #{encodeActivityProgram,jdbcType=VARCHAR}, 
+      #{certdept,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{onlineUniversityPk,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbPsnVocqua">
+    insert into LDAPM_MPW_WB_PSN_VOCQUA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsnVocqua != null">
+        PK_PSN_VOCQUA,
+      </if>
+      <if test="pkPsnMsg != null">
+        PK_PSN_MSG,
+      </if>
+      <if test="qualitype != null">
+        QUALITYPE,
+      </if>
+      <if test="qualiname != null">
+        QUALINAME,
+      </if>
+      <if test="qualilevel != null">
+        QUALILEVEL,
+      </if>
+      <if test="certunit != null">
+        CERTUNIT,
+      </if>
+      <if test="certcode != null">
+        CERTCODE,
+      </if>
+      <if test="getQualiDate != null">
+        GET_QUALI_DATE,
+      </if>
+      <if test="qualiEffPeriod != null">
+        QUALI_EFF_PERIOD,
+      </if>
+      <if test="highestLevelFlag != null">
+        HIGHEST_LEVEL_FLAG,
+      </if>
+      <if test="jobQualiMatch != null">
+        JOB_QUALI_MATCH,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+      <if test="defNum3 != null">
+        DEF_NUM3,
+      </if>
+      <if test="defNum4 != null">
+        DEF_NUM4,
+      </if>
+      <if test="defNum5 != null">
+        DEF_NUM5,
+      </if>
+      <if test="pkOmPost != null">
+        PK_OM_POST,
+      </if>
+      <if test="theoreticalResults != null">
+        THEORETICAL_RESULTS,
+      </if>
+      <if test="practicalResults != null">
+        PRACTICAL_RESULTS,
+      </if>
+      <if test="finalResults != null">
+        FINAL_RESULTS,
+      </if>
+      <if test="encodeCertifiedProgram != null">
+        ENCODE_CERTIFIED_PROGRAM,
+      </if>
+      <if test="encodeActivityProgram != null">
+        ENCODE_ACTIVITY_PROGRAM,
+      </if>
+      <if test="certdept != null">
+        CERTDEPT,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="onlineUniversityPk != null">
+        ONLINE_UNIVERSITY_PK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnVocqua != null">
+        #{pkPsnVocqua,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnMsg != null">
+        #{pkPsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="qualitype != null">
+        #{qualitype,jdbcType=VARCHAR},
+      </if>
+      <if test="qualiname != null">
+        #{qualiname,jdbcType=VARCHAR},
+      </if>
+      <if test="qualilevel != null">
+        #{qualilevel,jdbcType=VARCHAR},
+      </if>
+      <if test="certunit != null">
+        #{certunit,jdbcType=VARCHAR},
+      </if>
+      <if test="certcode != null">
+        #{certcode,jdbcType=VARCHAR},
+      </if>
+      <if test="getQualiDate != null">
+        #{getQualiDate,jdbcType=VARCHAR},
+      </if>
+      <if test="qualiEffPeriod != null">
+        #{qualiEffPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="highestLevelFlag != null">
+        #{highestLevelFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="jobQualiMatch != null">
+        #{jobQualiMatch,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum3 != null">
+        #{defNum3,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum4 != null">
+        #{defNum4,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum5 != null">
+        #{defNum5,jdbcType=DECIMAL},
+      </if>
+      <if test="pkOmPost != null">
+        #{pkOmPost,jdbcType=VARCHAR},
+      </if>
+      <if test="theoreticalResults != null">
+        #{theoreticalResults,jdbcType=DECIMAL},
+      </if>
+      <if test="practicalResults != null">
+        #{practicalResults,jdbcType=DECIMAL},
+      </if>
+      <if test="finalResults != null">
+        #{finalResults,jdbcType=DECIMAL},
+      </if>
+      <if test="encodeCertifiedProgram != null">
+        #{encodeCertifiedProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="encodeActivityProgram != null">
+        #{encodeActivityProgram,jdbcType=VARCHAR},
+      </if>
+      <if test="certdept != null">
+        #{certdept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineUniversityPk != null">
+        #{onlineUniversityPk,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

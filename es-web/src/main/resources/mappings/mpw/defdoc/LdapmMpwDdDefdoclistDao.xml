@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.defdoc.dao.LdapmMpwDdDefdoclistDao">
+
+  <resultMap id="BaseResultMap" type="LdapmMpwDdDefdoclist">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_DEFDOCLIST" jdbcType="VARCHAR" property="pkDefdoclist" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="DOCCLASS" jdbcType="VARCHAR" property="docclass" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DOCTYPE" jdbcType="DECIMAL" property="doctype" />
+    <result column="ISGRADE" jdbcType="VARCHAR" property="isgrade" />
+    <result column="CODERULE" jdbcType="VARCHAR" property="coderule" />
+    <result column="CODECTLGRADE" jdbcType="DECIMAL" property="codectlgrade" />
+    <result column="MNGCTLMODE" jdbcType="DECIMAL" property="mngctlmode" />
+    <result column="ISRELEASE" jdbcType="VARCHAR" property="isrelease" />
+    <result column="DOCLEVEL" jdbcType="DECIMAL" property="doclevel" />
+    <result column="ASSOCIATENAME" jdbcType="VARCHAR" property="associatename" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="FUNCODE" jdbcType="VARCHAR" property="funcode" />
+    <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
+    <result column="COMPONENTID" jdbcType="VARCHAR" property="componentid" />
+    <result column="BPFCOMPONENTID" jdbcType="VARCHAR" property="bpfcomponentid" />
+    <result column="NAME2" jdbcType="VARCHAR" property="name2" />
+    <result column="NAME3" jdbcType="VARCHAR" property="name3" />
+    <result column="NAME4" jdbcType="VARCHAR" property="name4" />
+    <result column="NAME5" jdbcType="VARCHAR" property="name5" />
+    <result column="NAME6" jdbcType="VARCHAR" property="name6" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+  </resultMap>
+
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_BD_DEFDOCLIST (MONTH_ID, UNIT_ID, PK_DEFDOCLIST,
+    PK_ORG, PK_GROUP, DOCCLASS,
+    CODE, NAME, DOCTYPE,
+    ISGRADE, CODERULE, CODECTLGRADE,
+    MNGCTLMODE, ISRELEASE, DOCLEVEL,
+    ASSOCIATENAME, CREATOR, CREATIONTIME,
+    MODIFIER, MODIFIEDTIME, FUNCODE,
+    DATAORIGINFLAG, COMPONENTID, BPFCOMPONENTID,
+    NAME2, NAME3, NAME4,
+    NAME5, NAME6, TS, DR
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL},
+      #{item.unitId,jdbcType=VARCHAR},
+      #{item.pkDefdoclist,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.docclass,jdbcType=VARCHAR},
+      #{item.code,jdbcType=VARCHAR},
+      #{item.name,jdbcType=VARCHAR},
+      #{item.doctype,jdbcType=DECIMAL},
+      #{item.isgrade,jdbcType=VARCHAR},
+      #{item.coderule,jdbcType=VARCHAR},
+      #{item.codectlgrade,jdbcType=DECIMAL},
+      #{item.mngctlmode,jdbcType=DECIMAL},
+      #{item.isrelease,jdbcType=VARCHAR},
+      #{item.doclevel,jdbcType=DECIMAL},
+      #{item.associatename,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.funcode,jdbcType=VARCHAR},
+      #{item.dataoriginflag,jdbcType=DECIMAL},
+      #{item.componentid,jdbcType=VARCHAR},
+      #{item.bpfcomponentid,jdbcType=VARCHAR},
+      #{item.name2,jdbcType=VARCHAR},
+      #{item.name3,jdbcType=VARCHAR},
+      #{item.name4,jdbcType=VARCHAR},
+      #{item.name5,jdbcType=VARCHAR},
+      #{item.name6,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="LdapmMpwDdDefdoclist">
+    insert into LDAPM_MPW_BD_DEFDOCLIST (MONTH_ID, UNIT_ID, PK_DEFDOCLIST, 
+      PK_ORG, PK_GROUP, DOCCLASS, 
+      CODE, NAME, DOCTYPE, 
+      ISGRADE, CODERULE, CODECTLGRADE, 
+      MNGCTLMODE, ISRELEASE, DOCLEVEL, 
+      ASSOCIATENAME, CREATOR, CREATIONTIME, 
+      MODIFIER, MODIFIEDTIME, FUNCODE, 
+      DATAORIGINFLAG, COMPONENTID, BPFCOMPONENTID, 
+      NAME2, NAME3, NAME4, 
+      NAME5, NAME6, TS, DR
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkDefdoclist,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{docclass,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{doctype,jdbcType=DECIMAL}, 
+      #{isgrade,jdbcType=VARCHAR}, #{coderule,jdbcType=VARCHAR}, #{codectlgrade,jdbcType=DECIMAL}, 
+      #{mngctlmode,jdbcType=DECIMAL}, #{isrelease,jdbcType=VARCHAR}, #{doclevel,jdbcType=DECIMAL}, 
+      #{associatename,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{funcode,jdbcType=VARCHAR}, 
+      #{dataoriginflag,jdbcType=DECIMAL}, #{componentid,jdbcType=VARCHAR}, #{bpfcomponentid,jdbcType=VARCHAR}, 
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, 
+      #{name5,jdbcType=VARCHAR}, #{name6,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwDdDefdoclist">
+    insert into LDAPM_MPW_BD_DEFDOCLIST
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkDefdoclist != null">
+        PK_DEFDOCLIST,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="docclass != null">
+        DOCCLASS,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="doctype != null">
+        DOCTYPE,
+      </if>
+      <if test="isgrade != null">
+        ISGRADE,
+      </if>
+      <if test="coderule != null">
+        CODERULE,
+      </if>
+      <if test="codectlgrade != null">
+        CODECTLGRADE,
+      </if>
+      <if test="mngctlmode != null">
+        MNGCTLMODE,
+      </if>
+      <if test="isrelease != null">
+        ISRELEASE,
+      </if>
+      <if test="doclevel != null">
+        DOCLEVEL,
+      </if>
+      <if test="associatename != null">
+        ASSOCIATENAME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="funcode != null">
+        FUNCODE,
+      </if>
+      <if test="dataoriginflag != null">
+        DATAORIGINFLAG,
+      </if>
+      <if test="componentid != null">
+        COMPONENTID,
+      </if>
+      <if test="bpfcomponentid != null">
+        BPFCOMPONENTID,
+      </if>
+      <if test="name2 != null">
+        NAME2,
+      </if>
+      <if test="name3 != null">
+        NAME3,
+      </if>
+      <if test="name4 != null">
+        NAME4,
+      </if>
+      <if test="name5 != null">
+        NAME5,
+      </if>
+      <if test="name6 != null">
+        NAME6,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="loadDate != null">
+        LOAD_DATE,
+      </if>
+      <if test="etlDay != null">
+        ETL_DAY,
+      </if>
+      <if test="localPartitionId != null">
+        LOCAL_PARTITION_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDefdoclist != null">
+        #{pkDefdoclist,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="docclass != null">
+        #{docclass,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="doctype != null">
+        #{doctype,jdbcType=DECIMAL},
+      </if>
+      <if test="isgrade != null">
+        #{isgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="coderule != null">
+        #{coderule,jdbcType=VARCHAR},
+      </if>
+      <if test="codectlgrade != null">
+        #{codectlgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="mngctlmode != null">
+        #{mngctlmode,jdbcType=DECIMAL},
+      </if>
+      <if test="isrelease != null">
+        #{isrelease,jdbcType=VARCHAR},
+      </if>
+      <if test="doclevel != null">
+        #{doclevel,jdbcType=DECIMAL},
+      </if>
+      <if test="associatename != null">
+        #{associatename,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="funcode != null">
+        #{funcode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoriginflag != null">
+        #{dataoriginflag,jdbcType=DECIMAL},
+      </if>
+      <if test="componentid != null">
+        #{componentid,jdbcType=VARCHAR},
+      </if>
+      <if test="bpfcomponentid != null">
+        #{bpfcomponentid,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null">
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="loadDate != null">
+        #{loadDate,jdbcType=DATE},
+      </if>
+      <if test="etlDay != null">
+        #{etlDay,jdbcType=DECIMAL},
+      </if>
+      <if test="localPartitionId != null">
+        #{localPartitionId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

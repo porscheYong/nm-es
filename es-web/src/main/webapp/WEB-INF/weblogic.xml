@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app
+  xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd
+	http://xmlns.oracle.com/weblogic/weblogic-web-app
+	http://xmlns.oracle.com/weblogic/weblogic-web-app/1.2/weblogic-web-app.xsd">
+	<jsp-descriptor>
+    <!-- 每隔一段时间检查一次jsp，如果发现变更则自动加载。 -->
+    	<page-check-seconds>30</page-check-seconds>
+    </jsp-descriptor>
+
+    <container-descriptor>
+	    <!-- 每隔一段时间检查一次servlet，如果发现变更则自动加载。 -->
+	    <servlet-reload-check-secs>30</servlet-reload-check-secs>
+	    <!-- 每隔一段时间检查一次资源文件，如果发现变更则自动加载。 -->
+	    <resource-reload-check-secs>30</resource-reload-check-secs>
+	  	<!-- 优先加载部分类，用于解决jar包冲突。 -->
+	  	<prefer-application-packages>
+	      <!-- <package-name>javax.servlet.*</package-name> -->
+	      <package-name>org.apache.commons.net.*</package-name>
+	  	</prefer-application-packages>
+    </container-descriptor>
+</weblogic-web-app>

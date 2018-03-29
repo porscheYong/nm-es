@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psn.dao.LdapmMpwWbPsnMsgDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbPsnMsg">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PSNCODE" jdbcType="VARCHAR" property="psncode" />
+    <result column="PSNNAME" jdbcType="VARCHAR" property="psnname" />
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTHDATE" jdbcType="VARCHAR" property="birthdate" />
+    <result column="HIGHEST_EDUCATION" jdbcType="VARCHAR" property="highestEducation" />
+    <result column="FULLTIME_EDUCATION" jdbcType="VARCHAR" property="fulltimeEducation" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="BUSILIFE" jdbcType="VARCHAR" property="busilife" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="VARCHAR" property="defStr5" />
+    <result column="DEF_NUM1" jdbcType="DECIMAL" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="DECIMAL" property="defNum2" />
+    <result column="DEF_NUM3" jdbcType="DECIMAL" property="defNum3" />
+    <result column="DEF_NUM4" jdbcType="DECIMAL" property="defNum4" />
+    <result column="DEF_NUM5" jdbcType="DECIMAL" property="defNum5" />
+    <result column="IS_SEND" jdbcType="VARCHAR" property="isSend" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="MOBTELEPHONE" jdbcType="VARCHAR" property="mobtelephone" />
+    <result column="OFFICEPHONE" jdbcType="VARCHAR" property="officephone" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="PK_HCMPSN_MSG" jdbcType="VARCHAR" property="pkHcmpsnMsg" />
+    <result column="PSNFLAG" jdbcType="VARCHAR" property="psnflag" />
+    <result column="ISZW" jdbcType="VARCHAR" property="iszw" />
+    <result column="ISQD" jdbcType="VARCHAR" property="isqd" />
+    <result column="PSN_NATURE" jdbcType="VARCHAR" property="psnNature" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_PSN_MSG (MONTH_ID, UNIT_ID, PK_PSN_MSG,
+    PK_ORG, PK_GROUP, PSNCODE,
+    PSNNAME, ID, SEX, BIRTHDATE,
+    HIGHEST_EDUCATION, FULLTIME_EDUCATION, DEGREE,
+    BUSILIFE, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_NUM1, DEF_NUM2, DEF_NUM3,
+    DEF_NUM4, DEF_NUM5, IS_SEND,
+    DR, MOBTELEPHONE, OFFICEPHONE,
+    TS, PK_HCMPSN_MSG, PSNFLAG,
+    ISZW, ISQD, PSN_NATURE)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsnMsg,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.psncode,jdbcType=VARCHAR},
+      #{item.psnname,jdbcType=VARCHAR}, #{item.id,jdbcType=VARCHAR}, #{item.sex,jdbcType=VARCHAR}, #{item.birthdate,jdbcType=VARCHAR},
+      #{item.highestEducation,jdbcType=VARCHAR}, #{item.fulltimeEducation,jdbcType=VARCHAR}, #{item.degree,jdbcType=VARCHAR},
+      #{item.busilife,jdbcType=VARCHAR}, #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR},
+      #{item.defStr3,jdbcType=VARCHAR}, #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=VARCHAR},
+      #{item.defNum1,jdbcType=DECIMAL}, #{item.defNum2,jdbcType=DECIMAL}, #{item.defNum3,jdbcType=DECIMAL},
+      #{item.defNum4,jdbcType=DECIMAL}, #{item.defNum5,jdbcType=DECIMAL}, #{item.isSend,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.mobtelephone,jdbcType=VARCHAR}, #{item.officephone,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.pkHcmpsnMsg,jdbcType=VARCHAR}, #{item.psnflag,jdbcType=VARCHAR},
+      #{item.iszw,jdbcType=VARCHAR}, #{item.isqd,jdbcType=VARCHAR}, #{item.psnNature,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbPsnMsg">
+    insert into LDAPM_MPW_WB_PSN_MSG (MONTH_ID, UNIT_ID, PK_PSN_MSG,
+      PK_ORG, PK_GROUP, PSNCODE,
+      PSNNAME, ID, SEX, BIRTHDATE,
+      HIGHEST_EDUCATION, FULLTIME_EDUCATION, DEGREE,
+      BUSILIFE, DEF_STR1, DEF_STR2,
+      DEF_STR3, DEF_STR4, DEF_STR5,
+      DEF_NUM1, DEF_NUM2, DEF_NUM3,
+      DEF_NUM4, DEF_NUM5, IS_SEND,
+      DR, MOBTELEPHONE, OFFICEPHONE,
+      TS, PK_HCMPSN_MSG, PSNFLAG,
+      ISZW, ISQD, PSN_NATURE)
+    values ((#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsnMsg,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{psncode,jdbcType=VARCHAR},
+      #{psnname,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR},
+      #{highestEducation,jdbcType=VARCHAR}, #{fulltimeEducation,jdbcType=VARCHAR}, #{degree,jdbcType=VARCHAR},
+      #{busilife,jdbcType=VARCHAR}, #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR},
+      #{defStr3,jdbcType=VARCHAR}, #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=VARCHAR},
+      #{defNum1,jdbcType=DECIMAL}, #{defNum2,jdbcType=DECIMAL}, #{defNum3,jdbcType=DECIMAL},
+      #{defNum4,jdbcType=DECIMAL}, #{defNum5,jdbcType=DECIMAL}, #{isSend,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL}, #{mobtelephone,jdbcType=VARCHAR}, #{officephone,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{pkHcmpsnMsg,jdbcType=VARCHAR}, #{psnflag,jdbcType=VARCHAR},
+      #{iszw,jdbcType=VARCHAR}, #{isqd,jdbcType=VARCHAR}, #{psnNature,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbPsnMsg">
+    insert into LDAPM_MPW_WB_PSN_MSG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsnMsg != null">
+        PK_PSN_MSG,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="psncode != null">
+        PSNCODE,
+      </if>
+      <if test="psnname != null">
+        PSNNAME,
+      </if>
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE,
+      </if>
+      <if test="highestEducation != null">
+        HIGHEST_EDUCATION,
+      </if>
+      <if test="fulltimeEducation != null">
+        FULLTIME_EDUCATION,
+      </if>
+      <if test="degree != null">
+        DEGREE,
+      </if>
+      <if test="busilife != null">
+        BUSILIFE,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+      <if test="defNum3 != null">
+        DEF_NUM3,
+      </if>
+      <if test="defNum4 != null">
+        DEF_NUM4,
+      </if>
+      <if test="defNum5 != null">
+        DEF_NUM5,
+      </if>
+      <if test="isSend != null">
+        IS_SEND,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="mobtelephone != null">
+        MOBTELEPHONE,
+      </if>
+      <if test="officephone != null">
+        OFFICEPHONE,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="pkHcmpsnMsg != null">
+        PK_HCMPSN_MSG,
+      </if>
+      <if test="psnflag != null">
+        PSNFLAG,
+      </if>
+      <if test="iszw != null">
+        ISZW,
+      </if>
+      <if test="isqd != null">
+        ISQD,
+      </if>
+      <if test="psnNature != null">
+        PSN_NATURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnMsg != null">
+        #{pkPsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="psncode != null">
+        #{psncode,jdbcType=VARCHAR},
+      </if>
+      <if test="psnname != null">
+        #{psnname,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="highestEducation != null">
+        #{highestEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="fulltimeEducation != null">
+        #{fulltimeEducation,jdbcType=VARCHAR},
+      </if>
+      <if test="degree != null">
+        #{degree,jdbcType=VARCHAR},
+      </if>
+      <if test="busilife != null">
+        #{busilife,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum3 != null">
+        #{defNum3,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum4 != null">
+        #{defNum4,jdbcType=DECIMAL},
+      </if>
+      <if test="defNum5 != null">
+        #{defNum5,jdbcType=DECIMAL},
+      </if>
+      <if test="isSend != null">
+        #{isSend,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="mobtelephone != null">
+        #{mobtelephone,jdbcType=VARCHAR},
+      </if>
+      <if test="officephone != null">
+        #{officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHcmpsnMsg != null">
+        #{pkHcmpsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="psnflag != null">
+        #{psnflag,jdbcType=VARCHAR},
+      </if>
+      <if test="iszw != null">
+        #{iszw,jdbcType=VARCHAR},
+      </if>
+      <if test="isqd != null">
+        #{isqd,jdbcType=VARCHAR},
+      </if>
+      <if test="psnNature != null">
+        #{psnNature,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

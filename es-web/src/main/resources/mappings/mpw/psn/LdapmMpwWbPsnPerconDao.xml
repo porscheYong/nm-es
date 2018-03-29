@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psn.dao.LdapmMpwWbPsnPerconDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWbPsnPercon">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSN_PERCON" jdbcType="VARCHAR" property="pkPsnPercon" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="CT_CODE" jdbcType="VARCHAR" property="ctCode" />
+    <result column="PK_TERMTYPE" jdbcType="VARCHAR" property="pkTermtype" />
+    <result column="CT_BEGIN_DATE" jdbcType="VARCHAR" property="ctBeginDate" />
+    <result column="CT_END_DATE" jdbcType="VARCHAR" property="ctEndDate" />
+    <result column="TRIAL_PERIOD" jdbcType="VARCHAR" property="trialPeriod" />
+    <result column="ACTUAL_END_DATE" jdbcType="VARCHAR" property="actualEndDate" />
+    <result column="CT_CHANGE_TYPE" jdbcType="VARCHAR" property="ctChangeType" />
+    <result column="WORKHOUR_SYSTEM" jdbcType="VARCHAR" property="workhourSystem" />
+    <result column="CT_MAJOR" jdbcType="VARCHAR" property="ctMajor" />
+    <result column="NEW_MARK" jdbcType="VARCHAR" property="newMark" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="TS" jdbcType="DECIMAL" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="DEF_STR1" jdbcType="VARCHAR" property="defStr1" />
+    <result column="DEF_STR2" jdbcType="VARCHAR" property="defStr2" />
+    <result column="DEF_STR3" jdbcType="VARCHAR" property="defStr3" />
+    <result column="DEF_STR4" jdbcType="VARCHAR" property="defStr4" />
+    <result column="DEF_STR5" jdbcType="DECIMAL" property="defStr5" />
+    <result column="DEF_STR6" jdbcType="VARCHAR" property="defStr6" />
+    <result column="DEF_STR7" jdbcType="VARCHAR" property="defStr7" />
+    <result column="DEF_STR8" jdbcType="VARCHAR" property="defStr8" />
+    <result column="DEF_NUM1" jdbcType="VARCHAR" property="defNum1" />
+    <result column="DEF_NUM2" jdbcType="VARCHAR" property="defNum2" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WB_PSN_PERCON (MONTH_ID, UNIT_ID, PK_PSN_PERCON,
+    PK_PSN_MSG, CT_CODE, PK_TERMTYPE,
+    CT_BEGIN_DATE, CT_END_DATE, TRIAL_PERIOD,
+    ACTUAL_END_DATE, CT_CHANGE_TYPE, WORKHOUR_SYSTEM,
+    CT_MAJOR, NEW_MARK, REMARK,
+    TS, DR, DEF_STR1, DEF_STR2,
+    DEF_STR3, DEF_STR4, DEF_STR5,
+    DEF_STR6, DEF_STR7, DEF_STR8,
+    DEF_NUM1, DEF_NUM2)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsnPercon,jdbcType=VARCHAR},
+      #{item.pkPsnMsg,jdbcType=VARCHAR}, #{item.ctCode,jdbcType=VARCHAR}, #{item.pkTermtype,jdbcType=VARCHAR},
+      #{item.ctBeginDate,jdbcType=VARCHAR}, #{item.ctEndDate,jdbcType=VARCHAR}, #{item.trialPeriod,jdbcType=VARCHAR},
+      #{item.actualEndDate,jdbcType=VARCHAR}, #{item.ctChangeType,jdbcType=VARCHAR}, #{item.workhourSystem,jdbcType=VARCHAR},
+      #{item.ctMajor,jdbcType=VARCHAR}, #{item.newMark,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=DECIMAL}, #{item.dr,jdbcType=DECIMAL}, #{item.defStr1,jdbcType=VARCHAR}, #{item.defStr2,jdbcType=VARCHAR},
+      #{item.defStr3,jdbcType=VARCHAR}, #{item.defStr4,jdbcType=VARCHAR}, #{item.defStr5,jdbcType=DECIMAL},
+      #{item.defStr6,jdbcType=VARCHAR}, #{item.defStr7,jdbcType=VARCHAR}, #{item.defStr8,jdbcType=VARCHAR},
+      #{item.defNum1,jdbcType=VARCHAR}, #{item.defNum2,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWbPsnPercon">
+    insert into LDAPM_MPW_WB_PSN_PERCON (MONTH_ID, UNIT_ID, PK_PSN_PERCON,
+      PK_PSN_MSG, CT_CODE, PK_TERMTYPE,
+      CT_BEGIN_DATE, CT_END_DATE, TRIAL_PERIOD,
+      ACTUAL_END_DATE, CT_CHANGE_TYPE, WORKHOUR_SYSTEM,
+      CT_MAJOR, NEW_MARK, REMARK,
+      TS, DR, DEF_STR1, DEF_STR2,
+      DEF_STR3, DEF_STR4, DEF_STR5,
+      DEF_STR6, DEF_STR7, DEF_STR8,
+      DEF_NUM1, DEF_NUM2)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsnPercon,jdbcType=VARCHAR},
+      #{pkPsnMsg,jdbcType=VARCHAR}, #{ctCode,jdbcType=VARCHAR}, #{pkTermtype,jdbcType=VARCHAR},
+      #{ctBeginDate,jdbcType=VARCHAR}, #{ctEndDate,jdbcType=VARCHAR}, #{trialPeriod,jdbcType=VARCHAR},
+      #{actualEndDate,jdbcType=VARCHAR}, #{ctChangeType,jdbcType=VARCHAR}, #{workhourSystem,jdbcType=VARCHAR},
+      #{ctMajor,jdbcType=VARCHAR}, #{newMark,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{ts,jdbcType=DECIMAL}, #{dr,jdbcType=DECIMAL}, #{defStr1,jdbcType=VARCHAR}, #{defStr2,jdbcType=VARCHAR},
+      #{defStr3,jdbcType=VARCHAR}, #{defStr4,jdbcType=VARCHAR}, #{defStr5,jdbcType=DECIMAL},
+      #{defStr6,jdbcType=VARCHAR}, #{defStr7,jdbcType=VARCHAR}, #{defStr8,jdbcType=VARCHAR},
+      #{defNum1,jdbcType=VARCHAR}, #{defNum2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWbPsnPercon">
+    insert into LDAPM_MPW_WB_PSN_PERCON
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsnPercon != null">
+        PK_PSN_PERCON,
+      </if>
+      <if test="pkPsnMsg != null">
+        PK_PSN_MSG,
+      </if>
+      <if test="ctCode != null">
+        CT_CODE,
+      </if>
+      <if test="pkTermtype != null">
+        PK_TERMTYPE,
+      </if>
+      <if test="ctBeginDate != null">
+        CT_BEGIN_DATE,
+      </if>
+      <if test="ctEndDate != null">
+        CT_END_DATE,
+      </if>
+      <if test="trialPeriod != null">
+        TRIAL_PERIOD,
+      </if>
+      <if test="actualEndDate != null">
+        ACTUAL_END_DATE,
+      </if>
+      <if test="ctChangeType != null">
+        CT_CHANGE_TYPE,
+      </if>
+      <if test="workhourSystem != null">
+        WORKHOUR_SYSTEM,
+      </if>
+      <if test="ctMajor != null">
+        CT_MAJOR,
+      </if>
+      <if test="newMark != null">
+        NEW_MARK,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="defStr1 != null">
+        DEF_STR1,
+      </if>
+      <if test="defStr2 != null">
+        DEF_STR2,
+      </if>
+      <if test="defStr3 != null">
+        DEF_STR3,
+      </if>
+      <if test="defStr4 != null">
+        DEF_STR4,
+      </if>
+      <if test="defStr5 != null">
+        DEF_STR5,
+      </if>
+      <if test="defStr6 != null">
+        DEF_STR6,
+      </if>
+      <if test="defStr7 != null">
+        DEF_STR7,
+      </if>
+      <if test="defStr8 != null">
+        DEF_STR8,
+      </if>
+      <if test="defNum1 != null">
+        DEF_NUM1,
+      </if>
+      <if test="defNum2 != null">
+        DEF_NUM2,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnPercon != null">
+        #{pkPsnPercon,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnMsg != null">
+        #{pkPsnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="ctCode != null">
+        #{ctCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTermtype != null">
+        #{pkTermtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ctBeginDate != null">
+        #{ctBeginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ctEndDate != null">
+        #{ctEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="trialPeriod != null">
+        #{trialPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="actualEndDate != null">
+        #{actualEndDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ctChangeType != null">
+        #{ctChangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="workhourSystem != null">
+        #{workhourSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="ctMajor != null">
+        #{ctMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="newMark != null">
+        #{newMark,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=DECIMAL},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="defStr1 != null">
+        #{defStr1,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr2 != null">
+        #{defStr2,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr3 != null">
+        #{defStr3,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr4 != null">
+        #{defStr4,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr5 != null">
+        #{defStr5,jdbcType=DECIMAL},
+      </if>
+      <if test="defStr6 != null">
+        #{defStr6,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr7 != null">
+        #{defStr7,jdbcType=VARCHAR},
+      </if>
+      <if test="defStr8 != null">
+        #{defStr8,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum1 != null">
+        #{defNum1,jdbcType=VARCHAR},
+      </if>
+      <if test="defNum2 != null">
+        #{defNum2,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

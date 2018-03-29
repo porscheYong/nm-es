@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.org.dao.LdapmMpwTelSyncCostcenterDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwTelSyncCostcenter">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_COSTCENTER" jdbcType="VARCHAR" property="pkCostcenter" />
+    <result column="KOSTL" jdbcType="VARCHAR" property="kostl" />
+    <result column="BUKRS" jdbcType="VARCHAR" property="bukrs" />
+    <result column="DATBI" jdbcType="VARCHAR" property="datbi" />
+    <result column="DATAB" jdbcType="VARCHAR" property="datab" />
+    <result column="KTEXT" jdbcType="VARCHAR" property="ktext" />
+    <result column="LTEXT" jdbcType="VARCHAR" property="ltext" />
+    <result column="VERAK" jdbcType="VARCHAR" property="verak" />
+    <result column="ABTEI" jdbcType="VARCHAR" property="abtei" />
+    <result column="KOSAR" jdbcType="VARCHAR" property="kosar" />
+    <result column="KHINR" jdbcType="VARCHAR" property="khinr" />
+    <result column="GSBER" jdbcType="VARCHAR" property="gsber" />
+    <result column="FUNC_AREA" jdbcType="VARCHAR" property="funcArea" />
+    <result column="WAERSQ" jdbcType="VARCHAR" property="waersq" />
+    <result column="PRCTR" jdbcType="VARCHAR" property="prctr" />
+    <result column="FLOW_SIGN" jdbcType="VARCHAR" property="flowSign" />
+    <result column="REMARK1" jdbcType="VARCHAR" property="remark1" />
+    <result column="REMARK2" jdbcType="VARCHAR" property="remark2" />
+    <result column="REMARK3" jdbcType="VARCHAR" property="remark3" />
+    <result column="REMARK4" jdbcType="VARCHAR" property="remark4" />
+    <result column="REMARK5" jdbcType="VARCHAR" property="remark5" />
+    <result column="KOKRS" jdbcType="VARCHAR" property="kokrs" />
+    <result column="REMARK6" jdbcType="VARCHAR" property="remark6" />
+    <result column="REMARK7" jdbcType="VARCHAR" property="remark7" />
+    <result column="REMARK8" jdbcType="VARCHAR" property="remark8" />
+    <result column="REMARK9" jdbcType="VARCHAR" property="remark9" />
+    <result column="REMARK10" jdbcType="VARCHAR" property="remark10" />
+    <result column="DATAB2" jdbcType="VARCHAR" property="datab2" />
+    <result column="DATBI2" jdbcType="VARCHAR" property="datbi2" />
+    <result column="DATASTATUS" jdbcType="VARCHAR" property="datastatus" />
+    <result column="IS_VIRTUAL" jdbcType="VARCHAR" property="isVirtual" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_TEL_SYNC_COSTCENTER (MONTH_ID, UNIT_ID, PK_COSTCENTER,
+    KOSTL, BUKRS, DATBI,
+    DATAB, KTEXT, LTEXT,
+    VERAK, ABTEI, KOSAR,
+    KHINR, GSBER, FUNC_AREA,
+    WAERSQ, PRCTR, FLOW_SIGN,
+    REMARK1, REMARK2, REMARK3,
+    REMARK4, REMARK5, KOKRS,
+    REMARK6, REMARK7, REMARK8,
+    REMARK9, REMARK10, DATAB2,
+    DATBI2, DATASTATUS, IS_VIRTUAL,
+    TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkCostcenter,jdbcType=VARCHAR},
+      #{item.kostl,jdbcType=VARCHAR}, #{item.bukrs,jdbcType=VARCHAR}, #{item.datbi,jdbcType=VARCHAR},
+      #{item.datab,jdbcType=VARCHAR}, #{item.ktext,jdbcType=VARCHAR}, #{item.ltext,jdbcType=VARCHAR},
+      #{item.verak,jdbcType=VARCHAR}, #{item.abtei,jdbcType=VARCHAR}, #{item.kosar,jdbcType=VARCHAR},
+      #{item.khinr,jdbcType=VARCHAR}, #{item.gsber,jdbcType=VARCHAR}, #{item.funcArea,jdbcType=VARCHAR},
+      #{item.waersq,jdbcType=VARCHAR}, #{item.prctr,jdbcType=VARCHAR}, #{item.flowSign,jdbcType=VARCHAR},
+      #{item.remark1,jdbcType=VARCHAR}, #{item.remark2,jdbcType=VARCHAR}, #{item.remark3,jdbcType=VARCHAR},
+      #{item.remark4,jdbcType=VARCHAR}, #{item.remark5,jdbcType=VARCHAR}, #{item.kokrs,jdbcType=VARCHAR},
+      #{item.remark6,jdbcType=VARCHAR}, #{item.remark7,jdbcType=VARCHAR}, #{item.remark8,jdbcType=VARCHAR},
+      #{item.remark9,jdbcType=VARCHAR}, #{item.remark10,jdbcType=VARCHAR}, #{item.datab2,jdbcType=VARCHAR},
+      #{item.datbi2,jdbcType=VARCHAR}, #{item.datastatus,jdbcType=VARCHAR}, #{item.isVirtual,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwTelSyncCostcenter">
+    insert into LDAPM_MPW_TEL_SYNC_COSTCENTER (MONTH_ID, UNIT_ID, PK_COSTCENTER,
+      KOSTL, BUKRS, DATBI,
+      DATAB, KTEXT, LTEXT,
+      VERAK, ABTEI, KOSAR,
+      KHINR, GSBER, FUNC_AREA,
+      WAERSQ, PRCTR, FLOW_SIGN,
+      REMARK1, REMARK2, REMARK3,
+      REMARK4, REMARK5, KOKRS,
+      REMARK6, REMARK7, REMARK8,
+      REMARK9, REMARK10, DATAB2,
+      DATBI2, DATASTATUS, IS_VIRTUAL,
+      TS, DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkCostcenter,jdbcType=VARCHAR},
+      #{kostl,jdbcType=VARCHAR}, #{bukrs,jdbcType=VARCHAR}, #{datbi,jdbcType=VARCHAR},
+      #{datab,jdbcType=VARCHAR}, #{ktext,jdbcType=VARCHAR}, #{ltext,jdbcType=VARCHAR},
+      #{verak,jdbcType=VARCHAR}, #{abtei,jdbcType=VARCHAR}, #{kosar,jdbcType=VARCHAR},
+      #{khinr,jdbcType=VARCHAR}, #{gsber,jdbcType=VARCHAR}, #{funcArea,jdbcType=VARCHAR},
+      #{waersq,jdbcType=VARCHAR}, #{prctr,jdbcType=VARCHAR}, #{flowSign,jdbcType=VARCHAR},
+      #{remark1,jdbcType=VARCHAR}, #{remark2,jdbcType=VARCHAR}, #{remark3,jdbcType=VARCHAR},
+      #{remark4,jdbcType=VARCHAR}, #{remark5,jdbcType=VARCHAR}, #{kokrs,jdbcType=VARCHAR},
+      #{remark6,jdbcType=VARCHAR}, #{remark7,jdbcType=VARCHAR}, #{remark8,jdbcType=VARCHAR},
+      #{remark9,jdbcType=VARCHAR}, #{remark10,jdbcType=VARCHAR}, #{datab2,jdbcType=VARCHAR},
+      #{datbi2,jdbcType=VARCHAR}, #{datastatus,jdbcType=VARCHAR}, #{isVirtual,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwTelSyncCostcenter">
+    insert into LDAPM_MPW_TEL_SYNC_COSTCENTER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkCostcenter != null">
+        PK_COSTCENTER,
+      </if>
+      <if test="kostl != null">
+        KOSTL,
+      </if>
+      <if test="bukrs != null">
+        BUKRS,
+      </if>
+      <if test="datbi != null">
+        DATBI,
+      </if>
+      <if test="datab != null">
+        DATAB,
+      </if>
+      <if test="ktext != null">
+        KTEXT,
+      </if>
+      <if test="ltext != null">
+        LTEXT,
+      </if>
+      <if test="verak != null">
+        VERAK,
+      </if>
+      <if test="abtei != null">
+        ABTEI,
+      </if>
+      <if test="kosar != null">
+        KOSAR,
+      </if>
+      <if test="khinr != null">
+        KHINR,
+      </if>
+      <if test="gsber != null">
+        GSBER,
+      </if>
+      <if test="funcArea != null">
+        FUNC_AREA,
+      </if>
+      <if test="waersq != null">
+        WAERSQ,
+      </if>
+      <if test="prctr != null">
+        PRCTR,
+      </if>
+      <if test="flowSign != null">
+        FLOW_SIGN,
+      </if>
+      <if test="remark1 != null">
+        REMARK1,
+      </if>
+      <if test="remark2 != null">
+        REMARK2,
+      </if>
+      <if test="remark3 != null">
+        REMARK3,
+      </if>
+      <if test="remark4 != null">
+        REMARK4,
+      </if>
+      <if test="remark5 != null">
+        REMARK5,
+      </if>
+      <if test="kokrs != null">
+        KOKRS,
+      </if>
+      <if test="remark6 != null">
+        REMARK6,
+      </if>
+      <if test="remark7 != null">
+        REMARK7,
+      </if>
+      <if test="remark8 != null">
+        REMARK8,
+      </if>
+      <if test="remark9 != null">
+        REMARK9,
+      </if>
+      <if test="remark10 != null">
+        REMARK10,
+      </if>
+      <if test="datab2 != null">
+        DATAB2,
+      </if>
+      <if test="datbi2 != null">
+        DATBI2,
+      </if>
+      <if test="datastatus != null">
+        DATASTATUS,
+      </if>
+      <if test="isVirtual != null">
+        IS_VIRTUAL,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCostcenter != null">
+        #{pkCostcenter,jdbcType=VARCHAR},
+      </if>
+      <if test="kostl != null">
+        #{kostl,jdbcType=VARCHAR},
+      </if>
+      <if test="bukrs != null">
+        #{bukrs,jdbcType=VARCHAR},
+      </if>
+      <if test="datbi != null">
+        #{datbi,jdbcType=VARCHAR},
+      </if>
+      <if test="datab != null">
+        #{datab,jdbcType=VARCHAR},
+      </if>
+      <if test="ktext != null">
+        #{ktext,jdbcType=VARCHAR},
+      </if>
+      <if test="ltext != null">
+        #{ltext,jdbcType=VARCHAR},
+      </if>
+      <if test="verak != null">
+        #{verak,jdbcType=VARCHAR},
+      </if>
+      <if test="abtei != null">
+        #{abtei,jdbcType=VARCHAR},
+      </if>
+      <if test="kosar != null">
+        #{kosar,jdbcType=VARCHAR},
+      </if>
+      <if test="khinr != null">
+        #{khinr,jdbcType=VARCHAR},
+      </if>
+      <if test="gsber != null">
+        #{gsber,jdbcType=VARCHAR},
+      </if>
+      <if test="funcArea != null">
+        #{funcArea,jdbcType=VARCHAR},
+      </if>
+      <if test="waersq != null">
+        #{waersq,jdbcType=VARCHAR},
+      </if>
+      <if test="prctr != null">
+        #{prctr,jdbcType=VARCHAR},
+      </if>
+      <if test="flowSign != null">
+        #{flowSign,jdbcType=VARCHAR},
+      </if>
+      <if test="remark1 != null">
+        #{remark1,jdbcType=VARCHAR},
+      </if>
+      <if test="remark2 != null">
+        #{remark2,jdbcType=VARCHAR},
+      </if>
+      <if test="remark3 != null">
+        #{remark3,jdbcType=VARCHAR},
+      </if>
+      <if test="remark4 != null">
+        #{remark4,jdbcType=VARCHAR},
+      </if>
+      <if test="remark5 != null">
+        #{remark5,jdbcType=VARCHAR},
+      </if>
+      <if test="kokrs != null">
+        #{kokrs,jdbcType=VARCHAR},
+      </if>
+      <if test="remark6 != null">
+        #{remark6,jdbcType=VARCHAR},
+      </if>
+      <if test="remark7 != null">
+        #{remark7,jdbcType=VARCHAR},
+      </if>
+      <if test="remark8 != null">
+        #{remark8,jdbcType=VARCHAR},
+      </if>
+      <if test="remark9 != null">
+        #{remark9,jdbcType=VARCHAR},
+      </if>
+      <if test="remark10 != null">
+        #{remark10,jdbcType=VARCHAR},
+      </if>
+      <if test="datab2 != null">
+        #{datab2,jdbcType=VARCHAR},
+      </if>
+      <if test="datbi2 != null">
+        #{datbi2,jdbcType=VARCHAR},
+      </if>
+      <if test="datastatus != null">
+        #{datastatus,jdbcType=VARCHAR},
+      </if>
+      <if test="isVirtual != null">
+        #{isVirtual,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

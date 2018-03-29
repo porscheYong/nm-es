@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.bd.dao.LdapmMpwBdPsnclDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwBdPsncl">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="INNERCODE" jdbcType="VARCHAR" property="innercode" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="NAME2" jdbcType="VARCHAR" property="name2" />
+    <result column="NAME3" jdbcType="VARCHAR" property="name3" />
+    <result column="NAME4" jdbcType="VARCHAR" property="name4" />
+    <result column="NAME5" jdbcType="VARCHAR" property="name5" />
+    <result column="NAME6" jdbcType="VARCHAR" property="name6" />
+    <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNCL" jdbcType="VARCHAR" property="pkPsncl" />
+    <result column="SEQ" jdbcType="VARCHAR" property="seq" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+
+  </resultMap>
+  <insert id="insert" parameterType="LdapmMpwBdPsncl">
+    insert into LDAPM_MPW_BD_PSNCL (MONTH_ID, UNIT_ID, CODE,
+      CREATIONTIME, CREATOR, DATAORIGINFLAG,
+      ENABLESTATE, INNERCODE, MEMO,
+      MODIFIEDTIME, MODIFIER, NAME,
+      NAME2, NAME3, NAME4,
+      NAME5, NAME6, PARENT_ID,
+      PK_GROUP, PK_ORG, PK_PSNCL,
+      SEQ, TS, DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
+      #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{dataoriginflag,jdbcType=DECIMAL},
+      #{enablestate,jdbcType=DECIMAL}, #{innercode,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR},
+      #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+      #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR},
+      #{name5,jdbcType=VARCHAR}, #{name6,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR},
+      #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkPsncl,jdbcType=VARCHAR},
+      #{seq,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_BD_PSNCL (MONTH_ID, UNIT_ID, CODE,
+    CREATIONTIME, CREATOR, DATAORIGINFLAG,
+    ENABLESTATE, INNERCODE, MEMO,
+    MODIFIEDTIME, MODIFIER, NAME,
+    NAME2, NAME3, NAME4,
+    NAME5, NAME6, PARENT_ID,
+    PK_GROUP, PK_ORG, PK_PSNCL,
+    SEQ, TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.dataoriginflag,jdbcType=DECIMAL},
+      #{item.enablestate,jdbcType=DECIMAL},#{item.innercode,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR},
+      #{item.modifiedtime,jdbcType=VARCHAR},#{item.modifier,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR},
+      #{item.name2,jdbcType=VARCHAR}, #{item.name3,jdbcType=VARCHAR}, #{item.name4,jdbcType=VARCHAR},
+      #{item.name5,jdbcType=VARCHAR}, #{item.name6,jdbcType=VARCHAR}, #{item.parentId,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPsncl,jdbcType=VARCHAR},
+      #{item.seq,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwBdPsncl">
+    insert into LDAPM_MPW_BD_PSNCL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dataoriginflag != null">
+        DATAORIGINFLAG,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="innercode != null">
+        INNERCODE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="name2 != null">
+        NAME2,
+      </if>
+      <if test="name3 != null">
+        NAME3,
+      </if>
+      <if test="name4 != null">
+        NAME4,
+      </if>
+      <if test="name5 != null">
+        NAME5,
+      </if>
+      <if test="name6 != null">
+        NAME6,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsncl != null">
+        PK_PSNCL,
+      </if>
+      <if test="seq != null">
+        SEQ,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoriginflag != null">
+        #{dataoriginflag,jdbcType=DECIMAL},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="innercode != null">
+        #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null">
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsncl != null">
+        #{pkPsncl,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null">
+        #{seq,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

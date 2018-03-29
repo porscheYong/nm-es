@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaTaxgroupmemberDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwWaTaxgroupmember" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_TAXGRPMEMBER" property="pkTaxgrpmember" jdbcType="VARCHAR" />
+    <result column="PK_TAXGROUP" property="pkTaxgroup" jdbcType="VARCHAR" />
+    <result column="PK_WACLASS" property="pkWaclass" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_TAXGROUPMEMBER (MONTH_ID, UNIT_ID, PK_TAXGRPMEMBER,
+    PK_TAXGROUP, PK_WACLASS, TS,
+    DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkTaxgrpmember,jdbcType=VARCHAR},
+      #{item.pkTaxgroup,jdbcType=VARCHAR}, #{item.pkWaclass,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaTaxgroupmember" >
+    insert into LDAPM_MPW_WA_TAXGROUPMEMBER (MONTH_ID, UNIT_ID, PK_TAXGRPMEMBER, 
+      PK_TAXGROUP, PK_WACLASS, TS, 
+      DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkTaxgrpmember,jdbcType=VARCHAR}, 
+      #{pkTaxgroup,jdbcType=VARCHAR}, #{pkWaclass,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaTaxgroupmember" >
+    insert into LDAPM_MPW_WA_TAXGROUPMEMBER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkTaxgrpmember != null" >
+        PK_TAXGRPMEMBER,
+      </if>
+      <if test="pkTaxgroup != null" >
+        PK_TAXGROUP,
+      </if>
+      <if test="pkWaclass != null" >
+        PK_WACLASS,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTaxgrpmember != null" >
+        #{pkTaxgrpmember,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTaxgroup != null" >
+        #{pkTaxgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaclass != null" >
+        #{pkWaclass,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

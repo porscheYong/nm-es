@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocEncDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocEnc">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="ENCOURMATTER" jdbcType="VARCHAR" property="encourmatter" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="ENCOURDATE" jdbcType="VARCHAR" property="encourdate" />
+    <result column="ENCOURTYPE" jdbcType="VARCHAR" property="encourtype" />
+    <result column="ENCOURMEAS" jdbcType="VARCHAR" property="encourmeas" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="ENCOURORG" jdbcType="VARCHAR" property="encourorg" />
+    <result column="ENCOURRANK" jdbcType="VARCHAR" property="encourrank" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="RECORDNUM" jdbcType="VARCHAR" property="recordnum" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_ENC (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    ENCOURMATTER, CREATIONTIME, ENCOURDATE,
+    ENCOURTYPE, ENCOURMEAS, GLBDEF1,
+    MODIFIER, GLBDEF5, PK_ORG,
+    PK_GROUP, MODIFIEDTIME, ENCOURORG,
+    ENCOURRANK, CREATOR, PK_PSNDOC,
+    TS, DR, LASTFLAG, RECORDNUM)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.encourmatter,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.encourdate,jdbcType=VARCHAR},
+      #{item.encourtype,jdbcType=VARCHAR}, #{item.encourmeas,jdbcType=VARCHAR}, #{item.glbdef1,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.encourorg,jdbcType=VARCHAR},
+      #{item.encourrank,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.lastflag,jdbcType=VARCHAR}, #{item.recordnum,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocEnc">
+    insert into LDAPM_MPW_HI_PSNDOC_ENC (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+      ENCOURMATTER, CREATIONTIME, ENCOURDATE,
+      ENCOURTYPE, ENCOURMEAS, GLBDEF1,
+      MODIFIER, GLBDEF5, PK_ORG,
+      PK_GROUP, MODIFIEDTIME, ENCOURORG,
+      ENCOURRANK, CREATOR, PK_PSNDOC,
+      TS, DR, LASTFLAG, RECORDNUM
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR},
+      #{encourmatter,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{encourdate,jdbcType=VARCHAR},
+      #{encourtype,jdbcType=VARCHAR}, #{encourmeas,jdbcType=VARCHAR}, #{glbdef1,jdbcType=VARCHAR},
+      #{modifier,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},
+      #{pkGroup,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{encourorg,jdbcType=VARCHAR},
+      #{encourrank,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR},
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{lastflag,jdbcType=VARCHAR}, #{recordnum,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocEnc">
+    insert into LDAPM_MPW_HI_PSNDOC_ENC
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="encourmatter != null">
+        ENCOURMATTER,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="encourdate != null">
+        ENCOURDATE,
+      </if>
+      <if test="encourtype != null">
+        ENCOURTYPE,
+      </if>
+      <if test="encourmeas != null">
+        ENCOURMEAS,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="encourorg != null">
+        ENCOURORG,
+      </if>
+      <if test="encourrank != null">
+        ENCOURRANK,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="encourmatter != null">
+        #{encourmatter,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="encourdate != null">
+        #{encourdate,jdbcType=VARCHAR},
+      </if>
+      <if test="encourtype != null">
+        #{encourtype,jdbcType=VARCHAR},
+      </if>
+      <if test="encourmeas != null">
+        #{encourmeas,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="encourorg != null">
+        #{encourorg,jdbcType=VARCHAR},
+      </if>
+      <if test="encourrank != null">
+        #{encourrank,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

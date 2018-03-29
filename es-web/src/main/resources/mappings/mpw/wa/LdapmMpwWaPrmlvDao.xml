@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaPrmlvDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwWaPrmlv" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_WA_PRMLV" property="pkWaPrmlv" jdbcType="VARCHAR" />
+    <result column="DISPLAYINDEX" property="displayindex" jdbcType="DECIMAL" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+    <result column="LEVELNAME" property="levelname" jdbcType="VARCHAR" />
+    <result column="PK_WA_GRD" property="pkWaGrd" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_PRMLV (MONTH_ID, UNIT_ID, PK_WA_PRMLV,
+    DISPLAYINDEX, DR, LEVELNAME,
+    PK_WA_GRD, TS)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkWaPrmlv,jdbcType=VARCHAR},
+      #{item.displayindex,jdbcType=DECIMAL}, #{item.dr,jdbcType=DECIMAL}, #{item.levelname,jdbcType=VARCHAR},
+      #{item.pkWaGrd,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaPrmlv" >
+    insert into LDAPM_MPW_WA_PRMLV (MONTH_ID, UNIT_ID, PK_WA_PRMLV, 
+      DISPLAYINDEX, DR, LEVELNAME, 
+      PK_WA_GRD, TS)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkWaPrmlv,jdbcType=VARCHAR}, 
+      #{displayindex,jdbcType=DECIMAL}, #{dr,jdbcType=DECIMAL}, #{levelname,jdbcType=VARCHAR}, 
+      #{pkWaGrd,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaPrmlv" >
+    insert into LDAPM_MPW_WA_PRMLV
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkWaPrmlv != null" >
+        PK_WA_PRMLV,
+      </if>
+      <if test="displayindex != null" >
+        DISPLAYINDEX,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+      <if test="levelname != null" >
+        LEVELNAME,
+      </if>
+      <if test="pkWaGrd != null" >
+        PK_WA_GRD,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaPrmlv != null" >
+        #{pkWaPrmlv,jdbcType=VARCHAR},
+      </if>
+      <if test="displayindex != null" >
+        #{displayindex,jdbcType=DECIMAL},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="levelname != null" >
+        #{levelname,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaGrd != null" >
+        #{pkWaGrd,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

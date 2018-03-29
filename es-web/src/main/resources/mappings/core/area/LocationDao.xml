@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.area.dao.LocationDao">
+
+    <sql id="locationColumns">
+        a.id,
+        a.parent_id AS "parent.id",
+        a.parent_ids,
+        a.local_code,
+        a.name,
+        a.sort,
+        a.remarks,
+        a.create_by AS "createBy.id",
+        a.create_date,
+        a.update_by AS "updateBy.id",
+        a.update_date,
+        a.del_flag,
+        p.name AS "parent.name"
+    </sql>
+
+    <sql id="lcationJoins">
+        LEFT JOIN TB_LOCATION p ON p.id = a.parent_id
+    </sql>
+
+    <select id="get" resultType="Location">
+        SELECT
+        <include refid="locationColumns"/>
+        FROM TB_LOCATION a
+        <include refid="lcationJoins"/>
+        <where>
+            <if test="id != null and id !=''">
+                a.id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="findList" resultType="Location">
+        SELECT
+        <include refid="locationColumns"/>
+        ,
+        (SELECT COUNT(1) FROM TB_LOCATION S WHERE S.PARENT_ID=A.Id) isParent
+        FROM TB_LOCATION a
+        <include refid="lcationJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+        and a.parent_id=#{id}
+        ORDER BY a.id
+    </select>
+
+    <select id="findAllList" resultType="Location">
+
+    </select>
+
+</mapper>

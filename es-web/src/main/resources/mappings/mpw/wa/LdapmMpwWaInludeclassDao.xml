@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaInludeclassDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwWaInludeclass">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_INCLUDECLASS" jdbcType="VARCHAR" property="pkIncludeclass" />
+    <result column="PK_PARENTCLASS" jdbcType="VARCHAR" property="pkParentclass" />
+    <result column="BATCH" jdbcType="DECIMAL" property="batch" />
+    <result column="PK_CHILDCLASS" jdbcType="VARCHAR" property="pkChildclass" />
+    <result column="CYEAR" jdbcType="VARCHAR" property="cyear" />
+    <result column="CPERIOD" jdbcType="VARCHAR" property="cperiod" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_INLUDECLASS (MONTH_ID, UNIT_ID, PK_GROUP,
+    PK_ORG, PK_INCLUDECLASS, PK_PARENTCLASS,
+    BATCH, PK_CHILDCLASS, CYEAR,
+    CPERIOD, MEMO, DR,
+    TS)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkIncludeclass,jdbcType=VARCHAR}, #{item.pkParentclass,jdbcType=VARCHAR},
+      #{item.batch,jdbcType=DECIMAL}, #{item.pkChildclass,jdbcType=VARCHAR}, #{item.cyear,jdbcType=VARCHAR},
+      #{item.cperiod,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.ts,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaInludeclass">
+    insert into LDAPM_MPW_WA_INLUDECLASS (MONTH_ID, UNIT_ID, PK_GROUP,
+    PK_ORG, PK_INCLUDECLASS, PK_PARENTCLASS,
+    BATCH, PK_CHILDCLASS, CYEAR,
+    CPERIOD, MEMO, DR,
+    TS)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR},
+    #{pkOrg,jdbcType=VARCHAR}, #{pkIncludeclass,jdbcType=VARCHAR}, #{pkParentclass,jdbcType=VARCHAR},
+    #{batch,jdbcType=DECIMAL}, #{pkChildclass,jdbcType=VARCHAR}, #{cyear,jdbcType=VARCHAR},
+    #{cperiod,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL},
+    #{ts,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaInludeclass">
+    insert into LDAPM_MPW_WA_INLUDECLASS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkIncludeclass != null">
+        PK_INCLUDECLASS,
+      </if>
+      <if test="pkParentclass != null">
+        PK_PARENTCLASS,
+      </if>
+      <if test="batch != null">
+        BATCH,
+      </if>
+      <if test="pkChildclass != null">
+        PK_CHILDCLASS,
+      </if>
+      <if test="cyear != null">
+        CYEAR,
+      </if>
+      <if test="cperiod != null">
+        CPERIOD,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkIncludeclass != null">
+        #{pkIncludeclass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkParentclass != null">
+        #{pkParentclass,jdbcType=VARCHAR},
+      </if>
+      <if test="batch != null">
+        #{batch,jdbcType=DECIMAL},
+      </if>
+      <if test="pkChildclass != null">
+        #{pkChildclass,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null">
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null">
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

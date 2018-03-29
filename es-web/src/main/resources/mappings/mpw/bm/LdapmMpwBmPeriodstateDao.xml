@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.bm.dao.LdapmMpwBmPeriodstateDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwBmPeriodstate">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PERIODSTATE" jdbcType="VARCHAR" property="pkPeriodstate" />
+    <result column="PK_BM_CLASS" jdbcType="VARCHAR" property="pkBmClass" />
+    <result column="PK_BM_PERIOD" jdbcType="VARCHAR" property="pkBmPeriod" />
+    <result column="RECACUFLAG" jdbcType="VARCHAR" property="recacuflag" />
+    <result column="CHECKFLAG" jdbcType="VARCHAR" property="checkflag" />
+    <result column="ACCOUNTMARK" jdbcType="VARCHAR" property="accountmark" />
+    <result column="OPERATORID" jdbcType="VARCHAR" property="operatorid" />
+    <result column="DACCOUNTDATE" jdbcType="VARCHAR" property="daccountdate" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="ENABLEFLAG" jdbcType="VARCHAR" property="enableflag" />
+    <result column="ISAPPROVED" jdbcType="VARCHAR" property="isapproved" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_BM_PERIODSTATE (MONTH_ID, UNIT_ID, PK_PERIODSTATE,
+    PK_BM_CLASS, PK_BM_PERIOD, RECACUFLAG,
+    CHECKFLAG, ACCOUNTMARK, OPERATORID,
+    DACCOUNTDATE, PK_GROUP, PK_ORG,
+    ENABLEFLAG, ISAPPROVED, TS,
+    DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPeriodstate,jdbcType=VARCHAR},
+      #{item.pkBmClass,jdbcType=VARCHAR}, #{item.pkBmPeriod,jdbcType=VARCHAR}, #{item.recacuflag,jdbcType=VARCHAR},
+      #{item.checkflag,jdbcType=VARCHAR}, #{item.accountmark,jdbcType=VARCHAR}, #{item.operatorid,jdbcType=VARCHAR},
+      #{item.daccountdate,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.enableflag,jdbcType=VARCHAR}, #{item.isapproved,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwBmPeriodstate">
+    insert into LDAPM_MPW_BM_PERIODSTATE (MONTH_ID, UNIT_ID, PK_PERIODSTATE,
+      PK_BM_CLASS, PK_BM_PERIOD, RECACUFLAG,
+      CHECKFLAG, ACCOUNTMARK, OPERATORID,
+      DACCOUNTDATE, PK_GROUP, PK_ORG,
+      ENABLEFLAG, ISAPPROVED, TS,
+      DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPeriodstate,jdbcType=VARCHAR},
+      #{pkBmClass,jdbcType=VARCHAR}, #{pkBmPeriod,jdbcType=VARCHAR}, #{recacuflag,jdbcType=VARCHAR},
+      #{checkflag,jdbcType=VARCHAR}, #{accountmark,jdbcType=VARCHAR}, #{operatorid,jdbcType=VARCHAR},
+      #{daccountdate,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR},
+      #{enableflag,jdbcType=VARCHAR}, #{isapproved,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwBmPeriodstate">
+    insert into LDAPM_MPW_BM_PERIODSTATE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPeriodstate != null">
+        PK_PERIODSTATE,
+      </if>
+      <if test="pkBmClass != null">
+        PK_BM_CLASS,
+      </if>
+      <if test="pkBmPeriod != null">
+        PK_BM_PERIOD,
+      </if>
+      <if test="recacuflag != null">
+        RECACUFLAG,
+      </if>
+      <if test="checkflag != null">
+        CHECKFLAG,
+      </if>
+      <if test="accountmark != null">
+        ACCOUNTMARK,
+      </if>
+      <if test="operatorid != null">
+        OPERATORID,
+      </if>
+      <if test="daccountdate != null">
+        DACCOUNTDATE,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="enableflag != null">
+        ENABLEFLAG,
+      </if>
+      <if test="isapproved != null">
+        ISAPPROVED,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPeriodstate != null">
+        #{pkPeriodstate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBmClass != null">
+        #{pkBmClass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBmPeriod != null">
+        #{pkBmPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="recacuflag != null">
+        #{recacuflag,jdbcType=VARCHAR},
+      </if>
+      <if test="checkflag != null">
+        #{checkflag,jdbcType=VARCHAR},
+      </if>
+      <if test="accountmark != null">
+        #{accountmark,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorid != null">
+        #{operatorid,jdbcType=VARCHAR},
+      </if>
+      <if test="daccountdate != null">
+        #{daccountdate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="enableflag != null">
+        #{enableflag,jdbcType=VARCHAR},
+      </if>
+      <if test="isapproved != null">
+        #{isapproved,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

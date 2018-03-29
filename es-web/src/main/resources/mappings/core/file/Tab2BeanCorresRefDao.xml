@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.core.file.dao.Tab2BeanCorresRefDao" >
+
+  <resultMap id="BaseResultMap" type="Tab2BeanCorresRef">
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="TABLE_DESC" jdbcType="VARCHAR" property="tableDesc" />
+    <result column="SERVICE_NAME" jdbcType="VARCHAR" property="serviceName" />
+    <result column="ENTITY_NAME" jdbcType="VARCHAR" property="entityName" />
+    <result column="MONTH_DATA" jdbcType="CHAR" property="monthData" />
+    <result column="DAY_DATA" jdbcType="CHAR" property="dayData" />
+    <result column="MONTH_ID" jdbcType="VARCHAR" property="monthId" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    TABLE_NAME, TABLE_DESC, SERVICE_NAME, ENTITY_NAME,MONTH_DATA,DAY_DATA
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="Tab2BeanCorresRef">
+    select
+    <include refid="Base_Column_List" />
+    from TAB2BEAN_CORRESREF
+    where TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findByEntityName" parameterType="java.lang.String" resultType="Tab2BeanCorresRef">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TAB2BEAN_CORRESREF
+    WHERE ENTITY_NAME = #{entityName,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findList" resultType="Tab2BeanCorresRef">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TAB2BEAN_CORRESREF t
+  </select>
+
+  <select id="findNotExists" resultType="Tab2BeanCorresRef">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM TAB2BEAN_CORRESREF t
+    WHERE
+    <if test="dayData != null">
+      t.DAY_DATA= #{dayData,jdbcType=CHAR}  AND
+    </if>
+    <if test="monthData != null">
+      t.MONTH_DATA= #{monthData,jdbcType=CHAR} AND
+    </if>
+    NOT EXISTS (
+    SELECT 1 from tb_document t1 WHERE t1.month_id=#{monthId,jdbcType=VARCHAR}
+    AND UPPER(t1.short_name)= UPPER(t.table_name)
+    )
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TAB2BEAN_CORRESREF
+    where TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="Tab2BeanCorresRef">
+    insert into TAB2BEAN_CORRESREF (TABLE_NAME, TABLE_DESC, SERVICE_NAME,
+    ENTITY_NAME)
+    values (#{tableName,jdbcType=VARCHAR}, #{tableDesc,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR},
+    #{entityName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="Tab2BeanCorresRef">
+    insert into TAB2BEAN_CORRESREF
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tableName != null">
+        TABLE_NAME,
+      </if>
+      <if test="tableDesc != null">
+        TABLE_DESC,
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME,
+      </if>
+      <if test="entityName != null">
+        ENTITY_NAME,
+      </if>
+      <if test="monthData != null">
+        MONTH_DATA,
+      </if>
+      <if test="dayData != null">
+        DAY_DATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableDesc != null">
+        #{tableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityName != null">
+        #{entityName,jdbcType=VARCHAR},
+      </if>
+      <if test="monthData != null">
+        #{monthData,jdbcType=CHAR},
+      </if>
+      <if test="dayData != null">
+        #{dayData,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="Tab2BeanCorresRef">
+    update TAB2BEAN_CORRESREF
+    <set>
+      <if test="tableDesc != null">
+        TABLE_DESC = #{tableDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null">
+        SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="entityName != null">
+        ENTITY_NAME = #{entityName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Tab2BeanCorresRef">
+    update TAB2BEAN_CORRESREF
+    set TABLE_DESC = #{tableDesc,jdbcType=VARCHAR},
+    SERVICE_NAME = #{serviceName,jdbcType=VARCHAR},
+    ENTITY_NAME = #{entityName,jdbcType=VARCHAR}
+    where TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

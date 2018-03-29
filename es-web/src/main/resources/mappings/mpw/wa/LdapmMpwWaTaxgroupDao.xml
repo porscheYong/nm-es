@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaTaxgroupDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwWaTaxgroup" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="PK_TAXGROUP" property="pkTaxgroup" jdbcType="VARCHAR" />
+    <result column="CCOMMENT" property="ccomment" jdbcType="VARCHAR" />
+    <result column="CGROUPNAME" property="cgroupname" jdbcType="VARCHAR" />
+    <result column="PK_COUNTRY" property="pkCountry" jdbcType="VARCHAR" />
+    <result column="PK_GROUP" property="pkGroup" jdbcType="VARCHAR" />
+    <result column="PK_ORG" property="pkOrg" jdbcType="VARCHAR" />
+    <result column="SYSCREATEFLAG" property="syscreateflag" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_TAXGROUP (MONTH_ID, UNIT_ID, PK_TAXGROUP,
+    CCOMMENT, CGROUPNAME, PK_COUNTRY,
+    PK_GROUP, PK_ORG, SYSCREATEFLAG,
+    TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkTaxgroup,jdbcType=VARCHAR},
+      #{item.ccomment,jdbcType=VARCHAR}, #{item.cgroupname,jdbcType=VARCHAR}, #{item.pkCountry,jdbcType=VARCHAR},
+      #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}, #{item.syscreateflag,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaTaxgroup" >
+    insert into LDAPM_MPW_WA_TAXGROUP (MONTH_ID, UNIT_ID, PK_TAXGROUP, 
+      CCOMMENT, CGROUPNAME, PK_COUNTRY, 
+      PK_GROUP, PK_ORG, SYSCREATEFLAG, 
+      TS, DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkTaxgroup,jdbcType=VARCHAR}, 
+      #{ccomment,jdbcType=VARCHAR}, #{cgroupname,jdbcType=VARCHAR}, #{pkCountry,jdbcType=VARCHAR}, 
+      #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{syscreateflag,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaTaxgroup" >
+    insert into LDAPM_MPW_WA_TAXGROUP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="pkTaxgroup != null" >
+        PK_TAXGROUP,
+      </if>
+      <if test="ccomment != null" >
+        CCOMMENT,
+      </if>
+      <if test="cgroupname != null" >
+        CGROUPNAME,
+      </if>
+      <if test="pkCountry != null" >
+        PK_COUNTRY,
+      </if>
+      <if test="pkGroup != null" >
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null" >
+        PK_ORG,
+      </if>
+      <if test="syscreateflag != null" >
+        SYSCREATEFLAG,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTaxgroup != null" >
+        #{pkTaxgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="ccomment != null" >
+        #{ccomment,jdbcType=VARCHAR},
+      </if>
+      <if test="cgroupname != null" >
+        #{cgroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="pkCountry != null" >
+        #{pkCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null" >
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null" >
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="syscreateflag != null" >
+        #{syscreateflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

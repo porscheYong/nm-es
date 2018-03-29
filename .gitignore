@@ -1,0 +1,14 @@
+.idea
+.classpath
+.project
+*.iml
+*.eml
+target
+*.log
+*.log.*
+**/target/
+generatorConfig.xml
+/build/
+/temp/
+#**/src/test/
+*.settings

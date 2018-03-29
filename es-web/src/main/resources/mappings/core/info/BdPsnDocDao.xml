@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.info.dao.BdPsnDocDao">
+
+    <sql id="bdPsnDocColumns">
+        t.GLBDEF7,t.GLBDEF8,
+        t.GLBDEF12,t.GLBDEF13,
+        t.HOMEPHONE,t.ID as "certId",t.IDTYPE,
+        t.MOBILE,t.NAME,t.OFFICEPHONE,
+        t.USEDNAME,t.COUNTRY,
+        t.FILEADDRESS,t.SHORTNAME
+    </sql>
+
+    <select id="findList" resultType="BdPsnDoc">
+        SELECT
+        rowid as "id",
+        <include refid="bdPsnDocColumns"/>
+        FROM ldapm_mpw_bd_psndoc T
+        where 1=1 and
+        LENGTH(t.IDTYPE) >3
+         AND <![CDATA[ rownum<200 ]]>
+    </select>
+
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into LDAPM_MPW_BD_PSNDOC (MONTH_ID, UNIT_ID, PK_PSNDOC,
+        PK_HRORG, GLBDEF10, GLBDEF11,
+        GLBDEF2, GLBDEF3, GLBDEF6,
+        GLBDEF7, GLBDEF8, GLBDEF9,
+        GLBDEF12, GLBDEF13, BIRTHDATE,
+        DEF3, DEF4, HOMEPHONE,
+        ID, IDTYPE, JOINWORKDATE,
+        MOBILE, NAME, OFFICEPHONE,
+        PK_GROUP, SEX, USEDNAME,
+        CHARACTERRPR, COUNTRY, FILEADDRESS,
+        HEALTH, MARITAL, NATIONALITY,
+        NATIVEPLACE, PHOTO, PREVIEWPHOTO,
+        SHORTNAME, ADDR, CODE,
+        CREATIONTIME, CREATOR, DATAORIGINFLAG,
+        DEF1, DEF10, DEF11,
+        DEF12, DEF13, DEF14,
+        DEF15, DEF16, DEF17,
+        DEF18, DEF19, DEF2,
+        DEF20, DEF5, DEF6,
+        DEF7, DEF8, DEF9, DR,
+        EMAIL, ENABLESTATE, ISSHOPASSIST,
+        MNECODE, MODIFIEDTIME, MODIFIER,
+        NAME2, NAME3, NAME4,
+        NAME5, NAME6, PK_ORG,
+        TS, BLOODTYPE, CENSUSADDR,
+        DIE_DATE, DIE_REMARK, EDU,
+        FAX, ISHISKEYPSN, JOINPOLITYDATE,
+        MARRIAGEDATE, PENELAUTH, PERMANRESIDE,
+        PK_DEGREE, POLITY, POSTALCODE,
+        PROF, RETIREDATE, SECRET_EMAIL,
+        TITLETECHPOST, ISTEMP, PSN_UID,
+        GLBDEF14, GLBDEF15)
+        select cd.* from(
+        <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+            select
+            #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR},
+            #{item.pkHrorg,jdbcType=VARCHAR}, #{item.glbdef10,jdbcType=VARCHAR}, #{item.glbdef11,jdbcType=VARCHAR},
+            #{item.glbdef2,jdbcType=VARCHAR}, #{item.glbdef3,jdbcType=VARCHAR}, #{item.glbdef6,jdbcType=VARCHAR},
+            #{item.glbdef7,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR}, #{item.glbdef9,jdbcType=VARCHAR},
+            #{item.glbdef12,jdbcType=VARCHAR}, #{item.glbdef13,jdbcType=VARCHAR}, #{item.birthdate,jdbcType=VARCHAR},
+            #{item.def3,jdbcType=VARCHAR}, #{item.def4,jdbcType=VARCHAR}, #{item.homephone,jdbcType=VARCHAR},
+            #{item.id,jdbcType=VARCHAR}, #{item.idtype,jdbcType=VARCHAR}, #{item.joinworkdate,jdbcType=VARCHAR},
+            #{item.mobile,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.officephone,jdbcType=VARCHAR},
+            #{item.pkGroup,jdbcType=VARCHAR}, #{item.sex,jdbcType=DECIMAL}, #{item.usedname,jdbcType=VARCHAR},
+            #{item.characterrpr,jdbcType=VARCHAR}, #{item.country,jdbcType=VARCHAR}, #{item.fileaddress,jdbcType=VARCHAR},
+            #{item.health,jdbcType=VARCHAR}, #{item.marital,jdbcType=VARCHAR}, #{item.nationality,jdbcType=VARCHAR},
+            #{item.nativeplace,jdbcType=VARCHAR}, #{item.photo,jdbcType=VARCHAR}, #{item.previewphoto,jdbcType=VARCHAR},
+            #{item.shortname,jdbcType=VARCHAR}, #{item.addr,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR},
+            #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.dataoriginflag,jdbcType=DECIMAL},
+            #{item.def1,jdbcType=VARCHAR}, #{item.def10,jdbcType=VARCHAR}, #{item.def11,jdbcType=VARCHAR},
+            #{item.def12,jdbcType=VARCHAR}, #{item.def13,jdbcType=VARCHAR}, #{item.def14,jdbcType=VARCHAR},
+            #{item.def15,jdbcType=VARCHAR}, #{item.def16,jdbcType=VARCHAR}, #{item.def17,jdbcType=VARCHAR},
+            #{item.def18,jdbcType=VARCHAR}, #{item.def19,jdbcType=VARCHAR}, #{item.def2,jdbcType=VARCHAR},
+            #{item.def20,jdbcType=VARCHAR}, #{item.def5,jdbcType=VARCHAR}, #{item.def6,jdbcType=VARCHAR},
+            #{item.def7,jdbcType=VARCHAR}, #{item.def8,jdbcType=VARCHAR}, #{item.def9,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+            #{item.email,jdbcType=VARCHAR}, #{item.enablestate,jdbcType=DECIMAL}, #{item.isshopassist,jdbcType=VARCHAR},
+            #{item.mnecode,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+            #{item.name2,jdbcType=VARCHAR}, #{item.name3,jdbcType=VARCHAR}, #{item.name4,jdbcType=VARCHAR},
+            #{item.name5,jdbcType=VARCHAR}, #{item.name6,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+            #{item.ts,jdbcType=VARCHAR}, #{item.bloodtype,jdbcType=VARCHAR}, #{item.censusaddr,jdbcType=VARCHAR},
+            #{item.dieDate,jdbcType=VARCHAR}, #{item.dieRemark,jdbcType=VARCHAR}, #{item.edu,jdbcType=VARCHAR},
+            #{item.fax,jdbcType=VARCHAR}, #{item.ishiskeypsn,jdbcType=VARCHAR}, #{item.joinpolitydate,jdbcType=VARCHAR},
+            #{item.marriagedate,jdbcType=VARCHAR}, #{item.penelauth,jdbcType=VARCHAR}, #{item.permanreside,jdbcType=VARCHAR},
+            #{item.pkDegree,jdbcType=VARCHAR}, #{item.polity,jdbcType=VARCHAR}, #{item.postalcode,jdbcType=VARCHAR},
+            #{item.prof,jdbcType=VARCHAR}, #{item.retiredate,jdbcType=VARCHAR}, #{item.secretEmail,jdbcType=VARCHAR},
+            #{item.titletechpost,jdbcType=VARCHAR}, #{item.istemp,jdbcType=VARCHAR}, #{item.psnUid,jdbcType=VARCHAR},
+            #{item.glbdef14,jdbcType=VARCHAR}, #{item.glbdef15,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="psn" 循环List的每条的结果集
+             collection="list" -->
+        <foreach collection="list" separator=";" item="psn" index="index" open="begin" close=";end;">
+            update ldapm_mpw_bd_psndoc t
+            set
+                t.GLBDEF7 = #{psn.glbdef7,jdbcType=VARCHAR},
+                t.GLBDEF8 = #{psn.glbdef8,jdbcType=VARCHAR},
+                t.GLBDEF12 = #{psn.glbdef12,jdbcType=VARCHAR},
+                t.GLBDEF13 = #{psn.glbdef13,jdbcType=VARCHAR},
+                t.HOMEPHONE = #{psn.homephone,jdbcType=VARCHAR},
+                t.ID = #{psn.certId,jdbcType=VARCHAR},
+                t.MOBILE = #{psn.mobile,jdbcType=VARCHAR},
+                t.OFFICEPHONE = #{psn.officePhone,jdbcType=VARCHAR},
+                t.USEDNAME = #{psn.usedName,jdbcType=VARCHAR},
+                t.FILEADDRESS = #{psn.fileAddress,jdbcType=VARCHAR},
+                t.SHORTNAME = #{psn.shortName,jdbcType=VARCHAR},
+                t.IDTYPE = #{psn.idType,jdbcType=VARCHAR},
+                t.COUNTRY = #{psn.country,jdbcType=VARCHAR},
+                t.NAME = #{psn.name,jdbcType=VARCHAR}
+            where rowid = #{psn.id}
+        </foreach>
+    </update>
+
+</mapper>

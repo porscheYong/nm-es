@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="xyz.wongs.es.mpw.wa.dao.LdapmMpwWaClassitemDao" >
+  <resultMap id="BaseResultMap" type="LdapmMpwWaClassitem" >
+    <result column="MONTH_ID" property="monthId" jdbcType="DECIMAL" />
+    <result column="UNIT_ID" property="unitId" jdbcType="VARCHAR" />
+    <result column="BANKACCOUNT" property="bankaccount" jdbcType="DECIMAL" />
+    <result column="CATEGORY_ID" property="categoryId" jdbcType="VARCHAR" />
+    <result column="CLEARFLAG" property="clearflag" jdbcType="VARCHAR" />
+    <result column="CPERIOD" property="cperiod" jdbcType="VARCHAR" />
+    <result column="CREATIONTIME" property="creationtime" jdbcType="VARCHAR" />
+    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+    <result column="CYEAR" property="cyear" jdbcType="VARCHAR" />
+    <result column="DESTITEMCOL" property="destitemcol" jdbcType="VARCHAR" />
+    <result column="DESTITEMPK" property="destitempk" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="DECIMAL" />
+    <result column="ICOMPUTESEQ" property="icomputeseq" jdbcType="DECIMAL" />
+    <result column="IDISPLAYSEQ" property="idisplayseq" jdbcType="DECIMAL" />
+    <result column="IFLDDECIMAL" property="iflddecimal" jdbcType="DECIMAL" />
+    <result column="IFROMFLAG" property="ifromflag" jdbcType="DECIMAL" />
+    <result column="INAPPROVEDITEM" property="inapproveditem" jdbcType="VARCHAR" />
+    <result column="ISSYSFORMULA" property="issysformula" jdbcType="VARCHAR" />
+    <result column="ISTRANSFER" property="istransfer" jdbcType="VARCHAR" />
+    <result column="ITEMKEY" property="itemkey" jdbcType="VARCHAR" />
+    <result column="MODIFIEDTIME" property="modifiedtime" jdbcType="VARCHAR" />
+    <result column="MODIFIER" property="modifier" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="NAME2" property="name2" jdbcType="VARCHAR" />
+    <result column="NAME3" property="name3" jdbcType="VARCHAR" />
+    <result column="NAME4" property="name4" jdbcType="VARCHAR" />
+    <result column="NAME5" property="name5" jdbcType="VARCHAR" />
+    <result column="NAME6" property="name6" jdbcType="VARCHAR" />
+    <result column="NPSNCEIL" property="npsnceil" jdbcType="DECIMAL" />
+    <result column="NPSNFLOOR" property="npsnfloor" jdbcType="DECIMAL" />
+    <result column="NSUMCEIL" property="nsumceil" jdbcType="DECIMAL" />
+    <result column="NSUMFLOOR" property="nsumfloor" jdbcType="DECIMAL" />
+    <result column="PK_GROUP" property="pkGroup" jdbcType="VARCHAR" />
+    <result column="PK_ORG" property="pkOrg" jdbcType="VARCHAR" />
+    <result column="PK_WA_CLASS" property="pkWaClass" jdbcType="VARCHAR" />
+    <result column="PK_WA_CLASSITEM" property="pkWaClassitem" jdbcType="VARCHAR" />
+    <result column="PK_WA_ITEM" property="pkWaItem" jdbcType="VARCHAR" />
+    <result column="PSNCEILFLAG" property="psnceilflag" jdbcType="VARCHAR" />
+    <result column="PSNFLOORFLAG" property="psnfloorflag" jdbcType="VARCHAR" />
+    <result column="ROUND_TYPE" property="roundType" jdbcType="DECIMAL" />
+    <result column="SHOWFLAG" property="showflag" jdbcType="VARCHAR" />
+    <result column="SUMCEILFLAG" property="sumceilflag" jdbcType="VARCHAR" />
+    <result column="SUMFLOORFLAG" property="sumfloorflag" jdbcType="VARCHAR" />
+    <result column="TAXFLAG" property="taxflag" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="VFORMULA" property="vformula" jdbcType="VARCHAR" />
+    <result column="VFORMULASTR" property="vformulastr" jdbcType="VARCHAR" />
+    <result column="INCLUDEITEMFLAG" property="includeitemflag" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_WA_CLASSITEM (MONTH_ID, UNIT_ID, BANKACCOUNT,
+    CATEGORY_ID, CLEARFLAG, CPERIOD,
+    CREATIONTIME, CREATOR, CYEAR,
+    DESTITEMCOL, DESTITEMPK, DR,
+    ICOMPUTESEQ, IDISPLAYSEQ, IFLDDECIMAL,
+    IFROMFLAG, INAPPROVEDITEM, ISSYSFORMULA,
+    ISTRANSFER, ITEMKEY, MODIFIEDTIME,
+    MODIFIER, NAME, NAME2,
+    NAME3, NAME4, NAME5,
+    NAME6, NPSNCEIL, NPSNFLOOR,
+    NSUMCEIL, NSUMFLOOR, PK_GROUP,
+    PK_ORG, PK_WA_CLASS, PK_WA_CLASSITEM,
+    PK_WA_ITEM, PSNCEILFLAG, PSNFLOORFLAG,
+    ROUND_TYPE, SHOWFLAG, SUMCEILFLAG,
+    SUMFLOORFLAG, TAXFLAG, TS,
+    VFORMULA, VFORMULASTR, INCLUDEITEMFLAG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.bankaccount,jdbcType=DECIMAL},
+      #{item.categoryId,jdbcType=VARCHAR}, #{item.clearflag,jdbcType=VARCHAR}, #{item.cperiod,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.cyear,jdbcType=VARCHAR},
+      #{item.destitemcol,jdbcType=VARCHAR}, #{item.destitempk,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.icomputeseq,jdbcType=DECIMAL}, #{item.idisplayseq,jdbcType=DECIMAL}, #{item.iflddecimal,jdbcType=DECIMAL},
+      #{item.ifromflag,jdbcType=DECIMAL}, #{item.inapproveditem,jdbcType=VARCHAR}, #{item.issysformula,jdbcType=VARCHAR},
+      #{item.istransfer,jdbcType=VARCHAR}, #{item.itemkey,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.name2,jdbcType=VARCHAR},
+      #{item.name3,jdbcType=VARCHAR}, #{item.name4,jdbcType=VARCHAR}, #{item.name5,jdbcType=VARCHAR},
+      #{item.name6,jdbcType=VARCHAR}, #{item.npsnceil,jdbcType=DECIMAL}, #{item.npsnfloor,jdbcType=DECIMAL},
+      #{item.nsumceil,jdbcType=DECIMAL}, #{item.nsumfloor,jdbcType=DECIMAL}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkWaClass,jdbcType=VARCHAR}, #{item.pkWaClassitem,jdbcType=VARCHAR},
+      #{item.pkWaItem,jdbcType=VARCHAR}, #{item.psnceilflag,jdbcType=VARCHAR}, #{item.psnfloorflag,jdbcType=VARCHAR},
+      #{item.roundType,jdbcType=DECIMAL}, #{item.showflag,jdbcType=VARCHAR}, #{item.sumceilflag,jdbcType=VARCHAR},
+      #{item.sumfloorflag,jdbcType=VARCHAR}, #{item.taxflag,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.vformula,jdbcType=VARCHAR}, #{item.vformulastr,jdbcType=VARCHAR}, #{item.includeitemflag,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwWaClassitem" >
+    insert into LDAPM_MPW_WA_CLASSITEM (MONTH_ID, UNIT_ID, BANKACCOUNT, 
+      CATEGORY_ID, CLEARFLAG, CPERIOD, 
+      CREATIONTIME, CREATOR, CYEAR, 
+      DESTITEMCOL, DESTITEMPK, DR, 
+      ICOMPUTESEQ, IDISPLAYSEQ, IFLDDECIMAL, 
+      IFROMFLAG, INAPPROVEDITEM, ISSYSFORMULA, 
+      ISTRANSFER, ITEMKEY, MODIFIEDTIME, 
+      MODIFIER, NAME, NAME2, 
+      NAME3, NAME4, NAME5, 
+      NAME6, NPSNCEIL, NPSNFLOOR, 
+      NSUMCEIL, NSUMFLOOR, PK_GROUP, 
+      PK_ORG, PK_WA_CLASS, PK_WA_CLASSITEM, 
+      PK_WA_ITEM, PSNCEILFLAG, PSNFLOORFLAG, 
+      ROUND_TYPE, SHOWFLAG, SUMCEILFLAG, 
+      SUMFLOORFLAG, TAXFLAG, TS, 
+      VFORMULA, VFORMULASTR, INCLUDEITEMFLAG
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{bankaccount,jdbcType=DECIMAL}, 
+      #{categoryId,jdbcType=VARCHAR}, #{clearflag,jdbcType=VARCHAR}, #{cperiod,jdbcType=VARCHAR}, 
+      #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{cyear,jdbcType=VARCHAR}, 
+      #{destitemcol,jdbcType=VARCHAR}, #{destitempk,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, 
+      #{icomputeseq,jdbcType=DECIMAL}, #{idisplayseq,jdbcType=DECIMAL}, #{iflddecimal,jdbcType=DECIMAL}, 
+      #{ifromflag,jdbcType=DECIMAL}, #{inapproveditem,jdbcType=VARCHAR}, #{issysformula,jdbcType=VARCHAR}, 
+      #{istransfer,jdbcType=VARCHAR}, #{itemkey,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, 
+      #{name3,jdbcType=VARCHAR}, #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}, 
+      #{name6,jdbcType=VARCHAR}, #{npsnceil,jdbcType=DECIMAL}, #{npsnfloor,jdbcType=DECIMAL}, 
+      #{nsumceil,jdbcType=DECIMAL}, #{nsumfloor,jdbcType=DECIMAL}, #{pkGroup,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkWaClass,jdbcType=VARCHAR}, #{pkWaClassitem,jdbcType=VARCHAR}, 
+      #{pkWaItem,jdbcType=VARCHAR}, #{psnceilflag,jdbcType=VARCHAR}, #{psnfloorflag,jdbcType=VARCHAR}, 
+      #{roundType,jdbcType=DECIMAL}, #{showflag,jdbcType=VARCHAR}, #{sumceilflag,jdbcType=VARCHAR}, 
+      #{sumfloorflag,jdbcType=VARCHAR}, #{taxflag,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
+      #{vformula,jdbcType=VARCHAR}, #{vformulastr,jdbcType=VARCHAR}, #{includeitemflag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwWaClassitem" >
+    insert into LDAPM_MPW_WA_CLASSITEM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        MONTH_ID,
+      </if>
+      <if test="unitId != null" >
+        UNIT_ID,
+      </if>
+      <if test="bankaccount != null" >
+        BANKACCOUNT,
+      </if>
+      <if test="categoryId != null" >
+        CATEGORY_ID,
+      </if>
+      <if test="clearflag != null" >
+        CLEARFLAG,
+      </if>
+      <if test="cperiod != null" >
+        CPERIOD,
+      </if>
+      <if test="creationtime != null" >
+        CREATIONTIME,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="cyear != null" >
+        CYEAR,
+      </if>
+      <if test="destitemcol != null" >
+        DESTITEMCOL,
+      </if>
+      <if test="destitempk != null" >
+        DESTITEMPK,
+      </if>
+      <if test="dr != null" >
+        DR,
+      </if>
+      <if test="icomputeseq != null" >
+        ICOMPUTESEQ,
+      </if>
+      <if test="idisplayseq != null" >
+        IDISPLAYSEQ,
+      </if>
+      <if test="iflddecimal != null" >
+        IFLDDECIMAL,
+      </if>
+      <if test="ifromflag != null" >
+        IFROMFLAG,
+      </if>
+      <if test="inapproveditem != null" >
+        INAPPROVEDITEM,
+      </if>
+      <if test="issysformula != null" >
+        ISSYSFORMULA,
+      </if>
+      <if test="istransfer != null" >
+        ISTRANSFER,
+      </if>
+      <if test="itemkey != null" >
+        ITEMKEY,
+      </if>
+      <if test="modifiedtime != null" >
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null" >
+        MODIFIER,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="name2 != null" >
+        NAME2,
+      </if>
+      <if test="name3 != null" >
+        NAME3,
+      </if>
+      <if test="name4 != null" >
+        NAME4,
+      </if>
+      <if test="name5 != null" >
+        NAME5,
+      </if>
+      <if test="name6 != null" >
+        NAME6,
+      </if>
+      <if test="npsnceil != null" >
+        NPSNCEIL,
+      </if>
+      <if test="npsnfloor != null" >
+        NPSNFLOOR,
+      </if>
+      <if test="nsumceil != null" >
+        NSUMCEIL,
+      </if>
+      <if test="nsumfloor != null" >
+        NSUMFLOOR,
+      </if>
+      <if test="pkGroup != null" >
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null" >
+        PK_ORG,
+      </if>
+      <if test="pkWaClass != null" >
+        PK_WA_CLASS,
+      </if>
+      <if test="pkWaClassitem != null" >
+        PK_WA_CLASSITEM,
+      </if>
+      <if test="pkWaItem != null" >
+        PK_WA_ITEM,
+      </if>
+      <if test="psnceilflag != null" >
+        PSNCEILFLAG,
+      </if>
+      <if test="psnfloorflag != null" >
+        PSNFLOORFLAG,
+      </if>
+      <if test="roundType != null" >
+        ROUND_TYPE,
+      </if>
+      <if test="showflag != null" >
+        SHOWFLAG,
+      </if>
+      <if test="sumceilflag != null" >
+        SUMCEILFLAG,
+      </if>
+      <if test="sumfloorflag != null" >
+        SUMFLOORFLAG,
+      </if>
+      <if test="taxflag != null" >
+        TAXFLAG,
+      </if>
+      <if test="ts != null" >
+        TS,
+      </if>
+      <if test="vformula != null" >
+        VFORMULA,
+      </if>
+      <if test="vformulastr != null" >
+        VFORMULASTR,
+      </if>
+      <if test="includeitemflag != null" >
+        INCLUDEITEMFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="monthId != null" >
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankaccount != null" >
+        #{bankaccount,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="clearflag != null" >
+        #{clearflag,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null" >
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null" >
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null" >
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="destitemcol != null" >
+        #{destitemcol,jdbcType=VARCHAR},
+      </if>
+      <if test="destitempk != null" >
+        #{destitempk,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null" >
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="icomputeseq != null" >
+        #{icomputeseq,jdbcType=DECIMAL},
+      </if>
+      <if test="idisplayseq != null" >
+        #{idisplayseq,jdbcType=DECIMAL},
+      </if>
+      <if test="iflddecimal != null" >
+        #{iflddecimal,jdbcType=DECIMAL},
+      </if>
+      <if test="ifromflag != null" >
+        #{ifromflag,jdbcType=DECIMAL},
+      </if>
+      <if test="inapproveditem != null" >
+        #{inapproveditem,jdbcType=VARCHAR},
+      </if>
+      <if test="issysformula != null" >
+        #{issysformula,jdbcType=VARCHAR},
+      </if>
+      <if test="istransfer != null" >
+        #{istransfer,jdbcType=VARCHAR},
+      </if>
+      <if test="itemkey != null" >
+        #{itemkey,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null" >
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null" >
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null" >
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null" >
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null" >
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null" >
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="npsnceil != null" >
+        #{npsnceil,jdbcType=DECIMAL},
+      </if>
+      <if test="npsnfloor != null" >
+        #{npsnfloor,jdbcType=DECIMAL},
+      </if>
+      <if test="nsumceil != null" >
+        #{nsumceil,jdbcType=DECIMAL},
+      </if>
+      <if test="nsumfloor != null" >
+        #{nsumfloor,jdbcType=DECIMAL},
+      </if>
+      <if test="pkGroup != null" >
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null" >
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaClass != null" >
+        #{pkWaClass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaClassitem != null" >
+        #{pkWaClassitem,jdbcType=VARCHAR},
+      </if>
+      <if test="pkWaItem != null" >
+        #{pkWaItem,jdbcType=VARCHAR},
+      </if>
+      <if test="psnceilflag != null" >
+        #{psnceilflag,jdbcType=VARCHAR},
+      </if>
+      <if test="psnfloorflag != null" >
+        #{psnfloorflag,jdbcType=VARCHAR},
+      </if>
+      <if test="roundType != null" >
+        #{roundType,jdbcType=DECIMAL},
+      </if>
+      <if test="showflag != null" >
+        #{showflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sumceilflag != null" >
+        #{sumceilflag,jdbcType=VARCHAR},
+      </if>
+      <if test="sumfloorflag != null" >
+        #{sumfloorflag,jdbcType=VARCHAR},
+      </if>
+      <if test="taxflag != null" >
+        #{taxflag,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null" >
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="vformula != null" >
+        #{vformula,jdbcType=VARCHAR},
+      </if>
+      <if test="vformulastr != null" >
+        #{vformulastr,jdbcType=VARCHAR},
+      </if>
+      <if test="includeitemflag != null" >
+        #{includeitemflag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.hi.dao.LdapmMpwHiEntryapplyDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiEntryapply">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_ENTRYAPPLY" jdbcType="VARCHAR" property="pkEntryapply" />
+    <result column="APPLY_DATE" jdbcType="VARCHAR" property="applyDate" />
+    <result column="APPROVE_NOTE" jdbcType="VARCHAR" property="approveNote" />
+    <result column="APPROVE_STATE" jdbcType="DECIMAL" property="approveState" />
+    <result column="APPROVE_TIME" jdbcType="VARCHAR" property="approveTime" />
+    <result column="APPROVER" jdbcType="VARCHAR" property="approver" />
+    <result column="BILL_CODE" jdbcType="VARCHAR" property="billCode" />
+    <result column="BILLMAKER" jdbcType="VARCHAR" property="billmaker" />
+    <result column="BUSINESS_TYPE" jdbcType="VARCHAR" property="businessType" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ISSYNCWORK" jdbcType="VARCHAR" property="issyncwork" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_BILLTYPE" jdbcType="VARCHAR" property="pkBilltype" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_HI_ORG" jdbcType="VARCHAR" property="pkHiOrg" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="TRANSTYPE" jdbcType="VARCHAR" property="transtype" />
+    <result column="TRANSTYPEID" jdbcType="VARCHAR" property="transtypeid" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="VATTACHMENT" jdbcType="VARCHAR" property="vattachment" />
+    <result column="ISSYNCGLBDEF11" jdbcType="VARCHAR" property="issyncglbdef11" />
+    <result column="VLEADERPOSITION" jdbcType="VARCHAR" property="vleaderposition" />
+    <result column="VDUTYDEPT" jdbcType="VARCHAR" property="vdutydept" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_ENTRYAPPLY (MONTH_ID, UNIT_ID, PK_ENTRYAPPLY,
+    APPLY_DATE, APPROVE_NOTE, APPROVE_STATE,
+    APPROVE_TIME, APPROVER, BILL_CODE,
+    BILLMAKER, BUSINESS_TYPE, CREATIONTIME,
+    CREATOR, DR, ISSYNCWORK,
+    MEMO, MODIFIEDTIME, MODIFIER,
+    PK_BILLTYPE, PK_GROUP, PK_HI_ORG,
+    PK_ORG, PK_PSNDOC, PK_PSNJOB,
+    TRANSTYPE, TRANSTYPEID, TS,
+    VATTACHMENT, ISSYNCGLBDEF11, VLEADERPOSITION,
+    VDUTYDEPT)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkEntryapply,jdbcType=VARCHAR},
+      #{item.applyDate,jdbcType=VARCHAR}, #{item.approveNote,jdbcType=VARCHAR}, #{item.approveState,jdbcType=DECIMAL},
+      #{item.approveTime,jdbcType=VARCHAR}, #{item.approver,jdbcType=VARCHAR}, #{item.billCode,jdbcType=VARCHAR},
+      #{item.billmaker,jdbcType=VARCHAR}, #{item.businessType,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.issyncwork,jdbcType=VARCHAR},
+      #{item.memo,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.pkBilltype,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkHiOrg,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.pkPsnjob,jdbcType=VARCHAR},
+      #{item.transtype,jdbcType=VARCHAR}, #{item.transtypeid,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+      #{item.vattachment,jdbcType=VARCHAR}, #{item.issyncglbdef11,jdbcType=VARCHAR}, #{item.vleaderposition,jdbcType=VARCHAR},
+      #{item.vdutydept,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiEntryapply">
+    insert into LDAPM_MPW_HI_ENTRYAPPLY (MONTH_ID, UNIT_ID, PK_ENTRYAPPLY,
+      APPLY_DATE, APPROVE_NOTE, APPROVE_STATE,
+      APPROVE_TIME, APPROVER, BILL_CODE,
+      BILLMAKER, BUSINESS_TYPE, CREATIONTIME,
+      CREATOR, DR, ISSYNCWORK,
+      MEMO, MODIFIEDTIME, MODIFIER,
+      PK_BILLTYPE, PK_GROUP, PK_HI_ORG,
+      PK_ORG, PK_PSNDOC, PK_PSNJOB,
+      TRANSTYPE, TRANSTYPEID, TS,
+      VATTACHMENT, ISSYNCGLBDEF11, VLEADERPOSITION,
+      VDUTYDEPT)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkEntryapply,jdbcType=VARCHAR},
+      #{applyDate,jdbcType=VARCHAR}, #{approveNote,jdbcType=VARCHAR}, #{approveState,jdbcType=DECIMAL},
+      #{approveTime,jdbcType=VARCHAR}, #{approver,jdbcType=VARCHAR}, #{billCode,jdbcType=VARCHAR},
+      #{billmaker,jdbcType=VARCHAR}, #{businessType,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{issyncwork,jdbcType=VARCHAR},
+      #{memo,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR},
+      #{pkBilltype,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkHiOrg,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR},
+      #{transtype,jdbcType=VARCHAR}, #{transtypeid,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+      #{vattachment,jdbcType=VARCHAR}, #{issyncglbdef11,jdbcType=VARCHAR}, #{vleaderposition,jdbcType=VARCHAR},
+      #{vdutydept,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiEntryapply">
+    insert into LDAPM_MPW_HI_ENTRYAPPLY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkEntryapply != null">
+        PK_ENTRYAPPLY,
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE,
+      </if>
+      <if test="approveNote != null">
+        APPROVE_NOTE,
+      </if>
+      <if test="approveState != null">
+        APPROVE_STATE,
+      </if>
+      <if test="approveTime != null">
+        APPROVE_TIME,
+      </if>
+      <if test="approver != null">
+        APPROVER,
+      </if>
+      <if test="billCode != null">
+        BILL_CODE,
+      </if>
+      <if test="billmaker != null">
+        BILLMAKER,
+      </if>
+      <if test="businessType != null">
+        BUSINESS_TYPE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="issyncwork != null">
+        ISSYNCWORK,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkBilltype != null">
+        PK_BILLTYPE,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkHiOrg != null">
+        PK_HI_ORG,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="transtype != null">
+        TRANSTYPE,
+      </if>
+      <if test="transtypeid != null">
+        TRANSTYPEID,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="vattachment != null">
+        VATTACHMENT,
+      </if>
+      <if test="issyncglbdef11 != null">
+        ISSYNCGLBDEF11,
+      </if>
+      <if test="vleaderposition != null">
+        VLEADERPOSITION,
+      </if>
+      <if test="vdutydept != null">
+        VDUTYDEPT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkEntryapply != null">
+        #{pkEntryapply,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=VARCHAR},
+      </if>
+      <if test="approveNote != null">
+        #{approveNote,jdbcType=VARCHAR},
+      </if>
+      <if test="approveState != null">
+        #{approveState,jdbcType=DECIMAL},
+      </if>
+      <if test="approveTime != null">
+        #{approveTime,jdbcType=VARCHAR},
+      </if>
+      <if test="approver != null">
+        #{approver,jdbcType=VARCHAR},
+      </if>
+      <if test="billCode != null">
+        #{billCode,jdbcType=VARCHAR},
+      </if>
+      <if test="billmaker != null">
+        #{billmaker,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="issyncwork != null">
+        #{issyncwork,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBilltype != null">
+        #{pkBilltype,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHiOrg != null">
+        #{pkHiOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="transtype != null">
+        #{transtype,jdbcType=VARCHAR},
+      </if>
+      <if test="transtypeid != null">
+        #{transtypeid,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="vattachment != null">
+        #{vattachment,jdbcType=VARCHAR},
+      </if>
+      <if test="issyncglbdef11 != null">
+        #{issyncglbdef11,jdbcType=VARCHAR},
+      </if>
+      <if test="vleaderposition != null">
+        #{vleaderposition,jdbcType=VARCHAR},
+      </if>
+      <if test="vdutydept != null">
+        #{vdutydept,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

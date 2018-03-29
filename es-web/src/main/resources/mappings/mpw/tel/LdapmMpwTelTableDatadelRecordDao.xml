@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.tel.dao.LdapmMpwTelTableDatadelRecordDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwTelTableDatadelRecord">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="TABLE_CODE" jdbcType="VARCHAR" property="tableCode" />
+    <result column="TABLE_PK" jdbcType="VARCHAR" property="tablePk" />
+    <result column="DELETE_TS" jdbcType="VARCHAR" property="deleteTs" />
+    <result column="DEL_FLAG" jdbcType="CHAR" property="delFlag" />
+    <result column="PK_TABLE_DELETE" jdbcType="VARCHAR" property="pkTableDelete" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_TEL_DATADEL_RECORD (MONTH_ID, UNIT_ID, TABLE_CODE,
+    TABLE_PK, DELETE_TS, DEL_FLAG,
+    PK_TABLE_DELETE, PK_ORG)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.tableCode,jdbcType=VARCHAR},
+      #{item.tablePk,jdbcType=VARCHAR}, #{item.deleteTs,jdbcType=VARCHAR}, #{item.delFlag,jdbcType=CHAR},
+      #{item.pkTableDelete,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="LdapmMpwTelTableDatadelRecord">
+    insert into LDAPM_MPW_TEL_DATADEL_RECORD (MONTH_ID, UNIT_ID, TABLE_CODE,
+      TABLE_PK, DELETE_TS, DEL_FLAG,
+      PK_TABLE_DELETE, PK_ORG)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{tableCode,jdbcType=VARCHAR},
+      #{tablePk,jdbcType=VARCHAR}, #{deleteTs,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR},
+      #{pkTableDelete,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwTelTableDatadelRecord">
+    insert into LDAPM_MPW_TEL_DATADEL_RECORD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="tableCode != null">
+        TABLE_CODE,
+      </if>
+      <if test="tablePk != null">
+        TABLE_PK,
+      </if>
+      <if test="deleteTs != null">
+        DELETE_TS,
+      </if>
+      <if test="delFlag != null">
+        DEL_FLAG,
+      </if>
+      <if test="pkTableDelete != null">
+        PK_TABLE_DELETE,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="tableCode != null">
+        #{tableCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tablePk != null">
+        #{tablePk,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTs != null">
+        #{deleteTs,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="pkTableDelete != null">
+        #{pkTableDelete,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

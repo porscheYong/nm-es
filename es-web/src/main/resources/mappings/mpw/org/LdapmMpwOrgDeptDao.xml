@@ -1,0 +1,791 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.org.dao.LdapmMpwOrgDeptDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwOrgDept">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_DEPT" jdbcType="VARCHAR" property="pkDept" />
+    <result column="SHORTNAME" jdbcType="VARCHAR" property="shortname" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="CREATEDATE" jdbcType="VARCHAR" property="createdate" />
+    <result column="PRINCIPAL" jdbcType="VARCHAR" property="principal" />
+    <result column="PK_FATHERORG" jdbcType="VARCHAR" property="pkFatherorg" />
+    <result column="DEPTTYPE" jdbcType="DECIMAL" property="depttype" />
+    <result column="DISPLAYORDER" jdbcType="DECIMAL" property="displayorder" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="HRCANCELED" jdbcType="VARCHAR" property="hrcanceled" />
+    <result column="DEPTCANCELDATE" jdbcType="VARCHAR" property="deptcanceldate" />
+    <result column="DEPTDUTY" jdbcType="VARCHAR" property="deptduty" />
+    <result column="DEPTLEVEL" jdbcType="VARCHAR" property="deptlevel" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DATAORIGINFLAG" jdbcType="DECIMAL" property="dataoriginflag" />
+    <result column="DEF1" jdbcType="VARCHAR" property="def1" />
+    <result column="DEF10" jdbcType="VARCHAR" property="def10" />
+    <result column="DEF11" jdbcType="VARCHAR" property="def11" />
+    <result column="DEF12" jdbcType="VARCHAR" property="def12" />
+    <result column="DEF13" jdbcType="VARCHAR" property="def13" />
+    <result column="DEF14" jdbcType="VARCHAR" property="def14" />
+    <result column="DEF15" jdbcType="VARCHAR" property="def15" />
+    <result column="DEF16" jdbcType="VARCHAR" property="def16" />
+    <result column="DEF17" jdbcType="VARCHAR" property="def17" />
+    <result column="DEF18" jdbcType="VARCHAR" property="def18" />
+    <result column="DEF19" jdbcType="VARCHAR" property="def19" />
+    <result column="DEF2" jdbcType="VARCHAR" property="def2" />
+    <result column="DEF20" jdbcType="VARCHAR" property="def20" />
+    <result column="DEF3" jdbcType="VARCHAR" property="def3" />
+    <result column="DEF4" jdbcType="VARCHAR" property="def4" />
+    <result column="DEF5" jdbcType="VARCHAR" property="def5" />
+    <result column="DEF6" jdbcType="VARCHAR" property="def6" />
+    <result column="DEF7" jdbcType="VARCHAR" property="def7" />
+    <result column="DEF8" jdbcType="VARCHAR" property="def8" />
+    <result column="DEF9" jdbcType="VARCHAR" property="def9" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="INNERCODE" jdbcType="VARCHAR" property="innercode" />
+    <result column="ISLASTVERSION" jdbcType="VARCHAR" property="islastversion" />
+    <result column="ISRETAIL" jdbcType="VARCHAR" property="isretail" />
+    <result column="MNECODE" jdbcType="VARCHAR" property="mnecode" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="NAME2" jdbcType="VARCHAR" property="name2" />
+    <result column="NAME3" jdbcType="VARCHAR" property="name3" />
+    <result column="NAME4" jdbcType="VARCHAR" property="name4" />
+    <result column="NAME5" jdbcType="VARCHAR" property="name5" />
+    <result column="NAME6" jdbcType="VARCHAR" property="name6" />
+    <result column="ORGTYPE13" jdbcType="VARCHAR" property="orgtype13" />
+    <result column="ORGTYPE17" jdbcType="VARCHAR" property="orgtype17" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_VID" jdbcType="VARCHAR" property="pkVid" />
+    <result column="RESPOSITION" jdbcType="VARCHAR" property="resposition" />
+    <result column="SHORTNAME2" jdbcType="VARCHAR" property="shortname2" />
+    <result column="SHORTNAME3" jdbcType="VARCHAR" property="shortname3" />
+    <result column="SHORTNAME4" jdbcType="VARCHAR" property="shortname4" />
+    <result column="SHORTNAME5" jdbcType="VARCHAR" property="shortname5" />
+    <result column="SHORTNAME6" jdbcType="VARCHAR" property="shortname6" />
+    <result column="TEL" jdbcType="VARCHAR" property="tel" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="VENDDATE" jdbcType="VARCHAR" property="venddate" />
+    <result column="VNAME" jdbcType="VARCHAR" property="vname" />
+    <result column="VNAME2" jdbcType="VARCHAR" property="vname2" />
+    <result column="VNAME3" jdbcType="VARCHAR" property="vname3" />
+    <result column="VNAME4" jdbcType="VARCHAR" property="vname4" />
+    <result column="VNAME5" jdbcType="VARCHAR" property="vname5" />
+    <result column="VNAME6" jdbcType="VARCHAR" property="vname6" />
+    <result column="VNO" jdbcType="VARCHAR" property="vno" />
+    <result column="VSTARTDATE" jdbcType="VARCHAR" property="vstartdate" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="DEPTLEVE" jdbcType="VARCHAR" property="deptleve" />
+    <result column="GLBDEF10" jdbcType="VARCHAR" property="glbdef10" />
+    <result column="GLBDEF11" jdbcType="VARCHAR" property="glbdef11" />
+    <result column="GLBDEF12" jdbcType="VARCHAR" property="glbdef12" />
+    <result column="GLBDEF13" jdbcType="VARCHAR" property="glbdef13" />
+    <result column="GLBDEF14" jdbcType="VARCHAR" property="glbdef14" />
+    <result column="GLBDEF15" jdbcType="VARCHAR" property="glbdef15" />
+    <result column="GLBDEF16" jdbcType="VARCHAR" property="glbdef16" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_ORG_DEPT (MONTH_ID, UNIT_ID, PK_DEPT,
+    SHORTNAME, CODE, CREATEDATE,
+    PRINCIPAL, PK_FATHERORG, DEPTTYPE,
+    DISPLAYORDER, NAME, HRCANCELED,
+    DEPTCANCELDATE, DEPTDUTY, DEPTLEVEL,
+    MEMO, ADDRESS, CREATIONTIME,
+    CREATOR, DATAORIGINFLAG, DEF1,
+    DEF10, DEF11, DEF12,
+    DEF13, DEF14, DEF15,
+    DEF16, DEF17, DEF18,
+    DEF19, DEF2, DEF20,
+    DEF3, DEF4, DEF5, DEF6,
+    DEF7, DEF8, DEF9, DR,
+    ENABLESTATE, INNERCODE, ISLASTVERSION,
+    ISRETAIL, MNECODE, MODIFIEDTIME,
+    MODIFIER, NAME2, NAME3,
+    NAME4, NAME5, NAME6,
+    ORGTYPE13, ORGTYPE17, PK_GROUP,
+    PK_ORG, PK_VID, RESPOSITION,
+    SHORTNAME2, SHORTNAME3, SHORTNAME4,
+    SHORTNAME5, SHORTNAME6, TEL,
+    TS, VENDDATE, VNAME,
+    VNAME2, VNAME3, VNAME4,
+    VNAME5, VNAME6, VNO,
+    VSTARTDATE, GLBDEF1, GLBDEF2,
+    GLBDEF3, GLBDEF4, GLBDEF5,
+    GLBDEF6, GLBDEF7, GLBDEF8,
+    GLBDEF9, DEPTLEVE, GLBDEF10,
+    GLBDEF11, GLBDEF12, GLBDEF13,
+    GLBDEF14, GLBDEF15, GLBDEF16
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkDept,jdbcType=VARCHAR},
+      #{item.shortname,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.createdate,jdbcType=VARCHAR},
+      #{item.principal,jdbcType=VARCHAR}, #{item.pkFatherorg,jdbcType=VARCHAR}, #{item.depttype,jdbcType=DECIMAL},
+      #{item.displayorder,jdbcType=DECIMAL}, #{item.name,jdbcType=VARCHAR}, #{item.hrcanceled,jdbcType=VARCHAR},
+      #{item.deptcanceldate,jdbcType=VARCHAR}, #{item.deptduty,jdbcType=VARCHAR}, #{item.deptlevel,jdbcType=VARCHAR},
+      #{item.memo,jdbcType=VARCHAR}, #{item.address,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR},
+      #{item.creator,jdbcType=VARCHAR}, #{item.dataoriginflag,jdbcType=DECIMAL}, #{item.def1,jdbcType=VARCHAR},
+      #{item.def10,jdbcType=VARCHAR}, #{item.def11,jdbcType=VARCHAR}, #{item.def12,jdbcType=VARCHAR},
+      #{item.def13,jdbcType=VARCHAR}, #{item.def14,jdbcType=VARCHAR}, #{item.def15,jdbcType=VARCHAR},
+      #{item.def16,jdbcType=VARCHAR}, #{item.def17,jdbcType=VARCHAR}, #{item.def18,jdbcType=VARCHAR},
+      #{item.def19,jdbcType=VARCHAR}, #{item.def2,jdbcType=VARCHAR}, #{item.def20,jdbcType=VARCHAR},
+      #{item.def3,jdbcType=VARCHAR}, #{item.def4,jdbcType=VARCHAR}, #{item.def5,jdbcType=VARCHAR}, #{item.def6,jdbcType=VARCHAR},
+      #{item.def7,jdbcType=VARCHAR}, #{item.def8,jdbcType=VARCHAR}, #{item.def9,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL},
+      #{item.enablestate,jdbcType=DECIMAL}, #{item.innercode,jdbcType=VARCHAR}, #{item.islastversion,jdbcType=VARCHAR},
+      #{item.isretail,jdbcType=VARCHAR}, #{item.mnecode,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.modifier,jdbcType=VARCHAR}, #{item.name2,jdbcType=VARCHAR}, #{item.name3,jdbcType=VARCHAR},
+      #{item.name4,jdbcType=VARCHAR}, #{item.name5,jdbcType=VARCHAR}, #{item.name6,jdbcType=VARCHAR},
+      #{item.orgtype13,jdbcType=VARCHAR}, #{item.orgtype17,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkVid,jdbcType=VARCHAR}, #{item.resposition,jdbcType=VARCHAR},
+      #{item.shortname2,jdbcType=VARCHAR}, #{item.shortname3,jdbcType=VARCHAR}, #{item.shortname4,jdbcType=VARCHAR},
+      #{item.shortname5,jdbcType=VARCHAR}, #{item.shortname6,jdbcType=VARCHAR}, #{item.tel,jdbcType=VARCHAR},
+      #{item.ts,jdbcType=VARCHAR}, #{item.venddate,jdbcType=VARCHAR}, #{item.vname,jdbcType=VARCHAR},
+      #{item.vname2,jdbcType=VARCHAR}, #{item.vname3,jdbcType=VARCHAR}, #{item.vname4,jdbcType=VARCHAR},
+      #{item.vname5,jdbcType=VARCHAR}, #{item.vname6,jdbcType=VARCHAR}, #{item.vno,jdbcType=VARCHAR},
+      #{item.vstartdate,jdbcType=VARCHAR}, #{item.glbdef1,jdbcType=VARCHAR}, #{item.glbdef2,jdbcType=VARCHAR},
+      #{item.glbdef3,jdbcType=VARCHAR}, #{item.glbdef4,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR},
+      #{item.glbdef6,jdbcType=VARCHAR}, #{item.glbdef7,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR},
+      #{item.glbdef9,jdbcType=VARCHAR}, #{item.deptleve,jdbcType=VARCHAR}, #{item.glbdef10,jdbcType=VARCHAR},
+      #{item.glbdef11,jdbcType=VARCHAR}, #{item.glbdef12,jdbcType=VARCHAR}, #{item.glbdef13,jdbcType=VARCHAR},
+      #{item.glbdef14,jdbcType=VARCHAR}, #{item.glbdef15,jdbcType=VARCHAR}, #{item.glbdef16,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwOrgDept">
+    insert into LDAPM_MPW_ORG_DEPT (MONTH_ID, UNIT_ID, PK_DEPT, 
+      SHORTNAME, CODE, CREATEDATE, 
+      PRINCIPAL, PK_FATHERORG, DEPTTYPE, 
+      DISPLAYORDER, NAME, HRCANCELED, 
+      DEPTCANCELDATE, DEPTDUTY, DEPTLEVEL, 
+      MEMO, ADDRESS, CREATIONTIME, 
+      CREATOR, DATAORIGINFLAG, DEF1, 
+      DEF10, DEF11, DEF12, 
+      DEF13, DEF14, DEF15, 
+      DEF16, DEF17, DEF18, 
+      DEF19, DEF2, DEF20, 
+      DEF3, DEF4, DEF5, DEF6, 
+      DEF7, DEF8, DEF9, DR, 
+      ENABLESTATE, INNERCODE, ISLASTVERSION, 
+      ISRETAIL, MNECODE, MODIFIEDTIME, 
+      MODIFIER, NAME2, NAME3, 
+      NAME4, NAME5, NAME6, 
+      ORGTYPE13, ORGTYPE17, PK_GROUP, 
+      PK_ORG, PK_VID, RESPOSITION, 
+      SHORTNAME2, SHORTNAME3, SHORTNAME4, 
+      SHORTNAME5, SHORTNAME6, TEL, 
+      TS, VENDDATE, VNAME, 
+      VNAME2, VNAME3, VNAME4, 
+      VNAME5, VNAME6, VNO, 
+      VSTARTDATE, GLBDEF1, GLBDEF2, 
+      GLBDEF3, GLBDEF4, GLBDEF5, 
+      GLBDEF6, GLBDEF7, GLBDEF8, 
+      GLBDEF9, DEPTLEVE, GLBDEF10, 
+      GLBDEF11, GLBDEF12, GLBDEF13, 
+      GLBDEF14, GLBDEF15, GLBDEF16
+      )
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, 
+      #{shortname,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{createdate,jdbcType=VARCHAR}, 
+      #{principal,jdbcType=VARCHAR}, #{pkFatherorg,jdbcType=VARCHAR}, #{depttype,jdbcType=DECIMAL}, 
+      #{displayorder,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{hrcanceled,jdbcType=VARCHAR}, 
+      #{deptcanceldate,jdbcType=VARCHAR}, #{deptduty,jdbcType=VARCHAR}, #{deptlevel,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
+      #{creator,jdbcType=VARCHAR}, #{dataoriginflag,jdbcType=DECIMAL}, #{def1,jdbcType=VARCHAR}, 
+      #{def10,jdbcType=VARCHAR}, #{def11,jdbcType=VARCHAR}, #{def12,jdbcType=VARCHAR}, 
+      #{def13,jdbcType=VARCHAR}, #{def14,jdbcType=VARCHAR}, #{def15,jdbcType=VARCHAR}, 
+      #{def16,jdbcType=VARCHAR}, #{def17,jdbcType=VARCHAR}, #{def18,jdbcType=VARCHAR}, 
+      #{def19,jdbcType=VARCHAR}, #{def2,jdbcType=VARCHAR}, #{def20,jdbcType=VARCHAR}, 
+      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{def5,jdbcType=VARCHAR}, #{def6,jdbcType=VARCHAR}, 
+      #{def7,jdbcType=VARCHAR}, #{def8,jdbcType=VARCHAR}, #{def9,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, 
+      #{enablestate,jdbcType=DECIMAL}, #{innercode,jdbcType=VARCHAR}, #{islastversion,jdbcType=VARCHAR}, 
+      #{isretail,jdbcType=VARCHAR}, #{mnecode,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, 
+      #{modifier,jdbcType=VARCHAR}, #{name2,jdbcType=VARCHAR}, #{name3,jdbcType=VARCHAR}, 
+      #{name4,jdbcType=VARCHAR}, #{name5,jdbcType=VARCHAR}, #{name6,jdbcType=VARCHAR}, 
+      #{orgtype13,jdbcType=VARCHAR}, #{orgtype17,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{pkVid,jdbcType=VARCHAR}, #{resposition,jdbcType=VARCHAR}, 
+      #{shortname2,jdbcType=VARCHAR}, #{shortname3,jdbcType=VARCHAR}, #{shortname4,jdbcType=VARCHAR}, 
+      #{shortname5,jdbcType=VARCHAR}, #{shortname6,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=VARCHAR}, #{venddate,jdbcType=VARCHAR}, #{vname,jdbcType=VARCHAR}, 
+      #{vname2,jdbcType=VARCHAR}, #{vname3,jdbcType=VARCHAR}, #{vname4,jdbcType=VARCHAR}, 
+      #{vname5,jdbcType=VARCHAR}, #{vname6,jdbcType=VARCHAR}, #{vno,jdbcType=VARCHAR}, 
+      #{vstartdate,jdbcType=VARCHAR}, #{glbdef1,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, 
+      #{glbdef3,jdbcType=VARCHAR}, #{glbdef4,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, 
+      #{glbdef6,jdbcType=VARCHAR}, #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, 
+      #{glbdef9,jdbcType=VARCHAR}, #{deptleve,jdbcType=VARCHAR}, #{glbdef10,jdbcType=VARCHAR}, 
+      #{glbdef11,jdbcType=VARCHAR}, #{glbdef12,jdbcType=VARCHAR}, #{glbdef13,jdbcType=VARCHAR}, 
+      #{glbdef14,jdbcType=VARCHAR}, #{glbdef15,jdbcType=VARCHAR}, #{glbdef16,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwOrgDept">
+    insert into LDAPM_MPW_ORG_DEPT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkDept != null">
+        PK_DEPT,
+      </if>
+      <if test="shortname != null">
+        SHORTNAME,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="createdate != null">
+        CREATEDATE,
+      </if>
+      <if test="principal != null">
+        PRINCIPAL,
+      </if>
+      <if test="pkFatherorg != null">
+        PK_FATHERORG,
+      </if>
+      <if test="depttype != null">
+        DEPTTYPE,
+      </if>
+      <if test="displayorder != null">
+        DISPLAYORDER,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="hrcanceled != null">
+        HRCANCELED,
+      </if>
+      <if test="deptcanceldate != null">
+        DEPTCANCELDATE,
+      </if>
+      <if test="deptduty != null">
+        DEPTDUTY,
+      </if>
+      <if test="deptlevel != null">
+        DEPTLEVEL,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dataoriginflag != null">
+        DATAORIGINFLAG,
+      </if>
+      <if test="def1 != null">
+        DEF1,
+      </if>
+      <if test="def10 != null">
+        DEF10,
+      </if>
+      <if test="def11 != null">
+        DEF11,
+      </if>
+      <if test="def12 != null">
+        DEF12,
+      </if>
+      <if test="def13 != null">
+        DEF13,
+      </if>
+      <if test="def14 != null">
+        DEF14,
+      </if>
+      <if test="def15 != null">
+        DEF15,
+      </if>
+      <if test="def16 != null">
+        DEF16,
+      </if>
+      <if test="def17 != null">
+        DEF17,
+      </if>
+      <if test="def18 != null">
+        DEF18,
+      </if>
+      <if test="def19 != null">
+        DEF19,
+      </if>
+      <if test="def2 != null">
+        DEF2,
+      </if>
+      <if test="def20 != null">
+        DEF20,
+      </if>
+      <if test="def3 != null">
+        DEF3,
+      </if>
+      <if test="def4 != null">
+        DEF4,
+      </if>
+      <if test="def5 != null">
+        DEF5,
+      </if>
+      <if test="def6 != null">
+        DEF6,
+      </if>
+      <if test="def7 != null">
+        DEF7,
+      </if>
+      <if test="def8 != null">
+        DEF8,
+      </if>
+      <if test="def9 != null">
+        DEF9,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="innercode != null">
+        INNERCODE,
+      </if>
+      <if test="islastversion != null">
+        ISLASTVERSION,
+      </if>
+      <if test="isretail != null">
+        ISRETAIL,
+      </if>
+      <if test="mnecode != null">
+        MNECODE,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="name2 != null">
+        NAME2,
+      </if>
+      <if test="name3 != null">
+        NAME3,
+      </if>
+      <if test="name4 != null">
+        NAME4,
+      </if>
+      <if test="name5 != null">
+        NAME5,
+      </if>
+      <if test="name6 != null">
+        NAME6,
+      </if>
+      <if test="orgtype13 != null">
+        ORGTYPE13,
+      </if>
+      <if test="orgtype17 != null">
+        ORGTYPE17,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkVid != null">
+        PK_VID,
+      </if>
+      <if test="resposition != null">
+        RESPOSITION,
+      </if>
+      <if test="shortname2 != null">
+        SHORTNAME2,
+      </if>
+      <if test="shortname3 != null">
+        SHORTNAME3,
+      </if>
+      <if test="shortname4 != null">
+        SHORTNAME4,
+      </if>
+      <if test="shortname5 != null">
+        SHORTNAME5,
+      </if>
+      <if test="shortname6 != null">
+        SHORTNAME6,
+      </if>
+      <if test="tel != null">
+        TEL,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="venddate != null">
+        VENDDATE,
+      </if>
+      <if test="vname != null">
+        VNAME,
+      </if>
+      <if test="vname2 != null">
+        VNAME2,
+      </if>
+      <if test="vname3 != null">
+        VNAME3,
+      </if>
+      <if test="vname4 != null">
+        VNAME4,
+      </if>
+      <if test="vname5 != null">
+        VNAME5,
+      </if>
+      <if test="vname6 != null">
+        VNAME6,
+      </if>
+      <if test="vno != null">
+        VNO,
+      </if>
+      <if test="vstartdate != null">
+        VSTARTDATE,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="deptleve != null">
+        DEPTLEVE,
+      </if>
+      <if test="glbdef10 != null">
+        GLBDEF10,
+      </if>
+      <if test="glbdef11 != null">
+        GLBDEF11,
+      </if>
+      <if test="glbdef12 != null">
+        GLBDEF12,
+      </if>
+      <if test="glbdef13 != null">
+        GLBDEF13,
+      </if>
+      <if test="glbdef14 != null">
+        GLBDEF14,
+      </if>
+      <if test="glbdef15 != null">
+        GLBDEF15,
+      </if>
+      <if test="glbdef16 != null">
+        GLBDEF16,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDept != null">
+        #{pkDept,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname != null">
+        #{shortname,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null">
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="pkFatherorg != null">
+        #{pkFatherorg,jdbcType=VARCHAR},
+      </if>
+      <if test="depttype != null">
+        #{depttype,jdbcType=DECIMAL},
+      </if>
+      <if test="displayorder != null">
+        #{displayorder,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="hrcanceled != null">
+        #{hrcanceled,jdbcType=VARCHAR},
+      </if>
+      <if test="deptcanceldate != null">
+        #{deptcanceldate,jdbcType=VARCHAR},
+      </if>
+      <if test="deptduty != null">
+        #{deptduty,jdbcType=VARCHAR},
+      </if>
+      <if test="deptlevel != null">
+        #{deptlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dataoriginflag != null">
+        #{dataoriginflag,jdbcType=DECIMAL},
+      </if>
+      <if test="def1 != null">
+        #{def1,jdbcType=VARCHAR},
+      </if>
+      <if test="def10 != null">
+        #{def10,jdbcType=VARCHAR},
+      </if>
+      <if test="def11 != null">
+        #{def11,jdbcType=VARCHAR},
+      </if>
+      <if test="def12 != null">
+        #{def12,jdbcType=VARCHAR},
+      </if>
+      <if test="def13 != null">
+        #{def13,jdbcType=VARCHAR},
+      </if>
+      <if test="def14 != null">
+        #{def14,jdbcType=VARCHAR},
+      </if>
+      <if test="def15 != null">
+        #{def15,jdbcType=VARCHAR},
+      </if>
+      <if test="def16 != null">
+        #{def16,jdbcType=VARCHAR},
+      </if>
+      <if test="def17 != null">
+        #{def17,jdbcType=VARCHAR},
+      </if>
+      <if test="def18 != null">
+        #{def18,jdbcType=VARCHAR},
+      </if>
+      <if test="def19 != null">
+        #{def19,jdbcType=VARCHAR},
+      </if>
+      <if test="def2 != null">
+        #{def2,jdbcType=VARCHAR},
+      </if>
+      <if test="def20 != null">
+        #{def20,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+      <if test="def5 != null">
+        #{def5,jdbcType=VARCHAR},
+      </if>
+      <if test="def6 != null">
+        #{def6,jdbcType=VARCHAR},
+      </if>
+      <if test="def7 != null">
+        #{def7,jdbcType=VARCHAR},
+      </if>
+      <if test="def8 != null">
+        #{def8,jdbcType=VARCHAR},
+      </if>
+      <if test="def9 != null">
+        #{def9,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="innercode != null">
+        #{innercode,jdbcType=VARCHAR},
+      </if>
+      <if test="islastversion != null">
+        #{islastversion,jdbcType=VARCHAR},
+      </if>
+      <if test="isretail != null">
+        #{isretail,jdbcType=VARCHAR},
+      </if>
+      <if test="mnecode != null">
+        #{mnecode,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="name2 != null">
+        #{name2,jdbcType=VARCHAR},
+      </if>
+      <if test="name3 != null">
+        #{name3,jdbcType=VARCHAR},
+      </if>
+      <if test="name4 != null">
+        #{name4,jdbcType=VARCHAR},
+      </if>
+      <if test="name5 != null">
+        #{name5,jdbcType=VARCHAR},
+      </if>
+      <if test="name6 != null">
+        #{name6,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype13 != null">
+        #{orgtype13,jdbcType=VARCHAR},
+      </if>
+      <if test="orgtype17 != null">
+        #{orgtype17,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkVid != null">
+        #{pkVid,jdbcType=VARCHAR},
+      </if>
+      <if test="resposition != null">
+        #{resposition,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname2 != null">
+        #{shortname2,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname3 != null">
+        #{shortname3,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname4 != null">
+        #{shortname4,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname5 != null">
+        #{shortname5,jdbcType=VARCHAR},
+      </if>
+      <if test="shortname6 != null">
+        #{shortname6,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="venddate != null">
+        #{venddate,jdbcType=VARCHAR},
+      </if>
+      <if test="vname != null">
+        #{vname,jdbcType=VARCHAR},
+      </if>
+      <if test="vname2 != null">
+        #{vname2,jdbcType=VARCHAR},
+      </if>
+      <if test="vname3 != null">
+        #{vname3,jdbcType=VARCHAR},
+      </if>
+      <if test="vname4 != null">
+        #{vname4,jdbcType=VARCHAR},
+      </if>
+      <if test="vname5 != null">
+        #{vname5,jdbcType=VARCHAR},
+      </if>
+      <if test="vname6 != null">
+        #{vname6,jdbcType=VARCHAR},
+      </if>
+      <if test="vno != null">
+        #{vno,jdbcType=VARCHAR},
+      </if>
+      <if test="vstartdate != null">
+        #{vstartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="deptleve != null">
+        #{deptleve,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef10 != null">
+        #{glbdef10,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef11 != null">
+        #{glbdef11,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef12 != null">
+        #{glbdef12,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef13 != null">
+        #{glbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef14 != null">
+        #{glbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef15 != null">
+        #{glbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef16 != null">
+        #{glbdef16,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

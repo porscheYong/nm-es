@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.bm.dao.LdapmMpwBmPeriodDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwBmPeriod">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_BM_PERIOD" jdbcType="VARCHAR" property="pkBmPeriod" />
+    <result column="PK_PERIODSCHEME" jdbcType="VARCHAR" property="pkPeriodscheme" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="PERIOD" jdbcType="VARCHAR" property="period" />
+    <result column="CSTARTDATE" jdbcType="VARCHAR" property="cstartdate" />
+    <result column="CENDDATE" jdbcType="VARCHAR" property="cenddate" />
+    <result column="CACCYEAR" jdbcType="VARCHAR" property="caccyear" />
+    <result column="CACCPERIOD" jdbcType="VARCHAR" property="caccperiod" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_BM_PERIOD (MONTH_ID, UNIT_ID, PK_BM_PERIOD,
+    PK_PERIODSCHEME, YEAR, PERIOD,
+    CSTARTDATE, CENDDATE, CACCYEAR,
+    CACCPERIOD, TS, DR)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkBmPeriod,jdbcType=VARCHAR},
+      #{item.pkPeriodscheme,jdbcType=VARCHAR}, #{item.year,jdbcType=VARCHAR}, #{item.period,jdbcType=VARCHAR},
+      #{item.cstartdate,jdbcType=VARCHAR}, #{item.cenddate,jdbcType=VARCHAR}, #{item.caccyear,jdbcType=VARCHAR},
+      #{item.caccperiod,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwBmPeriod">
+    insert into LDAPM_MPW_BM_PERIOD (MONTH_ID, UNIT_ID, PK_BM_PERIOD, 
+      PK_PERIODSCHEME, YEAR, PERIOD, 
+      CSTARTDATE, CENDDATE, CACCYEAR, 
+      CACCPERIOD, TS, DR)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkBmPeriod,jdbcType=VARCHAR}, 
+      #{pkPeriodscheme,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, 
+      #{cstartdate,jdbcType=VARCHAR}, #{cenddate,jdbcType=VARCHAR}, #{caccyear,jdbcType=VARCHAR}, 
+      #{caccperiod,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwBmPeriod">
+    insert into LDAPM_MPW_BM_PERIOD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkBmPeriod != null">
+        PK_BM_PERIOD,
+      </if>
+      <if test="pkPeriodscheme != null">
+        PK_PERIODSCHEME,
+      </if>
+      <if test="year != null">
+        YEAR,
+      </if>
+      <if test="period != null">
+        PERIOD,
+      </if>
+      <if test="cstartdate != null">
+        CSTARTDATE,
+      </if>
+      <if test="cenddate != null">
+        CENDDATE,
+      </if>
+      <if test="caccyear != null">
+        CACCYEAR,
+      </if>
+      <if test="caccperiod != null">
+        CACCPERIOD,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBmPeriod != null">
+        #{pkBmPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPeriodscheme != null">
+        #{pkPeriodscheme,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null">
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="cstartdate != null">
+        #{cstartdate,jdbcType=VARCHAR},
+      </if>
+      <if test="cenddate != null">
+        #{cenddate,jdbcType=VARCHAR},
+      </if>
+      <if test="caccyear != null">
+        #{caccyear,jdbcType=VARCHAR},
+      </if>
+      <if test="caccperiod != null">
+        #{caccperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

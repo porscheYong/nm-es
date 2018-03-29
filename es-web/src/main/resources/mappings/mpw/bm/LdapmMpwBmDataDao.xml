@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.bm.dao.LdapmMpwBmDataDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwBmData">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_BM_DATA" jdbcType="VARCHAR" property="pkBmData" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="CPERIOD" jdbcType="VARCHAR" property="cperiod" />
+    <result column="CYEAR" jdbcType="VARCHAR" property="cyear" />
+    <result column="DBEGINDATE" jdbcType="VARCHAR" property="dbegindate" />
+    <result column="F_1" jdbcType="DECIMAL" property="f1" />
+    <result column="F_10" jdbcType="DECIMAL" property="f10" />
+    <result column="F_11" jdbcType="DECIMAL" property="f11" />
+    <result column="F_12" jdbcType="DECIMAL" property="f12" />
+    <result column="F_13" jdbcType="DECIMAL" property="f13" />
+    <result column="F_14" jdbcType="DECIMAL" property="f14" />
+    <result column="F_15" jdbcType="DECIMAL" property="f15" />
+    <result column="F_16" jdbcType="DECIMAL" property="f16" />
+    <result column="F_17" jdbcType="DECIMAL" property="f17" />
+    <result column="F_2" jdbcType="DECIMAL" property="f2" />
+    <result column="F_3" jdbcType="DECIMAL" property="f3" />
+    <result column="F_4" jdbcType="DECIMAL" property="f4" />
+    <result column="F_5" jdbcType="DECIMAL" property="f5" />
+    <result column="F_6" jdbcType="DECIMAL" property="f6" />
+    <result column="F_7" jdbcType="DECIMAL" property="f7" />
+    <result column="F_8" jdbcType="DECIMAL" property="f8" />
+    <result column="F_9" jdbcType="DECIMAL" property="f9" />
+    <result column="PK_BM_CLASS" jdbcType="VARCHAR" property="pkBmClass" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="ACCOUNTSTATE" jdbcType="DECIMAL" property="accountstate" />
+    <result column="BMACCOUNTNO" jdbcType="VARCHAR" property="bmaccountno" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="CACULATEFLAG" jdbcType="VARCHAR" property="caculateflag" />
+    <result column="CHECKFLAG" jdbcType="VARCHAR" property="checkflag" />
+    <result column="ACCOUNTTYPE" jdbcType="VARCHAR" property="accounttype" />
+    <result column="ASSGID" jdbcType="DECIMAL" property="assgid" />
+    <result column="STAFF_UNIT" jdbcType="VARCHAR" property="staffUnit" />
+    <result column="C_1" jdbcType="VARCHAR" property="c1" />
+    <result column="C_10" jdbcType="VARCHAR" property="c10" />
+    <result column="C_11" jdbcType="VARCHAR" property="c11" />
+    <result column="C_12" jdbcType="VARCHAR" property="c12" />
+    <result column="C_13" jdbcType="VARCHAR" property="c13" />
+    <result column="C_14" jdbcType="VARCHAR" property="c14" />
+    <result column="C_15" jdbcType="VARCHAR" property="c15" />
+    <result column="C_16" jdbcType="VARCHAR" property="c16" />
+    <result column="C_17" jdbcType="VARCHAR" property="c17" />
+    <result column="C_18" jdbcType="VARCHAR" property="c18" />
+    <result column="C_19" jdbcType="VARCHAR" property="c19" />
+    <result column="C_2" jdbcType="VARCHAR" property="c2" />
+    <result column="C_20" jdbcType="VARCHAR" property="c20" />
+    <result column="C_3" jdbcType="VARCHAR" property="c3" />
+    <result column="C_4" jdbcType="VARCHAR" property="c4" />
+    <result column="C_5" jdbcType="VARCHAR" property="c5" />
+    <result column="C_6" jdbcType="VARCHAR" property="c6" />
+    <result column="C_7" jdbcType="VARCHAR" property="c7" />
+    <result column="C_8" jdbcType="VARCHAR" property="c8" />
+    <result column="C_9" jdbcType="VARCHAR" property="c9" />
+    <result column="D_1" jdbcType="VARCHAR" property="d1" />
+    <result column="D_10" jdbcType="VARCHAR" property="d10" />
+    <result column="D_2" jdbcType="VARCHAR" property="d2" />
+    <result column="D_3" jdbcType="VARCHAR" property="d3" />
+    <result column="D_4" jdbcType="VARCHAR" property="d4" />
+    <result column="D_5" jdbcType="VARCHAR" property="d5" />
+    <result column="D_6" jdbcType="VARCHAR" property="d6" />
+    <result column="D_7" jdbcType="VARCHAR" property="d7" />
+    <result column="D_8" jdbcType="VARCHAR" property="d8" />
+    <result column="D_9" jdbcType="VARCHAR" property="d9" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="F_100" jdbcType="DECIMAL" property="f100" />
+    <result column="F_18" jdbcType="DECIMAL" property="f18" />
+    <result column="F_19" jdbcType="DECIMAL" property="f19" />
+    <result column="F_20" jdbcType="DECIMAL" property="f20" />
+    <result column="F_21" jdbcType="DECIMAL" property="f21" />
+    <result column="F_22" jdbcType="DECIMAL" property="f22" />
+    <result column="F_23" jdbcType="DECIMAL" property="f23" />
+    <result column="F_24" jdbcType="DECIMAL" property="f24" />
+    <result column="F_25" jdbcType="DECIMAL" property="f25" />
+    <result column="F_26" jdbcType="DECIMAL" property="f26" />
+    <result column="F_27" jdbcType="DECIMAL" property="f27" />
+    <result column="F_28" jdbcType="DECIMAL" property="f28" />
+    <result column="F_29" jdbcType="DECIMAL" property="f29" />
+    <result column="F_30" jdbcType="DECIMAL" property="f30" />
+    <result column="F_31" jdbcType="DECIMAL" property="f31" />
+    <result column="F_32" jdbcType="DECIMAL" property="f32" />
+    <result column="F_33" jdbcType="DECIMAL" property="f33" />
+    <result column="F_34" jdbcType="DECIMAL" property="f34" />
+    <result column="F_35" jdbcType="DECIMAL" property="f35" />
+    <result column="F_36" jdbcType="DECIMAL" property="f36" />
+    <result column="F_37" jdbcType="DECIMAL" property="f37" />
+    <result column="F_38" jdbcType="DECIMAL" property="f38" />
+    <result column="F_39" jdbcType="DECIMAL" property="f39" />
+    <result column="F_40" jdbcType="DECIMAL" property="f40" />
+    <result column="F_41" jdbcType="DECIMAL" property="f41" />
+    <result column="F_42" jdbcType="DECIMAL" property="f42" />
+    <result column="F_43" jdbcType="DECIMAL" property="f43" />
+    <result column="F_44" jdbcType="DECIMAL" property="f44" />
+    <result column="F_45" jdbcType="DECIMAL" property="f45" />
+    <result column="F_46" jdbcType="DECIMAL" property="f46" />
+    <result column="F_47" jdbcType="DECIMAL" property="f47" />
+    <result column="F_48" jdbcType="DECIMAL" property="f48" />
+    <result column="F_49" jdbcType="DECIMAL" property="f49" />
+    <result column="F_50" jdbcType="DECIMAL" property="f50" />
+    <result column="F_51" jdbcType="DECIMAL" property="f51" />
+    <result column="F_52" jdbcType="DECIMAL" property="f52" />
+    <result column="F_53" jdbcType="DECIMAL" property="f53" />
+    <result column="F_54" jdbcType="DECIMAL" property="f54" />
+    <result column="F_55" jdbcType="DECIMAL" property="f55" />
+    <result column="F_56" jdbcType="DECIMAL" property="f56" />
+    <result column="F_57" jdbcType="DECIMAL" property="f57" />
+    <result column="F_58" jdbcType="DECIMAL" property="f58" />
+    <result column="F_59" jdbcType="DECIMAL" property="f59" />
+    <result column="F_60" jdbcType="DECIMAL" property="f60" />
+    <result column="F_61" jdbcType="DECIMAL" property="f61" />
+    <result column="F_62" jdbcType="DECIMAL" property="f62" />
+    <result column="F_63" jdbcType="DECIMAL" property="f63" />
+    <result column="F_64" jdbcType="DECIMAL" property="f64" />
+    <result column="F_65" jdbcType="DECIMAL" property="f65" />
+    <result column="F_66" jdbcType="DECIMAL" property="f66" />
+    <result column="F_67" jdbcType="DECIMAL" property="f67" />
+    <result column="F_68" jdbcType="DECIMAL" property="f68" />
+    <result column="F_69" jdbcType="DECIMAL" property="f69" />
+    <result column="F_70" jdbcType="DECIMAL" property="f70" />
+    <result column="F_71" jdbcType="DECIMAL" property="f71" />
+    <result column="F_72" jdbcType="DECIMAL" property="f72" />
+    <result column="F_73" jdbcType="DECIMAL" property="f73" />
+    <result column="F_74" jdbcType="DECIMAL" property="f74" />
+    <result column="F_75" jdbcType="DECIMAL" property="f75" />
+    <result column="F_76" jdbcType="DECIMAL" property="f76" />
+    <result column="F_77" jdbcType="DECIMAL" property="f77" />
+    <result column="F_78" jdbcType="DECIMAL" property="f78" />
+    <result column="F_79" jdbcType="DECIMAL" property="f79" />
+    <result column="F_80" jdbcType="DECIMAL" property="f80" />
+    <result column="F_81" jdbcType="DECIMAL" property="f81" />
+    <result column="F_82" jdbcType="DECIMAL" property="f82" />
+    <result column="F_83" jdbcType="DECIMAL" property="f83" />
+    <result column="F_84" jdbcType="DECIMAL" property="f84" />
+    <result column="F_85" jdbcType="DECIMAL" property="f85" />
+    <result column="F_86" jdbcType="DECIMAL" property="f86" />
+    <result column="F_87" jdbcType="DECIMAL" property="f87" />
+    <result column="F_88" jdbcType="DECIMAL" property="f88" />
+    <result column="F_89" jdbcType="DECIMAL" property="f89" />
+    <result column="F_90" jdbcType="DECIMAL" property="f90" />
+    <result column="FIPDEPTVID" jdbcType="VARCHAR" property="fipdeptvid" />
+    <result column="FIPORGVID" jdbcType="VARCHAR" property="fiporgvid" />
+    <result column="LIBDEPTVID" jdbcType="VARCHAR" property="libdeptvid" />
+    <result column="PAYLOCATION" jdbcType="VARCHAR" property="paylocation" />
+    <result column="PK_BMCLASSNO" jdbcType="VARCHAR" property="pkBmclassno" />
+    <result column="PK_FINANCEDEPT" jdbcType="VARCHAR" property="pkFinancedept" />
+    <result column="PK_FINANCEORG" jdbcType="VARCHAR" property="pkFinanceorg" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_LIABILITYDEPT" jdbcType="VARCHAR" property="pkLiabilitydept" />
+    <result column="PK_LIABILITYORG" jdbcType="VARCHAR" property="pkLiabilityorg" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="PK_SOURCECLS" jdbcType="VARCHAR" property="pkSourcecls" />
+    <result column="PK_TRANSFERORG" jdbcType="VARCHAR" property="pkTransferorg" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="VCANCELREASON" jdbcType="VARCHAR" property="vcancelreason" />
+    <result column="WORKDEPT" jdbcType="VARCHAR" property="workdept" />
+    <result column="WORKDEPTVID" jdbcType="VARCHAR" property="workdeptvid" />
+    <result column="WORKORG" jdbcType="VARCHAR" property="workorg" />
+    <result column="WORKORGVID" jdbcType="VARCHAR" property="workorgvid" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into LDAPM_MPW_BM_DATA (MONTH_ID, UNIT_ID, PK_BM_DATA,
+      PK_PSNJOB, CPERIOD, CYEAR,
+      DBEGINDATE, F_1, F_10,
+      F_11, F_12, F_13, F_14,
+      F_15, F_16, F_17, F_2,
+      F_3, F_4, F_5, F_6,
+      F_7, F_8, F_9, PK_BM_CLASS,
+      PK_ORG, ACCOUNTSTATE, BMACCOUNTNO,
+      PK_PSNDOC, CACULATEFLAG, CHECKFLAG,
+      ACCOUNTTYPE, ASSGID, STAFF_UNIT,
+      C_1, C_10, C_11, C_12,
+      C_13, C_14, C_15, C_16,
+      C_17, C_18, C_19, C_2,
+      C_20, C_3, C_4, C_5,
+      C_6, C_7, C_8, C_9,
+      D_1, D_10, D_2, D_3,
+      D_4, D_5, D_6, D_7,
+      D_8, D_9, DR, F_100,
+      F_18, F_19, F_20, F_21,
+      F_22, F_23, F_24, F_25,
+      F_26, F_27, F_28, F_29,
+      F_30, F_31, F_32, F_33,
+      F_34, F_35, F_36, F_37,
+      F_38, F_39, F_40, F_41,
+      F_42, F_43, F_44, F_45,
+      F_46, F_47, F_48, F_49,
+      F_50, F_51, F_52, F_53,
+      F_54, F_55, F_56, F_57,
+      F_58, F_59, F_60, F_61,
+      F_62, F_63, F_64, F_65,
+      F_66, F_67, F_68, F_69,
+      F_70, F_71, F_72, F_73,
+      F_74, F_75, F_76, F_77,
+      F_78, F_79, F_80, F_81,
+      F_82, F_83, F_84, F_85,
+      F_86, F_87, F_88, F_89,
+      F_90, FIPDEPTVID, FIPORGVID,
+      LIBDEPTVID, PAYLOCATION, PK_BMCLASSNO,
+      PK_FINANCEDEPT, PK_FINANCEORG, PK_GROUP,
+      PK_LIABILITYDEPT, PK_LIABILITYORG, PK_PSNORG,
+      PK_SOURCECLS, PK_TRANSFERORG, TS,
+      VCANCELREASON, WORKDEPT, WORKDEPTVID,
+      WORKORG, WORKORGVID)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+        #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkBmData,jdbcType=VARCHAR},
+        #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.cperiod,jdbcType=VARCHAR}, #{item.cyear,jdbcType=VARCHAR},
+        #{item.dbegindate,jdbcType=VARCHAR}, #{item.f1,jdbcType=DECIMAL}, #{item.f10,jdbcType=DECIMAL},
+        #{item.f11,jdbcType=DECIMAL}, #{item.f12,jdbcType=DECIMAL}, #{item.f13,jdbcType=DECIMAL}, #{item.f14,jdbcType=DECIMAL},
+        #{item.f15,jdbcType=DECIMAL}, #{item.f16,jdbcType=DECIMAL}, #{item.f17,jdbcType=DECIMAL}, #{item.f2,jdbcType=DECIMAL},
+        #{item.f3,jdbcType=DECIMAL}, #{item.f4,jdbcType=DECIMAL}, #{item.f5,jdbcType=DECIMAL}, #{item.f6,jdbcType=DECIMAL},
+        #{item.f7,jdbcType=DECIMAL}, #{item.f8,jdbcType=DECIMAL}, #{item.f9,jdbcType=DECIMAL}, #{item.pkBmClass,jdbcType=VARCHAR},
+        #{item.pkOrg,jdbcType=VARCHAR}, #{item.accountstate,jdbcType=DECIMAL}, #{item.bmaccountno,jdbcType=VARCHAR},
+        #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.caculateflag,jdbcType=VARCHAR}, #{item.checkflag,jdbcType=VARCHAR},
+        #{item.accounttype,jdbcType=VARCHAR}, #{item.assgid,jdbcType=DECIMAL}, #{item.staffUnit,jdbcType=VARCHAR},
+        #{item.c1,jdbcType=VARCHAR}, #{item.c10,jdbcType=VARCHAR}, #{item.c11,jdbcType=VARCHAR}, #{item.c12,jdbcType=VARCHAR},
+        #{item.c13,jdbcType=VARCHAR}, #{item.c14,jdbcType=VARCHAR}, #{item.c15,jdbcType=VARCHAR}, #{item.c16,jdbcType=VARCHAR},
+        #{item.c17,jdbcType=VARCHAR}, #{item.c18,jdbcType=VARCHAR}, #{item.c19,jdbcType=VARCHAR}, #{item.c2,jdbcType=VARCHAR},
+        #{item.c20,jdbcType=VARCHAR}, #{item.c3,jdbcType=VARCHAR}, #{item.c4,jdbcType=VARCHAR}, #{item.c5,jdbcType=VARCHAR},
+        #{item.c6,jdbcType=VARCHAR}, #{item.c7,jdbcType=VARCHAR}, #{item.c8,jdbcType=VARCHAR}, #{item.c9,jdbcType=VARCHAR},
+        #{item.d1,jdbcType=VARCHAR}, #{item.d10,jdbcType=VARCHAR}, #{item.d2,jdbcType=VARCHAR}, #{item.d3,jdbcType=VARCHAR},
+        #{item.d4,jdbcType=VARCHAR}, #{item.d5,jdbcType=VARCHAR}, #{item.d6,jdbcType=VARCHAR}, #{item.d7,jdbcType=VARCHAR},
+        #{item.d8,jdbcType=VARCHAR}, #{item.d9,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.f100,jdbcType=DECIMAL},
+        #{item.f18,jdbcType=DECIMAL}, #{item.f19,jdbcType=DECIMAL}, #{item.f20,jdbcType=DECIMAL}, #{item.f21,jdbcType=DECIMAL},
+        #{item.f22,jdbcType=DECIMAL}, #{item.f23,jdbcType=DECIMAL}, #{item.f24,jdbcType=DECIMAL}, #{item.f25,jdbcType=DECIMAL},
+        #{item.f26,jdbcType=DECIMAL}, #{item.f27,jdbcType=DECIMAL}, #{item.f28,jdbcType=DECIMAL}, #{item.f29,jdbcType=DECIMAL},
+        #{item.f30,jdbcType=DECIMAL}, #{item.f31,jdbcType=DECIMAL}, #{item.f32,jdbcType=DECIMAL}, #{item.f33,jdbcType=DECIMAL},
+        #{item.f34,jdbcType=DECIMAL}, #{item.f35,jdbcType=DECIMAL}, #{item.f36,jdbcType=DECIMAL}, #{item.f37,jdbcType=DECIMAL},
+        #{item.f38,jdbcType=DECIMAL}, #{item.f39,jdbcType=DECIMAL}, #{item.f40,jdbcType=DECIMAL}, #{item.f41,jdbcType=DECIMAL},
+        #{item.f42,jdbcType=DECIMAL}, #{item.f43,jdbcType=DECIMAL}, #{item.f44,jdbcType=DECIMAL}, #{item.f45,jdbcType=DECIMAL},
+        #{item.f46,jdbcType=DECIMAL}, #{item.f47,jdbcType=DECIMAL}, #{item.f48,jdbcType=DECIMAL}, #{item.f49,jdbcType=DECIMAL},
+        #{item.f50,jdbcType=DECIMAL}, #{item.f51,jdbcType=DECIMAL}, #{item.f52,jdbcType=DECIMAL}, #{item.f53,jdbcType=DECIMAL},
+        #{item.f54,jdbcType=DECIMAL}, #{item.f55,jdbcType=DECIMAL}, #{item.f56,jdbcType=DECIMAL}, #{item.f57,jdbcType=DECIMAL},
+        #{item.f58,jdbcType=DECIMAL}, #{item.f59,jdbcType=DECIMAL}, #{item.f60,jdbcType=DECIMAL}, #{item.f61,jdbcType=DECIMAL},
+        #{item.f62,jdbcType=DECIMAL}, #{item.f63,jdbcType=DECIMAL}, #{item.f64,jdbcType=DECIMAL}, #{item.f65,jdbcType=DECIMAL},
+        #{item.f66,jdbcType=DECIMAL}, #{item.f67,jdbcType=DECIMAL}, #{item.f68,jdbcType=DECIMAL}, #{item.f69,jdbcType=DECIMAL},
+        #{item.f70,jdbcType=DECIMAL}, #{item.f71,jdbcType=DECIMAL}, #{item.f72,jdbcType=DECIMAL}, #{item.f73,jdbcType=DECIMAL},
+        #{item.f74,jdbcType=DECIMAL}, #{item.f75,jdbcType=DECIMAL}, #{item.f76,jdbcType=DECIMAL}, #{item.f77,jdbcType=DECIMAL},
+        #{item.f78,jdbcType=DECIMAL}, #{item.f79,jdbcType=DECIMAL}, #{item.f80,jdbcType=DECIMAL}, #{item.f81,jdbcType=DECIMAL},
+        #{item.f82,jdbcType=DECIMAL}, #{item.f83,jdbcType=DECIMAL}, #{item.f84,jdbcType=DECIMAL}, #{item.f85,jdbcType=DECIMAL},
+        #{item.f86,jdbcType=DECIMAL}, #{item.f87,jdbcType=DECIMAL}, #{item.f88,jdbcType=DECIMAL}, #{item.f89,jdbcType=DECIMAL},
+        #{item.f90,jdbcType=DECIMAL}, #{item.fipdeptvid,jdbcType=VARCHAR}, #{item.fiporgvid,jdbcType=VARCHAR},
+        #{item.libdeptvid,jdbcType=VARCHAR}, #{item.paylocation,jdbcType=VARCHAR}, #{item.pkBmclassno,jdbcType=VARCHAR},
+        #{item.pkFinancedept,jdbcType=VARCHAR}, #{item.pkFinanceorg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+        #{item.pkLiabilitydept,jdbcType=VARCHAR}, #{item.pkLiabilityorg,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR},
+        #{item.pkSourcecls,jdbcType=VARCHAR}, #{item.pkTransferorg,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+        #{item.vcancelreason,jdbcType=VARCHAR}, #{item.workdept,jdbcType=VARCHAR}, #{item.workdeptvid,jdbcType=VARCHAR},
+        #{item.workorg,jdbcType=VARCHAR}, #{item.workorgvid,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwBmData">
+    insert into LDAPM_MPW_BM_DATA (MONTH_ID, UNIT_ID, PK_BM_DATA,
+      PK_PSNJOB, CPERIOD, CYEAR,
+      DBEGINDATE, F_1, F_10,
+      F_11, F_12, F_13, F_14,
+      F_15, F_16, F_17, F_2,
+      F_3, F_4, F_5, F_6,
+      F_7, F_8, F_9, PK_BM_CLASS,
+      PK_ORG, ACCOUNTSTATE, BMACCOUNTNO,
+      PK_PSNDOC, CACULATEFLAG, CHECKFLAG,
+      ACCOUNTTYPE, ASSGID, STAFF_UNIT,
+      C_1, C_10, C_11, C_12,
+      C_13, C_14, C_15, C_16,
+      C_17, C_18, C_19, C_2,
+      C_20, C_3, C_4, C_5,
+      C_6, C_7, C_8, C_9,
+      D_1, D_10, D_2, D_3,
+      D_4, D_5, D_6, D_7,
+      D_8, D_9, DR, F_100,
+      F_18, F_19, F_20, F_21,
+      F_22, F_23, F_24, F_25,
+      F_26, F_27, F_28, F_29,
+      F_30, F_31, F_32, F_33,
+      F_34, F_35, F_36, F_37,
+      F_38, F_39, F_40, F_41,
+      F_42, F_43, F_44, F_45,
+      F_46, F_47, F_48, F_49,
+      F_50, F_51, F_52, F_53,
+      F_54, F_55, F_56, F_57,
+      F_58, F_59, F_60, F_61,
+      F_62, F_63, F_64, F_65,
+      F_66, F_67, F_68, F_69,
+      F_70, F_71, F_72, F_73,
+      F_74, F_75, F_76, F_77,
+      F_78, F_79, F_80, F_81,
+      F_82, F_83, F_84, F_85,
+      F_86, F_87, F_88, F_89,
+      F_90, FIPDEPTVID, FIPORGVID,
+      LIBDEPTVID, PAYLOCATION, PK_BMCLASSNO,
+      PK_FINANCEDEPT, PK_FINANCEORG, PK_GROUP,
+      PK_LIABILITYDEPT, PK_LIABILITYORG, PK_PSNORG,
+      PK_SOURCECLS, PK_TRANSFERORG, TS,
+      VCANCELREASON, WORKDEPT, WORKDEPTVID,
+      WORKORG, WORKORGVID)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkBmData,jdbcType=VARCHAR},
+      #{pkPsnjob,jdbcType=VARCHAR}, #{cperiod,jdbcType=VARCHAR}, #{cyear,jdbcType=VARCHAR},
+      #{dbegindate,jdbcType=VARCHAR}, #{f1,jdbcType=DECIMAL}, #{f10,jdbcType=DECIMAL},
+      #{f11,jdbcType=DECIMAL}, #{f12,jdbcType=DECIMAL}, #{f13,jdbcType=DECIMAL}, #{f14,jdbcType=DECIMAL},
+      #{f15,jdbcType=DECIMAL}, #{f16,jdbcType=DECIMAL}, #{f17,jdbcType=DECIMAL}, #{f2,jdbcType=DECIMAL},
+      #{f3,jdbcType=DECIMAL}, #{f4,jdbcType=DECIMAL}, #{f5,jdbcType=DECIMAL}, #{f6,jdbcType=DECIMAL},
+      #{f7,jdbcType=DECIMAL}, #{f8,jdbcType=DECIMAL}, #{f9,jdbcType=DECIMAL}, #{pkBmClass,jdbcType=VARCHAR},
+      #{pkOrg,jdbcType=VARCHAR}, #{accountstate,jdbcType=DECIMAL}, #{bmaccountno,jdbcType=VARCHAR},
+      #{pkPsndoc,jdbcType=VARCHAR}, #{caculateflag,jdbcType=VARCHAR}, #{checkflag,jdbcType=VARCHAR},
+      #{accounttype,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, #{staffUnit,jdbcType=VARCHAR},
+      #{c1,jdbcType=VARCHAR}, #{c10,jdbcType=VARCHAR}, #{c11,jdbcType=VARCHAR}, #{c12,jdbcType=VARCHAR},
+      #{c13,jdbcType=VARCHAR}, #{c14,jdbcType=VARCHAR}, #{c15,jdbcType=VARCHAR}, #{c16,jdbcType=VARCHAR},
+      #{c17,jdbcType=VARCHAR}, #{c18,jdbcType=VARCHAR}, #{c19,jdbcType=VARCHAR}, #{c2,jdbcType=VARCHAR},
+      #{c20,jdbcType=VARCHAR}, #{c3,jdbcType=VARCHAR}, #{c4,jdbcType=VARCHAR}, #{c5,jdbcType=VARCHAR},
+      #{c6,jdbcType=VARCHAR}, #{c7,jdbcType=VARCHAR}, #{c8,jdbcType=VARCHAR}, #{c9,jdbcType=VARCHAR},
+      #{d1,jdbcType=VARCHAR}, #{d10,jdbcType=VARCHAR}, #{d2,jdbcType=VARCHAR}, #{d3,jdbcType=VARCHAR},
+      #{d4,jdbcType=VARCHAR}, #{d5,jdbcType=VARCHAR}, #{d6,jdbcType=VARCHAR}, #{d7,jdbcType=VARCHAR},
+      #{d8,jdbcType=VARCHAR}, #{d9,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{f100,jdbcType=DECIMAL},
+      #{f18,jdbcType=DECIMAL}, #{f19,jdbcType=DECIMAL}, #{f20,jdbcType=DECIMAL}, #{f21,jdbcType=DECIMAL},
+      #{f22,jdbcType=DECIMAL}, #{f23,jdbcType=DECIMAL}, #{f24,jdbcType=DECIMAL}, #{f25,jdbcType=DECIMAL},
+      #{f26,jdbcType=DECIMAL}, #{f27,jdbcType=DECIMAL}, #{f28,jdbcType=DECIMAL}, #{f29,jdbcType=DECIMAL},
+      #{f30,jdbcType=DECIMAL}, #{f31,jdbcType=DECIMAL}, #{f32,jdbcType=DECIMAL}, #{f33,jdbcType=DECIMAL},
+      #{f34,jdbcType=DECIMAL}, #{f35,jdbcType=DECIMAL}, #{f36,jdbcType=DECIMAL}, #{f37,jdbcType=DECIMAL},
+      #{f38,jdbcType=DECIMAL}, #{f39,jdbcType=DECIMAL}, #{f40,jdbcType=DECIMAL}, #{f41,jdbcType=DECIMAL},
+      #{f42,jdbcType=DECIMAL}, #{f43,jdbcType=DECIMAL}, #{f44,jdbcType=DECIMAL}, #{f45,jdbcType=DECIMAL},
+      #{f46,jdbcType=DECIMAL}, #{f47,jdbcType=DECIMAL}, #{f48,jdbcType=DECIMAL}, #{f49,jdbcType=DECIMAL},
+      #{f50,jdbcType=DECIMAL}, #{f51,jdbcType=DECIMAL}, #{f52,jdbcType=DECIMAL}, #{f53,jdbcType=DECIMAL},
+      #{f54,jdbcType=DECIMAL}, #{f55,jdbcType=DECIMAL}, #{f56,jdbcType=DECIMAL}, #{f57,jdbcType=DECIMAL},
+      #{f58,jdbcType=DECIMAL}, #{f59,jdbcType=DECIMAL}, #{f60,jdbcType=DECIMAL}, #{f61,jdbcType=DECIMAL},
+      #{f62,jdbcType=DECIMAL}, #{f63,jdbcType=DECIMAL}, #{f64,jdbcType=DECIMAL}, #{f65,jdbcType=DECIMAL},
+      #{f66,jdbcType=DECIMAL}, #{f67,jdbcType=DECIMAL}, #{f68,jdbcType=DECIMAL}, #{f69,jdbcType=DECIMAL},
+      #{f70,jdbcType=DECIMAL}, #{f71,jdbcType=DECIMAL}, #{f72,jdbcType=DECIMAL}, #{f73,jdbcType=DECIMAL},
+      #{f74,jdbcType=DECIMAL}, #{f75,jdbcType=DECIMAL}, #{f76,jdbcType=DECIMAL}, #{f77,jdbcType=DECIMAL},
+      #{f78,jdbcType=DECIMAL}, #{f79,jdbcType=DECIMAL}, #{f80,jdbcType=DECIMAL}, #{f81,jdbcType=DECIMAL},
+      #{f82,jdbcType=DECIMAL}, #{f83,jdbcType=DECIMAL}, #{f84,jdbcType=DECIMAL}, #{f85,jdbcType=DECIMAL},
+      #{f86,jdbcType=DECIMAL}, #{f87,jdbcType=DECIMAL}, #{f88,jdbcType=DECIMAL}, #{f89,jdbcType=DECIMAL},
+      #{f90,jdbcType=DECIMAL}, #{fipdeptvid,jdbcType=VARCHAR}, #{fiporgvid,jdbcType=VARCHAR},
+      #{libdeptvid,jdbcType=VARCHAR}, #{paylocation,jdbcType=VARCHAR}, #{pkBmclassno,jdbcType=VARCHAR},
+      #{pkFinancedept,jdbcType=VARCHAR}, #{pkFinanceorg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR},
+      #{pkLiabilitydept,jdbcType=VARCHAR}, #{pkLiabilityorg,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR},
+      #{pkSourcecls,jdbcType=VARCHAR}, #{pkTransferorg,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR},
+      #{vcancelreason,jdbcType=VARCHAR}, #{workdept,jdbcType=VARCHAR}, #{workdeptvid,jdbcType=VARCHAR},
+      #{workorg,jdbcType=VARCHAR}, #{workorgvid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwBmData">
+    insert into LDAPM_MPW_BM_DATA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkBmData != null">
+        PK_BM_DATA,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="cperiod != null">
+        CPERIOD,
+      </if>
+      <if test="cyear != null">
+        CYEAR,
+      </if>
+      <if test="dbegindate != null">
+        DBEGINDATE,
+      </if>
+      <if test="f1 != null">
+        F_1,
+      </if>
+      <if test="f10 != null">
+        F_10,
+      </if>
+      <if test="f11 != null">
+        F_11,
+      </if>
+      <if test="f12 != null">
+        F_12,
+      </if>
+      <if test="f13 != null">
+        F_13,
+      </if>
+      <if test="f14 != null">
+        F_14,
+      </if>
+      <if test="f15 != null">
+        F_15,
+      </if>
+      <if test="f16 != null">
+        F_16,
+      </if>
+      <if test="f17 != null">
+        F_17,
+      </if>
+      <if test="f2 != null">
+        F_2,
+      </if>
+      <if test="f3 != null">
+        F_3,
+      </if>
+      <if test="f4 != null">
+        F_4,
+      </if>
+      <if test="f5 != null">
+        F_5,
+      </if>
+      <if test="f6 != null">
+        F_6,
+      </if>
+      <if test="f7 != null">
+        F_7,
+      </if>
+      <if test="f8 != null">
+        F_8,
+      </if>
+      <if test="f9 != null">
+        F_9,
+      </if>
+      <if test="pkBmClass != null">
+        PK_BM_CLASS,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="accountstate != null">
+        ACCOUNTSTATE,
+      </if>
+      <if test="bmaccountno != null">
+        BMACCOUNTNO,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="caculateflag != null">
+        CACULATEFLAG,
+      </if>
+      <if test="checkflag != null">
+        CHECKFLAG,
+      </if>
+      <if test="accounttype != null">
+        ACCOUNTTYPE,
+      </if>
+      <if test="assgid != null">
+        ASSGID,
+      </if>
+      <if test="staffUnit != null">
+        STAFF_UNIT,
+      </if>
+      <if test="c1 != null">
+        C_1,
+      </if>
+      <if test="c10 != null">
+        C_10,
+      </if>
+      <if test="c11 != null">
+        C_11,
+      </if>
+      <if test="c12 != null">
+        C_12,
+      </if>
+      <if test="c13 != null">
+        C_13,
+      </if>
+      <if test="c14 != null">
+        C_14,
+      </if>
+      <if test="c15 != null">
+        C_15,
+      </if>
+      <if test="c16 != null">
+        C_16,
+      </if>
+      <if test="c17 != null">
+        C_17,
+      </if>
+      <if test="c18 != null">
+        C_18,
+      </if>
+      <if test="c19 != null">
+        C_19,
+      </if>
+      <if test="c2 != null">
+        C_2,
+      </if>
+      <if test="c20 != null">
+        C_20,
+      </if>
+      <if test="c3 != null">
+        C_3,
+      </if>
+      <if test="c4 != null">
+        C_4,
+      </if>
+      <if test="c5 != null">
+        C_5,
+      </if>
+      <if test="c6 != null">
+        C_6,
+      </if>
+      <if test="c7 != null">
+        C_7,
+      </if>
+      <if test="c8 != null">
+        C_8,
+      </if>
+      <if test="c9 != null">
+        C_9,
+      </if>
+      <if test="d1 != null">
+        D_1,
+      </if>
+      <if test="d10 != null">
+        D_10,
+      </if>
+      <if test="d2 != null">
+        D_2,
+      </if>
+      <if test="d3 != null">
+        D_3,
+      </if>
+      <if test="d4 != null">
+        D_4,
+      </if>
+      <if test="d5 != null">
+        D_5,
+      </if>
+      <if test="d6 != null">
+        D_6,
+      </if>
+      <if test="d7 != null">
+        D_7,
+      </if>
+      <if test="d8 != null">
+        D_8,
+      </if>
+      <if test="d9 != null">
+        D_9,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="f100 != null">
+        F_100,
+      </if>
+      <if test="f18 != null">
+        F_18,
+      </if>
+      <if test="f19 != null">
+        F_19,
+      </if>
+      <if test="f20 != null">
+        F_20,
+      </if>
+      <if test="f21 != null">
+        F_21,
+      </if>
+      <if test="f22 != null">
+        F_22,
+      </if>
+      <if test="f23 != null">
+        F_23,
+      </if>
+      <if test="f24 != null">
+        F_24,
+      </if>
+      <if test="f25 != null">
+        F_25,
+      </if>
+      <if test="f26 != null">
+        F_26,
+      </if>
+      <if test="f27 != null">
+        F_27,
+      </if>
+      <if test="f28 != null">
+        F_28,
+      </if>
+      <if test="f29 != null">
+        F_29,
+      </if>
+      <if test="f30 != null">
+        F_30,
+      </if>
+      <if test="f31 != null">
+        F_31,
+      </if>
+      <if test="f32 != null">
+        F_32,
+      </if>
+      <if test="f33 != null">
+        F_33,
+      </if>
+      <if test="f34 != null">
+        F_34,
+      </if>
+      <if test="f35 != null">
+        F_35,
+      </if>
+      <if test="f36 != null">
+        F_36,
+      </if>
+      <if test="f37 != null">
+        F_37,
+      </if>
+      <if test="f38 != null">
+        F_38,
+      </if>
+      <if test="f39 != null">
+        F_39,
+      </if>
+      <if test="f40 != null">
+        F_40,
+      </if>
+      <if test="f41 != null">
+        F_41,
+      </if>
+      <if test="f42 != null">
+        F_42,
+      </if>
+      <if test="f43 != null">
+        F_43,
+      </if>
+      <if test="f44 != null">
+        F_44,
+      </if>
+      <if test="f45 != null">
+        F_45,
+      </if>
+      <if test="f46 != null">
+        F_46,
+      </if>
+      <if test="f47 != null">
+        F_47,
+      </if>
+      <if test="f48 != null">
+        F_48,
+      </if>
+      <if test="f49 != null">
+        F_49,
+      </if>
+      <if test="f50 != null">
+        F_50,
+      </if>
+      <if test="f51 != null">
+        F_51,
+      </if>
+      <if test="f52 != null">
+        F_52,
+      </if>
+      <if test="f53 != null">
+        F_53,
+      </if>
+      <if test="f54 != null">
+        F_54,
+      </if>
+      <if test="f55 != null">
+        F_55,
+      </if>
+      <if test="f56 != null">
+        F_56,
+      </if>
+      <if test="f57 != null">
+        F_57,
+      </if>
+      <if test="f58 != null">
+        F_58,
+      </if>
+      <if test="f59 != null">
+        F_59,
+      </if>
+      <if test="f60 != null">
+        F_60,
+      </if>
+      <if test="f61 != null">
+        F_61,
+      </if>
+      <if test="f62 != null">
+        F_62,
+      </if>
+      <if test="f63 != null">
+        F_63,
+      </if>
+      <if test="f64 != null">
+        F_64,
+      </if>
+      <if test="f65 != null">
+        F_65,
+      </if>
+      <if test="f66 != null">
+        F_66,
+      </if>
+      <if test="f67 != null">
+        F_67,
+      </if>
+      <if test="f68 != null">
+        F_68,
+      </if>
+      <if test="f69 != null">
+        F_69,
+      </if>
+      <if test="f70 != null">
+        F_70,
+      </if>
+      <if test="f71 != null">
+        F_71,
+      </if>
+      <if test="f72 != null">
+        F_72,
+      </if>
+      <if test="f73 != null">
+        F_73,
+      </if>
+      <if test="f74 != null">
+        F_74,
+      </if>
+      <if test="f75 != null">
+        F_75,
+      </if>
+      <if test="f76 != null">
+        F_76,
+      </if>
+      <if test="f77 != null">
+        F_77,
+      </if>
+      <if test="f78 != null">
+        F_78,
+      </if>
+      <if test="f79 != null">
+        F_79,
+      </if>
+      <if test="f80 != null">
+        F_80,
+      </if>
+      <if test="f81 != null">
+        F_81,
+      </if>
+      <if test="f82 != null">
+        F_82,
+      </if>
+      <if test="f83 != null">
+        F_83,
+      </if>
+      <if test="f84 != null">
+        F_84,
+      </if>
+      <if test="f85 != null">
+        F_85,
+      </if>
+      <if test="f86 != null">
+        F_86,
+      </if>
+      <if test="f87 != null">
+        F_87,
+      </if>
+      <if test="f88 != null">
+        F_88,
+      </if>
+      <if test="f89 != null">
+        F_89,
+      </if>
+      <if test="f90 != null">
+        F_90,
+      </if>
+      <if test="fipdeptvid != null">
+        FIPDEPTVID,
+      </if>
+      <if test="fiporgvid != null">
+        FIPORGVID,
+      </if>
+      <if test="libdeptvid != null">
+        LIBDEPTVID,
+      </if>
+      <if test="paylocation != null">
+        PAYLOCATION,
+      </if>
+      <if test="pkBmclassno != null">
+        PK_BMCLASSNO,
+      </if>
+      <if test="pkFinancedept != null">
+        PK_FINANCEDEPT,
+      </if>
+      <if test="pkFinanceorg != null">
+        PK_FINANCEORG,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkLiabilitydept != null">
+        PK_LIABILITYDEPT,
+      </if>
+      <if test="pkLiabilityorg != null">
+        PK_LIABILITYORG,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="pkSourcecls != null">
+        PK_SOURCECLS,
+      </if>
+      <if test="pkTransferorg != null">
+        PK_TRANSFERORG,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="vcancelreason != null">
+        VCANCELREASON,
+      </if>
+      <if test="workdept != null">
+        WORKDEPT,
+      </if>
+      <if test="workdeptvid != null">
+        WORKDEPTVID,
+      </if>
+      <if test="workorg != null">
+        WORKORG,
+      </if>
+      <if test="workorgvid != null">
+        WORKORGVID,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBmData != null">
+        #{pkBmData,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="cperiod != null">
+        #{cperiod,jdbcType=VARCHAR},
+      </if>
+      <if test="cyear != null">
+        #{cyear,jdbcType=VARCHAR},
+      </if>
+      <if test="dbegindate != null">
+        #{dbegindate,jdbcType=VARCHAR},
+      </if>
+      <if test="f1 != null">
+        #{f1,jdbcType=DECIMAL},
+      </if>
+      <if test="f10 != null">
+        #{f10,jdbcType=DECIMAL},
+      </if>
+      <if test="f11 != null">
+        #{f11,jdbcType=DECIMAL},
+      </if>
+      <if test="f12 != null">
+        #{f12,jdbcType=DECIMAL},
+      </if>
+      <if test="f13 != null">
+        #{f13,jdbcType=DECIMAL},
+      </if>
+      <if test="f14 != null">
+        #{f14,jdbcType=DECIMAL},
+      </if>
+      <if test="f15 != null">
+        #{f15,jdbcType=DECIMAL},
+      </if>
+      <if test="f16 != null">
+        #{f16,jdbcType=DECIMAL},
+      </if>
+      <if test="f17 != null">
+        #{f17,jdbcType=DECIMAL},
+      </if>
+      <if test="f2 != null">
+        #{f2,jdbcType=DECIMAL},
+      </if>
+      <if test="f3 != null">
+        #{f3,jdbcType=DECIMAL},
+      </if>
+      <if test="f4 != null">
+        #{f4,jdbcType=DECIMAL},
+      </if>
+      <if test="f5 != null">
+        #{f5,jdbcType=DECIMAL},
+      </if>
+      <if test="f6 != null">
+        #{f6,jdbcType=DECIMAL},
+      </if>
+      <if test="f7 != null">
+        #{f7,jdbcType=DECIMAL},
+      </if>
+      <if test="f8 != null">
+        #{f8,jdbcType=DECIMAL},
+      </if>
+      <if test="f9 != null">
+        #{f9,jdbcType=DECIMAL},
+      </if>
+      <if test="pkBmClass != null">
+        #{pkBmClass,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="accountstate != null">
+        #{accountstate,jdbcType=DECIMAL},
+      </if>
+      <if test="bmaccountno != null">
+        #{bmaccountno,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="caculateflag != null">
+        #{caculateflag,jdbcType=VARCHAR},
+      </if>
+      <if test="checkflag != null">
+        #{checkflag,jdbcType=VARCHAR},
+      </if>
+      <if test="accounttype != null">
+        #{accounttype,jdbcType=VARCHAR},
+      </if>
+      <if test="assgid != null">
+        #{assgid,jdbcType=DECIMAL},
+      </if>
+      <if test="staffUnit != null">
+        #{staffUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="c1 != null">
+        #{c1,jdbcType=VARCHAR},
+      </if>
+      <if test="c10 != null">
+        #{c10,jdbcType=VARCHAR},
+      </if>
+      <if test="c11 != null">
+        #{c11,jdbcType=VARCHAR},
+      </if>
+      <if test="c12 != null">
+        #{c12,jdbcType=VARCHAR},
+      </if>
+      <if test="c13 != null">
+        #{c13,jdbcType=VARCHAR},
+      </if>
+      <if test="c14 != null">
+        #{c14,jdbcType=VARCHAR},
+      </if>
+      <if test="c15 != null">
+        #{c15,jdbcType=VARCHAR},
+      </if>
+      <if test="c16 != null">
+        #{c16,jdbcType=VARCHAR},
+      </if>
+      <if test="c17 != null">
+        #{c17,jdbcType=VARCHAR},
+      </if>
+      <if test="c18 != null">
+        #{c18,jdbcType=VARCHAR},
+      </if>
+      <if test="c19 != null">
+        #{c19,jdbcType=VARCHAR},
+      </if>
+      <if test="c2 != null">
+        #{c2,jdbcType=VARCHAR},
+      </if>
+      <if test="c20 != null">
+        #{c20,jdbcType=VARCHAR},
+      </if>
+      <if test="c3 != null">
+        #{c3,jdbcType=VARCHAR},
+      </if>
+      <if test="c4 != null">
+        #{c4,jdbcType=VARCHAR},
+      </if>
+      <if test="c5 != null">
+        #{c5,jdbcType=VARCHAR},
+      </if>
+      <if test="c6 != null">
+        #{c6,jdbcType=VARCHAR},
+      </if>
+      <if test="c7 != null">
+        #{c7,jdbcType=VARCHAR},
+      </if>
+      <if test="c8 != null">
+        #{c8,jdbcType=VARCHAR},
+      </if>
+      <if test="c9 != null">
+        #{c9,jdbcType=VARCHAR},
+      </if>
+      <if test="d1 != null">
+        #{d1,jdbcType=VARCHAR},
+      </if>
+      <if test="d10 != null">
+        #{d10,jdbcType=VARCHAR},
+      </if>
+      <if test="d2 != null">
+        #{d2,jdbcType=VARCHAR},
+      </if>
+      <if test="d3 != null">
+        #{d3,jdbcType=VARCHAR},
+      </if>
+      <if test="d4 != null">
+        #{d4,jdbcType=VARCHAR},
+      </if>
+      <if test="d5 != null">
+        #{d5,jdbcType=VARCHAR},
+      </if>
+      <if test="d6 != null">
+        #{d6,jdbcType=VARCHAR},
+      </if>
+      <if test="d7 != null">
+        #{d7,jdbcType=VARCHAR},
+      </if>
+      <if test="d8 != null">
+        #{d8,jdbcType=VARCHAR},
+      </if>
+      <if test="d9 != null">
+        #{d9,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="f100 != null">
+        #{f100,jdbcType=DECIMAL},
+      </if>
+      <if test="f18 != null">
+        #{f18,jdbcType=DECIMAL},
+      </if>
+      <if test="f19 != null">
+        #{f19,jdbcType=DECIMAL},
+      </if>
+      <if test="f20 != null">
+        #{f20,jdbcType=DECIMAL},
+      </if>
+      <if test="f21 != null">
+        #{f21,jdbcType=DECIMAL},
+      </if>
+      <if test="f22 != null">
+        #{f22,jdbcType=DECIMAL},
+      </if>
+      <if test="f23 != null">
+        #{f23,jdbcType=DECIMAL},
+      </if>
+      <if test="f24 != null">
+        #{f24,jdbcType=DECIMAL},
+      </if>
+      <if test="f25 != null">
+        #{f25,jdbcType=DECIMAL},
+      </if>
+      <if test="f26 != null">
+        #{f26,jdbcType=DECIMAL},
+      </if>
+      <if test="f27 != null">
+        #{f27,jdbcType=DECIMAL},
+      </if>
+      <if test="f28 != null">
+        #{f28,jdbcType=DECIMAL},
+      </if>
+      <if test="f29 != null">
+        #{f29,jdbcType=DECIMAL},
+      </if>
+      <if test="f30 != null">
+        #{f30,jdbcType=DECIMAL},
+      </if>
+      <if test="f31 != null">
+        #{f31,jdbcType=DECIMAL},
+      </if>
+      <if test="f32 != null">
+        #{f32,jdbcType=DECIMAL},
+      </if>
+      <if test="f33 != null">
+        #{f33,jdbcType=DECIMAL},
+      </if>
+      <if test="f34 != null">
+        #{f34,jdbcType=DECIMAL},
+      </if>
+      <if test="f35 != null">
+        #{f35,jdbcType=DECIMAL},
+      </if>
+      <if test="f36 != null">
+        #{f36,jdbcType=DECIMAL},
+      </if>
+      <if test="f37 != null">
+        #{f37,jdbcType=DECIMAL},
+      </if>
+      <if test="f38 != null">
+        #{f38,jdbcType=DECIMAL},
+      </if>
+      <if test="f39 != null">
+        #{f39,jdbcType=DECIMAL},
+      </if>
+      <if test="f40 != null">
+        #{f40,jdbcType=DECIMAL},
+      </if>
+      <if test="f41 != null">
+        #{f41,jdbcType=DECIMAL},
+      </if>
+      <if test="f42 != null">
+        #{f42,jdbcType=DECIMAL},
+      </if>
+      <if test="f43 != null">
+        #{f43,jdbcType=DECIMAL},
+      </if>
+      <if test="f44 != null">
+        #{f44,jdbcType=DECIMAL},
+      </if>
+      <if test="f45 != null">
+        #{f45,jdbcType=DECIMAL},
+      </if>
+      <if test="f46 != null">
+        #{f46,jdbcType=DECIMAL},
+      </if>
+      <if test="f47 != null">
+        #{f47,jdbcType=DECIMAL},
+      </if>
+      <if test="f48 != null">
+        #{f48,jdbcType=DECIMAL},
+      </if>
+      <if test="f49 != null">
+        #{f49,jdbcType=DECIMAL},
+      </if>
+      <if test="f50 != null">
+        #{f50,jdbcType=DECIMAL},
+      </if>
+      <if test="f51 != null">
+        #{f51,jdbcType=DECIMAL},
+      </if>
+      <if test="f52 != null">
+        #{f52,jdbcType=DECIMAL},
+      </if>
+      <if test="f53 != null">
+        #{f53,jdbcType=DECIMAL},
+      </if>
+      <if test="f54 != null">
+        #{f54,jdbcType=DECIMAL},
+      </if>
+      <if test="f55 != null">
+        #{f55,jdbcType=DECIMAL},
+      </if>
+      <if test="f56 != null">
+        #{f56,jdbcType=DECIMAL},
+      </if>
+      <if test="f57 != null">
+        #{f57,jdbcType=DECIMAL},
+      </if>
+      <if test="f58 != null">
+        #{f58,jdbcType=DECIMAL},
+      </if>
+      <if test="f59 != null">
+        #{f59,jdbcType=DECIMAL},
+      </if>
+      <if test="f60 != null">
+        #{f60,jdbcType=DECIMAL},
+      </if>
+      <if test="f61 != null">
+        #{f61,jdbcType=DECIMAL},
+      </if>
+      <if test="f62 != null">
+        #{f62,jdbcType=DECIMAL},
+      </if>
+      <if test="f63 != null">
+        #{f63,jdbcType=DECIMAL},
+      </if>
+      <if test="f64 != null">
+        #{f64,jdbcType=DECIMAL},
+      </if>
+      <if test="f65 != null">
+        #{f65,jdbcType=DECIMAL},
+      </if>
+      <if test="f66 != null">
+        #{f66,jdbcType=DECIMAL},
+      </if>
+      <if test="f67 != null">
+        #{f67,jdbcType=DECIMAL},
+      </if>
+      <if test="f68 != null">
+        #{f68,jdbcType=DECIMAL},
+      </if>
+      <if test="f69 != null">
+        #{f69,jdbcType=DECIMAL},
+      </if>
+      <if test="f70 != null">
+        #{f70,jdbcType=DECIMAL},
+      </if>
+      <if test="f71 != null">
+        #{f71,jdbcType=DECIMAL},
+      </if>
+      <if test="f72 != null">
+        #{f72,jdbcType=DECIMAL},
+      </if>
+      <if test="f73 != null">
+        #{f73,jdbcType=DECIMAL},
+      </if>
+      <if test="f74 != null">
+        #{f74,jdbcType=DECIMAL},
+      </if>
+      <if test="f75 != null">
+        #{f75,jdbcType=DECIMAL},
+      </if>
+      <if test="f76 != null">
+        #{f76,jdbcType=DECIMAL},
+      </if>
+      <if test="f77 != null">
+        #{f77,jdbcType=DECIMAL},
+      </if>
+      <if test="f78 != null">
+        #{f78,jdbcType=DECIMAL},
+      </if>
+      <if test="f79 != null">
+        #{f79,jdbcType=DECIMAL},
+      </if>
+      <if test="f80 != null">
+        #{f80,jdbcType=DECIMAL},
+      </if>
+      <if test="f81 != null">
+        #{f81,jdbcType=DECIMAL},
+      </if>
+      <if test="f82 != null">
+        #{f82,jdbcType=DECIMAL},
+      </if>
+      <if test="f83 != null">
+        #{f83,jdbcType=DECIMAL},
+      </if>
+      <if test="f84 != null">
+        #{f84,jdbcType=DECIMAL},
+      </if>
+      <if test="f85 != null">
+        #{f85,jdbcType=DECIMAL},
+      </if>
+      <if test="f86 != null">
+        #{f86,jdbcType=DECIMAL},
+      </if>
+      <if test="f87 != null">
+        #{f87,jdbcType=DECIMAL},
+      </if>
+      <if test="f88 != null">
+        #{f88,jdbcType=DECIMAL},
+      </if>
+      <if test="f89 != null">
+        #{f89,jdbcType=DECIMAL},
+      </if>
+      <if test="f90 != null">
+        #{f90,jdbcType=DECIMAL},
+      </if>
+      <if test="fipdeptvid != null">
+        #{fipdeptvid,jdbcType=VARCHAR},
+      </if>
+      <if test="fiporgvid != null">
+        #{fiporgvid,jdbcType=VARCHAR},
+      </if>
+      <if test="libdeptvid != null">
+        #{libdeptvid,jdbcType=VARCHAR},
+      </if>
+      <if test="paylocation != null">
+        #{paylocation,jdbcType=VARCHAR},
+      </if>
+      <if test="pkBmclassno != null">
+        #{pkBmclassno,jdbcType=VARCHAR},
+      </if>
+      <if test="pkFinancedept != null">
+        #{pkFinancedept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkFinanceorg != null">
+        #{pkFinanceorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkLiabilitydept != null">
+        #{pkLiabilitydept,jdbcType=VARCHAR},
+      </if>
+      <if test="pkLiabilityorg != null">
+        #{pkLiabilityorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkSourcecls != null">
+        #{pkSourcecls,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTransferorg != null">
+        #{pkTransferorg,jdbcType=VARCHAR},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="vcancelreason != null">
+        #{vcancelreason,jdbcType=VARCHAR},
+      </if>
+      <if test="workdept != null">
+        #{workdept,jdbcType=VARCHAR},
+      </if>
+      <if test="workdeptvid != null">
+        #{workdeptvid,jdbcType=VARCHAR},
+      </if>
+      <if test="workorg != null">
+        #{workorg,jdbcType=VARCHAR},
+      </if>
+      <if test="workorgvid != null">
+        #{workorgvid,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

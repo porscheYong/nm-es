@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocTrainDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocTrain">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="TRM_LOCATION" jdbcType="VARCHAR" property="trmLocation" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="TRAIM" jdbcType="VARCHAR" property="traim" />
+    <result column="TRA_RESULT" jdbcType="VARCHAR" property="traResult" />
+    <result column="ACT_NAME" jdbcType="VARCHAR" property="actName" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="TRA_TYPE" jdbcType="VARCHAR" property="traType" />
+    <result column="MEMO" jdbcType="VARCHAR" property="memo" />
+    <result column="TRM_CERTIF_CODE" jdbcType="VARCHAR" property="trmCertifCode" />
+    <result column="CERTIFICATE_UNIT" jdbcType="VARCHAR" property="certificateUnit" />
+    <result column="TRM_CERTIF_NAME" jdbcType="VARCHAR" property="trmCertifName" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="TRA_MODE" jdbcType="VARCHAR" property="traMode" />
+    <result column="TRA_TIME" jdbcType="DECIMAL" property="traTime" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="TRA_CONTENT" jdbcType="VARCHAR" property="traContent" />
+    <result column="TRA_COST" jdbcType="DECIMAL" property="traCost" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="ABSENCE_COUNT" jdbcType="DECIMAL" property="absenceCount" />
+    <result column="ACT_CODE" jdbcType="VARCHAR" property="actCode" />
+    <result column="ACT_NAME2" jdbcType="VARCHAR" property="actName2" />
+    <result column="ACT_NAME3" jdbcType="VARCHAR" property="actName3" />
+    <result column="ACT_NAME4" jdbcType="VARCHAR" property="actName4" />
+    <result column="ACT_NAME5" jdbcType="VARCHAR" property="actName5" />
+    <result column="ACT_NAME6" jdbcType="VARCHAR" property="actName6" />
+    <result column="ASS_OPTION" jdbcType="VARCHAR" property="assOption" />
+    <result column="ASS_RESULT" jdbcType="DECIMAL" property="assResult" />
+    <result column="ASSIST_UNIT" jdbcType="VARCHAR" property="assistUnit" />
+    <result column="CERTIFICATE_DATE" jdbcType="VARCHAR" property="certificateDate" />
+    <result column="CONTCODE" jdbcType="VARCHAR" property="contcode" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="ENTREPRENEUR" jdbcType="VARCHAR" property="entrepreneur" />
+    <result column="ISALLDUTY" jdbcType="VARCHAR" property="isallduty" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_ACT" jdbcType="VARCHAR" property="pkAct" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="PK_PSNORG" jdbcType="VARCHAR" property="pkPsnorg" />
+    <result column="PURVEYOR" jdbcType="VARCHAR" property="purveyor" />
+    <result column="RECORDNUM" jdbcType="DECIMAL" property="recordnum" />
+    <result column="SIGNON_DT" jdbcType="VARCHAR" property="signonDt" />
+    <result column="SOURCE_TYPE" jdbcType="DECIMAL" property="sourceType" />
+    <result column="TAKETRM_METHOD" jdbcType="DECIMAL" property="taketrmMethod" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_TRAIN (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    TRM_LOCATION, GLBDEF6, TRAIM,
+    TRA_RESULT, ACT_NAME, GLBDEF5,
+    TRA_TYPE, MEMO, TRM_CERTIF_CODE,
+    CERTIFICATE_UNIT, TRM_CERTIF_NAME, GLBDEF4,
+    TRA_MODE, TRA_TIME, BEGINDATE,
+    TRA_CONTENT, TRA_COST, ENDDATE,
+    PK_PSNDOC, ABSENCE_COUNT, ACT_CODE,
+    ACT_NAME2, ACT_NAME3, ACT_NAME4,
+    ACT_NAME5, ACT_NAME6, ASS_OPTION,
+    ASS_RESULT, ASSIST_UNIT, CERTIFICATE_DATE,
+    CONTCODE, CREATIONTIME, CREATOR,
+    DR, ENTREPRENEUR, ISALLDUTY,
+    LASTFLAG, MODIFIEDTIME, MODIFIER,
+    PK_ACT, PK_GROUP, PK_ORG,
+    PK_PSNJOB, PK_PSNORG, PURVEYOR,
+    RECORDNUM, SIGNON_DT, SOURCE_TYPE,
+    TAKETRM_METHOD, TS)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.trmLocation,jdbcType=VARCHAR}, #{item.glbdef6,jdbcType=VARCHAR}, #{item.traim,jdbcType=VARCHAR},
+      #{item.traResult,jdbcType=VARCHAR}, #{item.actName,jdbcType=VARCHAR}, #{item.glbdef5,jdbcType=VARCHAR},
+      #{item.traType,jdbcType=VARCHAR}, #{item.memo,jdbcType=VARCHAR}, #{item.trmCertifCode,jdbcType=VARCHAR},
+      #{item.certificateUnit,jdbcType=VARCHAR}, #{item.trmCertifName,jdbcType=VARCHAR}, #{item.glbdef4,jdbcType=VARCHAR},
+      #{item.traMode,jdbcType=VARCHAR}, #{item.traTime,jdbcType=DECIMAL}, #{item.begindate,jdbcType=VARCHAR},
+      #{item.traContent,jdbcType=VARCHAR}, #{item.traCost,jdbcType=DECIMAL}, #{item.enddate,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.absenceCount,jdbcType=DECIMAL}, #{item.actCode,jdbcType=VARCHAR},
+      #{item.actName2,jdbcType=VARCHAR}, #{item.actName3,jdbcType=VARCHAR}, #{item.actName4,jdbcType=VARCHAR},
+      #{item.actName5,jdbcType=VARCHAR}, #{item.actName6,jdbcType=VARCHAR}, #{item.assOption,jdbcType=VARCHAR},
+      #{item.assResult,jdbcType=DECIMAL}, #{item.assistUnit,jdbcType=VARCHAR}, #{item.certificateDate,jdbcType=VARCHAR},
+      #{item.contcode,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+      #{item.dr,jdbcType=DECIMAL}, #{item.entrepreneur,jdbcType=VARCHAR}, #{item.isallduty,jdbcType=VARCHAR},
+      #{item.lastflag,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR},
+      #{item.pkAct,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkOrg,jdbcType=VARCHAR},
+      #{item.pkPsnjob,jdbcType=VARCHAR}, #{item.pkPsnorg,jdbcType=VARCHAR}, #{item.purveyor,jdbcType=VARCHAR},
+      #{item.recordnum,jdbcType=DECIMAL}, #{item.signonDt,jdbcType=VARCHAR}, #{item.sourceType,jdbcType=DECIMAL},
+      #{item.taketrmMethod,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocTrain">
+    insert into LDAPM_MPW_HI_PSNDOC_TRAIN (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB, 
+      TRM_LOCATION, GLBDEF6, TRAIM, 
+      TRA_RESULT, ACT_NAME, GLBDEF5, 
+      TRA_TYPE, MEMO, TRM_CERTIF_CODE, 
+      CERTIFICATE_UNIT, TRM_CERTIF_NAME, GLBDEF4, 
+      TRA_MODE, TRA_TIME, BEGINDATE, 
+      TRA_CONTENT, TRA_COST, ENDDATE, 
+      PK_PSNDOC, ABSENCE_COUNT, ACT_CODE, 
+      ACT_NAME2, ACT_NAME3, ACT_NAME4, 
+      ACT_NAME5, ACT_NAME6, ASS_OPTION, 
+      ASS_RESULT, ASSIST_UNIT, CERTIFICATE_DATE, 
+      CONTCODE, CREATIONTIME, CREATOR, 
+      DR, ENTREPRENEUR, ISALLDUTY, 
+      LASTFLAG, MODIFIEDTIME, MODIFIER, 
+      PK_ACT, PK_GROUP, PK_ORG, 
+      PK_PSNJOB, PK_PSNORG, PURVEYOR, 
+      RECORDNUM, SIGNON_DT, SOURCE_TYPE, 
+      TAKETRM_METHOD, TS)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
+      #{trmLocation,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR}, #{traim,jdbcType=VARCHAR}, 
+      #{traResult,jdbcType=VARCHAR}, #{actName,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, 
+      #{traType,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{trmCertifCode,jdbcType=VARCHAR}, 
+      #{certificateUnit,jdbcType=VARCHAR}, #{trmCertifName,jdbcType=VARCHAR}, #{glbdef4,jdbcType=VARCHAR}, 
+      #{traMode,jdbcType=VARCHAR}, #{traTime,jdbcType=DECIMAL}, #{begindate,jdbcType=VARCHAR}, 
+      #{traContent,jdbcType=VARCHAR}, #{traCost,jdbcType=DECIMAL}, #{enddate,jdbcType=VARCHAR}, 
+      #{pkPsndoc,jdbcType=VARCHAR}, #{absenceCount,jdbcType=DECIMAL}, #{actCode,jdbcType=VARCHAR}, 
+      #{actName2,jdbcType=VARCHAR}, #{actName3,jdbcType=VARCHAR}, #{actName4,jdbcType=VARCHAR}, 
+      #{actName5,jdbcType=VARCHAR}, #{actName6,jdbcType=VARCHAR}, #{assOption,jdbcType=VARCHAR}, 
+      #{assResult,jdbcType=DECIMAL}, #{assistUnit,jdbcType=VARCHAR}, #{certificateDate,jdbcType=VARCHAR}, 
+      #{contcode,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=DECIMAL}, #{entrepreneur,jdbcType=VARCHAR}, #{isallduty,jdbcType=VARCHAR}, 
+      #{lastflag,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{pkAct,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, 
+      #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR}, #{purveyor,jdbcType=VARCHAR}, 
+      #{recordnum,jdbcType=DECIMAL}, #{signonDt,jdbcType=VARCHAR}, #{sourceType,jdbcType=DECIMAL}, 
+      #{taketrmMethod,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocTrain">
+    insert into LDAPM_MPW_HI_PSNDOC_TRAIN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="trmLocation != null">
+        TRM_LOCATION,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="traim != null">
+        TRAIM,
+      </if>
+      <if test="traResult != null">
+        TRA_RESULT,
+      </if>
+      <if test="actName != null">
+        ACT_NAME,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="traType != null">
+        TRA_TYPE,
+      </if>
+      <if test="memo != null">
+        MEMO,
+      </if>
+      <if test="trmCertifCode != null">
+        TRM_CERTIF_CODE,
+      </if>
+      <if test="certificateUnit != null">
+        CERTIFICATE_UNIT,
+      </if>
+      <if test="trmCertifName != null">
+        TRM_CERTIF_NAME,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="traMode != null">
+        TRA_MODE,
+      </if>
+      <if test="traTime != null">
+        TRA_TIME,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="traContent != null">
+        TRA_CONTENT,
+      </if>
+      <if test="traCost != null">
+        TRA_COST,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="absenceCount != null">
+        ABSENCE_COUNT,
+      </if>
+      <if test="actCode != null">
+        ACT_CODE,
+      </if>
+      <if test="actName2 != null">
+        ACT_NAME2,
+      </if>
+      <if test="actName3 != null">
+        ACT_NAME3,
+      </if>
+      <if test="actName4 != null">
+        ACT_NAME4,
+      </if>
+      <if test="actName5 != null">
+        ACT_NAME5,
+      </if>
+      <if test="actName6 != null">
+        ACT_NAME6,
+      </if>
+      <if test="assOption != null">
+        ASS_OPTION,
+      </if>
+      <if test="assResult != null">
+        ASS_RESULT,
+      </if>
+      <if test="assistUnit != null">
+        ASSIST_UNIT,
+      </if>
+      <if test="certificateDate != null">
+        CERTIFICATE_DATE,
+      </if>
+      <if test="contcode != null">
+        CONTCODE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="entrepreneur != null">
+        ENTREPRENEUR,
+      </if>
+      <if test="isallduty != null">
+        ISALLDUTY,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkAct != null">
+        PK_ACT,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="pkPsnorg != null">
+        PK_PSNORG,
+      </if>
+      <if test="purveyor != null">
+        PURVEYOR,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="signonDt != null">
+        SIGNON_DT,
+      </if>
+      <if test="sourceType != null">
+        SOURCE_TYPE,
+      </if>
+      <if test="taketrmMethod != null">
+        TAKETRM_METHOD,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="trmLocation != null">
+        #{trmLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="traim != null">
+        #{traim,jdbcType=VARCHAR},
+      </if>
+      <if test="traResult != null">
+        #{traResult,jdbcType=VARCHAR},
+      </if>
+      <if test="actName != null">
+        #{actName,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="traType != null">
+        #{traType,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null">
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="trmCertifCode != null">
+        #{trmCertifCode,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateUnit != null">
+        #{certificateUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="trmCertifName != null">
+        #{trmCertifName,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="traMode != null">
+        #{traMode,jdbcType=VARCHAR},
+      </if>
+      <if test="traTime != null">
+        #{traTime,jdbcType=DECIMAL},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="traContent != null">
+        #{traContent,jdbcType=VARCHAR},
+      </if>
+      <if test="traCost != null">
+        #{traCost,jdbcType=DECIMAL},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="absenceCount != null">
+        #{absenceCount,jdbcType=DECIMAL},
+      </if>
+      <if test="actCode != null">
+        #{actCode,jdbcType=VARCHAR},
+      </if>
+      <if test="actName2 != null">
+        #{actName2,jdbcType=VARCHAR},
+      </if>
+      <if test="actName3 != null">
+        #{actName3,jdbcType=VARCHAR},
+      </if>
+      <if test="actName4 != null">
+        #{actName4,jdbcType=VARCHAR},
+      </if>
+      <if test="actName5 != null">
+        #{actName5,jdbcType=VARCHAR},
+      </if>
+      <if test="actName6 != null">
+        #{actName6,jdbcType=VARCHAR},
+      </if>
+      <if test="assOption != null">
+        #{assOption,jdbcType=VARCHAR},
+      </if>
+      <if test="assResult != null">
+        #{assResult,jdbcType=DECIMAL},
+      </if>
+      <if test="assistUnit != null">
+        #{assistUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateDate != null">
+        #{certificateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="contcode != null">
+        #{contcode,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="entrepreneur != null">
+        #{entrepreneur,jdbcType=VARCHAR},
+      </if>
+      <if test="isallduty != null">
+        #{isallduty,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkAct != null">
+        #{pkAct,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnorg != null">
+        #{pkPsnorg,jdbcType=VARCHAR},
+      </if>
+      <if test="purveyor != null">
+        #{purveyor,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="signonDt != null">
+        #{signonDt,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceType != null">
+        #{sourceType,jdbcType=DECIMAL},
+      </if>
+      <if test="taketrmMethod != null">
+        #{taketrmMethod,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

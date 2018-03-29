@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.contact.msg.dao.ASmsWaitSendDao">
+  <resultMap id="BaseResultMap" type="ASmsWaitSend">
+    <result column="MT_SEQ" jdbcType="VARCHAR" property="mtSeq" />
+    <result column="MT_SERV_TYPE" jdbcType="VARCHAR" property="mtServType" />
+    <result column="SEND_PRIORITY" jdbcType="DECIMAL" property="sendPriority" />
+    <result column="MSG_CONTENT" jdbcType="VARCHAR" property="msgContent" />
+    <result column="DEST_TERMID" jdbcType="VARCHAR" property="destTermid" />
+    <result column="SRC_TERMID" jdbcType="VARCHAR" property="srcTermid" />
+    <result column="FEE_USER_TERMID" jdbcType="VARCHAR" property="feeUserTermid" />
+    <result column="FEE_TYPE" jdbcType="VARCHAR" property="feeType" />
+    <result column="MAKE_TIME" jdbcType="TIMESTAMP" property="makeTime" />
+    <result column="REQUIRE_APPLY" jdbcType="DECIMAL" property="requireApply" />
+
+  </resultMap>
+
+  <insert id="insertBatch" parameterType="java.util.List">
+    <if test="envName == 'pro'">
+      insert into SMS.A_SMS_WAIT_SEND@LK_SENDMSG
+    </if>
+    <if test="envName == 'test'">
+      insert into A_SMS_WAIT_SEND
+    </if>
+    (MT_SEQ,MT_SERV_TYPE,SEND_PRIORITY,
+      MSG_CONTENT,DEST_TERMID,
+      SRC_TERMID,FEE_USER_TERMID,
+      FEE_TYPE,MAKE_TIME,
+      REQUIRE_APPLY
+    )
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      <if test="envName == 'pro'">
+        SMS.ACCT_SENDSMS_SEQ.NEXTVAL@LK_SENDMSG
+      </if>
+      <if test="envName == 'test'">
+        ACCT_SENDSMS_SEQ.NEXTVAL
+      </if>
+      , #{mtServType,jdbcType=VARCHAR}, #{sendPriority,jdbcType=DECIMAL},
+        #{msgContent,jdbcType=VARCHAR}, #{destTermid,jdbcType=VARCHAR},
+        #{srcTermid,jdbcType=VARCHAR}, #{feeUserTermid,jdbcType=VARCHAR},
+        #{feeType,jdbcType=VARCHAR},SYSDATE,
+        #{requireApply,jdbcType=DECIMAL}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+
+  <insert id="insert" parameterType="ASmsWaitSend">
+    <if test="envName == 'pro'">
+      insert into SMS.A_SMS_WAIT_SEND@LK_SENDMSG
+    </if>
+    <if test="envName == 'test'">
+      insert into A_SMS_WAIT_SEND
+    </if>
+    (MT_SEQ,MT_SERV_TYPE,SEND_PRIORITY,
+      MSG_CONTENT,DEST_TERMID,
+      SRC_TERMID,FEE_USER_TERMID,
+      FEE_TYPE,MAKE_TIME,
+      REQUIRE_APPLY
+      )
+    values (
+    <if test="envName == 'pro'">
+      SMS.ACCT_SENDSMS_SEQ.NEXTVAL@LK_SENDMSG
+    </if>
+    <if test="envName == 'test'">
+      ACCT_SENDSMS_SEQ.NEXTVAL
+    </if>, #{mtServType,jdbcType=VARCHAR}, #{sendPriority,jdbcType=DECIMAL},
+      #{msgContent,jdbcType=VARCHAR}, #{destTermid,jdbcType=VARCHAR},
+      #{srcTermid,jdbcType=VARCHAR}, #{feeUserTermid,jdbcType=VARCHAR},
+      #{feeType,jdbcType=VARCHAR},SYSDATE,
+      #{requireApply,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="ASmsWaitSend">
+    <if test="envName == 'pro'">
+      insert into SMS.A_SMS_WAIT_SEND@LK_SENDMSG
+    </if>
+    <if test="envName == 'test'">
+      insert into A_SMS_WAIT_SEND
+    </if>
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mtSeq != null">
+        MT_SEQ,
+      </if>
+      <if test="mtServType != null">
+        MT_SERV_TYPE,
+      </if>
+      <if test="sendPriority != null">
+        SEND_PRIORITY,
+      </if>
+      <if test="msgContent != null">
+        MSG_CONTENT,
+      </if>
+      <if test="destTermid != null">
+        DEST_TERMID,
+      </if>
+      <if test="srcTermid != null">
+        SRC_TERMID,
+      </if>
+      <if test="feeUserTermid != null">
+        FEE_USER_TERMID,
+      </if>
+      <if test="feeType != null">
+        FEE_TYPE,
+      </if>
+
+      <if test="makeTime != null">
+        MAKE_TIME,
+      </if>
+      <if test="requireApply != null">
+        REQUIRE_APPLY,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="envName == 'pro'">
+        <if test="mtSeq != null">
+          SMS.ACCT_SENDSMS_SEQ.NEXTVAL@LK_SENDMSG
+        </if>
+      </if>
+      <if test="envName == 'test'">
+        <if test="mtSeq != null">
+          ACCT_SENDSMS_SEQ.NEXTVAL
+        </if>
+      </if>
+      <if test="mtServType != null">
+        #{mtServType,jdbcType=VARCHAR},
+      </if>
+      <if test="sendPriority != null">
+        #{sendPriority,jdbcType=DECIMAL},
+      </if>
+      <if test="msgContent != null">
+        #{msgContent,jdbcType=VARCHAR},
+      </if>
+      <if test="destTermid != null">
+        #{destTermid,jdbcType=VARCHAR},
+      </if>
+      <if test="srcTermid != null">
+        #{srcTermid,jdbcType=VARCHAR},
+      </if>
+      <if test="feeUserTermid != null">
+        #{feeUserTermid,jdbcType=VARCHAR},
+      </if>
+      <if test="feeType != null">
+        #{feeType,jdbcType=VARCHAR},
+      </if>
+
+      <if test="makeTime != null">
+        #{makeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requireApply != null">
+        #{requireApply,jdbcType=DECIMAL},
+      </if>
+
+    </trim>
+  </insert>
+</mapper>

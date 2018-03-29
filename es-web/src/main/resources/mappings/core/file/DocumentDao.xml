@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.file.dao.DocumentDao">
+
+
+    <resultMap id="BaseResultMap" type="Document">
+        <result column="SHORT_NAME" jdbcType="VARCHAR" property="shortName" />
+        <result column="NAME" jdbcType="VARCHAR" property="name" />
+        <result column="MONTH_ID" jdbcType="VARCHAR" property="monthId" />
+        <result column="PATH" jdbcType="VARCHAR" property="path" />
+        <result column="MD5" jdbcType="VARCHAR" property="md5" />
+        <result column="COUNTS" jdbcType="DECIMAL" property="counts" />
+        <result column="EXU_COUNTS" jdbcType="DECIMAL" property="exuCounts" />
+        <result column="FLAG" jdbcType="DECIMAL" property="flag" />
+        <result column="STATUSCODE" jdbcType="VARCHAR" property="statuscode" />
+        <result column="ERRMSG" jdbcType="VARCHAR" property="errmsg" />
+        <result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+    </resultMap>
+
+
+    <sql id="documentColumns">
+        t.SHORT_NAME,
+        t.NAME,
+        t.month_id,
+        t.path,
+        t.md5,
+        t.counts,
+        t.exu_counts,
+        t.flag,
+        t.statuscode,
+        t.errmsg,
+        t.create_time
+    </sql>
+
+    <select id="findList" resultType="Document">
+        SELECT
+        rowid as "id",
+        <include refid="documentColumns"/>
+        FROM TB_Document t WHERE 1=1
+        <if test="monthId != null and monthId != ''">
+            AND t.month_id =#{monthId}
+        </if>
+        <if test="shortName != null and shortName != ''">
+            AND t.SHORT_NAME = #{shortName}
+        </if>
+        <if test="id != null and id != ''">
+            AND rowid = #{id}
+        </if>
+        <if test="flag != null and flag != ''">
+            AND flag = #{flag}
+        </if>
+        ORDER BY t.month_id DESC
+    </select>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+
+        INSERT INTO TB_Document(
+        short_name,NAME,
+        month_id,PATH, md5,
+        counts, exu_counts,
+        flag, statuscode,
+        errmsg, create_time
+        )
+        select cd.* from(
+        <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+            select
+            #{item.shortName,jdbcType=VARCHAR},
+            #{item.name,jdbcType=VARCHAR},
+            #{item.monthId,jdbcType=VARCHAR},
+            #{item.path,jdbcType=VARCHAR},
+            #{item.md5,jdbcType=VARCHAR},
+            #{item.counts,jdbcType=DOUBLE},
+            #{item.exuCounts,jdbcType=DOUBLE},
+            #{item.flag,jdbcType=BIGINT},
+            #{item.statuscode,jdbcType=VARCHAR},
+            #{item.errmsg,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="Document">
+        update TB_Document
+        <set>
+            <if test="flag != null">
+                flag = #{flag,jdbcType=BIGINT},
+            </if>
+            <if test="statuscode != null">
+                statuscode = #{statuscode,jdbcType=VARCHAR},
+            </if>
+            <if test="errmsg != null">
+                errmsg = #{errmsg,jdbcType=VARCHAR},
+            </if>
+            <if test="exuCounts != null">
+                EXU_COUNTS = #{exuCounts,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where rowid = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+             separator=";" 代表着每次循环完，在sql后面放一个分号
+             item="psn" 循环List的每条的结果集
+             collection="list" -->
+        <foreach collection="list" separator=";" item="psn" index="index" open="begin" close=";end;">
+            update TB_Document t
+            set
+            t.SHORT_NAME = #{psn.shortName,jdbcType=VARCHAR},
+
+            t.NAME = #{psn.name,jdbcType=VARCHAR},
+            t.month_id = #{psn.monthId,jdbcType=VARCHAR},
+            t.path = #{psn.path,jdbcType=VARCHAR},
+            t.md5 = #{psn.md5,jdbcType=VARCHAR},
+            t.counts = #{psn.counts,jdbcType=DOUBLE},
+            t.EXU_COUNTS = #{item.exuCounts,jdbcType=DOUBLE},
+            t.flag= #{psn.flag,jdbcType=BIGINT},
+            t.statuscode= #{item.statuscode,jdbcType=VARCHAR},
+            t.errMsg= #{item.errmsg,jdbcType=VARCHAR},
+            t.create_time = #{psn.createTime,jdbcType=VARCHAR}
+            where rowid = #{psn.id}
+        </foreach>
+    </update>
+    <insert id="insert" parameterType="Document">
+        insert into TB_DOCUMENT (SHORT_NAME, NAME, MONTH_ID,
+        PATH, MD5, COUNTS,
+        EXU_COUNTS, FLAG, STATUSCODE,
+        ERRMSG, CREATE_TIME)
+        values (#{shortName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{monthId,jdbcType=VARCHAR},
+        #{path,jdbcType=VARCHAR}, #{md5,jdbcType=VARCHAR}, #{counts,jdbcType=DECIMAL},
+        #{exuCounts,jdbcType=DECIMAL}, #{flag,jdbcType=DECIMAL}, #{statuscode,jdbcType=VARCHAR},
+        #{errmsg,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR})
+    </insert>
+
+</mapper>

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.mpw.psndoc.dao.LdapmMpwHiPsndocTitleDao">
+  <resultMap id="BaseResultMap" type="LdapmMpwHiPsndocTitle">
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="UNIT_ID" jdbcType="VARCHAR" property="unitId" />
+    <result column="PK_PSNDOC_SUB" jdbcType="VARCHAR" property="pkPsndocSub" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="GLBDEF1" jdbcType="VARCHAR" property="glbdef1" />
+    <result column="GLBDEF5" jdbcType="VARCHAR" property="glbdef5" />
+    <result column="GLBDEF6" jdbcType="VARCHAR" property="glbdef6" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="TIPTOP_FLAG" jdbcType="VARCHAR" property="tiptopFlag" />
+    <result column="TITLERANK" jdbcType="VARCHAR" property="titlerank" />
+    <result column="ASSORG" jdbcType="VARCHAR" property="assorg" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="PK_GROUP" jdbcType="VARCHAR" property="pkGroup" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="BEGINDATE" jdbcType="VARCHAR" property="begindate" />
+    <result column="PK_TECHPOSTTITLE" jdbcType="VARCHAR" property="pkTechposttitle" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="CERTIFCODE" jdbcType="VARCHAR" property="certifcode" />
+    <result column="GLBDEF4" jdbcType="VARCHAR" property="glbdef4" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="ACHIVE" jdbcType="VARCHAR" property="achive" />
+    <result column="ENDDATE" jdbcType="VARCHAR" property="enddate" />
+    <result column="LASTFLAG" jdbcType="VARCHAR" property="lastflag" />
+    <result column="RECORDNUM" jdbcType="DECIMAL" property="recordnum" />
+    <result column="STRONGSUIT" jdbcType="VARCHAR" property="strongsuit" />
+    <result column="SUMM" jdbcType="VARCHAR" property="summ" />
+  </resultMap>
+  <insert id="insertBatch" parameterType="java.util.List">
+
+    insert into LDAPM_MPW_HI_PSNDOC_TITLE (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    CREATIONTIME, CREATOR, GLBDEF1,
+    GLBDEF5, GLBDEF6, MODIFIEDTIME,
+    TIPTOP_FLAG, TITLERANK, ASSORG,
+    GLBDEF2, GLBDEF8, PK_GROUP,
+    PK_ORG, MODIFIER, GLBDEF9,
+    BEGINDATE, PK_TECHPOSTTITLE, GLBDEF3,
+    CERTIFCODE, GLBDEF4, GLBDEF7,
+    PK_PSNDOC, DR, TS, ACHIVE,
+    ENDDATE, LASTFLAG, RECORDNUM,
+    STRONGSUIT, SUMM)
+    select cd.* from(
+    <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+      select
+      #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkPsndocSub,jdbcType=VARCHAR},
+      #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR}, #{item.glbdef1,jdbcType=VARCHAR},
+      #{item.glbdef5,jdbcType=VARCHAR}, #{item.glbdef6,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+      #{item.tiptopFlag,jdbcType=VARCHAR}, #{item.titlerank,jdbcType=VARCHAR}, #{item.assorg,jdbcType=VARCHAR},
+      #{item.glbdef2,jdbcType=VARCHAR}, #{item.glbdef8,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR},
+      #{item.pkOrg,jdbcType=VARCHAR}, #{item.modifier,jdbcType=VARCHAR}, #{item.glbdef9,jdbcType=VARCHAR},
+      #{item.begindate,jdbcType=VARCHAR}, #{item.pkTechposttitle,jdbcType=VARCHAR}, #{item.glbdef3,jdbcType=VARCHAR},
+      #{item.certifcode,jdbcType=VARCHAR}, #{item.glbdef4,jdbcType=VARCHAR}, #{item.glbdef7,jdbcType=VARCHAR},
+      #{item.pkPsndoc,jdbcType=VARCHAR}, #{item.dr,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}, #{item.achive,jdbcType=VARCHAR},
+      #{item.enddate,jdbcType=VARCHAR}, #{item.lastflag,jdbcType=VARCHAR}, #{item.recordnum,jdbcType=DECIMAL},
+      #{item.strongsuit,jdbcType=VARCHAR}, #{item.summ,jdbcType=VARCHAR}
+      from dual
+    </foreach>
+    ) cd
+  </insert>
+  <insert id="insert" parameterType="LdapmMpwHiPsndocTitle">
+    insert into LDAPM_MPW_HI_PSNDOC_TITLE (MONTH_ID, UNIT_ID, PK_PSNDOC_SUB,
+    CREATIONTIME, CREATOR, GLBDEF1,
+    GLBDEF5, GLBDEF6, MODIFIEDTIME,
+    TIPTOP_FLAG, TITLERANK, ASSORG,
+    GLBDEF2, GLBDEF8, PK_GROUP,
+    PK_ORG, MODIFIER, GLBDEF9,
+    BEGINDATE, PK_TECHPOSTTITLE, GLBDEF3,
+    CERTIFCODE, GLBDEF4, GLBDEF7,
+    PK_PSNDOC, DR, TS, ACHIVE,
+    ENDDATE, LASTFLAG, RECORDNUM,
+    STRONGSUIT, SUMM)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR},
+    #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, #{glbdef1,jdbcType=VARCHAR},
+    #{glbdef5,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR},
+    #{tiptopFlag,jdbcType=VARCHAR}, #{titlerank,jdbcType=VARCHAR}, #{assorg,jdbcType=VARCHAR},
+    #{glbdef2,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR},
+    #{pkOrg,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, #{glbdef9,jdbcType=VARCHAR},
+    #{begindate,jdbcType=VARCHAR}, #{pkTechposttitle,jdbcType=VARCHAR}, #{glbdef3,jdbcType=VARCHAR},
+    #{certifcode,jdbcType=VARCHAR}, #{glbdef4,jdbcType=VARCHAR}, #{glbdef7,jdbcType=VARCHAR},
+    #{pkPsndoc,jdbcType=VARCHAR}, #{dr,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR}, #{achive,jdbcType=VARCHAR},
+    #{enddate,jdbcType=VARCHAR}, #{lastflag,jdbcType=VARCHAR}, #{recordnum,jdbcType=DECIMAL},
+    #{strongsuit,jdbcType=VARCHAR}, #{summ,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="LdapmMpwHiPsndocTitle">
+    insert into LDAPM_MPW_HI_PSNDOC_TITLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="pkPsndocSub != null">
+        PK_PSNDOC_SUB,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="glbdef1 != null">
+        GLBDEF1,
+      </if>
+      <if test="glbdef5 != null">
+        GLBDEF5,
+      </if>
+      <if test="glbdef6 != null">
+        GLBDEF6,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="tiptopFlag != null">
+        TIPTOP_FLAG,
+      </if>
+      <if test="titlerank != null">
+        TITLERANK,
+      </if>
+      <if test="assorg != null">
+        ASSORG,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="pkGroup != null">
+        PK_GROUP,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="begindate != null">
+        BEGINDATE,
+      </if>
+      <if test="pkTechposttitle != null">
+        PK_TECHPOSTTITLE,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="certifcode != null">
+        CERTIFCODE,
+      </if>
+      <if test="glbdef4 != null">
+        GLBDEF4,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="ts != null">
+        TS,
+      </if>
+      <if test="achive != null">
+        ACHIVE,
+      </if>
+      <if test="enddate != null">
+        ENDDATE,
+      </if>
+      <if test="lastflag != null">
+        LASTFLAG,
+      </if>
+      <if test="recordnum != null">
+        RECORDNUM,
+      </if>
+      <if test="strongsuit != null">
+        STRONGSUIT,
+      </if>
+      <if test="summ != null">
+        SUMM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndocSub != null">
+        #{pkPsndocSub,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef1 != null">
+        #{glbdef1,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef5 != null">
+        #{glbdef5,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef6 != null">
+        #{glbdef6,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="tiptopFlag != null">
+        #{tiptopFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="titlerank != null">
+        #{titlerank,jdbcType=VARCHAR},
+      </if>
+      <if test="assorg != null">
+        #{assorg,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="pkGroup != null">
+        #{pkGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="begindate != null">
+        #{begindate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkTechposttitle != null">
+        #{pkTechposttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="certifcode != null">
+        #{certifcode,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef4 != null">
+        #{glbdef4,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=VARCHAR},
+      </if>
+      <if test="achive != null">
+        #{achive,jdbcType=VARCHAR},
+      </if>
+      <if test="enddate != null">
+        #{enddate,jdbcType=VARCHAR},
+      </if>
+      <if test="lastflag != null">
+        #{lastflag,jdbcType=VARCHAR},
+      </if>
+      <if test="recordnum != null">
+        #{recordnum,jdbcType=DECIMAL},
+      </if>
+      <if test="strongsuit != null">
+        #{strongsuit,jdbcType=VARCHAR},
+      </if>
+      <if test="summ != null">
+        #{summ,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
