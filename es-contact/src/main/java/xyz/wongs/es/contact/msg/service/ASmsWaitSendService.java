@@ -68,4 +68,7 @@ public class ASmsWaitSendService{
         return contact.split(";");
     }
 
+    public static void main(String[] args) {
+        
+    }
 }
