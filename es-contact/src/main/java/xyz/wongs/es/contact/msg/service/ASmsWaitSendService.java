@@ -1,11 +1,14 @@
 package xyz.wongs.es.contact.msg.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.contact.msg.dao.ASmsWaitSendDao;
 import xyz.wongs.es.contact.msg.entity.ASmsWaitSend;
 import xyz.wongs.es.modules.sys.service.DictService;
+import xyz.wongs.es.modules.sys.service.LogService;
 import xyz.wongs.es.modules.sys.utils.DictUtils;
 
 /**
@@ -25,7 +28,12 @@ public class ASmsWaitSendService{
     @Autowired
     private DictService dictService;
 
+    @Autowired
+    private LogService logService;
+
     private static String CONTACT="contact";
+
+    private static Logger logger = LoggerFactory.getLogger(ASmsWaitSendService.class);
 
     /**
      * 实现向短信待发表插入短信信息，目前仅实现单个插入，支持批量插入
@@ -48,6 +56,7 @@ public class ASmsWaitSendService{
             aSmsWaitSend.setDestTermid(s);
             aSmsWaitSend.setFeeUserTermid(s);
             aSmsWaitSendDao.insert(aSmsWaitSend);
+            logger.error(aSmsWaitSend.toString());
         }
     }
 
@@ -69,6 +78,6 @@ public class ASmsWaitSendService{
     }
 
     public static void main(String[] args) {
-        
+
     }
 }

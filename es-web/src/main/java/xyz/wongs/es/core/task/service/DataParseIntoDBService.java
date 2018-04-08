@@ -31,7 +31,7 @@ import java.util.List;
  */
 @Service
 @Lazy(false)
-@Transactional(readOnly = true)
+@Transactional(readOnly = true,rollbackFor = Exception.class)
 public class DataParseIntoDBService {
 
     private static Logger logger = LoggerFactory.getLogger(DataParseIntoDBService.class);
@@ -66,7 +66,8 @@ public class DataParseIntoDBService {
      */
     @Scheduled(cron = "0 30 20 6 * ?")
     public void DataParseInputTimeByMonth(){
-        String month = DateUtils.getMonth(0);//month:为每月的账期
+        //month:为每月的账期
+        String month = DateUtils.getMonth(0);
         String year =  month.substring(0,4);
         //数据解析入库路径地址格式（必须明确）
         String localPath = SUFFIX+"MonthData"+File.separator+year+File.separator+month+ File.separator;

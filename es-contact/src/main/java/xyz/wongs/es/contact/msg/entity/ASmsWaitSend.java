@@ -132,4 +132,20 @@ public class ASmsWaitSend extends DataEntity<ASmsWaitSend> {
         this.requireApply = requireApply;
     }
 
+
+    @Override
+    public String toString() {
+        return "ASmsWaitSend{" +
+                "mtSeq='" + mtSeq + '\'' +
+                ", mtServType='" + mtServType + '\'' +
+                ", sendPriority=" + sendPriority +
+                ", msgContent='" + msgContent + '\'' +
+                ", destTermid='" + destTermid + '\'' +
+                ", srcTermid='" + srcTermid + '\'' +
+                ", feeUserTermid='" + feeUserTermid + '\'' +
+                ", feeType='" + feeType + '\'' +
+                ", makeTime=" + makeTime +
+                ", requireApply=" + requireApply +
+                '}';
+    }
 }
