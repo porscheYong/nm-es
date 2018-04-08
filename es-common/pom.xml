@@ -3,7 +3,7 @@
     <parent>
         <artifactId>nm-es</artifactId>
         <groupId>xyz.wongs</groupId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,7 +16,7 @@
         <dependency>
             <groupId>xyz.wongs</groupId>
             <artifactId>es-util</artifactId>
-            <version>1.0</version>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
