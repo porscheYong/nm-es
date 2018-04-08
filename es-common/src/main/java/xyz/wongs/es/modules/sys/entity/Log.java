@@ -3,13 +3,12 @@
  */
 package xyz.wongs.es.modules.sys.entity;
 
-import java.util.Date;
-import java.util.Map;
-
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
 import xyz.wongs.es.common.persistence.DataEntity;
 import xyz.wongs.es.common.utils.StringUtils;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * 日志Entity
@@ -19,30 +18,62 @@ import xyz.wongs.es.common.utils.StringUtils;
 public class Log extends DataEntity<Log> {
 
 	private static final long serialVersionUID = 1L;
-	private String type; 		// 日志类型（1：接入日志；2：错误日志）
-	private String title;		// 日志标题
-	private String remoteAddr; 	// 操作用户的IP地址
-	private String requestUri; 	// 操作的URI
-	private String method; 		// 操作的方式
-	private String params; 		// 操作提交的数据
-	private String userAgent;	// 操作用户代理信息
-	private String exception; 	// 异常信息
-	
-	private Date beginDate;		// 开始日期
-	private Date endDate;		// 结束日期
-	
-	// 日志类型（1：接入日志；2：错误日志）
+	/**
+	 *  日志类型（1：接入日志；2：错误日志）
+	 */
+	private String type;
+	/**
+	 * // 日志标题
+	 */
+	private String title;
+	/**
+	 * // 操作用户的IP地址
+	 */
+	private String remoteAddr;
+	/**
+	 * // 操作的URI
+	 */
+	private String requestUri;
+	/**
+	 * // 操作的方式
+	 */
+	private String method;
+	/**
+	 * // 操作提交的数据
+	 */
+	private String params;
+	/**
+	 * // 操作用户代理信息
+	 */
+	private String userAgent;
+	/**
+	 * // 异常信息
+	 */
+	private String exception;
+
+	/**
+	 * // 开始日期
+	 */
+	private Date beginDate;
+	/**
+	 * // 结束日期
+	 */
+	private Date endDate;
+
+	/**
+	 * 日志类型（1：接入日志；2：错误日志）
+	 */
 	public static final String TYPE_ACCESS = "1";
 	public static final String TYPE_EXCEPTION = "2";
-	
+
 	public Log(){
 		super();
 	}
-	
+
 	public Log(String id){
 		super(id);
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -98,7 +129,7 @@ public class Log extends DataEntity<Log> {
 	public void setParams(String params) {
 		this.params = params;
 	}
-	
+
 	public String getException() {
 		return exception;
 	}
@@ -122,7 +153,7 @@ public class Log extends DataEntity<Log> {
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	/**
 	 * 设置请求参数
 	 * @param paramMap
@@ -140,7 +171,7 @@ public class Log extends DataEntity<Log> {
 		}
 		this.params = params.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		return ReflectionToStringBuilder.toString(this);
