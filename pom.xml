@@ -64,7 +64,18 @@
         <downloadSources>true</downloadSources>
 
     </properties>
-
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
     <!-- 依赖项定义 -->
     <dependencies>
         <dependency>
@@ -590,6 +601,9 @@
 
     </dependencies>
 
+
+
+
     <build>
 
         <plugins>
@@ -763,7 +777,9 @@
                     <overwrite>true</overwrite>
                 </configuration>
             </plugin>
+
         </plugins>
+
     </build>
 
 </project>
