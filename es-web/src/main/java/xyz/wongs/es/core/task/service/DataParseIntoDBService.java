@@ -57,14 +57,14 @@ public class DataParseIntoDBService {
 //    public static final String SUFFIX="E:\\UECC/";
 
     /**
-     * @Description: 定时任务：定时向数据库导入当月数据：每月6日20点30分进行数据写库
+     * @Description: 定时任务：定时向数据库导入当月数据：每月7日10点30分进行数据写库
      * @method      dataInsertDataBase
      * @author      Wang Yiren
      * @version
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 30 20 6 * ?")
+    @Scheduled(cron = "0 30 10 7 * ?")
     public void DataParseInputTimeByMonth(){
         //month:为每月的账期
         String month = DateUtils.getMonth(0);
@@ -90,7 +90,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 15 14 * * ?")
+//    @Scheduled(cron = "0 15 14 * * ?")
     public void DataParseInputTimeByDay(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
