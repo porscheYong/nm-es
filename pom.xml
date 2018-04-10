@@ -586,18 +586,18 @@
             <version>1.13</version>
         </dependency>
 
-        <dependency>
+      <!--  <dependency>
             <groupId>com.alipay.jarslink</groupId>
             <artifactId>jarslink-api</artifactId>
             <version>1.5.0.20180213</version>
             <exclusions>
-<!--                <exclusion>
+&lt;!&ndash;                <exclusion>
                     <groupId>commons-lang</groupId>
                     <artifactId>commons-lang</artifactId>
-                </exclusion>-->
+                </exclusion>&ndash;&gt;
 
             </exclusions>
-        </dependency>
+        </dependency>-->
 
     </dependencies>
 
