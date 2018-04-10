@@ -23,7 +23,7 @@ public class Examination2Document {
     /**
      * 文件中包含的记录数
      */
-    private Integer counts;
+    private Long counts;
 
     /**
      *  数据日期
@@ -33,5 +33,57 @@ public class Examination2Document {
     /**
      * 接口数据文件的生成时间
      */
-    private String cDate;
+    private String createDate;
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
+
+    public Long getCounts() {
+        return counts;
+    }
+
+    public void setCounts(Long counts) {
+        this.counts = counts;
+    }
+
+    public Integer getMonthId() {
+        return monthId;
+    }
+
+    public void setMonthId(Integer monthId) {
+        this.monthId = monthId;
+    }
+
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Examination2Document{" +
+                "documentName='" + documentName + '\'' +
+                ", size=" + size +
+                ", counts=" + counts +
+                ", monthId=" + monthId +
+                ", createDate='" + createDate + '\'' +
+                '}';
+    }
 }

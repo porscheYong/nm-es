@@ -18,7 +18,7 @@ import java.util.List;
  * @Modified By :
  **/
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = true,rollbackFor = Exception.class)
 public class Tab2BeanCorresRefService extends CrudService<Tab2BeanCorresRefDao, Tab2BeanCorresRef> {
 
     private static String KEY= "TAB2BEANCORRESREF";
@@ -27,10 +27,12 @@ public class Tab2BeanCorresRefService extends CrudService<Tab2BeanCorresRefDao, 
     Tab2BeanCorresRefDao tab2BeanCorresRefDao;
 
 
+    @Override
     public Page<Tab2BeanCorresRef> findPage(Page<Tab2BeanCorresRef> page, Tab2BeanCorresRef tab2BeanCorresRef) {
         return super.findPage(page, tab2BeanCorresRef);
     }
 
+    @Override
     public List<Tab2BeanCorresRef> findList(Tab2BeanCorresRef document){
         List<Tab2BeanCorresRef> list = (List<Tab2BeanCorresRef>)UserUtils.getCache(KEY);
         if(null==list || list.size()==0){

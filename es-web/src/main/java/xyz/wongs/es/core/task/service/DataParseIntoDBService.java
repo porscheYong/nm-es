@@ -12,8 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.DateUtils;
 import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.core.file.entity.Document;
+import xyz.wongs.es.core.file.entity.Examination2Document;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
 import xyz.wongs.es.core.file.service.DocumentService;
+import xyz.wongs.es.core.file.service.Examination2DocumentService;
 import xyz.wongs.es.core.file.service.InsertDataService;
 import xyz.wongs.es.core.file.service.Tab2BeanCorresRefService;
 
@@ -44,6 +46,9 @@ public class DataParseIntoDBService {
 
     @Autowired
     private InsertDataService insertDataService;
+
+    @Autowired
+    private Examination2DocumentService examination2DocumentService;
 
     private List<Document> documents = new ArrayList<Document>(70);
     /**
@@ -180,6 +185,12 @@ public class DataParseIntoDBService {
                 final String shortName = fileName.substring(0,fileName.indexOf("."));
                 final String monthId =   (fileName.split("\\."))[2];
                 Document doc = new Document(shortName,fileName,monthId,f.getPath(),(short)0, DateUtils.formatDateTime(new Date()));
+
+                //添加校验文件，用于对集团宽表文件中原始数据的量做解析
+                Examination2Document exm = examination2DocumentService.excuExamination(doc);
+                if(null!=exm){
+                    doc.setCounts(exm.getCounts());
+                }
                 documents.add(doc);
             }
         }
