@@ -76,7 +76,7 @@ public class FtpDownloadService {
      * @Description: 每月7日10点从ftp抓取数据
      * @Mod:
      */
-    @Scheduled(cron = "0 00 10 7 * ?")
+ //   @Scheduled(cron = "0 00 10 7 * ?")
     public void monthData(){
         String month = DateUtils.getMonth(0);
         String year =  month.substring(0,4);
