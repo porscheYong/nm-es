@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.dao.AtiPositionMapper">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.entity.AtiPosition">
+    <id column="ATI_POSITION_ID" jdbcType="DECIMAL" property="atiPositionId" />
+    <result column="POSITION_NAME" jdbcType="OTHER" property="positionName" />
+    <result column="POSITION_CDE" jdbcType="VARCHAR" property="positionCde" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_POSITION_ID, POSITION_NAME, POSITION_CDE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_POSITION
+    where ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_POSITION
+    where ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="xyz.wongs.es.entity.AtiPosition">
+    insert into ATI_POSITION (ATI_POSITION_ID, POSITION_NAME, POSITION_CDE
+      )
+    values (#{atiPositionId,jdbcType=DECIMAL}, #{positionName,jdbcType=OTHER}, #{positionCde,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.entity.AtiPosition">
+    insert into ATI_POSITION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiPositionId != null">
+        ATI_POSITION_ID,
+      </if>
+      <if test="positionName != null">
+        POSITION_NAME,
+      </if>
+      <if test="positionCde != null">
+        POSITION_CDE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiPositionId != null">
+        #{atiPositionId,jdbcType=DECIMAL},
+      </if>
+      <if test="positionName != null">
+        #{positionName,jdbcType=OTHER},
+      </if>
+      <if test="positionCde != null">
+        #{positionCde,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.entity.AtiPosition">
+    update ATI_POSITION
+    <set>
+      <if test="positionName != null">
+        POSITION_NAME = #{positionName,jdbcType=OTHER},
+      </if>
+      <if test="positionCde != null">
+        POSITION_CDE = #{positionCde,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.entity.AtiPosition">
+    update ATI_POSITION
+    set POSITION_NAME = #{positionName,jdbcType=OTHER},
+      POSITION_CDE = #{positionCde,jdbcType=VARCHAR}
+    where ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL}
+  </update>
+</mapper>

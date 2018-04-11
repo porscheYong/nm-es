@@ -20,6 +20,8 @@ import xyz.wongs.es.common.utils.CacheUtils;
 import xyz.wongs.es.common.utils.Encodes;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.common.web.Servlets;
+import xyz.wongs.es.dao.AtiUserMapper;
+import xyz.wongs.es.entity.AtiUser;
 import xyz.wongs.es.modules.sys.dao.MenuDao;
 import xyz.wongs.es.modules.sys.dao.RoleDao;
 import xyz.wongs.es.modules.sys.dao.UserDao;
@@ -31,6 +33,7 @@ import xyz.wongs.es.modules.sys.security.SystemAuthorizingRealm;
 import xyz.wongs.es.modules.sys.utils.LogUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 
+import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -60,6 +63,9 @@ public class SystemService extends BaseService implements InitializingBean {
 	@Autowired
 	private SystemAuthorizingRealm systemRealm;
 
+	@Autowired
+	private AtiUserMapper atiUserMapper;
+
 	public SessionDAO getSessionDao() {
 		return sessionDao;
 	}
@@ -85,6 +91,15 @@ public class SystemService extends BaseService implements InitializingBean {
 	 */
 	public User getUserByLoginName(String loginName) {
 		return UserUtils.getByLoginName(loginName);
+	}
+
+	/**
+	 * 修改为查找自定义用户
+	 * @param name
+	 * @return
+	 */
+	public AtiUser getAtiUserByName(String name) {
+		return  atiUserMapper.getUserByName(name);
 	}
 
 	public Page<User> findUser(Page<User> page, User user) {
@@ -415,6 +430,7 @@ public class SystemService extends BaseService implements InitializingBean {
 	 * 是需要同步Activiti数据，如果从未同步过，则同步数据。
 	 */
 	private static boolean isSynActivitiIndetity = true;
+	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (!Global.isSynActivitiIndetity()){
 			return;

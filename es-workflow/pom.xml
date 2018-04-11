@@ -15,5 +15,10 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>xyz.wongs</groupId>
+            <artifactId>es-common</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 </project>
