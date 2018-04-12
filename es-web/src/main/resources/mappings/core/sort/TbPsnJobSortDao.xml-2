@@ -25,7 +25,6 @@
     SELECT
     Distinct t.pk_psnDoc
     FROM TB_PSNJOB_SORT t
-
   </select>
 
   <select id="findList" resultType="TbPsnJobSort">

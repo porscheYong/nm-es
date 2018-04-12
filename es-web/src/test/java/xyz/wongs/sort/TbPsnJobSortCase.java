@@ -58,7 +58,7 @@
 //                        logger.error(i+ " 结束日期为空==============="+tbPsnJobSorts.get(j).getPkPsndoc());
 //                        continue;
 //                    }
-//                    int con = DateUtils.dateValiSeconds(DateUtils.getDatebystr(tbPsnJobSorts.get(j).getEndDate(),PATTERN),DateUtils.getDatebystr(tbPsnJobSorts.get(j+1).getBeginDate(),PATTERN));
+//                    int con = DateUtils.dateVali(DateUtils.getDatebystr(tbPsnJobSorts.get(j).getEndDate(),PATTERN),DateUtils.getDatebystr(tbPsnJobSorts.get(j+1).getBeginDate(),PATTERN));
 //                    if(con>1){
 //                        tbPsnJobSorts.get(j).setErrorMsg(" 日期间隔不一致");
 //                        tbPsnJobSorts.get(j).setFlag("1");
