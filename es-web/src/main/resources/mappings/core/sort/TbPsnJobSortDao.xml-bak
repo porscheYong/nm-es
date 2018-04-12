@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.core.sort.dao.TbPsnJobSortDao">
+  <resultMap id="BaseResultMap" type="TbPsnJobSort">
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PSNDOC_NAME" jdbcType="VARCHAR" property="psndocName" />
+    <result column="PK_PSNJOB" jdbcType="VARCHAR" property="pkPsnjob" />
+    <result column="BEGIN_DATE" jdbcType="VARCHAR" property="beginDate" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="ERROR_MSG" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="FLAG" jdbcType="CHAR" property="flag" />
+  </resultMap>
+
+  <sql id="tbPsnJobSortColumns">
+    t.PK_PSNDOC,
+    t.PSNDOC_NAME,
+    t.PK_PSNJOB,
+    t.BEGIN_DATE,
+    t.END_DATE,
+    t.ERROR_MSG,
+    t.FLAG
+  </sql>
+
+  <select id="findListPk" resultType="String">
+    SELECT
+    Distinct t.pk_psnDoc
+    FROM TB_PSNJOB_SORT t
+
+  </select>
+
+  <select id="findList" resultType="TbPsnJobSort">
+    SELECT
+    rowid as "id",
+    <include refid="tbPsnJobSortColumns"/>
+    FROM TB_PSNJOB_SORT t WHERE 1=1
+    <if test="pkPsndoc != null and pkPsndoc != ''">
+      AND t.PK_PSNDOC =#{pkPsndoc}
+    </if>
+    <if test="pkPsnjob != null and pkPsnjob != ''">
+      AND t.PK_PSNJOB = #{pkPsnjob}
+    </if>
+    <if test="id != null and id != ''">
+      AND rowid = #{id}
+    </if>
+    ORDER BY t.begin_date
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="TbPsnJobSort">
+    update TB_PSNJOB_SORT
+    <set>
+      <if test="errorMsg != null and errorMsg != ''">
+        ERROR_MSG = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=CHAR},
+      </if>
+    </set>
+    where rowid = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="batchUpdate" parameterType="java.util.List">
+    <!-- 接收list参数，循环着组装sql语句，注意for循环的写法
+         separator=";" 代表着每次循环完，在sql后面放一个分号
+         item="psn" 循环List的每条的结果集
+         collection="list" -->
+    <foreach collection="list" separator=";" item="psn" index="index" open="begin" close=";end;">
+      update TB_PSNJOB_SORT t
+      set
+      t.ERROR_MSG = #{psn.errorMsg,jdbcType=VARCHAR},
+      t.FLAG = #{psn.flag,jdbcType=CHAR}
+      where rowid = #{psn.id}
+    </foreach>
+  </update>
+
+  <insert id="insert" parameterType="TbPsnJobSort">
+    insert into TB_PSNJOB_SORT (PK_PSNDOC, PSNDOC_NAME, PK_PSNJOB,
+      BEGIN_DATE, END_DATE, ERROR_MSG,
+      FLAG)
+    values (#{pkPsndoc,jdbcType=VARCHAR}, #{psndocName,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR},
+      #{beginDate,jdbcType=VARCHAR}, #{endDate,jdbcType=VARCHAR}, #{errorMsg,jdbcType=VARCHAR},
+      #{flag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="TbPsnJobSort">
+    insert into TB_PSNJOB_SORT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="psndocName != null">
+        PSNDOC_NAME,
+      </if>
+      <if test="pkPsnjob != null">
+        PK_PSNJOB,
+      </if>
+      <if test="beginDate != null">
+        BEGIN_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="errorMsg != null">
+        ERROR_MSG,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="psndocName != null">
+        #{psndocName,jdbcType=VARCHAR},
+      </if>
+      <if test="pkPsnjob != null">
+        #{pkPsnjob,jdbcType=VARCHAR},
+      </if>
+      <if test="beginDate != null">
+        #{beginDate,jdbcType=VARCHAR},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=VARCHAR},
+      </if>
+      <if test="errorMsg != null">
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
