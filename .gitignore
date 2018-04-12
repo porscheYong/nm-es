@@ -7,7 +7,7 @@ target
 *.log
 *.log.*
 **/target/
-
+generatorConfig.xml
 /build/
 /temp/
 #**/src/test/
