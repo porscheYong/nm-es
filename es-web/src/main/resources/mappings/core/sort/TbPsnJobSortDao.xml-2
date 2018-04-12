@@ -10,7 +10,24 @@
     <result column="ERROR_MSG" jdbcType="VARCHAR" property="errorMsg" />
     <result column="FLAG" jdbcType="CHAR" property="flag" />
   </resultMap>
-
+  <!--
+  TRUNCATE TABLE TB_PSNJOB_SORT;
+  DROP TABLE TB_PSNJOB_SORT;
+  CREATE TABLE TB_PSNJOB_SORT(
+  pk_psnDoc VARCHAR2(40),
+  psndoc_name VARCHAR2(40),
+  pk_psnjob VARCHAR2(40),
+  begin_date VARCHAR2(40),
+  end_date VARCHAR2(40),
+  error_msg VARCHAR2(100),
+  flag CHAR(2)
+  ) ;
+  INSERT INTO TB_PSNJOB_SORT(pk_psnDoc,psndoc_name,pk_psnjob,begin_date,end_date)
+  SELECT T.人员基本信息主键,t.人员基本信息,t.主键,t.开始日期,
+               t.结束日期
+   FROM HI_PSNJOB_0411 T ;
+   COMMIT;
+  -->
   <sql id="tbPsnJobSortColumns">
     t.PK_PSNDOC,
     t.PSNDOC_NAME,
