@@ -302,8 +302,8 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
 
 	/**
-	 * 方法实现说明
-	 * @method      dateVali
+	 * 转换成毫秒进行判断，相差几天
+	 * @method      dateValiSeconds
 	 * @author      WCNGS@QQ.COM
 	 * @version
 	 * @see
@@ -314,12 +314,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * @date        2018/4/12 19:53
 	 */
 	public static int dateValiSeconds(Date date1,Date date2){
-
-//		Calendar cal1 = Calendar.getInstance();
-
 		long time1 = date1.getTime();
-
-
 		long time2 = date2.getTime();
 		long between_days=(time2-time1)/(1000*3600*24);
 		return Integer.parseInt(String.valueOf(between_days));
