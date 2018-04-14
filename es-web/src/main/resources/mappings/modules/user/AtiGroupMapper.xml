@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.AtiGroupMapper">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.AtiGroup">
+    <id column="ATI_GROUP_ID" jdbcType="DECIMAL" property="atiGroupId" />
+    <result column="GROUP_NAME" jdbcType="OTHER" property="groupName" />
+    <result column="GROUP_TYPE" jdbcType="VARCHAR" property="groupType" />
+    <result column="GROUP_DATA_RANGE" jdbcType="VARCHAR" property="groupDataRange" />
+    <result column="ATI_POSITION_ID" jdbcType="DECIMAL" property="atiPositionId" />
+    <result column="IS_PRI_POSI" jdbcType="VARCHAR" property="isPriPosi" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_GROUP_ID, GROUP_NAME, GROUP_TYPE, GROUP_DATA_RANGE, ATI_POSITION_ID, IS_PRI_POSI
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_GROUP
+    where ATI_GROUP_ID = #{atiGroupId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_GROUP
+    where ATI_GROUP_ID = #{atiGroupId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.user.entity.AtiGroup">
+    insert into ATI_GROUP (ATI_GROUP_ID, GROUP_NAME, GROUP_TYPE, 
+      GROUP_DATA_RANGE, ATI_POSITION_ID, IS_PRI_POSI
+      )
+    values (#{atiGroupId,jdbcType=DECIMAL}, #{groupName,jdbcType=OTHER}, #{groupType,jdbcType=VARCHAR}, 
+      #{groupDataRange,jdbcType=VARCHAR}, #{atiPositionId,jdbcType=DECIMAL}, #{isPriPosi,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiGroup">
+    insert into ATI_GROUP
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiGroupId != null">
+        ATI_GROUP_ID,
+      </if>
+      <if test="groupName != null">
+        GROUP_NAME,
+      </if>
+      <if test="groupType != null">
+        GROUP_TYPE,
+      </if>
+      <if test="groupDataRange != null">
+        GROUP_DATA_RANGE,
+      </if>
+      <if test="atiPositionId != null">
+        ATI_POSITION_ID,
+      </if>
+      <if test="isPriPosi != null">
+        IS_PRI_POSI,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiGroupId != null">
+        #{atiGroupId,jdbcType=DECIMAL},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=OTHER},
+      </if>
+      <if test="groupType != null">
+        #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDataRange != null">
+        #{groupDataRange,jdbcType=VARCHAR},
+      </if>
+      <if test="atiPositionId != null">
+        #{atiPositionId,jdbcType=DECIMAL},
+      </if>
+      <if test="isPriPosi != null">
+        #{isPriPosi,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiGroup">
+    update ATI_GROUP
+    <set>
+      <if test="groupName != null">
+        GROUP_NAME = #{groupName,jdbcType=OTHER},
+      </if>
+      <if test="groupType != null">
+        GROUP_TYPE = #{groupType,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDataRange != null">
+        GROUP_DATA_RANGE = #{groupDataRange,jdbcType=VARCHAR},
+      </if>
+      <if test="atiPositionId != null">
+        ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL},
+      </if>
+      <if test="isPriPosi != null">
+        IS_PRI_POSI = #{isPriPosi,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_GROUP_ID = #{atiGroupId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.user.entity.AtiGroup">
+    update ATI_GROUP
+    set GROUP_NAME = #{groupName,jdbcType=OTHER},
+      GROUP_TYPE = #{groupType,jdbcType=VARCHAR},
+      GROUP_DATA_RANGE = #{groupDataRange,jdbcType=VARCHAR},
+      ATI_POSITION_ID = #{atiPositionId,jdbcType=DECIMAL},
+      IS_PRI_POSI = #{isPriPosi,jdbcType=VARCHAR}
+    where ATI_GROUP_ID = #{atiGroupId,jdbcType=DECIMAL}
+  </update>
+</mapper>

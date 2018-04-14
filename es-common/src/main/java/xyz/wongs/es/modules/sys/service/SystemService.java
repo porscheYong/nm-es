@@ -20,8 +20,6 @@ import xyz.wongs.es.common.utils.CacheUtils;
 import xyz.wongs.es.common.utils.Encodes;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.common.web.Servlets;
-import xyz.wongs.es.dao.AtiUserMapper;
-import xyz.wongs.es.entity.AtiUser;
 import xyz.wongs.es.modules.sys.dao.MenuDao;
 import xyz.wongs.es.modules.sys.dao.RoleDao;
 import xyz.wongs.es.modules.sys.dao.UserDao;
@@ -32,6 +30,8 @@ import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.security.SystemAuthorizingRealm;
 import xyz.wongs.es.modules.sys.utils.LogUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
+import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.annotation.Resource;
 import java.util.Collection;

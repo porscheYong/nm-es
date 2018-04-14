@@ -57,29 +57,8 @@
 			<table class="table-form">
 				<tr>
 					<td class="tit">姓名</td><td>
-					<form:input path="formSender"></form:input>
+
 				</td>
-				</tr>
-				<tr>
-					<td class="tit">工单主题 </td>
-					<td colspan="5">
-							<form:textarea path="formTheme" class="required" cols="200" cssStyle="width:500px" />
-					</td>
-				</tr>
-				<tr>
-					<td class="tit">紧急程度</td>
-					<td>
-						<select name="urgent">
-							<option value="1">一般</option>
-							<option value="2">加急</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td class="tit">表单内容 </td>
-					<td colspan="5">
-						<form:textarea path="formContent" class="required" cols="200" maxlength="200" cssStyle="width:500px"/>
-					</td>
 				</tr>
 				<tr>
 					<td class="tit">请假类型</td>

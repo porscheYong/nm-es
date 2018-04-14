@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.AtiUserDataRangeMapper">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.AtiUserDataRange">
+    <id column="ATI_USER_DATA_RANGE_ID" jdbcType="DECIMAL" property="atiUserDataRangeId" />
+    <result column="ATI_USER_ID" jdbcType="DECIMAL" property="atiUserId" />
+    <result column="DATA_RANGE_TYPE" jdbcType="VARCHAR" property="dataRangeType" />
+    <result column="DATA_NUMBER" jdbcType="VARCHAR" property="dataNumber" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_USER_DATA_RANGE_ID, ATI_USER_ID, DATA_RANGE_TYPE, DATA_NUMBER
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_USER_DATA_RANGE
+    where ATI_USER_DATA_RANGE_ID = #{atiUserDataRangeId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_USER_DATA_RANGE
+    where ATI_USER_DATA_RANGE_ID = #{atiUserDataRangeId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.user.entity.AtiUserDataRange">
+    insert into ATI_USER_DATA_RANGE (ATI_USER_DATA_RANGE_ID, ATI_USER_ID, DATA_RANGE_TYPE, 
+      DATA_NUMBER)
+    values (#{atiUserDataRangeId,jdbcType=DECIMAL}, #{atiUserId,jdbcType=DECIMAL}, #{dataRangeType,jdbcType=VARCHAR}, 
+      #{dataNumber,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiUserDataRange">
+    insert into ATI_USER_DATA_RANGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiUserDataRangeId != null">
+        ATI_USER_DATA_RANGE_ID,
+      </if>
+      <if test="atiUserId != null">
+        ATI_USER_ID,
+      </if>
+      <if test="dataRangeType != null">
+        DATA_RANGE_TYPE,
+      </if>
+      <if test="dataNumber != null">
+        DATA_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiUserDataRangeId != null">
+        #{atiUserDataRangeId,jdbcType=DECIMAL},
+      </if>
+      <if test="atiUserId != null">
+        #{atiUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="dataRangeType != null">
+        #{dataRangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataNumber != null">
+        #{dataNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiUserDataRange">
+    update ATI_USER_DATA_RANGE
+    <set>
+      <if test="atiUserId != null">
+        ATI_USER_ID = #{atiUserId,jdbcType=DECIMAL},
+      </if>
+      <if test="dataRangeType != null">
+        DATA_RANGE_TYPE = #{dataRangeType,jdbcType=VARCHAR},
+      </if>
+      <if test="dataNumber != null">
+        DATA_NUMBER = #{dataNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_USER_DATA_RANGE_ID = #{atiUserDataRangeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.user.entity.AtiUserDataRange">
+    update ATI_USER_DATA_RANGE
+    set ATI_USER_ID = #{atiUserId,jdbcType=DECIMAL},
+      DATA_RANGE_TYPE = #{dataRangeType,jdbcType=VARCHAR},
+      DATA_NUMBER = #{dataNumber,jdbcType=VARCHAR}
+    where ATI_USER_DATA_RANGE_ID = #{atiUserDataRangeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

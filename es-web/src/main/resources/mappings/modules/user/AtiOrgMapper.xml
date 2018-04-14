@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.AtiOrgMapper">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.AtiOrg">
+    <id column="ATI_ORG_ID" jdbcType="DECIMAL" property="atiOrgId" />
+    <result column="PARENT_ID" jdbcType="DECIMAL" property="parentId" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_ORG_ID, PARENT_ID, ORG_NAME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_ORG
+    where ATI_ORG_ID = #{atiOrgId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_ORG
+    where ATI_ORG_ID = #{atiOrgId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.user.entity.AtiOrg">
+    insert into ATI_ORG (ATI_ORG_ID, PARENT_ID, ORG_NAME
+      )
+    values (#{atiOrgId,jdbcType=DECIMAL}, #{parentId,jdbcType=DECIMAL}, #{orgName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiOrg">
+    insert into ATI_ORG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiOrgId != null">
+        ATI_ORG_ID,
+      </if>
+      <if test="parentId != null">
+        PARENT_ID,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiOrgId != null">
+        #{atiOrgId,jdbcType=DECIMAL},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.user.entity.AtiOrg">
+    update ATI_ORG
+    <set>
+      <if test="parentId != null">
+        PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      </if>
+      <if test="orgName != null">
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_ORG_ID = #{atiOrgId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.user.entity.AtiOrg">
+    update ATI_ORG
+    set PARENT_ID = #{parentId,jdbcType=DECIMAL},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR}
+    where ATI_ORG_ID = #{atiOrgId,jdbcType=DECIMAL}
+  </update>
+</mapper>

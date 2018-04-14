@@ -19,10 +19,10 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.common.utils.StringUtils;
-import xyz.wongs.es.entity.AtiUser;
 import xyz.wongs.es.modules.act.utils.ActUtils;
 import xyz.wongs.es.modules.sys.entity.Role;
 import xyz.wongs.es.modules.sys.service.SystemService;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 /**
  * Activiti User Entity Service

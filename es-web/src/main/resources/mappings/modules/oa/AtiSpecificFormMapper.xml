@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    <id column="ATI_SPECIFIC_FORM_ID" jdbcType="DECIMAL" property="atiSpecificFormId" />
+    <result column="ATI_BASE_FORM_ID" jdbcType="DECIMAL" property="atiBaseFormId" />
+    <result column="ATI_ACT_CATEGORY_ID" jdbcType="DECIMAL" property="atiActCategoryId" />
+    <result column="PARAMETER" jdbcType="VARCHAR" property="parameter" />
+    <result column="PARAM_VALUE" jdbcType="VARCHAR" property="paramValue" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_SPECIFIC_FORM_ID, ATI_BASE_FORM_ID, ATI_ACT_CATEGORY_ID, PARAMETER, PARAM_VALUE
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_SPECIFIC_FORM
+    where ATI_SPECIFIC_FORM_ID = #{atiSpecificFormId,jdbcType=DECIMAL}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_SPECIFIC_FORM
+    where ATI_SPECIFIC_FORM_ID = #{atiSpecificFormId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    insert into ATI_SPECIFIC_FORM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiSpecificFormId != null">
+        ATI_SPECIFIC_FORM_ID,
+      </if>
+      <if test="atiBaseFormId != null">
+        ATI_BASE_FORM_ID,
+      </if>
+      <if test="atiActCategoryId != null">
+        ATI_ACT_CATEGORY_ID,
+      </if>
+      <if test="parameter != null">
+        PARAMETER,
+      </if>
+      <if test="paramValue != null">
+        PARAM_VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiSpecificFormId != null">
+        #{atiSpecificFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="atiBaseFormId != null">
+        #{atiBaseFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="atiActCategoryId != null">
+        #{atiActCategoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="parameter != null">
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    update ATI_SPECIFIC_FORM
+    <set>
+      <if test="atiBaseFormId != null">
+        ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL},
+      </if>
+      <if test="atiActCategoryId != null">
+        ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="parameter != null">
+        PARAMETER = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="paramValue != null">
+        PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_SPECIFIC_FORM_ID = #{atiSpecificFormId,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    update ATI_SPECIFIC_FORM
+    set ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL},
+      ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL},
+      PARAMETER = #{parameter,jdbcType=VARCHAR},
+      PARAM_VALUE = #{paramValue,jdbcType=VARCHAR}
+    where ATI_SPECIFIC_FORM_ID = #{atiSpecificFormId,jdbcType=DECIMAL}
+  </update>
+
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    insert into ATI_SPECIFIC_FORM (ATI_SPECIFIC_FORM_ID, ATI_BASE_FORM_ID,
+    ATI_ACT_CATEGORY_ID, PARAMETER, PARAM_VALUE
+    )
+    values (ATI_SPECIFIC_FORM_ID_SEQ.Nextval, ATI_BASE_FORM_ID_SEQ.Currval,
+    #{atiActCategoryId,jdbcType=DECIMAL}, #{parameter,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}
+    )
+  </insert>
+
+  <insert id="insertSpecificForms" parameterType="java.util.List">
+    insert into ATI_SPECIFIC_FORM (ATI_SPECIFIC_FORM_ID, ATI_BASE_FORM_ID,
+    ATI_ACT_CATEGORY_ID, PARAMETER, PARAM_VALUE
+    )
+    values
+    <foreach collection="list" index="index" item="specificForm"  separator="," >
+        (ATI_SPECIFIC_FORM_ID_SEQ.Nextval, ATI_BASE_FORM_ID_SEQ.Currval,
+      #{specificForm.atiActCategoryId,jdbcType=DECIMAL}, #{specificForm.parameter,jdbcType=VARCHAR},
+      #{specificForm.paramValue,jdbcType=VARCHAR}
+      )
+    </foreach>
+
+  </insert>
+
+
+</mapper>
