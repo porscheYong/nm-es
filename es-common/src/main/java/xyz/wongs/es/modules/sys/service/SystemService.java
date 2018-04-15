@@ -30,8 +30,6 @@ import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.security.SystemAuthorizingRealm;
 import xyz.wongs.es.modules.sys.utils.LogUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
-import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import java.util.Collection;
 import java.util.Date;
@@ -113,7 +111,7 @@ public class SystemService extends BaseService implements InitializingBean {
 
 	/**
 	 * 通过部门ID获取用户列表，仅返回用户id和name（树查询用户时用）
-	 * @param user
+	 * @param officeId
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
