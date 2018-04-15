@@ -12,10 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.DateUtils;
 import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.core.file.entity.Document;
-import xyz.wongs.es.core.file.entity.Examination2Document;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
 import xyz.wongs.es.core.file.service.DocumentService;
-import xyz.wongs.es.core.file.service.Examination2DocumentService;
 import xyz.wongs.es.core.file.service.InsertDataService;
 import xyz.wongs.es.core.file.service.Tab2BeanCorresRefService;
 
@@ -47,9 +45,6 @@ public class DataParseIntoDBService {
     @Autowired
     private InsertDataService insertDataService;
 
-    @Autowired
-    private Examination2DocumentService examination2DocumentService;
-
     private List<Document> documents = new ArrayList<Document>(70);
     /**
      * 生产环境
@@ -62,14 +57,14 @@ public class DataParseIntoDBService {
 //    public static final String SUFFIX="E:\\UECC/";
 
     /**
-     * @Description: 定时任务：定时向数据库导入当月数据：每月7日10点30分进行数据写库
+     * @Description: 定时任务：定时向数据库导入当月数据：每月6日20点30分进行数据写库
      * @method      dataInsertDataBase
      * @author      Wang Yiren
      * @version
      * @see
      * @date        2018/1/28 17:47
      */
-//    @Scheduled(cron = "0 30 10 7 * ?")
+    @Scheduled(cron = "0 30 20 6 * ?")
     public void DataParseInputTimeByMonth(){
         //month:为每月的账期
         String month = DateUtils.getMonth(0);
@@ -95,7 +90,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-//    @Scheduled(cron = "0 15 14 * * ?")
+    @Scheduled(cron = "0 15 14 * * ?")
     public void DataParseInputTimeByDay(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
@@ -185,12 +180,6 @@ public class DataParseIntoDBService {
                 final String shortName = fileName.substring(0,fileName.indexOf("."));
                 final String monthId =   (fileName.split("\\."))[2];
                 Document doc = new Document(shortName,fileName,monthId,f.getPath(),(short)0, DateUtils.formatDateTime(new Date()));
-
-                //添加校验文件，用于对集团宽表文件中原始数据的量做解析
-                Examination2Document exm = examination2DocumentService.excuExamination(doc);
-                if(null!=exm){
-                    doc.setCounts(exm.getCounts());
-                }
                 documents.add(doc);
             }
         }

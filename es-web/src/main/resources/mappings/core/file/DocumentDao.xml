@@ -92,9 +92,6 @@
             <if test="errmsg != null">
                 errmsg = #{errmsg,jdbcType=VARCHAR},
             </if>
-            <if test="counts != null">
-                COUNTS = #{counts,jdbcType=DOUBLE},
-            </if>
             <if test="exuCounts != null">
                 EXU_COUNTS = #{exuCounts,jdbcType=DOUBLE},
             </if>
