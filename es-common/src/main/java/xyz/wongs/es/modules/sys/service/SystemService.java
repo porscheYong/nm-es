@@ -30,6 +30,8 @@ import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.security.SystemAuthorizingRealm;
 import xyz.wongs.es.modules.sys.utils.LogUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
+import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import java.util.Collection;
 import java.util.Date;

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.act.dao.ActMapper">
+    
+	<update id="updateProcInstIdByBaseFormId">
+		UPDATE ati_base_form SET
+			proc_inst_id = #{procInstId}
+		WHERE ati_base_form_id = #{atiBaseFormId}
+	</update>
+	
+</mapper>

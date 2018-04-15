@@ -4,8 +4,8 @@
     
 	<update id="updateProcInsIdByBusinessId">
 		UPDATE ${businessTable} SET 
-			proc_ins_id = #{procInsId}
-		WHERE id = #{businessId}
+			proc_inst_id = #{procInstId}
+		WHERE ati_base_form_id = #{atiBaseFormId}
 	</update>
 	
 </mapper>
