@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import xyz.wongs.es.common.web.BaseController;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.service.AtiLeaveService;
@@ -103,6 +104,12 @@ public class AtiLeaveController extends BaseController {
 		}
 		leaveService.auditSave(leave);
 		return "redirect:" + adminPath + "/act/task/todo/";
+	}
+
+
+	@RequestMapping(value = "/startAtiLeave",method = RequestMethod.POST)
+	public void startAtiLeave(AtiLeave leave) {
+
 	}
 
 

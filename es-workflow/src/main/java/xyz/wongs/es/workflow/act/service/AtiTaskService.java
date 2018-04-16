@@ -63,7 +63,8 @@ public class AtiTaskService extends BaseService {
 
 
 		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-		identityService.setAuthenticatedUserId(String.valueOf(atiBaseForm.getFormSender()));
+		String userId = String.valueOf(atiBaseForm.getFormSender());
+		identityService.setAuthenticatedUserId(userId);
 		
 		// 设置流程变量
 		if (vars == null){
@@ -82,10 +83,10 @@ public class AtiTaskService extends BaseService {
 		Act act = new Act();
 		//业务表名
 		act.setBusinessTable(businessTable);
-		//这里使用ATI_BASE_FORM_ID 作为 businessId
 		act.setBusinessId(businessId);
 		act.setProcInsId(procIns.getId());
-		//更新ATI_BASE_FORM 的流程实例ID值
+
+		//更新ATI_BASE_FORM 字段procInstId的值
 		actMapper.updateProcInstIdByBaseFormId(act.getProcInsId(),atiBaseForm.getAtiBaseFormId());
 		return act.getProcInsId();
 	}

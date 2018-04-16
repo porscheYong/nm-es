@@ -9,6 +9,7 @@ import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
+import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import java.util.List;
@@ -43,14 +44,24 @@ public class AtiLeaveService {
         // 申请发起
         if (StringUtils.isBlank(leave.getId())){
 
-            atiBaseFormMapper.insert(leave);
+            //添加procDefId到通用配置表单
+            AtiBaseForm atiBaseForm = leave;
+            atiBaseForm.setProcDefId(leave.getAct().getProcDefId());
 
+            atiBaseFormMapper.insert(atiBaseForm);
+            long currentBaseFormId = atiBaseFormMapper.getCurrentBaseFormId();
+            //添加currentBaseFormId ,用来更新ATI_BASE_FORM  字段proc_inst_id 用
+            leave.setAtiBaseFormId(currentBaseFormId);
+
+            //TODO
+            //Mybatis批量插入，提高效率
 //            dao.insertSpecificForms(specificForms);
             for(AtiSpecificForm atiSpecificForm : specificForms) {
                 dao.insert(atiSpecificForm);
             }
 
-            String atiBaseFormId = String.valueOf(atiBaseFormMapper.getCurrentBaseFormId());
+            //这里暂使用ATI_BASE_FORM_ID 作为 businessId
+            String atiBaseFormId = String.valueOf(currentBaseFormId);
 
 
             // 启动流程
@@ -74,6 +85,11 @@ public class AtiLeaveService {
         }
     }
 
+    /**
+     * 通过虚拟对象leave获取atiBaseForm对象集合
+     * @param leave
+     * @return
+     */
     public List<AtiSpecificForm> getSpecificForms(AtiLeave leave) {
 
         List<AtiSpecificForm> specificForms = Lists.newArrayList();
@@ -107,8 +123,19 @@ public class AtiLeaveService {
             specificForms.add(atiSpecificForm);
         }
 
-        //TODO
-        //hrText deptText
+        if(leave.getDeptLeaderText()!=null || !leave.getDeptLeaderText().isEmpty()) {
+            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
+            atiSpecificForm.setParameter("DEPTLEADER_TEXT");
+            atiSpecificForm.setParamValue(leave.getDeptLeaderText());
+            specificForms.add(atiSpecificForm);
+        }
+
+        if(leave.getHrText()!=null || !leave.getHrText().isEmpty()) {
+            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
+            atiSpecificForm.setParameter("HR_TEXT");
+            atiSpecificForm.setParamValue(leave.getHrText());
+            specificForms.add(atiSpecificForm);
+        }
 
         AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
         atiSpecificForm.setParameter("PROC_INST_ID");
@@ -162,4 +189,6 @@ public class AtiLeaveService {
         vars.put("pass", "yes".equals(leave.getAct().getFlag())? "1" : "0");
         atiTaskService.complete(leave.getAct().getTaskId(), leave.getAct().getProcInsId(), leave.getAct().getComment(), vars);
     }
+
+
 }

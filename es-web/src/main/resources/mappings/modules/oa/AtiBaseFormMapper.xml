@@ -28,7 +28,7 @@
     where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
   </delete>
 
-  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm" useGeneratedKeys="true" keyProperty="id">
     insert into ATI_BASE_FORM
     <trim prefix="(" suffix=")" suffixOverrides=",">
         ATI_BASE_FORM_ID,
@@ -41,7 +41,7 @@
       <if test="formContent != null">
         FORM_CONTENT,
       </if>
-      <if test="procDefId != null">
+      <if test="act.procDefId != null">
         PROC_DEF_ID,
       </if>
       <if test="procInstId != null">
@@ -65,8 +65,8 @@
       <if test="formContent != null">
         #{formContent,jdbcType=OTHER},
       </if>
-      <if test="procDefId != null">
-        #{procDefId,jdbcType=OTHER},
+      <if test="act.procDefId != null">
+        #{act.procDefId,jdbcType=OTHER},
       </if>
       <if test="procInstId != null">
         #{procInstId,jdbcType=VARCHAR},
