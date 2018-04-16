@@ -18,13 +18,11 @@ public class ActUserEntityServiceFactory implements SessionFactory {
 	@Autowired
 	private ActUserEntityService actUserEntityService;
 
-	@Override
 	public Class<?> getSessionType() {
 		// 返回原始的UserIdentityManager类型
 		return UserIdentityManager.class;
 	}
 
-	@Override
 	public Session openSession() {
 		// 返回自定义的UserEntityManager实例
 		return actUserEntityService;

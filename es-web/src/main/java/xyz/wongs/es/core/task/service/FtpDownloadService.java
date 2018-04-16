@@ -73,10 +73,10 @@ public class FtpDownloadService {
     /**
      * @Author: WCNGS@QQ.COM
      * @Date: 2017/12/21 11:28
-     * @Description: 每月7日10点从ftp抓取数据
+     * @Description: 每月6日20点从ftp抓取数据
      * @Mod:
      */
- //   @Scheduled(cron = "0 00 10 7 * ?")
+    @Scheduled(cron = "0 00 20 6 * ?")
     public void monthData(){
         String month = DateUtils.getMonth(0);
         String year =  month.substring(0,4);
@@ -97,7 +97,7 @@ public class FtpDownloadService {
      * @Description: 每天14点
      * @Mod:
      */
-//    @Scheduled(cron = "0 00 14 * * ?")
+    @Scheduled(cron = "0 00 14 * * ?")
     public void dayData(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);

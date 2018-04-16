@@ -9,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import xyz.wongs.es.common.utils.DateUtils;
 import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.core.file.entity.Document;
-import xyz.wongs.es.core.file.entity.Examination2Document;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
 import xyz.wongs.es.core.file.service.DocumentService;
-import xyz.wongs.es.core.file.service.Examination2DocumentService;
 import xyz.wongs.es.core.file.service.InsertDataService;
 import xyz.wongs.es.core.file.service.Tab2BeanCorresRefService;
 import xyz.wongs.es.core.task.service.FtpDownloadService;
@@ -30,10 +28,10 @@ public class DocUnitCase extends BaseUnit {
     private static Logger logger = LoggerFactory.getLogger(DocUnitCase.class);
 
     //批量测试：true；单例测试：false
-    private final static Boolean FLAG = false;
+    private final static Boolean FLAG = true;
 
     //public static final String SUFFIX="G:\\UECC/";
-    public static final String SUFFIX="G:\\UECC\\Val";
+    public static final String SUFFIX="D:\\workspace\\nm_documnet\\UECC/";
     @Autowired
     DocumentService documentService;
 
@@ -45,9 +43,6 @@ public class DocUnitCase extends BaseUnit {
 
     @Autowired
     private InsertDataService insertDataService;
-
-    @Autowired
-    private Examination2DocumentService examination2DocumentService;
 
     private List<Document> documents = new ArrayList<Document>(70);
 
@@ -127,8 +122,7 @@ public class DocUnitCase extends BaseUnit {
      * @exception
      * @date        2018/1/19 15:10
      */
-    public Document
-    makeInfoDoc(){
+    public Document makeInfoDoc(){
         Document document = new Document();
         document.setFlag((short)0);
         document.setMonthId("201712");
@@ -162,19 +156,20 @@ public class DocUnitCase extends BaseUnit {
                  if(!fileName.endsWith("DAT.gz")) {
                      continue;
                  }
-
-
                  final String shortName = fileName.substring(0,fileName.indexOf("."));
                  final String monthId =   (fileName.split("\\."))[2];
                  Document doc = new Document(shortName,fileName,monthId,f.getPath(),(short)0, DateUtils.formatDateTime(new Date()));
-
-                 Examination2Document exm = examination2DocumentService.excuExamination(doc);
-                 doc.setCounts(exm.getCounts());
+//                 logger.error(doc.toString());
                  documents.add(doc);
-
+//                 documentService.save(doc);
              }
         }
 
+//        if(!FLAG){
+//            if(CollectionUtils.isNotEmpty(documents))   {
+//                documentService.batchInsert(documents) ;
+//            }
+//        }
         return documents;
     }
 

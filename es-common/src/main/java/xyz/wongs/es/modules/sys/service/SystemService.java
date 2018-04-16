@@ -30,10 +30,7 @@ import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.security.SystemAuthorizingRealm;
 import xyz.wongs.es.modules.sys.utils.LogUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
-import xyz.wongs.es.workflow.user.entity.AtiUser;
 
-import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
@@ -63,9 +60,6 @@ public class SystemService extends BaseService implements InitializingBean {
 	@Autowired
 	private SystemAuthorizingRealm systemRealm;
 
-	@Autowired
-	private AtiUserMapper atiUserMapper;
-
 	public SessionDAO getSessionDao() {
 		return sessionDao;
 	}
@@ -93,15 +87,6 @@ public class SystemService extends BaseService implements InitializingBean {
 		return UserUtils.getByLoginName(loginName);
 	}
 
-	/**
-	 * 修改为查找自定义用户
-	 * @param name
-	 * @return
-	 */
-	public AtiUser getAtiUserByName(String name) {
-		return  atiUserMapper.getUserByName(name);
-	}
-
 	public Page<User> findUser(Page<User> page, User user) {
 		// 生成数据权限过滤条件（dsf为dataScopeFilter的简写，在xml中使用 ${sqlMap.dsf}调用权限SQL）
 		user.getSqlMap().put("dsf", dataScopeFilter(user.getCurrentUser(), "o", "a"));
@@ -126,7 +111,7 @@ public class SystemService extends BaseService implements InitializingBean {
 
 	/**
 	 * 通过部门ID获取用户列表，仅返回用户id和name（树查询用户时用）
-	 * @param user
+	 * @param officeId
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
@@ -430,7 +415,6 @@ public class SystemService extends BaseService implements InitializingBean {
 	 * 是需要同步Activiti数据，如果从未同步过，则同步数据。
 	 */
 	private static boolean isSynActivitiIndetity = true;
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (!Global.isSynActivitiIndetity()){
 			return;
