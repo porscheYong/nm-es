@@ -16,19 +16,15 @@
     URGENT, LEVEL
   </sql>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from ATI_BASE_FORM
-    where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
-  </select>
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from ATI_BASE_FORM
     where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
   </delete>
 
-  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm" useGeneratedKeys="true" keyProperty="id">
+  <insert id="addAtiBaseForm" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+    <selectKey keyProperty="atiBaseFormId" resultType="java.lang.Long" order="BEFORE">
+      select ati_base_form_id_seq.nextval from dual
+    </selectKey>
     insert into ATI_BASE_FORM
     <trim prefix="(" suffix=")" suffixOverrides=",">
         ATI_BASE_FORM_ID,
@@ -55,7 +51,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-        ATI_BASE_FORM_ID_SEQ.Nextval,
+      #{atiBaseFormId,jdbcType=DECIMAL},
       <if test="formSender != null">
         #{formSender,jdbcType=DECIMAL},
       </if>
@@ -120,8 +116,9 @@
     where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
   </update>
 
-  <select id="getCurrentBaseFormId" resultType="Long">
-    select ATI_BASE_FORM_ID_SEQ.Currval from dual
+  <select id="getBaseFormIdByProcInstId" resultType="Long">
+    SELECT ati_base_form_id
+    FROM ATI_BASE_FORM
+    WHERE proc_inst_id = #{procInstId}
   </select>
-
 </mapper>

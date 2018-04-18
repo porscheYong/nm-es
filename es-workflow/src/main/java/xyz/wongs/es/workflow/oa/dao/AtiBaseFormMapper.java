@@ -15,11 +15,19 @@ public interface AtiBaseFormMapper extends CrudDao<AtiBaseForm> {
      * 获取当前通用表单标识，目的是与通用表名组成businessKey
      * @return
      */
-    public Long getCurrentBaseFormId();
+
+     int addAtiBaseForm(AtiBaseForm atiBaseForm);
 
     /**
      * 更新基础表单流程实例ID
      * @param atiBaseForm
      */
-    public void updateProcInstID(AtiBaseForm atiBaseForm);
+     void updateProcInstID(AtiBaseForm atiBaseForm);
+
+    /**
+     * 通过流程实例ID 获取 baseFormId
+     * @param procInstId
+     * @return
+     */
+     Long getBaseFormIdByProcInstId(String procInstId);
 }

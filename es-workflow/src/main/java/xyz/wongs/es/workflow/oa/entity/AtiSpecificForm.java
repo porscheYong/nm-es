@@ -16,6 +16,15 @@ public class AtiSpecificForm implements Serializable {
 
     private String paramValue;
 
+    public AtiSpecificForm() {
+    }
+
+    public AtiSpecificForm(Long atiBaseFormId, String parameter, String paramValue) {
+        this.atiBaseFormId = atiBaseFormId;
+        this.parameter = parameter;
+        this.paramValue = paramValue;
+    }
+
     public Long getAtiSpecificFormId() {
         return atiSpecificFormId;
     }

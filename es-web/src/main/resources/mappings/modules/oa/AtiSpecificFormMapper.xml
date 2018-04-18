@@ -103,15 +103,31 @@
     insert into ATI_SPECIFIC_FORM (ATI_SPECIFIC_FORM_ID, ATI_BASE_FORM_ID,
     ATI_ACT_CATEGORY_ID, PARAMETER, PARAM_VALUE
     )
-    values
-    <foreach collection="list" index="index" item="specificForm"  separator="," >
-        (ATI_SPECIFIC_FORM_ID_SEQ.Nextval, ATI_BASE_FORM_ID_SEQ.Currval,
-      #{specificForm.atiActCategoryId,jdbcType=DECIMAL}, #{specificForm.parameter,jdbcType=VARCHAR},
-      #{specificForm.paramValue,jdbcType=VARCHAR}
-      )
+    <foreach collection="list" item="item" separator="union all" >
+      select ATI_SPECIFIC_FORM_ID_SEQ.Nextval, ATI_BASE_FORM_ID_SEQ.Currval,
+      #{item.atiActCategoryId,jdbcType=DECIMAL}, #{item.parameter,jdbcType=VARCHAR},
+      #{item.paramValue,jdbcType=VARCHAR} from dual
     </foreach>
-
   </insert>
 
+  <update id="updateDeptLeaderText" parameterType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+    UPDATE ATI_SPECIFIC_FORM
+    SET PARAM_VALUE = #{deptLeaderText}
+    WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
+    AND PARAMETER = 'DEPTLEADER_TEXT'
+  </update>
 
+  <update id="updateHrText" parameterType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+    UPDATE ATI_SPECIFIC_FORM
+    SET PARAM_VALUE = #{hrText}
+    WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
+    AND PARAMETER = 'HR_TEXT'
+  </update>
+
+  <update id="update" parameterType="xyz.wongs.es.workflow.oa.entity.AtiSpecificForm">
+    UPDATE ATI_SPECIFIC_FORM
+    SET PARAM_VALUE = #{paramValue}
+    WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
+    AND PARAMETER = #{parameter}
+  </update>
 </mapper>

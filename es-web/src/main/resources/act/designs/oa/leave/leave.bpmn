@@ -5,7 +5,7 @@
     <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId" activiti:formKey="/oa/leave/form"></startEvent>
     <userTask id="deptLeaderAudit" name="部门领导审批">
       <extensionElements>
-        <activiti:taskListener event="create" delegateExpression="${AutoAssignProcessor}"></activiti:taskListener>
+        <activiti:taskListener event="create" delegateExpression="${autoAssignProcessor}"></activiti:taskListener>
       </extensionElements>
     </userTask>
     <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>

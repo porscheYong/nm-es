@@ -3,7 +3,11 @@
  */
 package xyz.wongs.es.workflow.oa.web;
 
+import com.google.common.collect.Maps;
+import oracle.sql.DATE;
+import org.activiti.engine.FormService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,9 +15,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.wongs.es.common.web.BaseController;
+import xyz.wongs.es.modules.act.entity.Act;
+import xyz.wongs.es.modules.sys.entity.User;
+import xyz.wongs.es.modules.sys.utils.UserUtils;
+import xyz.wongs.es.workflow.act.service.AtiTaskService;
+import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
+import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
+import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import xyz.wongs.es.workflow.oa.service.AtiLeaveService;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 示例 请假Controller
@@ -26,8 +42,12 @@ public class AtiLeaveController extends BaseController {
 
 	@Autowired
 	private AtiLeaveService leaveService;
-
-
+	//注入 AtiSpecificFormMapper ,测试重新申请接口
+	@Autowired
+	private AtiSpecificFormMapper atiSpecificFormMapper;
+	//注入 AtiTaskService ,测试重新申请接口
+	@Autowired
+	private AtiTaskService atiTaskService;
 	/**
 	 * 申请单填写
 	 * @param atiLeave
@@ -87,6 +107,7 @@ public class AtiLeaveController extends BaseController {
 		return "redirect:" + adminPath + "/act/task/todo/";
 	}
 
+
 	/**
 	 * 工单执行（完成任务）
 	 * @param leave
@@ -107,10 +128,206 @@ public class AtiLeaveController extends BaseController {
 	}
 
 
-	@RequestMapping(value = "/startAtiLeave",method = RequestMethod.POST)
-	public void startAtiLeave(AtiLeave leave) {
+
+
+	//////////////以下为测试接口部分
+
+	/**
+	 *
+	 * 发起流程接口测试
+	 * @param leave
+	 */
+	@RequestMapping(value = "/testStartAtiLeave",method = RequestMethod.POST)
+	@ResponseBody
+	public String testStartAtiLeave(AtiLeave leave) {
+
+		String procDefId = (String) leave.getProcDefId();
+		if(procDefId == null || procDefId.isEmpty()) {
+			return "fail";
+		}
+
+		String formSender = String.valueOf(leave.getFormSender());
+		if(formSender == null || formSender.isEmpty()){
+			return "fail";
+		}
+
+		String formTheme = (String) leave.getFormTheme();
+		if(formTheme == null || formTheme.isEmpty()) {
+			return  "fail";
+		}
+
+		String urgent = leave.getUrgent();
+		if(urgent == null || urgent.isEmpty()) {
+			return "fail";
+		}
+
+		String formContent = (String) leave.getFormContent();
+		if(formContent == null || formContent.isEmpty()) {
+			return "fail";
+		}
+
+		String leaveType = leave.getLeaveType();
+		if(leaveType == null || leaveType.isEmpty()) {
+			return "fail";
+		}
+
+		Date startTime = leave.getStartTime();
+		if(startTime == null) {
+			return "fail";
+		}
+
+		Date endTime = leave.getEndTime();
+		if(endTime == null) {
+			return "fail";
+		}
+
+		String reason = leave.getReason();
+		if(reason == null || reason.isEmpty()) {
+			return "fail";
+		}
+
+		leaveService.save(leave);
+		return "success";
+	}
+
+
+	/**
+	 * 审批测试接口
+	 * @param taskId
+	 * @param procInsId
+	 * @param comment
+	 * @param flag
+	 * @return
+	 */
+	@RequestMapping(value = "/testSaveAudit",method = RequestMethod.POST)
+	@ResponseBody
+	public String  testSaveAudit(String taskId,String procInsId,String comment,String flag) {
+
+		if(taskId==null || taskId.isEmpty()) {
+			return "taskId false";
+		}
+
+		if(procInsId==null || procInsId.isEmpty()) {
+			return "procInsId false";
+		}
+
+		if(comment==null || comment.isEmpty()) {
+			return "comment false";
+		}
+
+		if(flag==null || flag.isEmpty()) {
+			return "flag false";
+		}
+
+		AtiLeave atiLeave = new AtiLeave();
+		atiLeave.getAct().setTaskId(taskId);
+		atiLeave.getAct().setComment(comment);
+		atiLeave.setProcInstId(procInsId);
+		atiLeave.getAct().setFlag(flag);
+		atiLeave.getAct().setTaskDefKey("deptLeaderAudit");
+
+		leaveService.auditSave(atiLeave);
+
+		return "success";
+
 
 	}
+
+
+	/**
+	 * 销假 测试接口
+	 * @param taskId
+	 * @param procInsId
+	 * @param comment
+	 * @param flag
+	 * @return
+	 */
+	@RequestMapping(value = "/restReportBack",method = RequestMethod.POST)
+	@ResponseBody
+	public String  testModify(String taskId,String procInsId,String comment,String flag,
+								 Date realityStartTime,Date realityEndTime) {
+
+		if(taskId==null || taskId.isEmpty()) {
+			return "taskId false";
+		}
+
+		if(procInsId==null || procInsId.isEmpty()) {
+			return "procInsId false";
+		}
+
+		if(flag==null || flag.isEmpty()) {
+			return "flag false";
+		}
+
+		if(realityStartTime == null) {
+			return "realityStartTime false";
+		}
+
+		if(realityEndTime == null) {
+			return "realityEndTime false";
+		}
+
+
+		AtiLeave atiLeave = new AtiLeave();
+		atiLeave.getAct().setTaskId(taskId);
+		atiLeave.getAct().setComment(comment);
+		atiLeave.setProcInstId(procInsId);
+		atiLeave.getAct().setFlag(flag);
+		atiLeave.setRealityStartTime(realityStartTime);
+		atiLeave.setRealityEndTime(realityEndTime);
+		atiLeave.getAct().setTaskDefKey("reportBack");
+
+		leaveService.auditSave(atiLeave);
+
+		return "success";
+
+
+	}
+
+
+	/**
+	 * 重申 测试接口
+	 * @param leave
+	 * @return
+	 */
+	@RequestMapping(value = "/testRestart")
+	@ResponseBody
+	public String testRestart(AtiLeave leave) {
+
+		String leaveType = leave.getLeaveType();
+		if(leaveType == null || leaveType.isEmpty()) {
+			return  "false";
+		}
+
+		Date startTime = leave.getStartTime();
+		if(startTime == null) {
+			return "false";
+		}
+
+		Date endTime = leave.getEndTime();
+		if(endTime == null) {
+			return "false";
+		}
+
+		String reason = leave.getReason();
+		if(reason == null || reason.isEmpty()) {
+			return "false";
+		}
+
+		List<AtiSpecificForm> list = leaveService.getSpecificForms(leave);
+		for(AtiSpecificForm atiSpecificForm : list) {
+			atiSpecificFormMapper.update(atiSpecificForm);
+		}
+		// 完成流程任务
+		Map<String, Object> vars = Maps.newHashMap();
+		vars.put("pass", "1");
+		atiTaskService.complete("b8f788c534cf43758d6c922c6b43e006", "7a719f56419d4ad785d82c7757b970a7", "[重申]", leave.getReason(), vars);
+		return "success";
+	}
+
+
+
+
 
 
 

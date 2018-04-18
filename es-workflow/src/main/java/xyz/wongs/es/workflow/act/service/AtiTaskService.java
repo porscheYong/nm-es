@@ -4,17 +4,27 @@
 package xyz.wongs.es.workflow.act.service;
 import com.google.common.collect.Maps;
 import org.activiti.engine.*;
+import org.activiti.engine.delegate.DelegateTask;
+import org.activiti.engine.repository.Deployment;
+import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.wongs.es.common.persistence.Page;
 import xyz.wongs.es.common.service.BaseService;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.modules.act.entity.Act;
+import xyz.wongs.es.modules.act.utils.ProcessDefCache;
+import xyz.wongs.es.modules.oa.entity.Leave;
+import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.dao.ActMapper;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
+import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 
-import java.io.InputStream;
 import java.util.*;
 
 /**
@@ -34,6 +44,41 @@ public class AtiTaskService extends BaseService {
 	private TaskService taskService;
 	@Autowired
 	private IdentityService identityService;
+	@Autowired
+	private FormService formService;
+	@Autowired
+	private RepositoryService repositoryService;
+
+
+
+	/**
+	 * 获取流程列表
+	 * @param category 流程分类
+	 */
+	public Page<Object[]> processList(Page<Object[]> page, String category) {
+		/*
+		 * 保存两个对象，一个是ProcessDefinition（流程定义），一个是Deployment（流程部署）
+		 */
+		ProcessDefinitionQuery processDefinitionQuery = repositoryService.createProcessDefinitionQuery()
+				.latestVersion().active().orderByProcessDefinitionKey().asc();
+
+		if (StringUtils.isNotEmpty(category)){
+			processDefinitionQuery.processDefinitionCategory(category);
+		}
+
+		page.setCount(processDefinitionQuery.count());
+
+		List<ProcessDefinition> processDefinitionList = processDefinitionQuery.listPage(page.getFirstResult(), page.getMaxResults());
+		for (ProcessDefinition processDefinition : processDefinitionList) {
+			String deploymentId = processDefinition.getDeploymentId();
+			Deployment deployment = repositoryService.createDeploymentQuery().deploymentId(deploymentId).singleResult();
+			page.getList().add(new Object[]{processDefinition, deployment});
+		}
+		return page;
+	}
+
+
+
 
 	/**
 	 * 启动流程
@@ -92,6 +137,74 @@ public class AtiTaskService extends BaseService {
 	}
 
 
+
+	/**
+	 * 获取待办列表
+	 * @param act .procDefKey 流程定义标识
+	 * @return
+	 */
+	public List<Act> todoList(Act act,String name){
+
+		List<Act> result = new ArrayList<Act>();
+
+		// =============== 已经签收的任务  ===============
+		TaskQuery todoTaskQuery = taskService.createTaskQuery().taskAssignee(name).active()
+				.includeProcessVariables().orderByTaskCreateTime().desc();
+
+		// 设置查询条件
+		if (StringUtils.isNotBlank(act.getProcDefKey())){
+			todoTaskQuery.processDefinitionKey(act.getProcDefKey());
+		}
+		if (act.getBeginDate() != null){
+			todoTaskQuery.taskCreatedAfter(act.getBeginDate());
+		}
+		if (act.getEndDate() != null){
+			todoTaskQuery.taskCreatedBefore(act.getEndDate());
+		}
+
+		// 查询列表
+		List<Task> todoList = todoTaskQuery.list();
+		for (Task task : todoList) {
+			Act e = new Act();
+			e.setTask(task);
+			e.setVars(task.getProcessVariables());
+			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
+			e.setStatus("todo");
+			result.add(e);
+		}
+
+		// =============== 等待签收的任务  ===============
+		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(name)
+				.includeProcessVariables().active().orderByTaskCreateTime().desc();
+
+		// 设置查询条件
+		if (StringUtils.isNotBlank(act.getProcDefKey())){
+			toClaimQuery.processDefinitionKey(act.getProcDefKey());
+		}
+		if (act.getBeginDate() != null){
+			toClaimQuery.taskCreatedAfter(act.getBeginDate());
+		}
+		if (act.getEndDate() != null){
+			toClaimQuery.taskCreatedBefore(act.getEndDate());
+		}
+
+		// 查询列表
+		List<Task> toClaimList = toClaimQuery.list();
+		for (Task task : toClaimList) {
+			Act e = new Act();
+			e.setTask(task);
+			e.setVars(task.getProcessVariables());
+			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
+			e.setStatus("claim");
+			result.add(e);
+		}
+		return result;
+	}
+
+
+
+
+
 	/**
 	 * 签收任务
 	 * @param taskId 任务ID
@@ -101,6 +214,7 @@ public class AtiTaskService extends BaseService {
 	public void claim(String taskId, String userId){
 		taskService.claim(taskId, userId);
 	}
+
 	
 	/**
 	 * 提交任务, 并保存意见
@@ -113,6 +227,7 @@ public class AtiTaskService extends BaseService {
 	public void complete(String taskId, String procInsId, String comment, Map<String, Object> vars){
 		complete(taskId, procInsId, comment, "", vars);
 	}
+
 	
 	/**
 	 * 提交任务, 并保存意见
@@ -141,6 +256,43 @@ public class AtiTaskService extends BaseService {
 		
 		// 提交任务
 		taskService.complete(taskId, vars);
+	}
+
+
+
+	/**
+	 * 获取流程外置表单（首先获取任务节点表单KEY，如果没有则取流程开始节点表单KEY）
+	 * @return
+	 */
+	public String getFormKey(String procDefId, String taskDefKey){
+		String formKey = "";
+		if (StringUtils.isNotBlank(procDefId)){
+			if (StringUtils.isNotBlank(taskDefKey)){
+				try{
+					formKey = formService.getTaskFormKey(procDefId, taskDefKey);
+				}catch (Exception e) {
+					formKey = "";
+				}
+			}
+			if (StringUtils.isBlank(formKey)){
+				formKey = formService.getStartFormKey(procDefId);
+			}
+			if (StringUtils.isBlank(formKey)){
+				formKey = "/404";
+			}
+		}
+		logger.debug("getFormKey: {}", formKey);
+		return formKey;
+	}
+
+	/**
+	 * 获取流程实例对象
+	 * @param procInsId
+	 * @return
+	 */
+	@Transactional(readOnly = false)
+	public ProcessInstance getProcIns(String procInsId) {
+		return runtimeService.createProcessInstanceQuery().processInstanceId(procInsId).singleResult();
 	}
 
 }

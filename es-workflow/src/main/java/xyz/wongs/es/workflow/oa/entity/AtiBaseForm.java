@@ -26,6 +26,20 @@ public class AtiBaseForm extends ActEntity {
     /** 级别  */
     private String level;
 
+    public AtiBaseForm() {
+    }
+
+    public AtiBaseForm(Long atiBaseFormId, Long formSender, Object formTheme, Object formContent, Object procDefId, String procInstId, String urgent, String level) {
+        this.atiBaseFormId = atiBaseFormId;
+        this.formSender = formSender;
+        this.formTheme = formTheme;
+        this.formContent = formContent;
+        this.procDefId = procDefId;
+        this.procInstId = procInstId;
+        this.urgent = urgent;
+        this.level = level;
+    }
+
     public Long getAtiBaseFormId() {
         return atiBaseFormId;
     }

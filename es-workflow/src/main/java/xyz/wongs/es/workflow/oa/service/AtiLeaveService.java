@@ -26,7 +26,7 @@ public class AtiLeaveService {
     @Autowired
     private AtiBaseFormMapper atiBaseFormMapper;
     @Autowired
-    private AtiSpecificFormMapper dao;
+    private AtiSpecificFormMapper atiSpecificFormMapper;
 
     @Autowired
     private AtiTaskService atiTaskService;
@@ -44,20 +44,22 @@ public class AtiLeaveService {
         // 申请发起
         if (StringUtils.isBlank(leave.getId())){
 
-            //添加procDefId到通用配置表单
-            AtiBaseForm atiBaseForm = leave;
-            atiBaseForm.setProcDefId(leave.getAct().getProcDefId());
+            //判断流程是启动还是重申的依据
+            leave.preInsert();
 
-            atiBaseFormMapper.insert(atiBaseForm);
-            long currentBaseFormId = atiBaseFormMapper.getCurrentBaseFormId();
-            //添加currentBaseFormId ,用来更新ATI_BASE_FORM  字段proc_inst_id 用
+            //添加procDefId到通用配置表单
+            leave.setProcDefId(leave.getAct().getProcDefId());
+            AtiBaseForm atiBaseForm = leave;
+
+            long currentBaseFormId = atiBaseFormMapper.addAtiBaseForm(atiBaseForm);
+
             leave.setAtiBaseFormId(currentBaseFormId);
 
             //TODO
             //Mybatis批量插入，提高效率
-//            dao.insertSpecificForms(specificForms);
+//            atiSpecificFormMapper.insertSpecificForms(specificForms);
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                dao.insert(atiSpecificForm);
+                atiSpecificFormMapper.insert(atiSpecificForm);
             }
 
             //这里暂使用ATI_BASE_FORM_ID 作为 businessId
@@ -72,8 +74,9 @@ public class AtiLeaveService {
         // 重新编辑申请
         else{
 
+            //todo validate
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                dao.update(atiSpecificForm);
+                atiSpecificFormMapper.update(atiSpecificForm);
             }
 
             leave.getAct().setComment(("yes".equals(leave.getAct().getFlag())?"[重申] ":"[销毁] ")+leave.getAct().getComment());
@@ -85,73 +88,7 @@ public class AtiLeaveService {
         }
     }
 
-    /**
-     * 通过虚拟对象leave获取atiBaseForm对象集合
-     * @param leave
-     * @return
-     */
-    public List<AtiSpecificForm> getSpecificForms(AtiLeave leave) {
 
-        List<AtiSpecificForm> specificForms = Lists.newArrayList();
-
-        if(leave.getReason()!=null || !"".equals(leave.getReason())) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("REASON");
-            atiSpecificForm.setParamValue(leave.getReason());
-            specificForms.add(atiSpecificForm);
-        }
-
-        if(leave.getStartTime()!=null || "".equals(leave.getStartTime())) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("START_TIME");
-
-            atiSpecificForm.setParamValue(String.valueOf(leave.getStartTime()));
-            specificForms.add(atiSpecificForm);
-        }
-
-        if(leave.getEndTime()!=null || "".equals(leave.getEndTime())) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("END_TIME");
-            atiSpecificForm.setParamValue(String.valueOf(leave.getEndTime()));
-            specificForms.add(atiSpecificForm);
-        }
-
-        if(leave.getLeaveType()!=null || !leave.getLeaveType().isEmpty()) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("LEAVE_TYPE");
-            atiSpecificForm.setParamValue(leave.getLeaveType());
-            specificForms.add(atiSpecificForm);
-        }
-
-        if(leave.getDeptLeaderText()!=null || !leave.getDeptLeaderText().isEmpty()) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("DEPTLEADER_TEXT");
-            atiSpecificForm.setParamValue(leave.getDeptLeaderText());
-            specificForms.add(atiSpecificForm);
-        }
-
-        if(leave.getHrText()!=null || !leave.getHrText().isEmpty()) {
-            AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-            atiSpecificForm.setParameter("HR_TEXT");
-            atiSpecificForm.setParamValue(leave.getHrText());
-            specificForms.add(atiSpecificForm);
-        }
-
-        AtiSpecificForm atiSpecificForm = getSpecificForm(leave);
-        atiSpecificForm.setParameter("PROC_INST_ID");
-        atiSpecificForm.setParamValue(leave.getProcInstId());
-        specificForms.add(atiSpecificForm);
-
-            return specificForms;
-    }
-
-    public AtiSpecificForm getSpecificForm(AtiLeave leave) {
-        AtiSpecificForm atiSpecificForm= new AtiSpecificForm();
-        atiSpecificForm.setAtiSpecificFormId(leave.getAtiSpecificFormId());
-        atiSpecificForm.setAtiBaseFormId(leave.getAtiBaseFormId());
-        atiSpecificForm.setAtiActCategoryId(leave.getAtiActCategoryId());
-        return  atiSpecificForm;
-    }
 
     /**
      * 审核审批保存
@@ -169,11 +106,11 @@ public class AtiLeaveService {
         // 审核环节
         if ("deptLeaderAudit".equals(taskDefKey)){
             leave.setDeptLeaderText(leave.getAct().getComment());
-            //todo dao.updateDeptLeaderTxt(leave);
+            atiSpecificFormMapper.updateDeptLeaderText(leave);
         }
         else if ("hrAudit".equals(taskDefKey)){
             leave.setHrText(leave.getAct().getComment());
-           //todo dao.updateHrTxt(leave);
+           atiSpecificFormMapper.updateHrText(leave);
         }
         else if ("reportBack".equals(taskDefKey)){
 
@@ -189,6 +126,70 @@ public class AtiLeaveService {
         vars.put("pass", "yes".equals(leave.getAct().getFlag())? "1" : "0");
         atiTaskService.complete(leave.getAct().getTaskId(), leave.getAct().getProcInsId(), leave.getAct().getComment(), vars);
     }
+
+
+
+    /**
+     * 通过虚拟对象leave获取atiBaseForm对象集合
+     * @param leave
+     * @return
+     */
+    public List<AtiSpecificForm> getSpecificForms(AtiLeave leave) {
+
+        List<AtiSpecificForm> specificForms = Lists.newArrayList();
+
+        AtiSpecificForm atiSpecificFormReason = getSpecificForm(leave);
+        atiSpecificFormReason.setParameter("REASON");
+        atiSpecificFormReason.setParamValue(leave.getReason());
+        specificForms.add(atiSpecificFormReason);
+
+        AtiSpecificForm atiSpecificFormStartTime = getSpecificForm(leave);
+        atiSpecificFormStartTime.setParameter("START_TIME");
+        atiSpecificFormStartTime.setParamValue(String.valueOf(leave.getStartTime()));
+        specificForms.add(atiSpecificFormStartTime);
+
+        AtiSpecificForm atiSpecificFormEndTime = getSpecificForm(leave);
+        atiSpecificFormEndTime.setParameter("END_TIME");
+        atiSpecificFormEndTime.setParamValue(String.valueOf(leave.getEndTime()));
+        specificForms.add(atiSpecificFormEndTime);
+
+        AtiSpecificForm atiSpecificFormLeaveType = getSpecificForm(leave);
+        atiSpecificFormLeaveType.setParameter("LEAVE_TYPE");
+        atiSpecificFormLeaveType.setParamValue(leave.getLeaveType());
+        specificForms.add(atiSpecificFormLeaveType);
+
+        AtiSpecificForm atiSpecificFormDeptLeaderText = getSpecificForm(leave);
+        atiSpecificFormDeptLeaderText.setParameter("DEPTLEADER_TEXT");
+        atiSpecificFormDeptLeaderText.setParamValue(leave.getDeptLeaderText());
+        specificForms.add(atiSpecificFormDeptLeaderText);
+
+        AtiSpecificForm atiSpecificFormHrText = getSpecificForm(leave);
+        atiSpecificFormHrText.setParameter("HR_TEXT");
+        atiSpecificFormHrText.setParamValue(leave.getHrText());
+        specificForms.add(atiSpecificFormHrText);
+
+        AtiSpecificForm atiSpecificFormRealStartTime =  getSpecificForm(leave);
+        atiSpecificFormRealStartTime.setParameter("REALITY_START_TIME");
+        atiSpecificFormRealStartTime.setParamValue(String.valueOf(leave.getRealityStartTime()));
+        specificForms.add(atiSpecificFormRealStartTime);
+
+        AtiSpecificForm atiSpecificFormRealEndTime =  getSpecificForm(leave);
+        atiSpecificFormRealStartTime.setParameter("REALITY_END_TIME");
+        atiSpecificFormRealStartTime.setParamValue(String.valueOf(leave.getRealityEndTime()));
+        specificForms.add(atiSpecificFormRealEndTime);
+
+        return specificForms;
+    }
+
+    public AtiSpecificForm getSpecificForm(AtiLeave leave) {
+        AtiSpecificForm atiSpecificForm= new AtiSpecificForm();
+        atiSpecificForm.setAtiSpecificFormId(leave.getAtiSpecificFormId());
+        atiSpecificForm.setAtiBaseFormId(leave.getAtiBaseFormId());
+        atiSpecificForm.setAtiActCategoryId(leave.getAtiActCategoryId());
+        return  atiSpecificForm;
+    }
+
+
 
 
 }
