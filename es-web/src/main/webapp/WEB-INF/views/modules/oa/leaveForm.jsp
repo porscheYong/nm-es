@@ -50,29 +50,31 @@
 		<form:hidden path="act.procDefId"/>
 		<form:hidden id="flag" path="act.flag"/>
 		<sys:message content="${message}"/>
-		<fieldset>
+		<br>
 			<legend>
 				<shiro:hasPermission name="oa:leave:edit">请假流程${not empty leave.id?'修改':'申请'}</shiro:hasPermission><shiro:lacksPermission name="oa:leave:edit">查看</shiro:lacksPermission>
 			</legend>
 			<table class="table-form">
 				<tr>
-					<td class="tit">姓名</td><td>
+					<td class="tit">申请人</td><td>
 					<form:input path="formSender"></form:input>
 				</td>
 				</tr>
 				<tr>
 					<td class="tit">工单主题 </td>
 					<td colspan="5">
-							<form:textarea path="formTheme" class="required" cols="200" cssStyle="width:500px" />
+						<form:textarea path="formTheme" class="required" cols="200" cssStyle="width:500px" />
 					</td>
 				</tr>
 				<tr>
 					<td class="tit">紧急程度</td>
-					<td>
-						<select name="urgent">
-							<option value="1">一般</option>
-							<option value="2">加急</option>
-						</select>
+					<td class="tit">
+						<div class="control-label">
+							<select name="urgent">
+								<option value="1">一般</option>
+								<option value="2">紧急</option>
+							</select>
+						</div>
 					</td>
 				</tr>
 				<tr>
@@ -81,6 +83,9 @@
 						<form:textarea path="formContent" class="required" cols="200" maxlength="200" cssStyle="width:500px"/>
 					</td>
 				</tr>
+			</table>
+			<br></br>
+			<table class="table-form">
 				<tr>
 					<td class="tit">请假类型</td>
 					<td class="tit">

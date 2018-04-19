@@ -17,6 +17,7 @@ import java.util.Date;
 
 /**
  * 调整请假内容处理器
+ * 已经在完成重申任务前更新了
  * @author liuj
  */
 @Service
@@ -33,24 +34,24 @@ public class LeaveModifyProcessor implements TaskListener {
 	@Override
 	public void notify(DelegateTask delegateTask) {
 
-		String procInstId = delegateTask.getProcessInstanceId();
-		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
-
-		String leaveType = (String) delegateTask.getVariable("leaveType");
-		AtiSpecificForm specificFormLeaveType = new AtiSpecificForm(currentBaseFormId,"LEAVE_TYPE",leaveType);
-		atiSpecificFormMapper.update(specificFormLeaveType);
-
-		String startTime = (String) delegateTask.getVariable("startTime");
-		AtiSpecificForm specificFormStartTime = new AtiSpecificForm(currentBaseFormId,"START_TIME",startTime);
-		atiSpecificFormMapper.update(specificFormStartTime);
-
-		String endTime = (String) delegateTask.getVariable("endTime");
-		AtiSpecificForm specificFormEndTime = new AtiSpecificForm(currentBaseFormId,"END_TIME",endTime);
-		atiSpecificFormMapper.update(specificFormEndTime);
-
-		String reason = (String) delegateTask.getVariable("reason");
-		AtiSpecificForm specificFormReason = new AtiSpecificForm(currentBaseFormId,"REASON",reason);
-		atiSpecificFormMapper.update(specificFormReason);
+//		String procInstId = delegateTask.getProcessInstanceId();
+//		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
+//
+//		String leaveType = (String) delegateTask.getVariable("leaveType");
+//		AtiSpecificForm specificFormLeaveType = new AtiSpecificForm(currentBaseFormId,"LEAVE_TYPE",leaveType);
+//		atiSpecificFormMapper.update(specificFormLeaveType);
+//
+//		String startTime = (String) delegateTask.getVariable("startTime");
+//		AtiSpecificForm specificFormStartTime = new AtiSpecificForm(currentBaseFormId,"START_TIME",startTime);
+//		atiSpecificFormMapper.update(specificFormStartTime);
+//
+//		String endTime = (String) delegateTask.getVariable("endTime");
+//		AtiSpecificForm specificFormEndTime = new AtiSpecificForm(currentBaseFormId,"END_TIME",endTime);
+//		atiSpecificFormMapper.update(specificFormEndTime);
+//
+//		String reason = (String) delegateTask.getVariable("reason");
+//		AtiSpecificForm specificFormReason = new AtiSpecificForm(currentBaseFormId,"REASON",reason);
+//		atiSpecificFormMapper.update(specificFormReason);
 
 
 	}

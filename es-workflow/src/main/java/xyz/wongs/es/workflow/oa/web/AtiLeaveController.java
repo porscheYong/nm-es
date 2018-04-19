@@ -23,6 +23,7 @@ import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
+import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import xyz.wongs.es.workflow.oa.service.AtiLeaveService;
@@ -141,7 +142,7 @@ public class AtiLeaveController extends BaseController {
 	@ResponseBody
 	public String testStartAtiLeave(AtiLeave leave) {
 
-		String procDefId = (String) leave.getProcDefId();
+		String procDefId = leave.getAct().getProcDefId();
 		if(procDefId == null || procDefId.isEmpty()) {
 			return "fail";
 		}
@@ -201,7 +202,7 @@ public class AtiLeaveController extends BaseController {
 	 */
 	@RequestMapping(value = "/testSaveAudit",method = RequestMethod.POST)
 	@ResponseBody
-	public String  testSaveAudit(String taskId,String procInsId,String comment,String flag) {
+	public String  testSaveAudit(String taskId,String procInsId,String comment,String flag,String atiBaseFormId) {
 
 		if(taskId==null || taskId.isEmpty()) {
 			return "taskId false";
@@ -225,6 +226,7 @@ public class AtiLeaveController extends BaseController {
 		atiLeave.setProcInstId(procInsId);
 		atiLeave.getAct().setFlag(flag);
 		atiLeave.getAct().setTaskDefKey("deptLeaderAudit");
+		atiLeave.setAtiBaseFormId(Long.valueOf(atiBaseFormId));
 
 		leaveService.auditSave(atiLeave);
 
@@ -292,7 +294,7 @@ public class AtiLeaveController extends BaseController {
 	 */
 	@RequestMapping(value = "/testRestart")
 	@ResponseBody
-	public String testRestart(AtiLeave leave) {
+	public String testRestart(AtiLeave leave,String taskId) {
 
 		String leaveType = leave.getLeaveType();
 		if(leaveType == null || leaveType.isEmpty()) {
@@ -314,14 +316,32 @@ public class AtiLeaveController extends BaseController {
 			return "false";
 		}
 
-		List<AtiSpecificForm> list = leaveService.getSpecificForms(leave);
-		for(AtiSpecificForm atiSpecificForm : list) {
-			atiSpecificFormMapper.update(atiSpecificForm);
+		String procInstId = leave.getProcInstId();
+		if(procInstId == null || procInstId.isEmpty()) {
+			return "false";
 		}
+
+		if(taskId == null || taskId.isEmpty()) {
+			return "false";
+		}
+
+
+		AtiSpecificForm atiSpecificFormStartTime = new AtiSpecificForm(leave.getAtiBaseFormId(),"START_TIME",leave.getReason());
+		atiSpecificFormMapper.update(atiSpecificFormStartTime);
+
+		AtiSpecificForm atiSpecificFormEndTime = new AtiSpecificForm(leave.getAtiBaseFormId(),"END_TIME",String.valueOf(leave.getEndTime()));
+		atiSpecificFormMapper.update(atiSpecificFormEndTime);
+
+		AtiSpecificForm atiSpecificFormLeaveType = new AtiSpecificForm(leave.getAtiBaseFormId(),"LEAVE_TYPE",leave.getLeaveType());
+		atiSpecificFormMapper.update(atiSpecificFormLeaveType);
+
+		AtiSpecificForm atiSpecificFormReason = new AtiSpecificForm(leave.getAtiBaseFormId(),"REASON",leave.getReason());
+		atiSpecificFormMapper.update(atiSpecificFormReason);
+
 		// 完成流程任务
 		Map<String, Object> vars = Maps.newHashMap();
 		vars.put("pass", "1");
-		atiTaskService.complete("b8f788c534cf43758d6c922c6b43e006", "7a719f56419d4ad785d82c7757b970a7", "[重申]", leave.getReason(), vars);
+		atiTaskService.complete(taskId, leave.getProcInstId(), "[重申]", leave.getReason(), vars);
 		return "success";
 	}
 

@@ -51,8 +51,9 @@ public class AtiLeaveService {
             leave.setProcDefId(leave.getAct().getProcDefId());
             AtiBaseForm atiBaseForm = leave;
 
-            long currentBaseFormId = atiBaseFormMapper.addAtiBaseForm(atiBaseForm);
+            atiBaseFormMapper.addAtiBaseForm(atiBaseForm);
 
+            Long currentBaseFormId = leave.getAtiBaseFormId();
             leave.setAtiBaseFormId(currentBaseFormId);
 
             //TODO
@@ -168,14 +169,14 @@ public class AtiLeaveService {
         atiSpecificFormHrText.setParamValue(leave.getHrText());
         specificForms.add(atiSpecificFormHrText);
 
-        AtiSpecificForm atiSpecificFormRealStartTime =  getSpecificForm(leave);
+        AtiSpecificForm atiSpecificFormRealStartTime = getSpecificForm(leave);
         atiSpecificFormRealStartTime.setParameter("REALITY_START_TIME");
         atiSpecificFormRealStartTime.setParamValue(String.valueOf(leave.getRealityStartTime()));
         specificForms.add(atiSpecificFormRealStartTime);
 
-        AtiSpecificForm atiSpecificFormRealEndTime =  getSpecificForm(leave);
-        atiSpecificFormRealStartTime.setParameter("REALITY_END_TIME");
-        atiSpecificFormRealStartTime.setParamValue(String.valueOf(leave.getRealityEndTime()));
+        AtiSpecificForm atiSpecificFormRealEndTime = getSpecificForm(leave);
+        atiSpecificFormRealEndTime.setParameter("REALITY_END_TIME");
+        atiSpecificFormRealEndTime.setParamValue(String.valueOf(leave.getRealityEndTime()));
         specificForms.add(atiSpecificFormRealEndTime);
 
         return specificForms;
