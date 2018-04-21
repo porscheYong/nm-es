@@ -20,13 +20,13 @@ public class AtiLeave extends AtiBaseForm {
     /** 请假原因    */
     private String reason;
     /** 请假开始日期  */
-    private Date startTime;
+    private Object startTime;
     /** 请假结束日期  */
-    private Date endTime;
+    private Object endTime;
     /** 实际开始时间  */
-    private Date realityStartTime;
+    private Object realityStartTime;
     /** 实际结束时间  */
-    private Date realityEndTime;
+    private Object realityEndTime;
     /** 假种  */
     private String leaveType;
     /** 部门领导意见  */
@@ -58,35 +58,35 @@ public class AtiLeave extends AtiBaseForm {
         this.reason = reason;
     }
 
-    public Date getStartTime() {
+    public Object getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Object startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Object getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    public Date getRealityStartTime() {
+    public Object getRealityStartTime() {
         return realityStartTime;
     }
 
-    public void setRealityStartTime(Date realityStartTime) {
+    public void setRealityStartTime(Object realityStartTime) {
         this.realityStartTime = realityStartTime;
     }
 
-    public Date getRealityEndTime() {
+    public Object getRealityEndTime() {
         return realityEndTime;
     }
 
-    public void setRealityEndTime(Date realityEndTime) {
+    public void setRealityEndTime(String realityEndTime) {
         this.realityEndTime = realityEndTime;
     }
 

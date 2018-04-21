@@ -45,13 +45,13 @@
 		<legend>请假流程审批</legend>
 		<table class="table-form">
 			<tr>
-				<td class="tit">姓名</td><td>${leave.user.name}</td>
+				<td class="tit">姓名</td><td>${leave.formSender}</td>
 			</tr>
 			<tr>
-				<td class="tit">部门</td><td>${leave.office.name}</td>
+				<td class="tit">部门</td><td></td>
 			</tr>
 			<tr>
-				<td class="tit">岗位职级</td><td>${leave.post}</td>
+				<td class="tit">岗位职级</td><td></td>
 			</tr>
 			<tr>
 				<td class="tit">请假原因 </td>
@@ -63,13 +63,15 @@
 				<td class="tit">
 					开始时间
 				</td>
-				<td><fmt:formatDate value="${leave.startTime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"></fmt:formatDate> </td>
+				<%--<td><fmt:formatDate value="${leave.startTime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"></fmt:formatDate> </td>--%>
+				<td>${leave.startTime}</td>
 			</tr>
 			<tr>
 				<td class="tit">
 					结束时间
 				</td>
-				<td><fmt:formatDate value="${leave.endTime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"></fmt:formatDate></td>
+				<%--<td><fmt:formatDate value="${leave.endTime}" pattern="yyyy年MM月dd日 HH时mm分ss秒"></fmt:formatDate></td>--%>
+				<td>${leave.endTime}</td>
 			</tr>
 			<tr>
 				<td class="tit">部门领导意见</td>

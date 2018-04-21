@@ -17,6 +17,8 @@ import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
+import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +36,7 @@ public class AtiTaskController extends BaseController {
 	@Autowired
 	private AtiTaskService atiTaskService;
 	@Autowired
-	private ActTaskService taskService;
+	private AtiUserMapper atiUserMapper;
 
 
 
@@ -83,7 +85,10 @@ public class AtiTaskController extends BaseController {
 	 */
 	@RequestMapping(value = {"todo", ""})
 	public String todoList(Act act, Model model) throws Exception {
-		List<Act> list = atiTaskService.todoList(act,"赵明星-部门领导");
+		//需要传入一个UserId参数,String
+//		String userId = "38";
+		String userId = "35";
+		List<Act> list = atiTaskService.todoList(act,userId);
 		model.addAttribute("list", list);
 		return "modules/act/actTaskTodoList";
 	}
@@ -95,8 +100,10 @@ public class AtiTaskController extends BaseController {
 	 */
 	@RequestMapping(value = "claim")
 	@ResponseBody
-	public String claim(Act act,String assignName) {
-		atiTaskService.claim(act.getTaskId(), assignName);
+	public String claim(Act act) {
+		//需要传入一个userId参数,String
+		String userId = "32";
+		atiTaskService.claim(act.getTaskId(), userId);
 		return "true";
 	}
 	

@@ -130,4 +130,24 @@
     WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
     AND PARAMETER = #{parameter}
   </update>
+
+  <select id="getAtiLeaveByBaseFormId" resultType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+    select bf.*,sf.ati_act_category_id,sf.leave_type,sf.start_time,sf.end_time,sf.reason,sf.deptleader_text,
+      sf.hr_text,sf.reality_start_time,sf.reality_end_time
+    from ati_base_form bf
+    left join
+      (select ati_base_form_id,ati_act_category_id,
+      max(case parameter when 'LEAVE_TYPE' then param_value end) as leave_type,
+      max(case parameter when 'START_TIME' then param_value end) as start_time,
+      max(case parameter when 'END_TIME' then param_value end) as end_time,
+      max(case parameter when 'REASON' then param_value end) as reason,
+      max(case parameter when 'DEPTLEADER_TEXT' then param_value end) as deptleader_text,
+      max(case parameter when 'HR_TEXT' then param_value end) as hr_text,
+      max(case parameter when 'REALITY_START_TIME' then param_value end) as reality_start_time,
+      max(case parameter when 'REALITY_END_TIME' then param_value end) as reality_end_time
+      from ati_specific_form
+      group by ati_base_form_id,ati_act_category_id) sf
+    on bf.ati_base_form_id = sf.ati_base_form_id
+    where bf.ati_base_form_id = #{ati_base_form_id}
+  </select>
 </mapper>

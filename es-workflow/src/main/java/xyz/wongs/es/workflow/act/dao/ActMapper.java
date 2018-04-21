@@ -16,6 +16,6 @@ public interface ActMapper {
      * @param procInstId
      * @param atiBaseFormId
      */
-    public void updateProcInstIdByBaseFormId(@Param("procInstId") String procInstId,
+    void updateProcInstIdByBaseFormId(@Param("procInstId") String procInstId,
                                              @Param("atiBaseFormId") Long atiBaseFormId);
 }

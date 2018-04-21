@@ -18,7 +18,7 @@ public interface AtiUserMapper extends CrudDao<AtiUser> {
      * @param name
      * @return
      */
-    public AtiUser getUserByName(String name);
+    AtiUser getUserByName(String name);
 
 
     /**
@@ -26,6 +26,6 @@ public interface AtiUserMapper extends CrudDao<AtiUser> {
      * @param atiRoleId
      * @return
      */
-    public List<AtiUser> getUsersByRoleId(Long atiRoleId);
+    List<AtiUser> getUsersByRoleId(Long atiRoleId);
 
 }

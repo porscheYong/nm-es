@@ -75,7 +75,6 @@ public class AtiLeaveService {
         // 重新编辑申请
         else{
 
-            //todo validate
             for(AtiSpecificForm atiSpecificForm : specificForms) {
                 atiSpecificFormMapper.update(atiSpecificForm);
             }
@@ -189,8 +188,6 @@ public class AtiLeaveService {
         atiSpecificForm.setAtiActCategoryId(leave.getAtiActCategoryId());
         return  atiSpecificForm;
     }
-
-
 
 
 }

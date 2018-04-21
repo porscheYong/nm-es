@@ -28,6 +28,7 @@
 		<li class="active"><a href="${ctx}/act/task/todo/">待办任务</a></li>
 		<li><a href="${ctx}/act/task/historic/">已办任务</a></li>
 		<li><a href="${ctx}/act/task/process/">新建任务</a></li>
+		<li><a href="${ctx}/oa/delegate/list/">代理设置</a></li>
 	</ul>
 	<form:form id="searchForm" modelAttribute="act" action="${ctx}/act/task/todo/" method="get" class="breadcrumb form-search">
 		<div>

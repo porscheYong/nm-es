@@ -20,13 +20,13 @@ public interface AtiRoleMapper extends CrudDao<AtiRole> {
      * @param roleCode
      * @return
      */
-    public AtiRole getRoleByRoleCode(String roleCode);
+    AtiRole getRoleByRoleCode(String roleCode);
 
     /**
      *根据UserId查找List<AtiRole>
      * @param UserId
      * @return
      */
-    public List<AtiRole> getRolesByUserId(String UserId);
+    List<AtiRole> getRolesByUserId(String UserId);
 
 }

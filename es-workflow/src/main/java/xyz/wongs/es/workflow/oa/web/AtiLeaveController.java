@@ -13,11 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import xyz.wongs.es.common.web.BaseController;
 import xyz.wongs.es.modules.act.entity.Act;
+import xyz.wongs.es.modules.oa.entity.Leave;
 import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
@@ -49,6 +48,27 @@ public class AtiLeaveController extends BaseController {
 	//注入 AtiTaskService ,测试重新申请接口
 	@Autowired
 	private AtiTaskService atiTaskService;
+
+
+	/**
+	 * 先获取虚拟对象Leave
+	 * @param id
+	 * @return
+	 */
+	@ModelAttribute
+	public AtiLeave get(@RequestParam(required=false) Long id){
+		AtiLeave leave = null;
+		if(id != null) {
+			leave = atiSpecificFormMapper.getAtiLeaveByBaseFormId(id);
+		}
+		if (leave == null){
+			leave = new AtiLeave();
+		}
+		return leave;
+	}
+
+
+
 	/**
 	 * 申请单填写
 	 * @param atiLeave
@@ -86,8 +106,8 @@ public class AtiLeaveController extends BaseController {
 				view = "leaveTestAudit";
 			}
 			// 兑现环节
-			else if ("apply_end".equals(taskDefKey)){
-				view = "leaveTestAudit";
+			else if ("reportBack".equals(taskDefKey)){
+				view = "leaveModifyForm";
 			}
 		}
 
@@ -133,6 +153,9 @@ public class AtiLeaveController extends BaseController {
 
 	//////////////以下为测试接口部分
 
+
+
+
 	/**
 	 *
 	 * 发起流程接口测试
@@ -172,12 +195,12 @@ public class AtiLeaveController extends BaseController {
 			return "fail";
 		}
 
-		Date startTime = leave.getStartTime();
+		Object startTime = leave.getStartTime();
 		if(startTime == null) {
 			return "fail";
 		}
 
-		Date endTime = leave.getEndTime();
+		Object endTime = leave.getEndTime();
 		if(endTime == null) {
 			return "fail";
 		}
@@ -247,7 +270,7 @@ public class AtiLeaveController extends BaseController {
 	@RequestMapping(value = "/restReportBack",method = RequestMethod.POST)
 	@ResponseBody
 	public String  testModify(String taskId,String procInsId,String comment,String flag,
-								 Date realityStartTime,Date realityEndTime) {
+							  String realityStartTime,String realityEndTime) {
 
 		if(taskId==null || taskId.isEmpty()) {
 			return "taskId false";
@@ -301,12 +324,12 @@ public class AtiLeaveController extends BaseController {
 			return  "false";
 		}
 
-		Date startTime = leave.getStartTime();
+		Object startTime = leave.getStartTime();
 		if(startTime == null) {
 			return "false";
 		}
 
-		Date endTime = leave.getEndTime();
+		Object endTime = leave.getEndTime();
 		if(endTime == null) {
 			return "false";
 		}
