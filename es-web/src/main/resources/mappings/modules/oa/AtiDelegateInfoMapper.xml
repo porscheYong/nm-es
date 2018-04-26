@@ -171,4 +171,31 @@
     WHERE
       ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
   </update>
+
+  <select id="getDelegateInfoByLeaver" resultType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    FROM
+      ATI_DELEGATE_INFO
+    WHERE
+      ASSIGNEE = #{assignee} OR ATTORNEY = #{assignee}
+  </select>
+
+  <update id="updateDelegateAssignee" parameterType="java.lang.String">
+    UPDATE
+      ATI_DELEGATE_INFO
+    SET
+      ASSIGNEE = #{attorney}
+    WHERE
+      ASSIGNEE = #{assignee}
+  </update>
+
+  <update id="updateDelegateAttorney" parameterType="java.lang.String">
+    UPDATE
+      ATI_DELEGATE_INFO
+    SET
+      ATTORNEY = #{attorney}
+    WHERE
+      ATTORNEY = #{assignee}
+  </update>
 </mapper>

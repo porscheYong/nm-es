@@ -38,11 +38,13 @@ public class AutoAssignProcessor implements TaskListener {
 		List<AtiUser> users = atiUserMapper.getUsersByRoleId(atiRole.getAtiRoleId());
 		List<String> names = Lists.newArrayList();
 		for(AtiUser atiUser : users) {
-			names.add((String) atiUser.getName());
+			names.add(String.valueOf(atiUser.getAtiUserId()));
 		}
 
 		//添加处理人
 		delegateTask.addCandidateUsers(names);
+
+
 
 	}
 

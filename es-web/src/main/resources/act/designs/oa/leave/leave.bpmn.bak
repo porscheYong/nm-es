@@ -5,7 +5,7 @@
     <startEvent id="startevent1" name="Start" activiti:initiator="applyUserId" activiti:formKey="/oa/leave/form"></startEvent>
     <userTask id="deptLeaderAudit" name="部门领导审批">
       <extensionElements>
-        <activiti:taskListener event="create" delegateExpression="${autoAssignProcessor}"></activiti:taskListener>
+        <activiti:taskListener event="all" delegateExpression="${autoAssignProcessor}"></activiti:taskListener>
       </extensionElements>
     </userTask>
     <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway"></exclusiveGateway>
@@ -14,9 +14,9 @@
         <activiti:taskListener event="complete" delegateExpression="${leaveModifyProcessor}"></activiti:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="hrAudit" name="人事审批" activiti:assignee="刘小东-人事">
-		<extensionElements>
-        <activiti:taskListener event="create" delegateExpression="${leaveHrDelegateProcessor}"></activiti:taskListener>
+    <userTask id="hrAudit" name="人事审批">
+	  <extensionElements>
+        <activiti:taskListener event="create" delegateExpression="${hrAuditAssignProcessor}"></activiti:taskListener>
       </extensionElements>
 	</userTask>
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>

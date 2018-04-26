@@ -1,5 +1,6 @@
 package xyz.wongs.es.workflow.oa.dao;
 
+import org.apache.ibatis.annotations.Param;
 import xyz.wongs.es.common.persistence.CrudDao;
 import xyz.wongs.es.common.persistence.annotation.MyBatisDao;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
@@ -43,4 +44,29 @@ public interface AtiDelegateInfoMapper extends CrudDao<AtiDelegateInfo> {
      * @return
      */
     int updateDelegateInfoStatus(AtiDelegateInfo atiDelegateInfo);
+
+    /**
+     * 根据委托人查找委托信息
+     * @param leaver
+     * @return
+     */
+    List<AtiDelegateInfo> getDelegateInfoByLeaver(String leaver);
+
+    /**
+     * 更改委托人
+     * @param assignee
+     * @param attorney
+     * @return
+     */
+    int updateDelegateAssignee(String assignee,String attorney);
+
+
+    /**
+     * 更改代理人
+     * @param assignee
+     * @param attorney
+     * @return
+     */
+    int updateDelegateAttorney(@Param("assignee") String assignee, @Param("attorney") String attorney);
+
 }

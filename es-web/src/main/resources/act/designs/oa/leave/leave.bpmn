@@ -14,9 +14,9 @@
         <activiti:taskListener event="complete" delegateExpression="${leaveModifyProcessor}"></activiti:taskListener>
       </extensionElements>
     </userTask>
-    <userTask id="hrAudit" name="人事审批" activiti:assignee="刘小东-人事">
-		<extensionElements>
-        <activiti:taskListener event="create" delegateExpression="${leaveHrDelegateProcessor}"></activiti:taskListener>
+    <userTask id="hrAudit" name="人事审批">
+	  <extensionElements>
+        <activiti:taskListener event="create" delegateExpression="${hrAuditAssignProcessor}"></activiti:taskListener>
       </extensionElements>
 	</userTask>
     <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway"></exclusiveGateway>

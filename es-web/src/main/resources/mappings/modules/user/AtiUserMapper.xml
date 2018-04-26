@@ -38,6 +38,21 @@
     from ATI_USER u
     LEFT JOIN ATI_USER_ROLE ur
     ON u.ATI_USER_ID = ur.ATI_USER_ID
-    where ur.ati_role_id = #{atiRoleId}
+    where ur.ATI_ROLE_ID = #{atiRoleId}
+  </select>
+
+  <select id="getUsersByGroup" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      ATI_USER u
+    LEFT JOIN
+      ATI_USER_GROUP ug
+    ON u.ATI_USER_ID = ug.ATI_USER_ID
+    LEFT JOIN
+      ATI_GROUP g
+    ON ug.ATI_GROUP_ID = g.ATI_GROUP_ID
+    WHERE
+      g.ATI_GROUP_ID = #{atiGroupId}
   </select>
 </mapper>

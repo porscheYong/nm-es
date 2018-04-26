@@ -58,6 +58,9 @@
 				<tr>
 					<td class="tit">申请人</td><td>
 					<form:input path="formSender"></form:input>
+						<%--<sys:treeselect id="user" name="user.id" value="${leave.formSender}" labelName="user.name" labelValue="${leave.user.name}"--%>
+										<%--title="用户" url="/sys/office/treeData?type=3" cssClass="required recipient" cssStyle="width:150px"--%>
+										<%--allowClear="true" notAllowSelectParent="true" smallBtn="false"/>--%>
 				</td>
 				</tr>
 				<tr>

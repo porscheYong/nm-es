@@ -1,11 +1,13 @@
 package xyz.wongs.es.workflow.oa.service;
 
 import com.google.common.collect.Lists;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
 import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
 import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
@@ -28,17 +30,31 @@ public class HrAuditAssignProcessor implements TaskListener {
 	private AtiUserMapper atiUserMapper;
 	@Autowired
 	private AtiRoleMapper atiRoleMapper;
+	@Autowired
+	private RuntimeService runtimeService;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
 
+		Object vars = runtimeService.getVariable(delegateTask.getProcessInstanceId(),TaskDefKey.LEAVE_TASK_DEF_KEY[3]);
+
+		List<AtiUser> users = (List<AtiUser>) vars;
+		List<String> names = Lists.newArrayList();
+
+		if(users!=null) {
+			for(AtiUser atiUser : users) {
+				names.add(String.valueOf(atiUser.getAtiUserId()));
+			}
+			delegateTask.addCandidateUsers(names);
+			return;
+		}
+
 		//人事角色编号
 		AtiRole atiRole = atiRoleMapper.getRoleByRoleCode("3000");
+		users = atiUserMapper.getUsersByRoleId(atiRole.getAtiRoleId());
 
-		List<AtiUser> users = atiUserMapper.getUsersByRoleId(atiRole.getAtiRoleId());
-		List<String> names = Lists.newArrayList();
 		for(AtiUser atiUser : users) {
-			names.add((String) atiUser.getName());
+			names.add(String.valueOf(atiUser.getAtiUserId()));
 		}
 
 		//添加处理人

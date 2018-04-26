@@ -2,13 +2,20 @@
  * Copyright &copy; 2012-2016 <a href="https://wongs.xyz">UECC</a> All rights reserved.
  */
 package xyz.wongs.es.workflow.act.service;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.activiti.engine.*;
-import org.activiti.engine.delegate.DelegateTask;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.history.HistoricTaskInstanceQuery;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +26,12 @@ import xyz.wongs.es.common.service.BaseService;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.modules.act.utils.ProcessDefCache;
-import xyz.wongs.es.modules.oa.entity.Leave;
+import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.dao.ActMapper;
+import xyz.wongs.es.workflow.act.entity.JumpCmd;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
+import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
 
 import java.util.*;
 
@@ -48,7 +56,10 @@ public class AtiTaskService extends BaseService {
 	private FormService formService;
 	@Autowired
 	private RepositoryService repositoryService;
-
+	@Autowired
+	private HistoryService historyService;
+	@Autowired
+	private ManagementService managementService;
 
 
 	/**
@@ -290,9 +301,204 @@ public class AtiTaskService extends BaseService {
 	 * @param procInsId
 	 * @return
 	 */
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false,rollbackFor = Exception.class)
 	public ProcessInstance getProcIns(String procInsId) {
 		return runtimeService.createProcessInstanceQuery().processInstanceId(procInsId).singleResult();
 	}
+
+
+	/**
+	 * 获取已办任务
+	 * @param page
+	 * @param act .procDefKey 流程定义标识
+	 * @return
+	 */
+	public Page<Act> historicList(Page<Act> page, Act act){
+		String userId = "刘小东-人事";
+
+		HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery().taskAssignee(userId).finished()
+				.includeProcessVariables().orderByHistoricTaskInstanceEndTime().desc();
+
+		// 设置查询条件
+		if (StringUtils.isNotBlank(act.getProcDefKey())){
+			histTaskQuery.processDefinitionKey(act.getProcDefKey());
+		}
+		if (act.getBeginDate() != null){
+			histTaskQuery.taskCompletedAfter(act.getBeginDate());
+		}
+		if (act.getEndDate() != null){
+			histTaskQuery.taskCompletedBefore(act.getEndDate());
+		}
+
+		// 查询总数
+		page.setCount(histTaskQuery.count());
+
+		// 查询列表
+		List<HistoricTaskInstance> histList = histTaskQuery.listPage(page.getFirstResult(), page.getMaxResults());
+		//处理分页问题
+		List<Act> actList= Lists.newArrayList();
+		for (HistoricTaskInstance histTask : histList) {
+			Act e = new Act();
+			e.setHistTask(histTask);
+			e.setVars(histTask.getProcessVariables());
+			e.setProcDef(ProcessDefCache.get(histTask.getProcessDefinitionId()));
+			e.setStatus("finish");
+			actList.add(e);
+		}
+		page.setList(actList);
+		return page;
+	}
+
+
+
+
+	/**
+	 * 获取流转历史列表
+	 * @param procInsId 流程实例
+	 * @param startAct 流程开始节点
+	 * @param endAct 流程结束节点
+	 * @return
+	 */
+	public List<Act> histoicFlowList(String procInsId, String startAct, String endAct){
+		List<Act> actList = Lists.newArrayList();
+		List<HistoricActivityInstance> list = historyService.createHistoricActivityInstanceQuery().processInstanceId(procInsId)
+				.orderByHistoricActivityInstanceStartTime().asc().orderByHistoricActivityInstanceEndTime().asc().list();
+
+		boolean start = false;
+		Map<String, Integer> actMap = Maps.newHashMap();
+
+		for (int i=0; i<list.size(); i++){
+
+			HistoricActivityInstance histIns = list.get(i);
+
+			// 过滤开始节点前的节点
+			if (StringUtils.isNotBlank(startAct) && startAct.equals(histIns.getActivityId())){
+				start = true;
+			}
+			if (StringUtils.isNotBlank(startAct) && !start){
+				continue;
+			}
+
+			// 只显示开始节点和结束节点，并且执行人不为空的任务
+			if (StringUtils.isNotBlank(histIns.getAssignee())
+					|| "startEvent".equals(histIns.getActivityType())
+					|| "endEvent".equals(histIns.getActivityType())){
+
+				// 给节点增加一个序号
+				Integer actNum = actMap.get(histIns.getActivityId());
+				if (actNum == null){
+					actMap.put(histIns.getActivityId(), actMap.size());
+				}
+
+				Act e = new Act();
+				e.setHistIns(histIns);
+				// 获取流程发起人名称
+				if ("startEvent".equals(histIns.getActivityType())){
+					List<HistoricProcessInstance> il = historyService.createHistoricProcessInstanceQuery().processInstanceId(procInsId).orderByProcessInstanceStartTime().asc().list();
+//					List<HistoricIdentityLink> il = historyService.getHistoricIdentityLinksForProcessInstance(procInsId);
+					if (il.size() > 0){
+						if (StringUtils.isNotBlank(il.get(0).getStartUserId())){
+							User user = UserUtils.getByLoginName(il.get(0).getStartUserId());
+							if (user != null){
+								e.setAssignee(histIns.getAssignee());
+								e.setAssigneeName(user.getName());
+							}
+						}
+					}
+				}
+				// 获取任务执行人名称
+				if (StringUtils.isNotEmpty(histIns.getAssignee())){
+					User user = UserUtils.getByLoginName(histIns.getAssignee());
+					if (user != null){
+						e.setAssignee(histIns.getAssignee());
+						e.setAssigneeName(user.getName());
+					}
+				}
+				// 获取意见评论内容
+				if (StringUtils.isNotBlank(histIns.getTaskId())){
+					List<Comment> commentList = taskService.getTaskComments(histIns.getTaskId());
+					if (commentList.size()>0){
+						e.setComment(commentList.get(0).getFullMessage());
+					}
+				}
+				actList.add(e);
+			}
+
+			// 过滤结束节点后的节点
+			if (StringUtils.isNotBlank(endAct) && endAct.equals(histIns.getActivityId())){
+				boolean bl = false;
+				Integer actNum = actMap.get(histIns.getActivityId());
+				// 该活动节点，后续节点是否在结束节点之前，在后续节点中是否存在
+				for (int j=i+1; j<list.size(); j++){
+					HistoricActivityInstance hi = list.get(j);
+					Integer actNumA = actMap.get(hi.getActivityId());
+					if ((actNumA != null && actNumA < actNum) || StringUtils.equals(hi.getActivityId(), histIns.getActivityId())){
+						bl = true;
+					}
+				}
+				if (!bl){
+					break;
+				}
+			}
+		}
+		return actList;
+	}
+
+
+
+
+	/**
+	 * 获取上一个节点的taskId
+	 * @param procInstId
+	 * @return
+	 */
+	public String getPreTaskId(String procInstId) {
+
+		String preTaskDefKey = "";
+		//当前任务
+		Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).active().singleResult();
+		for(int i=1;i<TaskDefKey.LEAVE_TASK_DEF_KEY.length;i++) {
+			if(TaskDefKey.LEAVE_TASK_DEF_KEY[i].equals(currentTask.getTaskDefinitionKey()	)) {
+				preTaskDefKey = TaskDefKey.LEAVE_TASK_DEF_KEY[i-1];
+				break;
+			}
+		}
+		String taskId = "";
+		List<HistoricTaskInstance> historicTaskInstances = historyService.createHistoricTaskInstanceQuery().processInstanceId(procInstId).list();
+		for(HistoricTaskInstance historicTaskInstance : historicTaskInstances) {
+			if(preTaskDefKey.equals(historicTaskInstance.getTaskDefinitionKey())) {
+				taskId = historicTaskInstance.getId();
+				break;
+			}
+		}
+		return taskId;
+	}
+
+
+	/**
+	 * 根据taskId 跳转到指定节点
+	 * @param taskId
+	 */
+	public void jumpByTaskId(String taskId) {
+
+		//根据要跳转的任务ID获取其任务
+		HistoricTaskInstance hisTask = historyService
+				.createHistoricTaskInstanceQuery().taskId(taskId)
+				.singleResult();
+		//进而获取流程实例
+		ProcessInstance instance = runtimeService
+				.createProcessInstanceQuery()
+				.processInstanceId(hisTask.getProcessInstanceId())
+				.singleResult();
+		//取得流程定义
+		ProcessDefinitionEntity definition = (ProcessDefinitionEntity) repositoryService.getProcessDefinition(hisTask.getProcessDefinitionId());
+		//获取历史任务的Activity
+		ActivityImpl hisActivity = definition.findActivity(hisTask.getTaskDefinitionKey());
+		//实现跳转
+		managementService.executeCommand(new JumpCmd(instance.getId(), hisActivity.getId()));
+	}
+
+
+
 
 }

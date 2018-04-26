@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="xyz.wongs.es.modules.oa.leave" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" expressionLanguage="http://www.w3.org/1999/XPath" id="m1520410055368" name="" targetNamespace="xyz.wongs.es.modules.oa.leave" typeLanguage="http://www.w3.org/2001/XMLSchema">
+  <process id="testModifyStaffInfo" isClosed="false" isExecutable="true" name="人员信息修改" processType="None">
+    <documentation id="testModifyStaffInfo_D_1"><![CDATA[盟市人员信息修改演示]]></documentation>
+    <startEvent id="startEvent" name="Start"/>
+    <userTask activiti:assignee="${applyUser}" activiti:async="true" activiti:exclusive="true" id="applyUser" name="申请人"/>
+    <sequenceFlow id="flow1" sourceRef="startEvent" targetRef="applyUser"/>
+    <userTask activiti:exclusive="true" id="hrAudit" name="盟市人力资源"/>
+    <sequenceFlow id="flow2" sourceRef="applyUser" targetRef="hrAudit"/>
+    <userTask activiti:exclusive="true" id="deptLeader" name="分管领导"/>
+    <sequenceFlow id="flow3" sourceRef="hrAudit" targetRef="deptLeader"/>
+    <userTask activiti:exclusive="true" id="admin" name="系统管理员"/>
+    <sequenceFlow id="flow4" sourceRef="deptLeader" targetRef="admin"/>
+    <endEvent id="endEvent" name="End"/>
+    <sequenceFlow id="flow5" sourceRef="admin" targetRef="endEvent"/>
+  </process>
+  <bpmndi:BPMNDiagram documentation="background=#FFFFFF;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0" id="Diagram-_1" name="New Diagram">
+    <bpmndi:BPMNPlane bpmnElement="testModifyStaffInfo">
+      <bpmndi:BPMNShape bpmnElement="startEvent" id="Shape-startEvent">
+        <omgdc:Bounds height="32.0" width="32.0" x="130.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="applyUser" id="Shape-applyUser">
+        <omgdc:Bounds height="55.0" width="105.0" x="210.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="hrAudit" id="Shape-hrAudit">
+        <omgdc:Bounds height="55.0" width="105.0" x="360.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="deptLeader" id="Shape-deptLeader">
+        <omgdc:Bounds height="55.0" width="105.0" x="510.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="admin" id="Shape-admin">
+        <omgdc:Bounds height="55.0" width="105.0" x="660.0" y="100.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="55.0" width="105.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="endEvent" id="Shape-endEvent">
+        <omgdc:Bounds height="32.0" width="32.0" x="810.0" y="110.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1" sourceElement="startEvent" targetElement="applyUser">
+        <omgdi:waypoint x="162.0" y="126.0"/>
+        <omgdi:waypoint x="210.0" y="127.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2" sourceElement="applyUser" targetElement="hrAudit">
+        <omgdi:waypoint x="315.0" y="127.5"/>
+        <omgdi:waypoint x="360.0" y="127.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow3" id="BPMNEdge_flow3" sourceElement="hrAudit" targetElement="deptLeader">
+        <omgdi:waypoint x="465.0" y="127.5"/>
+        <omgdi:waypoint x="510.0" y="127.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow4" id="BPMNEdge_flow4" sourceElement="deptLeader" targetElement="admin">
+        <omgdi:waypoint x="615.0" y="127.5"/>
+        <omgdi:waypoint x="660.0" y="127.5"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow5" id="BPMNEdge_flow5" sourceElement="admin" targetElement="endEvent">
+        <omgdi:waypoint x="765.0" y="127.5"/>
+        <omgdi:waypoint x="810.0" y="126.0"/>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="-1.0" width="-1.0" x="-1.0" y="-1.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

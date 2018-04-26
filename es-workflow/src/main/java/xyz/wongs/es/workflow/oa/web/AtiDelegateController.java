@@ -60,7 +60,7 @@ public class AtiDelegateController extends BaseController {
 
         atiDelegateService.saveDelegateInfo(atiDelegateInfo);
 
-        return "modules/act/actTaskTodoList";
+        return "redirect:" + adminPath + "/act/task/todo";
 
     }
 

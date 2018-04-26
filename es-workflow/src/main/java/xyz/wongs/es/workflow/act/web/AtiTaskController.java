@@ -3,6 +3,15 @@
  */
 package xyz.wongs.es.workflow.act.web;
 
+import org.activiti.engine.HistoryService;
+import org.activiti.engine.ManagementService;
+import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
+import org.activiti.engine.history.HistoricTaskInstance;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
+import org.activiti.engine.impl.pvm.process.ActivityImpl;
+import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +26,15 @@ import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
+import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
 import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 流程个人任务相关Controller
@@ -36,8 +48,13 @@ public class AtiTaskController extends BaseController {
 	@Autowired
 	private AtiTaskService atiTaskService;
 	@Autowired
-	private AtiUserMapper atiUserMapper;
-
+	private HistoryService historyService;
+	@Autowired
+	private RepositoryService repositoryService;
+	@Autowired
+	private RuntimeService runtimeService;
+	@Autowired
+	private ManagementService managementService;
 
 
 	/**
@@ -86,8 +103,8 @@ public class AtiTaskController extends BaseController {
 	@RequestMapping(value = {"todo", ""})
 	public String todoList(Act act, Model model) throws Exception {
 		//需要传入一个UserId参数,String
-//		String userId = "38";
-		String userId = "35";
+//		String userId = "35";
+		String userId = "32";
 		List<Act> list = atiTaskService.todoList(act,userId);
 		model.addAttribute("list", list);
 		return "modules/act/actTaskTodoList";
@@ -123,6 +140,69 @@ public class AtiTaskController extends BaseController {
 		atiTaskService.complete(act.getTaskId(), act.getProcInsId(), act.getComment(), act.getVars().getVariableMap());
 		return "true";
 	}
+
+
+	/**
+	 * 获取已办任务
+	 * @param act
+	 * @param request
+	 * @param response
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "historic")
+	public String historicList(Act act, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		Page<Act> page = new Page<Act>(request, response);
+		page = atiTaskService.historicList(page, act);
+		model.addAttribute("page", page);
+		if (UserUtils.getPrincipal().isMobileLogin()){
+			return renderString(response, page);
+		}
+		return "modules/act/actTaskHistoricList";
+	}
+
+
+	/**
+	 * 获取流转历史列表
+	 * @param act
+	 * @param startAct
+	 * @param endAct
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "histoicFlow")
+	public String histoicFlow(Act act, String startAct, String endAct, Model model){
+		if (StringUtils.isNotBlank(act.getProcInsId())){
+			List<Act> histoicFlowList = atiTaskService.histoicFlowList(act.getProcInsId(), startAct, endAct);
+			model.addAttribute("histoicFlowList", histoicFlowList);
+		}
+		return "modules/act/actTaskHistoricFlow";
+	}
+
+
+	/**
+	 * 跳转到上一个节点
+	 * @param procInstId
+	 * @return
+	 */
+	@RequestMapping(value = "/taskBack")
+	public String taskRollback(String procInstId){
+
+		//获取上一步的taskId
+		String preTaskId = atiTaskService.getPreTaskId(procInstId);
+
+		//根据taskId 跳转到流程任意节点
+		atiTaskService.jumpByTaskId(preTaskId);
+
+		return "redirect:" + adminPath + "/workflow/act/process/running";
+	}
+
+
+
+
+
+
 
 
 

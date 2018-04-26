@@ -18,6 +18,7 @@
 		<li><a href="${ctx}/act/task/todo/">待办任务</a></li>
 		<li class="active"><a href="${ctx}/act/task/historic/">已办任务</a></li>
 		<li><a href="${ctx}/act/task/process/">新建任务</a></li>
+		<li><a href="${ctx}/oa/delegate/list/">代理设置</a></li>
 	</ul>
 	<form:form id="searchForm" modelAttribute="act" action="${ctx}/act/task/historic/" method="get" class="breadcrumb form-search">
 		<div>
@@ -73,7 +74,7 @@
 					<td>${task.description}</td> --%>
 					<td><fmt:formatDate value="${task.endTime}" type="both"/></td>
 					<td>
-						<a href="${ctx}/act/task/form?taskId=${task.id}&taskName=${fns:urlEncode(task.name)}&taskDefKey=${task.taskDefinitionKey}&procInsId=${task.processInstanceId}&procDefId=${task.processDefinitionId}&status=${status}">详情</a>
+						<a target="_blank" href="${pageContext.request.contextPath}/act/diagram-viewer?processDefinitionId=${task.processDefinitionId}&processInstanceId=${task.processInstanceId}">详情</a>
 					</td>
 				</tr>
 			</c:forEach>

@@ -3,12 +3,15 @@ package xyz.wongs.es.workflow.oa.service;
 import com.google.common.collect.Lists;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
+import org.activiti.engine.task.IdentityLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
+import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
 import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import java.util.Date;
@@ -31,30 +34,37 @@ public class LeaveHrDelegateProcessor implements TaskListener {
     private AtiDelegateService atiDelegateService;
     @Autowired
     private AtiUserMapper atiUserMapper;
+    @Autowired
+    private AtiRoleMapper atiRoleMapper;
 
     @Override
     public void notify(DelegateTask delegateTask) {
 
-        //如果有委托，设置委托人
-        String assignee = delegateTask.getAssignee();
-        String processDefinitionId = delegateTask.getProcessDefinitionId();
-
-        AtiUser atiUser = atiUserMapper.getUserByName(assignee);
-        AtiDelegateInfo delegateInfo = atiDelegateService.getDelegateInfo(String.valueOf(atiUser.getAtiUserId()),processDefinitionId);
-
-        if (delegateInfo == null) {
-            return;
-        }
-
-        String attorney = (String) delegateInfo.getAttorney();
-
-        delegateTask.setAssignee(attorney);
-
-        AtiDelegateHistory delegateHistory = new AtiDelegateHistory(assignee,attorney,new Date(),
-                delegateTask.getProcessInstanceId(),delegateTask.getId(),delegateTask.getTaskDefinitionKey(),
-                delegateInfo.getDelegateReason(),delegateInfo.getStatus());
-
-        atiDelegateService.saveDelegateHistory(delegateHistory);
+//        //人事处理环节的办理人
+//        AtiRole atiRole = atiRoleMapper.getRoleByRoleCode("3000");
+//        List<AtiUser> users = atiUserMapper.getUsersByRoleId(atiRole.getAtiRoleId());
+//
+//        String processDefinitionId = delegateTask.getProcessDefinitionId();
+//
+//        String assignee = null;
+//        AtiDelegateInfo delegateInfo = null;
+//        for(AtiUser atiUser : users) {
+//            delegateInfo = atiDelegateService.getDelegateInfo(String.valueOf(atiUser.getAtiUserId()),processDefinitionId);
+//            if(delegateInfo != null) {
+//                assignee = String.valueOf(atiUser.getAtiUserId());
+//                break;
+//            }
+//        }
+//
+//
+//        String attorney = (String) delegateInfo.getAttorney();
+//        delegateTask.addCandidateUser(attorney);
+//
+//        AtiDelegateHistory delegateHistory = new AtiDelegateHistory(assignee,attorney,new Date(),
+//                delegateTask.getProcessInstanceId(),delegateTask.getId(),delegateTask.getTaskDefinitionKey(),
+//                delegateInfo.getDelegateReason(),delegateInfo.getStatus());
+//
+//        atiDelegateService.saveDelegateHistory(delegateHistory);
 
     }
 }
