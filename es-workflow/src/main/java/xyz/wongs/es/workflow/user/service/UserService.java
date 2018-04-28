@@ -4,8 +4,10 @@ import org.activiti.engine.impl.persistence.entity.GroupEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.wongs.es.modules.sys.entity.Role;
-import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.dao.AtiOrgDao;
+import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
+import xyz.wongs.es.workflow.user.dao.AtiUserDao;
+import xyz.wongs.es.workflow.user.entity.AtiOrg;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
@@ -20,9 +22,12 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private AtiUserMapper atiUserMapper;
+    private AtiUserDao atiUserMapper;
     @Autowired
-    private AtiRoleMapper atiRoleMapper;
+    private AtiRoleDao atiRoleMapper;
+    @Autowired
+    private AtiOrgDao atiOrgMapper;
+
 
     /**
      * 修改为查找自定义用户
@@ -53,6 +58,15 @@ public class UserService {
         groupEntity.setType(role.getRoleType());
         groupEntity.setRevision(1);
         return groupEntity;
+    }
+
+
+    public AtiUser getUserByUserId(Long atiUserId) {
+        return atiUserMapper.getUserById(atiUserId);
+    }
+
+    public AtiOrg getOrgByUserId(Long atiUserId) {
+        return atiOrgMapper.getOrgByUserId(atiUserId);
     }
 
 

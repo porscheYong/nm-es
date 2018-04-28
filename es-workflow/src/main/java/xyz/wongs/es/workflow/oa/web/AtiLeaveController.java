@@ -20,12 +20,12 @@ import xyz.wongs.es.modules.oa.entity.Leave;
 import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
-import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
-import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
+import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import xyz.wongs.es.workflow.oa.service.AtiLeaveService;
+import xyz.wongs.es.workflow.oa.service.AtiSpecificFormService;
 
 import java.util.Date;
 import java.util.List;
@@ -42,10 +42,11 @@ public class AtiLeaveController extends BaseController {
 
 	@Autowired
 	private AtiLeaveService leaveService;
-	//注入 AtiSpecificFormMapper ,测试重新申请接口
 	@Autowired
-	private AtiSpecificFormMapper atiSpecificFormMapper;
-	//注入 AtiTaskService ,测试重新申请接口
+	private AtiSpecificFormService specificFormService;
+	/**  测试用 */
+	@Autowired
+	private AtiSpecificFormDao atiSpecificFormMapper;
 	@Autowired
 	private AtiTaskService atiTaskService;
 
@@ -59,7 +60,7 @@ public class AtiLeaveController extends BaseController {
 	public AtiLeave get(@RequestParam(required=false) Long id){
 		AtiLeave leave = null;
 		if(id != null) {
-			leave = atiSpecificFormMapper.getAtiLeaveByBaseFormId(id);
+			leave = specificFormService.getAtiLeaveByBaseFormId(id);
 		}
 		if (leave == null){
 			leave = new AtiLeave();

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+    <id column="ATI_BASE_FORM_ID" jdbcType="DECIMAL" property="atiBaseFormId" />
+    <result column="FORM_SENDER" jdbcType="DECIMAL" property="formSender" />
+    <result column="FORM_THEME" jdbcType="OTHER" property="formTheme" />
+    <result column="FORM_CONTENT" jdbcType="OTHER" property="formContent" />
+    <result column="PROC_DEF_ID" jdbcType="OTHER" property="procDefId" />
+    <result column="PROC_INST_ID" jdbcType="VARCHAR" property="procInstId" />
+    <result column="URGENT" jdbcType="VARCHAR" property="urgent" />
+    <result column="LEVEL" jdbcType="VARCHAR" property="level" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_BASE_FORM_ID, FORM_SENDER, FORM_THEME, FORM_CONTENT, PROC_DEF_ID, PROC_INST_ID, 
+    URGENT, LEVEL
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_BASE_FORM
+    where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="addAtiBaseForm" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+    <selectKey keyProperty="atiBaseFormId" resultType="java.lang.Long" order="BEFORE">
+      select ati_base_form_id_seq.nextval from dual
+    </selectKey>
+    insert into ATI_BASE_FORM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        ATI_BASE_FORM_ID,
+      <if test="formSender != null">
+        FORM_SENDER,
+      </if>
+      <if test="formTheme != null">
+        FORM_THEME,
+      </if>
+      <if test="formContent != null">
+        FORM_CONTENT,
+      </if>
+      <if test="act.procDefId != null">
+        PROC_DEF_ID,
+      </if>
+      <if test="procInstId != null">
+        PROC_INST_ID,
+      </if>
+      <if test="urgent != null">
+        URGENT,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{atiBaseFormId,jdbcType=DECIMAL},
+      <if test="formSender != null">
+        #{formSender,jdbcType=DECIMAL},
+      </if>
+      <if test="formTheme != null">
+        #{formTheme,jdbcType=OTHER},
+      </if>
+      <if test="formContent != null">
+        #{formContent,jdbcType=OTHER},
+      </if>
+      <if test="act.procDefId != null">
+        #{act.procDefId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null">
+        #{procInstId,jdbcType=VARCHAR},
+      </if>
+      <if test="urgent != null">
+        #{urgent,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+    update ATI_BASE_FORM
+    <set>
+      <if test="formSender != null">
+        FORM_SENDER = #{formSender,jdbcType=DECIMAL},
+      </if>
+      <if test="formTheme != null">
+        FORM_THEME = #{formTheme,jdbcType=OTHER},
+      </if>
+      <if test="formContent != null">
+        FORM_CONTENT = #{formContent,jdbcType=OTHER},
+      </if>
+      <if test="procDefId != null">
+        PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
+      </if>
+      <if test="procInstId != null">
+        PROC_INST_ID = #{procInstId,jdbcType=VARCHAR},
+      </if>
+      <if test="urgent != null">
+        URGENT = #{urgent,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
+    update ATI_BASE_FORM
+    set FORM_SENDER = #{formSender,jdbcType=DECIMAL},
+      FORM_THEME = #{formTheme,jdbcType=OTHER},
+      FORM_CONTENT = #{formContent,jdbcType=OTHER},
+      PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
+      PROC_INST_ID = #{procInstId,jdbcType=VARCHAR},
+      URGENT = #{urgent,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=VARCHAR}
+    where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
+  </update>
+
+  <select id="getBaseFormIdByProcInstId" resultType="Long">
+    SELECT ati_base_form_id
+    FROM ATI_BASE_FORM
+    WHERE proc_inst_id = #{procInstId}
+  </select>
+
+</mapper>

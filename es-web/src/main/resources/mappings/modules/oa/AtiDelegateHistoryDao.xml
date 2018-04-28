@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiDelegateHistoryDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    <id column="ATI_DELEGATE_HISTORY_ID" jdbcType="DECIMAL" property="atiDelegateHistoryId" />
+    <result column="ATTORNEY" jdbcType="OTHER" property="attorney" />
+    <result column="ASSIGNEE" jdbcType="OTHER" property="assignee" />
+    <result column="DELEGATE_TIME" jdbcType="TIMESTAMP" property="delegateTime" />
+    <result column="PROC_INST_ID" jdbcType="OTHER" property="procInstId" />
+    <result column="TASK_ID" jdbcType="OTHER" property="taskId" />
+    <result column="TASK_DEF_KEY" jdbcType="OTHER" property="taskDefKey" />
+    <result column="REASON" jdbcType="OTHER" property="reason" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_DELEGATE_HISTORY_ID, ATTORNEY, ASSIGNEE, DELEGATE_TIME, PROC_INST_ID, TASK_ID, 
+    TASK_DEF_KEY, REASON, STATUS
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_DELEGATE_HISTORY
+    where ATI_DELEGATE_HISTORY_ID = #{atiDelegateHistoryId,jdbcType=DECIMAL}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_DELEGATE_HISTORY
+    where ATI_DELEGATE_HISTORY_ID = #{atiDelegateHistoryId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    insert into ATI_DELEGATE_HISTORY (ATI_DELEGATE_HISTORY_ID, ATTORNEY, ASSIGNEE, 
+      DELEGATE_TIME, PROC_INST_ID, TASK_ID, 
+      TASK_DEF_KEY, REASON, STATUS
+      )
+    values (#{atiDelegateHistoryId,jdbcType=DECIMAL}, #{attorney,jdbcType=OTHER}, #{assignee,jdbcType=OTHER}, 
+      #{delegateTime,jdbcType=TIMESTAMP}, #{procInstId,jdbcType=OTHER}, #{taskId,jdbcType=OTHER}, 
+      #{taskDefKey,jdbcType=OTHER}, #{reason,jdbcType=OTHER}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    insert into ATI_DELEGATE_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiDelegateHistoryId != null">
+        ATI_DELEGATE_HISTORY_ID,
+      </if>
+      <if test="attorney != null">
+        ATTORNEY,
+      </if>
+      <if test="assignee != null">
+        ASSIGNEE,
+      </if>
+      <if test="delegateTime != null">
+        DELEGATE_TIME,
+      </if>
+      <if test="procInstId != null">
+        PROC_INST_ID,
+      </if>
+      <if test="taskId != null">
+        TASK_ID,
+      </if>
+      <if test="taskDefKey != null">
+        TASK_DEF_KEY,
+      </if>
+      <if test="reason != null">
+        REASON,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiDelegateHistoryId != null">
+        #{atiDelegateHistoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="attorney != null">
+        #{attorney,jdbcType=OTHER},
+      </if>
+      <if test="assignee != null">
+        #{assignee,jdbcType=OTHER},
+      </if>
+      <if test="delegateTime != null">
+        #{delegateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procInstId != null">
+        #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="taskDefKey != null">
+        #{taskDefKey,jdbcType=OTHER},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    update ATI_DELEGATE_HISTORY
+    <set>
+      <if test="attorney != null">
+        ATTORNEY = #{attorney,jdbcType=OTHER},
+      </if>
+      <if test="assignee != null">
+        ASSIGNEE = #{assignee,jdbcType=OTHER},
+      </if>
+      <if test="delegateTime != null">
+        DELEGATE_TIME = #{delegateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="procInstId != null">
+        PROC_INST_ID = #{procInstId,jdbcType=OTHER},
+      </if>
+      <if test="taskId != null">
+        TASK_ID = #{taskId,jdbcType=OTHER},
+      </if>
+      <if test="taskDefKey != null">
+        TASK_DEF_KEY = #{taskDefKey,jdbcType=OTHER},
+      </if>
+      <if test="reason != null">
+        REASON = #{reason,jdbcType=OTHER},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_DELEGATE_HISTORY_ID = #{atiDelegateHistoryId,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    update ATI_DELEGATE_HISTORY
+    set ATTORNEY = #{attorney,jdbcType=OTHER},
+      ASSIGNEE = #{assignee,jdbcType=OTHER},
+      DELEGATE_TIME = #{delegateTime,jdbcType=TIMESTAMP},
+      PROC_INST_ID = #{procInstId,jdbcType=OTHER},
+      TASK_ID = #{taskId,jdbcType=OTHER},
+      TASK_DEF_KEY = #{taskDefKey,jdbcType=OTHER},
+      REASON = #{reason,jdbcType=OTHER},
+      STATUS = #{status,jdbcType=VARCHAR}
+    where ATI_DELEGATE_HISTORY_ID = #{atiDelegateHistoryId,jdbcType=DECIMAL}
+  </update>
+
+  <insert id="saveDelegateHistory" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory">
+    INSERT INTO
+      ATI_DELEGATE_HISTORY (ATI_DELEGATE_HISTORY_ID, ATTORNEY, ASSIGNEE,
+      DELEGATE_TIME, PROC_INST_ID, TASK_ID,
+      TASK_DEF_KEY, REASON, STATUS
+      )
+    VALUES (ati_delegate_history_id_seq.Nextval, #{attorney,jdbcType=OTHER}, #{assignee,jdbcType=OTHER},
+      #{delegateTime,jdbcType=TIMESTAMP}, #{procInstId,jdbcType=OTHER}, #{taskId,jdbcType=OTHER},
+      #{taskDefKey,jdbcType=OTHER}, #{reason,jdbcType=OTHER}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+
+
+</mapper>

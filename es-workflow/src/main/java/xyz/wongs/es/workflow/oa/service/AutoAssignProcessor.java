@@ -6,8 +6,9 @@ import org.activiti.engine.delegate.TaskListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+
+import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
+import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
@@ -25,9 +26,9 @@ public class AutoAssignProcessor implements TaskListener {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private AtiUserMapper atiUserMapper;
+	private AtiUserDao atiUserMapper;
 	@Autowired
-	private AtiRoleMapper atiRoleMapper;
+	private AtiRoleDao atiRoleMapper;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {

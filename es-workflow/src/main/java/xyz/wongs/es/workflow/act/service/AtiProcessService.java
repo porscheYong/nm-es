@@ -1,7 +1,9 @@
 package xyz.wongs.es.workflow.act.service;
 
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.runtime.ProcessInstanceQuery;
 import org.activiti.engine.task.Task;
@@ -10,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.wongs.es.common.persistence.Page;
 import xyz.wongs.es.common.utils.StringUtils;
-import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoMapper;
+import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoDao;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
+import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import java.util.List;
 
@@ -28,7 +32,9 @@ public class AtiProcessService {
     @Autowired
     private TaskService taskService;
     @Autowired
-    private AtiDelegateInfoMapper atiDelegateInfoMapper;
+    private AtiDelegateInfoDao atiDelegateInfoMapper;
+    @Autowired
+    private RepositoryService repositoryService;
 
     /**
      * 流程定义列表
@@ -87,6 +93,44 @@ public class AtiProcessService {
             }
             if(delegateInfo.getAttorney().equals(leaver)) {
                 atiDelegateInfoMapper.updateDelegateAttorney(leaver,receiver);
+            }
+        }
+
+    }
+
+
+    /**
+     * 任务改派
+     * @param procInstId
+     * @param taskDefKey
+     * @param users
+     */
+    public void alterAssignee(String procInstId,String taskDefKey,List<AtiUser> users) {
+
+        Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).active().singleResult();
+        //当前任务改派
+        if(taskDefKey.equals(currentTask.getTaskDefinitionKey())) {
+            //1. 清空所有办理人
+            if(currentTask.getAssignee() == null) {
+                taskService.claim(currentTask.getId(), "user");
+            }
+            taskService.unclaim(currentTask.getId());
+            //2. 给节点添加办理人
+            for(AtiUser user : users) {
+                taskService.addCandidateUser(currentTask.getId(), String.valueOf(user.getAtiUserId()));
+            }
+        }
+
+        //非当前任务改派
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(currentTask.getProcessDefinitionId()).singleResult();
+        ProcDefKey.init();
+        String[] actDefKeys = (String[]) ProcDefKey.map.get(processDefinition.getKey());
+
+        //任务改派时，往流程实例中添加变量，到节点指派候选人时再取出该变量中的用户
+        for(int i=0;i<actDefKeys.length;i++) {
+            if(actDefKeys[i].equals(taskDefKey)) {
+                runtimeService.setVariable(procInstId,actDefKeys[i],users);
+                break;
             }
         }
 

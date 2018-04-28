@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.AtiUserDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.AtiUser">
+    <id column="ATI_USER_ID" jdbcType="DECIMAL" property="atiUserId" />
+    <result column="NAME" jdbcType="OTHER" property="name" />
+    <result column="IDENTITY_ID" jdbcType="VARCHAR" property="identityId" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="MAIL" jdbcType="VARCHAR" property="mail" />
+    <result column="NO" jdbcType="VARCHAR" property="no" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    u.ATI_USER_ID, u.NAME, u.IDENTITY_ID, u.PHONE, u.MAIL, u.NO, u.PASSWORD
+  </sql>
+
+  <sql id="userJoins">
+    JOIN ATI_USER_ROLE ur ON ur.ATI_USER_ID = u.ATI_USER_ID
+  </sql>
+
+  <select id="getUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ATI_USER u
+    where u.NAME = #{name,jdbcType=OTHER}
+  </select>
+
+  <select id="getUserById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ATI_USER u
+    where u.ATI_USER_ID = #{atiUserId}
+  </select>
+
+  <select id="getUsersByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ATI_USER u
+    LEFT JOIN ATI_USER_ROLE ur
+    ON u.ATI_USER_ID = ur.ATI_USER_ID
+    where ur.ATI_ROLE_ID = #{atiRoleId}
+  </select>
+
+  <select id="getUsersByGroup" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      ATI_USER u
+    LEFT JOIN
+      ATI_USER_GROUP ug
+    ON u.ATI_USER_ID = ug.ATI_USER_ID
+    LEFT JOIN
+      ATI_GROUP g
+    ON ug.ATI_GROUP_ID = g.ATI_GROUP_ID
+    WHERE
+      g.ATI_GROUP_ID = #{atiGroupId}
+  </select>
+
+  <select id="getHrUsersByAtiUserId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ati_user u left join ati_user_role ur
+    on u.ati_user_id = ur.ati_user_id
+    left join ati_role r on ur.ati_role_id = r.ati_role_id
+    left join ati_user_org uo on uo.ati_user_id = u.ati_user_id
+    left join ati_org o on uo.ati_org_id = o.ati_org_id
+    where r.role_name= '人事' and o.ati_org_id in (
+    select g.ati_org_id
+    from ati_user u left join ati_user_org uo
+    on u.ati_user_id = uo.ati_user_id
+    left join ati_org  g on uo.ati_org_id = g.ati_org_id
+    where u.ati_user_id = #{atiUserId})
+  </select>
+</mapper>

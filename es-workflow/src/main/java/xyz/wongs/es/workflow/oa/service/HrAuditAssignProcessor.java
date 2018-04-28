@@ -7,9 +7,9 @@ import org.activiti.engine.delegate.TaskListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
-import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
+import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
+import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
@@ -27,16 +27,16 @@ public class HrAuditAssignProcessor implements TaskListener {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private AtiUserMapper atiUserMapper;
+	private AtiUserDao atiUserMapper;
 	@Autowired
-	private AtiRoleMapper atiRoleMapper;
+	private AtiRoleDao atiRoleMapper;
 	@Autowired
 	private RuntimeService runtimeService;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
 
-		Object vars = runtimeService.getVariable(delegateTask.getProcessInstanceId(),TaskDefKey.LEAVE_TASK_DEF_KEY[3]);
+		Object vars = runtimeService.getVariable(delegateTask.getProcessInstanceId(), ProcDefKey.LEAVE_TASK_DEF_KEY[3]);
 
 		List<AtiUser> users = (List<AtiUser>) vars;
 		List<String> names = Lists.newArrayList();

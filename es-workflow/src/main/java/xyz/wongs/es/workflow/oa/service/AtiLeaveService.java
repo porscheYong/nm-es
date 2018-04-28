@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
-import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
-import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
+import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
+import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
 import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * 请假示例流程Service
  * @author liuxiaodong
  * @date 2018/4/12
  */
@@ -24,9 +24,9 @@ import java.util.Map;
 public class AtiLeaveService {
 
     @Autowired
-    private AtiBaseFormMapper atiBaseFormMapper;
+    private AtiBaseFormDao atiBaseFormMapper;
     @Autowired
-    private AtiSpecificFormMapper atiSpecificFormMapper;
+    private AtiSpecificFormDao atiSpecificFormMapper;
 
     @Autowired
     private AtiTaskService atiTaskService;

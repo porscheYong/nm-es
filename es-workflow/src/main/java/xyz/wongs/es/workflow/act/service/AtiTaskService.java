@@ -28,10 +28,12 @@ import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.modules.act.utils.ProcessDefCache;
 import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
-import xyz.wongs.es.workflow.act.dao.ActMapper;
+import xyz.wongs.es.workflow.act.dao.AtiActDao;
 import xyz.wongs.es.workflow.act.entity.JumpCmd;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
-import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
+import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
+import xyz.wongs.es.workflow.user.service.UserService;
 
 import java.util.*;
 
@@ -45,7 +47,7 @@ import java.util.*;
 public class AtiTaskService extends BaseService {
 
 	@Autowired
-	private ActMapper actMapper;
+	private AtiActDao atiActDao;
 	@Autowired
 	private RuntimeService runtimeService;
 	@Autowired
@@ -60,6 +62,8 @@ public class AtiTaskService extends BaseService {
 	private HistoryService historyService;
 	@Autowired
 	private ManagementService managementService;
+	@Autowired
+	private UserService userService;
 
 
 	/**
@@ -119,8 +123,8 @@ public class AtiTaskService extends BaseService {
 
 
 		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-		String userId = String.valueOf(atiBaseForm.getFormSender());
-		identityService.setAuthenticatedUserId(userId);
+		Long userId = atiBaseForm.getFormSender();
+		identityService.setAuthenticatedUserId(String.valueOf(userId));
 		
 		// 设置流程变量
 		if (vars == null){
@@ -130,6 +134,8 @@ public class AtiTaskService extends BaseService {
 		// 设置流程标题
 		if (StringUtils.isNotBlank(title)){
 			vars.put("title", title);
+			//添加申请人
+			vars.put("applyUser",userId);
 		}
 		
 		// 启动流程
@@ -143,7 +149,7 @@ public class AtiTaskService extends BaseService {
 		act.setProcInsId(procIns.getId());
 
 		//更新ATI_BASE_FORM 字段procInstId的值
-		actMapper.updateProcInstIdByBaseFormId(act.getProcInsId(),atiBaseForm.getAtiBaseFormId());
+		atiActDao.updateProcInstIdByBaseFormId(act.getProcInsId(),atiBaseForm.getAtiBaseFormId());
 		return act.getProcInsId();
 	}
 
@@ -313,8 +319,7 @@ public class AtiTaskService extends BaseService {
 	 * @param act .procDefKey 流程定义标识
 	 * @return
 	 */
-	public Page<Act> historicList(Page<Act> page, Act act){
-		String userId = "刘小东-人事";
+	public Page<Act> historicList(Page<Act> page, Act act,String userId){
 
 		HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery().taskAssignee(userId).finished()
 				.includeProcessVariables().orderByHistoricTaskInstanceEndTime().desc();
@@ -395,23 +400,22 @@ public class AtiTaskService extends BaseService {
 				// 获取流程发起人名称
 				if ("startEvent".equals(histIns.getActivityType())){
 					List<HistoricProcessInstance> il = historyService.createHistoricProcessInstanceQuery().processInstanceId(procInsId).orderByProcessInstanceStartTime().asc().list();
-//					List<HistoricIdentityLink> il = historyService.getHistoricIdentityLinksForProcessInstance(procInsId);
 					if (il.size() > 0){
 						if (StringUtils.isNotBlank(il.get(0).getStartUserId())){
-							User user = UserUtils.getByLoginName(il.get(0).getStartUserId());
+							AtiUser user = userService.getUserByUserId(Long.valueOf(il.get(0).getStartUserId()));
 							if (user != null){
 								e.setAssignee(histIns.getAssignee());
-								e.setAssigneeName(user.getName());
+								e.setAssigneeName((String) user.getName());
 							}
 						}
 					}
 				}
 				// 获取任务执行人名称
 				if (StringUtils.isNotEmpty(histIns.getAssignee())){
-					User user = UserUtils.getByLoginName(histIns.getAssignee());
+					AtiUser user = userService.getAtiUserByName(histIns.getAssignee());
 					if (user != null){
 						e.setAssignee(histIns.getAssignee());
-						e.setAssigneeName(user.getName());
+						e.setAssigneeName((String) user.getName());
 					}
 				}
 				// 获取意见评论内容
@@ -454,12 +458,19 @@ public class AtiTaskService extends BaseService {
 	 */
 	public String getPreTaskId(String procInstId) {
 
+		//通过流程实例获取相应procDefKey
+
 		String preTaskDefKey = "";
 		//当前任务
 		Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).active().singleResult();
-		for(int i=1;i<TaskDefKey.LEAVE_TASK_DEF_KEY.length;i++) {
-			if(TaskDefKey.LEAVE_TASK_DEF_KEY[i].equals(currentTask.getTaskDefinitionKey()	)) {
-				preTaskDefKey = TaskDefKey.LEAVE_TASK_DEF_KEY[i-1];
+		//流程定义
+		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(currentTask.getProcessDefinitionId()).singleResult();
+		//获取相应taskDefKey数组
+		ProcDefKey.init();
+		String[] actDefKeys = (String[]) ProcDefKey.map.get(processDefinition.getKey());
+		for(int i = 1; i< actDefKeys.length; i++) {
+			if(actDefKeys[i].equals(currentTask.getTaskDefinitionKey())) {
+				preTaskDefKey = actDefKeys[i-1];
 				break;
 			}
 		}
@@ -496,6 +507,23 @@ public class AtiTaskService extends BaseService {
 		ActivityImpl hisActivity = definition.findActivity(hisTask.getTaskDefinitionKey());
 		//实现跳转
 		managementService.executeCommand(new JumpCmd(instance.getId(), hisActivity.getId()));
+	}
+
+
+	public String[] getTaskDefKeyByProcInstId(String procInstId) {
+
+		//通过流程实例获取相应procDefKey
+
+		String preTaskDefKey = "";
+		//当前任务
+		Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).active().singleResult();
+		//流程定义
+		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(currentTask.getProcessDefinitionId()).singleResult();
+		//获取相应taskDefKey数组
+		ProcDefKey.init();
+		String[] actDefKeys = (String[]) ProcDefKey.map.get(processDefinition.getKey());
+
+		return actDefKeys;
 	}
 
 

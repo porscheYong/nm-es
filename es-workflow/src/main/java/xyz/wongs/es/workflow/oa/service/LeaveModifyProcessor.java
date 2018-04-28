@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.modules.oa.dao.LeaveDao;
 import xyz.wongs.es.modules.oa.entity.Leave;
-import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
-import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormMapper;
+import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
+import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 
 import java.util.Date;
@@ -27,9 +27,9 @@ public class LeaveModifyProcessor implements TaskListener {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private AtiSpecificFormMapper atiSpecificFormMapper;
+	private AtiSpecificFormDao atiSpecificFormMapper;
 	@Autowired
-	private AtiBaseFormMapper atiBaseFormMapper;
+	private AtiBaseFormDao atiBaseFormMapper;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {

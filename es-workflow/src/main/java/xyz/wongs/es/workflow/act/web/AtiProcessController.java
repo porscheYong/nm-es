@@ -1,17 +1,6 @@
 package xyz.wongs.es.workflow.act.web;
 
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.TaskService;
-import org.activiti.engine.impl.RepositoryServiceImpl;
-import org.activiti.engine.impl.persistence.entity.ExecutionEntity;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.impl.task.TaskDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
-import org.activiti.engine.task.Task;
-import org.activiti.engine.task.TaskQuery;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.wongs.es.common.persistence.Page;
 import xyz.wongs.es.common.web.BaseController;
-import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.workflow.act.service.AtiProcessService;
-import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoMapper;
-import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
-import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
-import xyz.wongs.es.workflow.user.dao.AtiRoleMapper;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
+import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
+import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
@@ -44,14 +29,14 @@ public class AtiProcessController extends BaseController {
 
     @Autowired
     private AtiProcessService atiProcessService;
+    /**  测试用 */
     @Autowired
-    private TaskService taskService;
+    private AtiUserDao atiUserMapper;
+    /**  测试用 */
     @Autowired
-    private AtiUserMapper atiUserMapper;
-    @Autowired
-    private AtiRoleMapper atiRoleMapper;
-    @Autowired
-    private RuntimeService runtimeService;
+    private AtiRoleDao atiRoleMapper;
+
+
 
     /**
      * 运行中的实例列表
@@ -81,7 +66,7 @@ public class AtiProcessController extends BaseController {
 
 
     /**
-     * 改派流程实例中当前运行节点办理人
+     * 改派流程实例节点办理人
      * @param procInstId 流程实例ID
      * @param taskDefKey 例如deptLeaderAudit
      * @return
@@ -89,47 +74,13 @@ public class AtiProcessController extends BaseController {
     @RequestMapping(value = "/saveTaskAlterAssignee")
     public String saveAlterAssignee(String procInstId, String taskDefKey) {
 
-
         //需要从页面传递一个List<AtiUser>参数
-        //测试
+        //测试用户
         List<AtiUser> users = null;
-        AtiRole atiRole = atiRoleMapper.getRoleByRoleCode("2000");
+        AtiRole atiRole = atiRoleMapper.getRoleByRoleCode("3000");
         users = atiUserMapper.getUsersByRoleId(atiRole.getAtiRoleId());
 
-        String[] taskDefKeys = TaskDefKey.LEAVE_TASK_DEF_KEY;
-        //任务改派时，往流程实例中添加变量，到节点指派候选人时再取出该变量中的用户
-        for(int i=0;i<taskDefKeys.length;i++) {
-            if(taskDefKeys[i].equals(taskDefKey)) {
-                runtimeService.setVariable(procInstId,taskDefKeys[i],users);
-                break;
-            }
-        }
-
-        Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).active().singleResult();
-        if(taskDefKey.equals(currentTask.getTaskDefinitionKey())) {
-            //1. 清空所有办理人
-            if(currentTask.getAssignee() == null) {
-                taskService.claim(currentTask.getId(), "user");
-            }
-            taskService.unclaim(currentTask.getId());
-            //2. 给节点添加办理人
-            for(AtiUser user : users) {
-                taskService.addCandidateUser(currentTask.getId(), String.valueOf(user.getAtiUserId()));
-            }
-//        taskService.addCandidateUser(task.getId(),"35");
-//        taskService.addCandidateUser(task.getId(),"36");
-        }
-
-
-
-
-
-
-
-
-
-
-
+        atiProcessService.alterAssignee(procInstId,taskDefKey,users);
 
         return "redirect:" + adminPath + "/workflow/act/process/running";
     }

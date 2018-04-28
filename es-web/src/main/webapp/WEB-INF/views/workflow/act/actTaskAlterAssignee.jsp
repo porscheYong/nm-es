@@ -18,8 +18,8 @@
 <form id="alterAssign" action="${ctx}/workflow/act/process/saveTaskAlterAssignee?procInstId=${procInstId}" method="post" class="breadcrumb form-search">
     <label>流程实例</label>${proInstId}
     <select name="taskDefKey">
-        <option value="deptLeaderAudit">部门经理审批</option>
-        <option value="huAudit">人事审批</option>
+        <option value="hrAudit">人力资源审批</option>
+        <option value="hrLeaderAudit">分管领导审批</option>
     </select>
     <label>用户组选择</label><input type="text" id="procDefKey" name="procDefKey" value="${procDefKey}" class="input-medium"/>
     &nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>

@@ -3,14 +3,6 @@
  */
 package xyz.wongs.es.workflow.act.web;
 
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.ManagementService;
-import org.activiti.engine.RepositoryService;
-import org.activiti.engine.RuntimeService;
-import org.activiti.engine.history.HistoricTaskInstance;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
-import org.activiti.engine.impl.pvm.process.ActivityImpl;
-import org.activiti.engine.runtime.ProcessInstance;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,21 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.wongs.es.common.persistence.Page;
 import xyz.wongs.es.common.web.BaseController;
 import xyz.wongs.es.modules.act.entity.Act;
-import xyz.wongs.es.modules.act.service.ActTaskService;
 import xyz.wongs.es.modules.act.utils.ActUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
-import xyz.wongs.es.workflow.oa.dao.AtiBaseFormMapper;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
-import xyz.wongs.es.workflow.oa.entity.TaskDefKey;
-import xyz.wongs.es.workflow.user.dao.AtiUserMapper;
-import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 流程个人任务相关Controller
@@ -47,14 +32,6 @@ public class AtiTaskController extends BaseController {
 
 	@Autowired
 	private AtiTaskService atiTaskService;
-	@Autowired
-	private HistoryService historyService;
-	@Autowired
-	private RepositoryService repositoryService;
-	@Autowired
-	private RuntimeService runtimeService;
-	@Autowired
-	private ManagementService managementService;
 
 
 	/**
@@ -95,16 +72,28 @@ public class AtiTaskController extends BaseController {
 		return "redirect:" + ActUtils.getFormUrl(formKey, act);
 	}
 
+
+
+	/**
+	 * 获取待办列表
+	 * @param act .procDefKey 流程定义标识
+	 * @return
+	 */
+	@RequestMapping(value = "/todoNeedName")
+	public String todoListNeedParam(Act act, HttpSession session) throws Exception {
+		session.setAttribute("act",act);
+		return "modules/act/actTaskTodoListNeedName";
+	}
+
 	/**
 	 * 获取待办列表
 	 * @param act .procDefKey 流程定义标识
 	 * @return
 	 */
 	@RequestMapping(value = {"todo", ""})
-	public String todoList(Act act, Model model) throws Exception {
+	public String todoList(Act act, Model model, String userId,HttpSession session) throws Exception {
+		act = (Act) session.getAttribute("act");
 		//需要传入一个UserId参数,String
-//		String userId = "35";
-		String userId = "32";
 		List<Act> list = atiTaskService.todoList(act,userId);
 		model.addAttribute("list", list);
 		return "modules/act/actTaskTodoList";
@@ -119,7 +108,7 @@ public class AtiTaskController extends BaseController {
 	@ResponseBody
 	public String claim(Act act) {
 		//需要传入一个userId参数,String
-		String userId = "32";
+		String userId = "38";
 		atiTaskService.claim(act.getTaskId(), userId);
 		return "true";
 	}
@@ -154,7 +143,9 @@ public class AtiTaskController extends BaseController {
 	@RequestMapping(value = "historic")
 	public String historicList(Act act, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		Page<Act> page = new Page<Act>(request, response);
-		page = atiTaskService.historicList(page, act);
+		//需要传入一个参数
+		String userId = "刘小东-人事";
+		page = atiTaskService.historicList(page, act,userId);
 		model.addAttribute("page", page);
 		if (UserUtils.getPrincipal().isMobileLogin()){
 			return renderString(response, page);

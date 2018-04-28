@@ -2,8 +2,9 @@ package xyz.wongs.es.workflow.oa.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import xyz.wongs.es.workflow.oa.dao.AtiDelegateHistoryMapper;
-import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoMapper;
+
+import xyz.wongs.es.workflow.oa.dao.AtiDelegateHistoryDao;
+import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoDao;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
 
@@ -19,9 +20,9 @@ import java.util.List;
 public class AtiDelegateService {
 
     @Autowired
-    private AtiDelegateInfoMapper atiDelegateInfoMapper;
+    private AtiDelegateInfoDao atiDelegateInfoMapper;
     @Autowired
-    private AtiDelegateHistoryMapper atiDelegateHistoryMapper;
+    private AtiDelegateHistoryDao atiDelegateHistoryMapper;
 
     /**
      * 获取列表
