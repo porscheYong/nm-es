@@ -3,7 +3,7 @@ package xyz.wongs.es.workflow.oa.entity;
 import java.io.Serializable;
 
 /**
- *流程分类Entity
+ * 流程分类Entity
  * @author liuxiaodong
  * @date 2018/4/11
  */

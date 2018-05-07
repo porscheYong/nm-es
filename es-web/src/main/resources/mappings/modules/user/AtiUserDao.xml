@@ -71,4 +71,11 @@
     left join ati_org  g on uo.ati_org_id = g.ati_org_id
     where u.ati_user_id = #{atiUserId})
   </select>
+
+  <select id="getUsers" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      ATI_USER u
+  </select>
 </mapper>

@@ -1,6 +1,8 @@
-package xyz.wongs.es.workflow.oa.entity;
+package xyz.wongs.es.workflow.workattendace.entity;
 
 import java.util.Date;
+
+import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
 
 /**
  *

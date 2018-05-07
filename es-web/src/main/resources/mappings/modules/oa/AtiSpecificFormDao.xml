@@ -110,14 +110,14 @@
     </foreach>
   </insert>
 
-  <update id="updateDeptLeaderText" parameterType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+  <update id="updateDeptLeaderText" parameterType="xyz.wongs.es.workflow.workattendace.entity.AtiLeave">
     UPDATE ATI_SPECIFIC_FORM
     SET PARAM_VALUE = #{deptLeaderText}
     WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
     AND PARAMETER = 'DEPTLEADER_TEXT'
   </update>
 
-  <update id="updateHrText" parameterType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+  <update id="updateHrText" parameterType="xyz.wongs.es.workflow.workattendace.entity.AtiLeave">
     UPDATE ATI_SPECIFIC_FORM
     SET PARAM_VALUE = #{hrText}
     WHERE ATI_BASE_FORM_ID = #{atiBaseFormId}
@@ -131,7 +131,7 @@
     AND PARAMETER = #{parameter}
   </update>
 
-  <select id="getAtiLeaveByBaseFormId" resultType="xyz.wongs.es.workflow.oa.entity.AtiLeave">
+  <select id="getAtiLeaveByBaseFormId" resultType="xyz.wongs.es.workflow.workattendace.entity.AtiLeave">
     select bf.*,sf.ati_act_category_id,sf.leave_type,sf.start_time,sf.end_time,sf.reason,sf.deptleader_text,
       sf.hr_text,sf.reality_start_time,sf.reality_end_time
     from ati_base_form bf

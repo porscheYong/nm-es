@@ -13,6 +13,7 @@ import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -24,10 +25,10 @@ import java.util.Map;
 @Service
 public class AtiModifyStaffInfoService {
 
-    @Autowired
-    private AtiBaseFormDao atiBaseFormMapper;
-    @Autowired
-    private AtiSpecificFormDao atiSpecificFormMapper;
+    @Resource
+    private AtiBaseFormDao atiBaseFormDao;
+    @Resource
+    private AtiSpecificFormDao atiSpecificFormDao;
     @Autowired
     private AtiTaskService atiTaskService;
 
@@ -50,13 +51,13 @@ public class AtiModifyStaffInfoService {
             //添加procDefId到通用配置表单
             modifyStaffInfo.setProcDefId(modifyStaffInfo.getAct().getProcDefId());
 
-            atiBaseFormMapper.addAtiBaseForm(modifyStaffInfo);
+            atiBaseFormDao.addAtiBaseForm(modifyStaffInfo);
 
             Long currentBaseFormId = modifyStaffInfo.getAtiBaseFormId();
             modifyStaffInfo.setAtiBaseFormId(currentBaseFormId);
 
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                atiSpecificFormMapper.insert(atiSpecificForm);
+                atiSpecificFormDao.insert(atiSpecificForm);
             }
 
             //使用ATI_BASE_FORM_ID 作为 businessId
@@ -70,7 +71,7 @@ public class AtiModifyStaffInfoService {
         else{
 
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                atiSpecificFormMapper.update(atiSpecificForm);
+                atiSpecificFormDao.update(atiSpecificForm);
             }
 
             modifyStaffInfo.getAct().setComment("[重申] "+modifyStaffInfo.getAct().getComment());
@@ -89,7 +90,7 @@ public class AtiModifyStaffInfoService {
      */
     public String getFormKey(AtiModifyStaffInfo modifyStaffInfo) {
 
-        String view = "modifyStaffInfoForm";
+        String view = "";
 
         // 查看审批申请单
         if (StringUtils.isNotBlank(modifyStaffInfo.getId())){
@@ -97,21 +98,25 @@ public class AtiModifyStaffInfoService {
             // 环节编号
             String taskDefKey = modifyStaffInfo.getAct().getTaskDefKey();
 
-            // 修改环节
-            if (ProcDefKey.MODIFY_TASK_DEF_KEY[1].equals(taskDefKey)){
-                view = "modifyStaffInfoModifyForm";
-            }
-            // 人力资源审核环节
-            else if (ProcDefKey.MODIFY_TASK_DEF_KEY[2].equals(taskDefKey)){
-                view = "modifyStaffInfoAudit";
-            }
-            // 人力分管领导审核环节
-            else if (ProcDefKey.MODIFY_TASK_DEF_KEY[3].equals(taskDefKey)){
-                view = "modifyStaffInfoAudit";
-            }
-            //系统管理员环节
-            else if(ProcDefKey.MODIFY_TASK_DEF_KEY[4].equals(taskDefKey)) {
-                view = "modifyStaffInfoAudit";
+            switch (taskDefKey) {
+                // 修改环节
+                case "modify":
+                    view = "modifyStaffInfoModifyForm";
+                    break;
+                // 人力资源审核环节
+                case "hrAudit":
+                    view = "modifyStaffInfoAudit";
+                    break;
+                // 人力分管领导审核环节
+                case "hrLeaderAudit":
+                    view = "modifyStaffInfoAudit";
+                    break;
+                //系统管理员环节
+                case "admin":
+                    view = "modifyStaffInfoAudit";
+                    break;
+                default:
+                    view = "modifyStaffInfoForm";
             }
 
         }
@@ -125,30 +130,37 @@ public class AtiModifyStaffInfoService {
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     public void auditSave(AtiModifyStaffInfo modifyStaffInfo) {
 
+        List<AtiSpecificForm> specificForms = getSpecificForms(modifyStaffInfo);
+
         // 设置意见
         modifyStaffInfo.getAct().setComment(("yes".equals(modifyStaffInfo.getAct().getFlag())?"[同意] ":"[驳回] ")+modifyStaffInfo.getAct().getComment());
 
         // 对不同环节的业务逻辑进行操作
         String taskDefKey = modifyStaffInfo.getAct().getTaskDefKey();
 
-        // 人力资源审核环节
-        if (ProcDefKey.MODIFY_TASK_DEF_KEY[2].equals(taskDefKey)){
-            modifyStaffInfo.setHrText(modifyStaffInfo.getAct().getComment());
-//            atiSpecificFormMapper.updateText(modifyStaffInfo);
-        }
-        // 分管领导审核环节
-        else if (ProcDefKey.MODIFY_TASK_DEF_KEY[3].equals(taskDefKey)){
-            modifyStaffInfo.setHrLeaderText( modifyStaffInfo.getAct().getComment());
-//           atiSpecificFormMapper.updateText(modifyStaffInfo);
-        }
-        //系统管理员环节
-        else if (ProcDefKey.MODIFY_TASK_DEF_KEY[4].equals(taskDefKey)){
+        switch (taskDefKey) {
+            // 人力资源审核环节
+            case "hrAudit":
+                modifyStaffInfo.setHrText(modifyStaffInfo.getAct().getComment());
 
-        }
+                for(AtiSpecificForm specificForm :specificForms) {
+                    atiSpecificFormDao.update(specificForm);
+                }
+                break;
+            // 分管领导审核环节
+            case "hrLeaderAudit":
+                modifyStaffInfo.setHrLeaderText( modifyStaffInfo.getAct().getComment());
 
-        // 未知环节，直接返回
-        else{
-            return;
+                for(AtiSpecificForm specificForm :specificForms) {
+                    atiSpecificFormDao.update(specificForm);
+                }
+                break;
+            //系统管理员环节
+            case "admin":
+                break;
+            // 未知环节，直接返回
+            default:
+                return;
         }
 
         // 提交流程任务
@@ -187,6 +199,17 @@ public class AtiModifyStaffInfoService {
         specificFormNewPassword.setParameter("NEW_PASSWORD");
         specificFormNewPassword.setParamValue(modifyStaffInfo.getNewPassword());
         specificForms.add(specificFormNewPassword);
+
+        AtiSpecificForm specificFormFirstText = getSpecificForm(modifyStaffInfo);
+        specificFormFirstText.setParameter("HR_TEXT");
+        specificFormFirstText.setParamValue(modifyStaffInfo.getHrText());
+        specificForms.add(specificFormFirstText);
+
+        AtiSpecificForm specificFormSecondText = getSpecificForm(modifyStaffInfo);
+        specificFormSecondText.setParameter("HR_LEADER_TEXT");
+        specificFormSecondText.setParamValue(modifyStaffInfo.getHrLeaderText());
+        specificForms.add(specificFormSecondText);
+
 
         return specificForms;
     }

@@ -32,13 +32,7 @@
 <%--<li><a href="#">审批修改流程</a></li>--%>
 <%--</ul>--%>
 <form:form id="inputForm" modelAttribute="testAudit" action="${ctx}/oa/testAudit/save" method="post" class="form-horizontal">
-	<form:hidden path="id"/>
-	<form:hidden path="act.taskId"/>
-	<form:hidden path="act.taskName"/>
-	<form:hidden path="act.taskDefKey"/>
-	<form:hidden path="act.procInsId"/>
-	<form:hidden path="act.procDefId"/>
-	<form:hidden id="flag" path="act.flag"/>
+	
 	<sys:message content="${message}"/>
 	<fieldset>
 		<legend>
@@ -47,7 +41,7 @@
 		<table class="table-form">
 			<tr>
 				<td class="tit">姓名</td><td>
-				<sys:treeselect id="user" name="user.id" value="${testAudit.user.id}" labelName="user.name" labelValue="${testAudit.user.name}"
+				<sys:treeselect id="user" name="user.id" value="${testAudit.user.id}" labelName="" labelValue=""
 								title="用户" url="/sys/office/treeData?type=3" cssClass="required recipient" cssStyle="width:150px"
 								allowClear="true" notAllowSelectParent="true" smallBtn="false"/>
 			</td>
@@ -56,40 +50,23 @@
 								<%--title="用户" url="/sys/office/treeData?type=2" cssClass="required recipient" cssStyle="width:150px"--%>
 								<%--allowClear="true" notAllowSelectParent="true" smallBtn="false"/></td>--%>
 				<td class="tit">岗位职级</td><td>
-				<form:input path="post" htmlEscape="false" maxlength="50"/>
+
 			</td>
 			</tr>
 			<tr>
-				<td class="tit">调整原因</td>
-				<td colspan="5">
-					<form:textarea path="content" class="required" rows="5" maxlength="200" cssStyle="width:500px"/>
-				</td>
+
 			</tr>
 			<tr>
-				<td class="tit" rowspan="3">调整原因</td>
-				<td class="tit">薪酬档级</td>
-				<td><form:input path="olda" htmlEscape="false" maxlength="50"/></td>
-				<td class="tit" rowspan="3">拟调整标准</td>
-				<td class="tit">薪酬档级</td>
-				<td><form:input path="newa" htmlEscape="false" maxlength="50"/></td>
+
 			</tr>
 			<tr>
-				<td class="tit">月工资额</td>
-				<td><form:input path="oldb" htmlEscape="false" maxlength="50"/></td>
-				<td class="tit">月工资额</td>
-				<td><form:input path="newb" htmlEscape="false" maxlength="50"/></td>
+
 			</tr>
 			<tr>
-				<td class="tit">年薪金额</td>
-				<td><form:input path="oldc" htmlEscape="false" maxlength="50"/></td>
-				<td class="tit">年薪金额</td>
-				<td><form:input path="newc" htmlEscape="false" maxlength="50"/></td>
+
 			</tr>
 			<tr>
-				<td class="tit">月增资</td>
-				<td colspan="2"><form:input path="addNum" htmlEscape="false" maxlength="50"/></td>
-				<td class="tit">执行时间</td>
-				<td colspan="2"><form:input path="exeDate" htmlEscape="false" maxlength="50"/></td>
+
 			</tr>
 			<tr>
 				<td class="tit">人力资源部意见</td>

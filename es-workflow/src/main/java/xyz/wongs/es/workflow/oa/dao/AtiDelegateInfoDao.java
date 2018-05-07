@@ -58,7 +58,7 @@ public interface AtiDelegateInfoDao extends CrudDao<AtiDelegateInfo> {
      * @param attorney
      * @return
      */
-    int updateDelegateAssignee(String assignee,String attorney);
+    int updateDelegateAssignee(@Param("assignee") String assignee,@Param("attorney") String attorney);
 
 
     /**

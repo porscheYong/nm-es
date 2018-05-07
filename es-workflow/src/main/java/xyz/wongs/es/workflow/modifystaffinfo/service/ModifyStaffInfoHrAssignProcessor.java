@@ -1,15 +1,21 @@
 package xyz.wongs.es.workflow.modifystaffinfo.service;
 
+import com.google.common.collect.Lists;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
+import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
+import xyz.wongs.es.workflow.oa.service.OaBaseTaskListenerService;
 import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -19,31 +25,43 @@ import java.util.List;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class ModifyStaffInfoHrAssignProcessor implements TaskListener {
+public class ModifyStaffInfoHrAssignProcessor extends OaBaseTaskListenerService implements TaskListener {
 
     private static final long serialVersionUID = 7499738744879695134L;
 
-    @Autowired
-    private AtiUserDao atiUserMapper;
-    @Autowired
+    @Resource
+    private AtiUserDao atiUserDao;
+    @Resource
     private RuntimeService runtimeService;
+    @Resource
+    private RepositoryService repositoryService;
+    @Resource
+    private TaskService taskService;
 
     @Override
     public void notify(DelegateTask delegateTask) {
 
-        List<AtiUser> users = (List<AtiUser>) runtimeService.getVariable(delegateTask.getProcessInstanceId(),"hr");
-        if(users!=null) {
-            for(AtiUser atiUser : users) {
-                delegateTask.addCandidateUser(String.valueOf(atiUser.getAtiUserId()));
-            }
+
+        //分配候选人之前先查看是否有任务改派
+        ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(delegateTask.getProcessDefinitionId()).singleResult();
+        List<AtiUser> hrUsers = (List<AtiUser>) runtimeService.getVariable(delegateTask.getProcessInstanceId(),processDefinition.getKey() + ProcDefKey.MODIFY_TASK_DEF_KEY[2]);
+        List<String> names = Lists.newArrayList();
+        if(hrUsers!=null) {
+            addNames(hrUsers,names,delegateTask);
             return;
         }
-        Long  atiUserId = (Long) delegateTask.getVariable("applyUser");
-        List<AtiUser> hrUsers = atiUserMapper.getHrUsersByAtiUserId(atiUserId);
 
-        for(AtiUser atiUser : hrUsers) {
-            delegateTask.addCandidateUser(String.valueOf(atiUser.getAtiUserId()));
-        }
+        //本流程该节点的候选人为：发起人所在部门的人力资源部
+        Long  atiUserId = (Long) delegateTask.getVariable("applyUser");
+        hrUsers = atiUserDao.getHrUsersByAtiUserId(atiUserId);
+
+        addNames(hrUsers,names,delegateTask);
+
+
+        //如果有任务委托，添加委托人
+        addDelegateNames(hrUsers,delegateTask);
+
+        taskService.setVariable(delegateTask.getId(),ProcDefKey.MODIFY_TASK_DEF_KEY[2],hrUsers);
 
     }
 }

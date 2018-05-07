@@ -29,8 +29,8 @@ import xyz.wongs.es.modules.act.utils.ProcessDefCache;
 import xyz.wongs.es.modules.sys.entity.User;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.dao.AtiActDao;
-import xyz.wongs.es.workflow.act.entity.JumpCmd;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
+import xyz.wongs.es.workflow.oa.entity.JumpCmd;
 import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 import xyz.wongs.es.workflow.user.service.UserService;
@@ -466,7 +466,6 @@ public class AtiTaskService extends BaseService {
 		//流程定义
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(currentTask.getProcessDefinitionId()).singleResult();
 		//获取相应taskDefKey数组
-		ProcDefKey.init();
 		String[] actDefKeys = (String[]) ProcDefKey.map.get(processDefinition.getKey());
 		for(int i = 1; i< actDefKeys.length; i++) {
 			if(actDefKeys[i].equals(currentTask.getTaskDefinitionKey())) {
@@ -520,7 +519,6 @@ public class AtiTaskService extends BaseService {
 		//流程定义
 		ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(currentTask.getProcessDefinitionId()).singleResult();
 		//获取相应taskDefKey数组
-		ProcDefKey.init();
 		String[] actDefKeys = (String[]) ProcDefKey.map.get(processDefinition.getKey());
 
 		return actDefKeys;

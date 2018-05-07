@@ -1,5 +1,7 @@
 package xyz.wongs.es.workflow.oa.service;
 
+import com.google.common.collect.Lists;
+import org.activiti.engine.delegate.DelegateTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -7,8 +9,11 @@ import xyz.wongs.es.workflow.oa.dao.AtiDelegateHistoryDao;
 import xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoDao;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
 
+import javax.annotation.Resource;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -19,10 +24,10 @@ import java.util.List;
 @Service
 public class AtiDelegateService {
 
-    @Autowired
-    private AtiDelegateInfoDao atiDelegateInfoMapper;
-    @Autowired
-    private AtiDelegateHistoryDao atiDelegateHistoryMapper;
+    @Resource
+    private AtiDelegateInfoDao atiDelegateInfoDao;
+    @Resource
+    private AtiDelegateHistoryDao atiDelegateHistoryDao;
 
     /**
      * 获取列表
@@ -30,7 +35,7 @@ public class AtiDelegateService {
      * @return
      */
     public List<AtiDelegateInfo> getDelegateInfoList(Object assignee) {
-        return atiDelegateInfoMapper.getDelegateInfoList(assignee);
+        return atiDelegateInfoDao.getDelegateInfoList(assignee);
 
     }
 
@@ -42,7 +47,7 @@ public class AtiDelegateService {
      */
     public int saveDelegateInfo(AtiDelegateInfo atiDelegateInfo) {
 
-        return atiDelegateInfoMapper.addDelegateInfo(atiDelegateInfo);
+        return atiDelegateInfoDao.addDelegateInfo(atiDelegateInfo);
     }
 
 
@@ -52,7 +57,7 @@ public class AtiDelegateService {
      * @return
      */
     public int updateDelegateInfo(AtiDelegateInfo atiDelegateInfo) {
-        return atiDelegateInfoMapper.updateDelegateInfo(atiDelegateInfo);
+        return atiDelegateInfoDao.updateDelegateInfo(atiDelegateInfo);
     }
 
 
@@ -62,7 +67,7 @@ public class AtiDelegateService {
      * @return
      */
     public int updateDelegateInfoStatus(AtiDelegateInfo atiDelegateInfo) {
-        return atiDelegateInfoMapper.updateDelegateInfoStatus(atiDelegateInfo);
+        return atiDelegateInfoDao.updateDelegateInfoStatus(atiDelegateInfo);
     }
 
 
@@ -70,15 +75,14 @@ public class AtiDelegateService {
     /**
      * 获取用户流程的委托任务信息
      * @param targetAssignee
-     * @param targetProcDefinitionId
      * @return
      */
-    public AtiDelegateInfo getDelegateInfo(String targetAssignee,String targetProcDefinitionId) {
+    public List<AtiDelegateInfo> getDelegateInfo(String targetAssignee) {
 
-        List<AtiDelegateInfo> list = atiDelegateInfoMapper.getDelegateInfoList(targetAssignee);
+        List<AtiDelegateInfo> list = atiDelegateInfoDao.getDelegateInfoList(targetAssignee);
+        List<AtiDelegateInfo> delegateInfos = Lists.newArrayList();
         for (AtiDelegateInfo delegateInfo : list) {
 
-            String procDefId = (String) delegateInfo.getProcDefId();
             Date startTime = delegateInfo.getStartTime();
             Date endTime = delegateInfo.getEndTime();
 
@@ -87,12 +91,10 @@ public class AtiDelegateService {
                 continue;
             }
 
-            if (procDefId.equals(targetProcDefinitionId)) {
-                return delegateInfo;
-            }
+            delegateInfos.add(delegateInfo);
         }
 
-        return null;
+        return delegateInfos;
     }
 
 
@@ -113,7 +115,7 @@ public class AtiDelegateService {
 
 
     public void saveDelegateHistory(AtiDelegateHistory atiDelegateHistory) {
-        atiDelegateHistoryMapper.saveDelegateHistory(atiDelegateHistory);
+        atiDelegateHistoryDao.saveDelegateHistory(atiDelegateHistory);
     }
 
 

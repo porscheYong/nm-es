@@ -49,6 +49,7 @@
 		<form:hidden path="act.procInsId"/>
 		<form:hidden path="act.procDefId"/>
 		<form:hidden id="flag" path="act.flag"/>
+		<form:hidden path="atiActCategoryId"></form:hidden>
 		<sys:message content="${message}"/>
 		<br>
 			<legend>

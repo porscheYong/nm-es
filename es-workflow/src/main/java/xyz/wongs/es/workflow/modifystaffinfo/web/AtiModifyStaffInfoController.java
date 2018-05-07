@@ -3,7 +3,9 @@
  */
 package xyz.wongs.es.workflow.modifystaffinfo.web;
 
+import org.activiti.engine.RepositoryService;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +34,8 @@ public class AtiModifyStaffInfoController extends BaseController {
 	private UserService userService;
 	@Autowired
 	private AtiSpecificFormService specificFormService;
+	@Autowired
+	private RepositoryService repositoryService;
 
 
 	/**
@@ -70,6 +74,14 @@ public class AtiModifyStaffInfoController extends BaseController {
 		AtiOrg org = userService.getOrgByUserId(modifyStaffInfo.getFormSender());
 		model.addAttribute("org",org);
 
+		//获取申请流程的分类
+		if(modifyStaffInfo.getAtiActCategoryId() == null) {
+			String category = repositoryService.createProcessDefinitionQuery().processDefinitionId(modifyStaffInfo.getAct().getProcDefId()).singleResult().getCategory();
+			if(category!=null) {
+				modifyStaffInfo.setAtiActCategoryId(Long.valueOf(category));
+			}
+		}
+
 		model.addAttribute("modifyStaffInfo", modifyStaffInfo);
 		return "modules/oa/" + view;
 	}
@@ -83,7 +95,7 @@ public class AtiModifyStaffInfoController extends BaseController {
 	public String save(AtiModifyStaffInfo modifyStaffInfo) {
 
 		modifyStaffInfoService.save(modifyStaffInfo);
-		return "redirect:" + adminPath + "/act/task/todo/";
+		return "redirect:" + adminPath + "/act/task/todoNeedName/";
 	}
 
 
@@ -106,7 +118,7 @@ public class AtiModifyStaffInfoController extends BaseController {
 		}
 
 		modifyStaffInfoService.auditSave(modifyStaffInfo);
-		return "redirect:" + adminPath + "/act/task/todo/";
+		return "redirect:" + adminPath + "/act/task/todoNeedName/";
 	}
 
 

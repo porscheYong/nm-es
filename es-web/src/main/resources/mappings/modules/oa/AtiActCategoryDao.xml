@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiActCategoryDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiActCategory">
+    <id column="ATI_ACT_CATEGORY_ID" jdbcType="DECIMAL" property="atiActCategoryId" />
+    <result column="PARENT_CATEGORY_ID" jdbcType="DECIMAL" property="parentCategoryId" />
+    <result column="CATEGORY_CODE" jdbcType="VARCHAR" property="categoryCode" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ATI_ACT_CATEGORY_ID, PARENT_CATEGORY_ID, CATEGORY_CODE, NAME
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ATI_ACT_CATEGORY
+    where ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ATI_ACT_CATEGORY
+    where ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL}
+  </delete>
+
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiActCategory">
+    insert into ATI_ACT_CATEGORY (ATI_ACT_CATEGORY_ID, PARENT_CATEGORY_ID, 
+      CATEGORY_CODE, NAME)
+    values (#{atiActCategoryId,jdbcType=DECIMAL}, #{parentCategoryId,jdbcType=DECIMAL}, 
+      #{categoryCode,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiActCategory">
+    insert into ATI_ACT_CATEGORY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="atiActCategoryId != null">
+        ATI_ACT_CATEGORY_ID,
+      </if>
+      <if test="parentCategoryId != null">
+        PARENT_CATEGORY_ID,
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="atiActCategoryId != null">
+        #{atiActCategoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="parentCategoryId != null">
+        #{parentCategoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryCode != null">
+        #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiActCategory">
+    update ATI_ACT_CATEGORY
+    <set>
+      <if test="parentCategoryId != null">
+        PARENT_CATEGORY_ID = #{parentCategoryId,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryCode != null">
+        CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiActCategory">
+    update ATI_ACT_CATEGORY
+    set PARENT_CATEGORY_ID = #{parentCategoryId,jdbcType=DECIMAL},
+      CATEGORY_CODE = #{categoryCode,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR}
+    where ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL}
+  </update>
+
+  <select id="findAllCategory" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      ATI_ACT_CATEGORY
+  </select>
+
+  <select id="getCategoryByCategoryId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      ATI_ACT_CATEGORY
+    WHERE
+      ATI_ACT_CATEGORY_ID = #{atiActCategoryId}
+  </select>
+
+  <select id="getProcessDefinitionByCategoryId" resultType="java.util.Map">
+    select f.id_,f.name_
+    from act_re_procdef f,
+    (select key_,max(version_) version_ from act_re_procdef
+    group by key_) m
+    where f.key_ = m.key_ and f.version_ = m.version_
+      and f.category_ = #{atiActCategoryid}
+  </select>
+</mapper>

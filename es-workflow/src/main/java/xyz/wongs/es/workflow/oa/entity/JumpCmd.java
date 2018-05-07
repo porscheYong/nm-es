@@ -1,4 +1,4 @@
-package xyz.wongs.es.workflow.act.entity;
+package xyz.wongs.es.workflow.oa.entity;
 
 import org.activiti.engine.impl.interceptor.Command;
 import org.activiti.engine.impl.interceptor.CommandContext;

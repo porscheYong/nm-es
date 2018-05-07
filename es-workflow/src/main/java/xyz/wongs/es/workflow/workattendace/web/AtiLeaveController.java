@@ -1,11 +1,12 @@
 /**
  * There are <a href="https://wongs.xyz">UECC</a> code generation
  */
-package xyz.wongs.es.workflow.oa.web;
+package xyz.wongs.es.workflow.workattendace.web;
 
 import com.google.common.collect.Maps;
 import oracle.sql.DATE;
 import org.activiti.engine.FormService;
+import org.activiti.engine.RepositoryService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,11 +23,12 @@ import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
-import xyz.wongs.es.workflow.oa.service.AtiLeaveService;
 import xyz.wongs.es.workflow.oa.service.AtiSpecificFormService;
+import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
+import xyz.wongs.es.workflow.workattendace.service.AtiLeaveService;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -40,15 +42,17 @@ import java.util.Map;
 @RequestMapping(value = "${adminPath}/oa/leave")
 public class AtiLeaveController extends BaseController {
 
-	@Autowired
-	private AtiLeaveService leaveService;
-	@Autowired
-	private AtiSpecificFormService specificFormService;
+	@Resource
+	private AtiLeaveService atiLeaveService;
+	@Resource
+	private AtiSpecificFormService atiSpecificFormService;
 	/**  测试用 */
 	@Autowired
 	private AtiSpecificFormDao atiSpecificFormMapper;
-	@Autowired
+	@Resource
 	private AtiTaskService atiTaskService;
+	@Resource
+	private RepositoryService repositoryService;
 
 
 	/**
@@ -60,7 +64,7 @@ public class AtiLeaveController extends BaseController {
 	public AtiLeave get(@RequestParam(required=false) Long id){
 		AtiLeave leave = null;
 		if(id != null) {
-			leave = specificFormService.getAtiLeaveByBaseFormId(id);
+			leave = atiSpecificFormService.getAtiLeaveByBaseFormId(id);
 		}
 		if (leave == null){
 			leave = new AtiLeave();
@@ -88,31 +92,39 @@ public class AtiLeaveController extends BaseController {
 			// 环节编号
 			String taskDefKey = atiLeave.getAct().getTaskDefKey();
 
-			// 查看工单
-			if(atiLeave.getAct().isFinishTask()){
-				view = "leaveTestList";
-			}
-			// 修改环节
-			else if ("modifyApply".equals(taskDefKey)){
-				view = "leaveModifyForm";
-			}
-			// 审核环节
-			else if ("deptLeaderAudit".equals(taskDefKey)){
-				view = "leaveTestAudit";
-//				String formKey = "/oa/testAudit";
-//				return "redirect:" + ActUtils.getFormUrl(formKey, testAudit.getAct());
-			}
-			// 审核环节2
-			else if ("hrAudit".equals(taskDefKey)){
-				view = "leaveTestAudit";
-			}
-			// 兑现环节
-			else if ("reportBack".equals(taskDefKey)){
-				view = "leaveModifyForm";
+			switch (taskDefKey) {
+				// 修改环节
+				case "modifyApply":
+					view = "leaveModifyForm";
+					break;
+				// 部门经理审核环节
+				case "deptLeaderAudit":
+					view = "leaveTestAudit";
+					break;
+				// 人事审核环节
+				case "hrAudit":
+					view = "leaveTestAudit";
+					break;
+				// 兑现环节
+				case "reportBack":
+					view = "leaveModifyForm";
+					break;
+				default:
+					break;
 			}
 		}
 
+		//获取申请流程的分类
+		if(atiLeave.getAtiActCategoryId() == null) {
+			String category = repositoryService.createProcessDefinitionQuery().processDefinitionId(atiLeave.getAct().getProcDefId()).singleResult().getCategory();
+			if(category!=null) {
+				atiLeave.setAtiActCategoryId(Long.valueOf(category));
+			}
+
+		}
+
 		model.addAttribute("leave", atiLeave);
+
 		return "modules/oa/" + view;
 	}
 
@@ -125,8 +137,8 @@ public class AtiLeaveController extends BaseController {
 	@RequestMapping(value = "save")
 	public String save(AtiLeave leave) {
 
-		leaveService.save(leave);
-		return "redirect:" + adminPath + "/act/task/todo/";
+		atiLeaveService.save(leave);
+		return "redirect:" + adminPath + "/act/task/todoNeedName/";
 	}
 
 
@@ -145,14 +157,23 @@ public class AtiLeaveController extends BaseController {
 			addMessage(model, "请填写审核意见。");
 			return form(leave, model);
 		}
-		leaveService.auditSave(leave);
-		return "redirect:" + adminPath + "/act/task/todo/";
+		atiLeaveService.auditSave(leave);
+		return "redirect:" + adminPath + "/act/task/todoNeedName/";
 	}
 
 
 
 
+
+
+
+
 	//////////////以下为测试接口部分
+
+
+
+
+
 
 
 
@@ -211,7 +232,7 @@ public class AtiLeaveController extends BaseController {
 			return "fail";
 		}
 
-		leaveService.save(leave);
+		atiLeaveService.save(leave);
 		return "success";
 	}
 
@@ -252,7 +273,7 @@ public class AtiLeaveController extends BaseController {
 		atiLeave.getAct().setTaskDefKey("deptLeaderAudit");
 		atiLeave.setAtiBaseFormId(Long.valueOf(atiBaseFormId));
 
-		leaveService.auditSave(atiLeave);
+		atiLeaveService.auditSave(atiLeave);
 
 		return "success";
 
@@ -303,7 +324,7 @@ public class AtiLeaveController extends BaseController {
 		atiLeave.setRealityEndTime(realityEndTime);
 		atiLeave.getAct().setTaskDefKey("reportBack");
 
-		leaveService.auditSave(atiLeave);
+		atiLeaveService.auditSave(atiLeave);
 
 		return "success";
 

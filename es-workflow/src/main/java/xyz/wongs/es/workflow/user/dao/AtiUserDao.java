@@ -51,4 +51,10 @@ public interface AtiUserDao extends CrudDao<AtiUser> {
      */
     AtiUser getUserById(Long atiUserId);
 
+    /**
+     * 获取所有用户，测试用
+     * @return
+     */
+    List<AtiUser> getUsers();
+
 }

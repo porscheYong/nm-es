@@ -15,16 +15,16 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/act/task/todo/">待办任务</a></li>
+		<li><a href="${ctx}/act/task/todoNeedName/">待办任务</a></li>
 		<li><a href="${ctx}/act/task/historic/">已办任务</a></li>
 		<li class="active"><a href="${ctx}/act/task/process/">新建任务</a></li>
 		<li><a href="${ctx}/oa/delegate/list/">代理设置</a></li>
 	</ul>
-	<form id="searchForm" action="${ctx}/oa/delegate/list/" method="post" class="breadcrumb form-search">
+	<form id="searchForm" action="${ctx}/oa/delegate/list/" method="get" class="breadcrumb form-search">
 		<select id="category" name="category" class="input-medium">
 			<option value="">全部分类</option>
-			<c:forEach items="${fns:getDictList('act_category')}" var="dict">
-				<option value="${dict.value}" ${dict.value==category?'selected':''}>${dict.label}</option>
+			<c:forEach items="${categories}" var="category">
+				<option value="${category.atiActCategoryId}">${category.name}</option>
 			</c:forEach>
 		</select>
 		&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
@@ -41,6 +41,7 @@
 			<th>代理人</th>
 			<th>开始日期</th>
 			<th>终结日期</th>
+			<th>流程分类</th>
 			<th>流程名称</th>
 			<th>操作</th>
 		</tr>
@@ -53,6 +54,7 @@
 				<td><a href="${ctx}/oa/delegate/modify?atiDelegateInfoId=${delegateInfo.atiDelegateInfoId}">${delegateInfo.attorney}</a></td>
 				<td><fmt:formatDate value="${delegateInfo.startTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate> </td>
 				<td><fmt:formatDate value="${delegateInfo.endTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate> </td>
+				<td>${delegateInfo.atiActCategoryId}</td>
 				<td><a href="${ctx}/oa/delegate/modify?atiDelegateInfoId=${delegateInfo.atiDelegateInfoId}">${delegateInfo.procDefId}</a></td>
 				<td>
 					<a href="${ctx}/oa/delegate/modify?atiDelegateInfoId=${delegateInfo.atiDelegateInfoId}">修改</a>&nbsp;

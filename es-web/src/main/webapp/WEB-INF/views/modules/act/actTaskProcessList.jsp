@@ -15,7 +15,7 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li><a href="${ctx}/act/task/todo/">待办任务</a></li>
+		<li><a href="${ctx}/act/task/todoNeedName/">待办任务</a></li>
 		<li><a href="${ctx}/act/task/historic/">已办任务</a></li>
 		<li class="active"><a href="${ctx}/act/task/process/">新建任务</a></li>
 		<li><a href="${ctx}/oa/delegate/list/">代理设置</a></li>
@@ -23,8 +23,8 @@
 	<form id="searchForm" action="${ctx}/act/task/process/" method="post" class="breadcrumb form-search">
 		<select id="category" name="category" class="input-medium">
 			<option value="">全部分类</option>
-			<c:forEach items="${fns:getDictList('act_category')}" var="dict">
-				<option value="${dict.value}" ${dict.value==category?'selected':''}>${dict.label}</option>
+			<c:forEach items="${categories}" var="category">
+				<option value="${category.atiActCategoryId}">${category.name}</option>
 			</c:forEach>
 		</select>
 		&nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="查询"/>
@@ -47,7 +47,7 @@
 				<c:set var="process" value="${object[0]}" />
 				<c:set var="deployment" value="${object[1]}" />
 				<tr>
-					<td>${fns:getDictLabel(process.category,'act_category','无分类')}</td>
+					<td>${process.category}</td>
 					<td><a href="${ctx}/act/task/form?procDefId=${process.id}">${process.key}</a></td>
 					<td>${process.name}</td>
 					<td><a target="_blank" href="${pageContext.request.contextPath}/act/diagram-viewer?processDefinitionId=${process.id}">${process.diagramResourceName}</a><%--

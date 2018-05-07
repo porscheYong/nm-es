@@ -15,7 +15,10 @@ import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.modules.act.utils.ActUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
+import xyz.wongs.es.workflow.oa.entity.AtiActCategory;
+import xyz.wongs.es.workflow.oa.service.AtiActCategoryService;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,6 +35,8 @@ public class AtiTaskController extends BaseController {
 
 	@Autowired
 	private AtiTaskService atiTaskService;
+	@Autowired
+	private AtiActCategoryService categoryService;
 
 
 	/**
@@ -43,7 +48,8 @@ public class AtiTaskController extends BaseController {
 		Page<Object[]> page = new Page<Object[]>(request, response);
 		page = atiTaskService.processList(page, category);
 		model.addAttribute("page", page);
-		model.addAttribute("category", category);
+		List<AtiActCategory> categories = categoryService.findAllCategory();
+		model.addAttribute("categories",categories);
 		return "modules/act/actTaskProcessList";
 	}
 
@@ -75,8 +81,8 @@ public class AtiTaskController extends BaseController {
 
 
 	/**
-	 * 获取待办列表
-	 * @param act .procDefKey 流程定义标识
+	 * 待办列表传入userId参数
+	 *
 	 * @return
 	 */
 	@RequestMapping(value = "/todoNeedName")
@@ -101,14 +107,26 @@ public class AtiTaskController extends BaseController {
 
 
 	/**
+	 * 签收任务传入userId参数页面
+	 * @param act
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "/claimNeedName")
+	public String claimNeedName(Act act,HttpSession session) {
+		session.setAttribute("act",act);
+		return "modules/act/actClaimNeedName";
+
+	}
+	/**
 	 * 签收任务
-	 * @param act .taskId 任务ID
 	 */
 	@RequestMapping(value = "claim")
 	@ResponseBody
-	public String claim(Act act) {
+	public String claim(String userId,HttpSession session) {
 		//需要传入一个userId参数,String
-		String userId = "38";
+//		String userId = "34";
+		Act act = (Act) session.getAttribute("act");
 		atiTaskService.claim(act.getTaskId(), userId);
 		return "true";
 	}

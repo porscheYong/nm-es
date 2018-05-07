@@ -13,6 +13,8 @@ public class AtiDelegateInfo implements Serializable {
 
     private Long atiDelegateInfoId;
 
+    private String atiActCategoryId;
+
     /** 代理人 */
     private Object attorney;
 
@@ -91,5 +93,13 @@ public class AtiDelegateInfo implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAtiActCategoryId() {
+        return atiActCategoryId;
+    }
+
+    public void setAtiActCategoryId(String atiActCategoryId) {
+        this.atiActCategoryId = atiActCategoryId;
     }
 }

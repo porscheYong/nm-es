@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.wongs.es.common.web.BaseController;
+import xyz.wongs.es.workflow.oa.entity.AtiActCategory;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
+import xyz.wongs.es.workflow.oa.service.AtiActCategoryService;
 import xyz.wongs.es.workflow.oa.service.AtiDelegateService;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class AtiDelegateController extends BaseController {
 
     @Autowired
     private AtiDelegateService atiDelegateService;
+    @Autowired
+    private AtiActCategoryService categoryService;
 
     /**
      * 获取任务委托列表
@@ -30,9 +34,11 @@ public class AtiDelegateController extends BaseController {
      */
     @RequestMapping(value = "/list")
     public String getDelegateList(Object assignee,Model model) {
-        assignee = "34";
+        assignee = "31";
         List<AtiDelegateInfo> delegateInfoList = atiDelegateService.getDelegateInfoList(assignee);
         model.addAttribute("delegateInfoList",delegateInfoList);
+        List<AtiActCategory> categories = categoryService.findAllCategory();
+        model.addAttribute("categories",categories);
         return "modules/oa/atiDelegateList";
     }
 
@@ -46,6 +52,7 @@ public class AtiDelegateController extends BaseController {
     @RequestMapping(value = "/add")
     public String addDelegateInfo(AtiDelegateInfo delegateInfo,Model model) {
         model.addAttribute("delegateInfo",delegateInfo);
+
         return "modules/oa/atiDelegate";
     }
 
@@ -60,7 +67,7 @@ public class AtiDelegateController extends BaseController {
 
         atiDelegateService.saveDelegateInfo(atiDelegateInfo);
 
-        return "redirect:" + adminPath + "/act/task/todo";
+        return "redirect:" + adminPath + "/act/task/todoNeedName";
 
     }
 
@@ -103,6 +110,14 @@ public class AtiDelegateController extends BaseController {
 
         return "modules/oa/atiDelegateList";
     }
+
+
+    @RequestMapping(value = "/abcd")
+    public String abcd() {
+        return "modules/oa/testAuditForm";
+    }
+
+
 
 
 }

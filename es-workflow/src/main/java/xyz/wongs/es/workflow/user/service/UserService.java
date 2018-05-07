@@ -11,6 +11,7 @@ import xyz.wongs.es.workflow.user.entity.AtiOrg;
 import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -21,12 +22,12 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private AtiUserDao atiUserMapper;
-    @Autowired
-    private AtiRoleDao atiRoleMapper;
-    @Autowired
-    private AtiOrgDao atiOrgMapper;
+    @Resource
+    private AtiUserDao atiUserDao;
+    @Resource
+    private AtiRoleDao atiRoleDao;
+    @Resource
+    private AtiOrgDao atiOrgDao;
 
 
     /**
@@ -35,7 +36,7 @@ public class UserService {
      * @return
      */
     public AtiUser getAtiUserByName(String name) {
-        return  atiUserMapper.getUserByName(name);
+        return  atiUserDao.getUserByName(name);
     }
 
     /**
@@ -44,7 +45,7 @@ public class UserService {
      * @return
      */
     public List<AtiRole> getRolesByUserId(String userId) {
-        return atiRoleMapper.getRolesByUserId(userId);
+        return atiRoleDao.getRolesByUserId(userId);
     }
 
 
@@ -62,11 +63,15 @@ public class UserService {
 
 
     public AtiUser getUserByUserId(Long atiUserId) {
-        return atiUserMapper.getUserById(atiUserId);
+        return atiUserDao.getUserById(atiUserId);
     }
 
     public AtiOrg getOrgByUserId(Long atiUserId) {
-        return atiOrgMapper.getOrgByUserId(atiUserId);
+        return atiOrgDao.getOrgByUserId(atiUserId);
+    }
+
+    public List<AtiUser> getUsers() {
+        return atiUserDao.getUsers();
     }
 
 

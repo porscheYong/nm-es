@@ -1,4 +1,4 @@
-package xyz.wongs.es.workflow.oa.service;
+package xyz.wongs.es.workflow.workattendace.service;
 
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.delegate.DelegateTask;
@@ -13,6 +13,7 @@ import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 /**
@@ -26,16 +27,16 @@ public class LeaveModifyProcessor implements TaskListener {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	@Resource
 	private AtiSpecificFormDao atiSpecificFormMapper;
-	@Autowired
+	@Resource
 	private AtiBaseFormDao atiBaseFormMapper;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
 
-//		String procInstId = delegateTask.getProcessInstanceId();
-//		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
+		String procInstId = delegateTask.getProcessInstanceId();
+		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
 //
 //		String leaveType = (String) delegateTask.getVariable("leaveType");
 //		AtiSpecificForm specificFormLeaveType = new AtiSpecificForm(currentBaseFormId,"LEAVE_TYPE",leaveType);

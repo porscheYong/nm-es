@@ -1,201 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiDelegateInfoDao">
-  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
-    <id column="ATI_DELEGATE_INFO_ID" jdbcType="DECIMAL" property="atiDelegateInfoId" />
-    <result column="ATTORNEY" jdbcType="OTHER" property="attorney" />
-    <result column="ASSIGNEE" jdbcType="OTHER" property="assignee" />
-    <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
-    <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
-    <result column="PROC_DEF_ID" jdbcType="OTHER" property="procDefId" />
-    <result column="DELEGATE_REASON" jdbcType="VARCHAR" property="delegateReason" />
-    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ATI_DELEGATE_INFO_ID, ATTORNEY, ASSIGNEE, START_TIME, END_TIME, PROC_DEF_ID, DELEGATE_REASON, 
-    STATUS
-  </sql>
-
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from ATI_DELEGATE_INFO
-    where ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
-  </select>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from ATI_DELEGATE_INFO
-    where ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
-  </delete>
-
-  <insert id="insert" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
-    insert into ATI_DELEGATE_INFO (ATI_DELEGATE_INFO_ID, ATTORNEY, ASSIGNEE, 
-      START_TIME, END_TIME, PROC_DEF_ID, 
-      DELEGATE_REASON, STATUS)
-    values (#{atiDelegateInfoId,jdbcType=DECIMAL}, #{attorney,jdbcType=OTHER}, #{assignee,jdbcType=OTHER}, 
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{procDefId,jdbcType=OTHER}, 
-      #{delegateReason,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR})
-  </insert>
-
-  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
-    insert into ATI_DELEGATE_INFO
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="atiDelegateInfoId != null">
-        ATI_DELEGATE_INFO_ID,
-      </if>
-      <if test="attorney != null">
-        ATTORNEY,
-      </if>
-      <if test="assignee != null">
-        ASSIGNEE,
-      </if>
-      <if test="startTime != null">
-        START_TIME,
-      </if>
-      <if test="endTime != null">
-        END_TIME,
-      </if>
-      <if test="procDefId != null">
-        PROC_DEF_ID,
-      </if>
-      <if test="delegateReason != null">
-        DELEGATE_REASON,
-      </if>
-      <if test="status != null">
-        STATUS,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="atiDelegateInfoId != null">
-        #{atiDelegateInfoId,jdbcType=DECIMAL},
-      </if>
-      <if test="attorney != null">
-        #{attorney,jdbcType=OTHER},
-      </if>
-      <if test="assignee != null">
-        #{assignee,jdbcType=OTHER},
-      </if>
-      <if test="startTime != null">
-        #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="procDefId != null">
-        #{procDefId,jdbcType=OTHER},
-      </if>
-      <if test="delegateReason != null">
-        #{delegateReason,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-
-  <update id="updateByPrimaryKeySelective" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
-    update ATI_DELEGATE_INFO
-    <set>
-      <if test="attorney != null">
-        ATTORNEY = #{attorney,jdbcType=OTHER},
-      </if>
-      <if test="assignee != null">
-        ASSIGNEE = #{assignee,jdbcType=OTHER},
-      </if>
-      <if test="startTime != null">
-        START_TIME = #{startTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="endTime != null">
-        END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="procDefId != null">
-        PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
-      </if>
-      <if test="delegateReason != null">
-        DELEGATE_REASON = #{delegateReason,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        STATUS = #{status,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
-  </update>
-
-  <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
-    update ATI_DELEGATE_INFO
-    set ATTORNEY = #{attorney,jdbcType=OTHER},
-      ASSIGNEE = #{assignee,jdbcType=OTHER},
-      START_TIME = #{startTime,jdbcType=TIMESTAMP},
-      END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
-      DELEGATE_REASON = #{delegateReason,jdbcType=VARCHAR},
-      STATUS = #{status,jdbcType=VARCHAR}
-    where ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
-  </update>
+<resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
+  <id column="ATI_DELEGATE_INFO_ID" jdbcType="DECIMAL" property="atiDelegateInfoId" />
+  <result column="ATTORNEY" jdbcType="OTHER" property="attorney" />
+  <result column="ASSIGNEE" jdbcType="OTHER" property="assignee" />
+  <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+  <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+  <result column="PROC_DEF_ID" jdbcType="OTHER" property="procDefId" />
+  <result column="DELEGATE_REASON" jdbcType="VARCHAR" property="delegateReason" />
+  <result column="STATUS" jdbcType="VARCHAR" property="status" />
+  <result column="ATI_ACT_CATEGORY_ID" jdbcType="DECIMAL" property="atiActCategoryId" />
+</resultMap>
+<sql id="Base_Column_List">
+  ATI_DELEGATE_INFO_ID, ATTORNEY, ASSIGNEE, START_TIME, END_TIME, PROC_DEF_ID, DELEGATE_REASON,
+  STATUS, ATI_ACT_CATEGORY_ID
+</sql>
 
   <insert id="addDelegateInfo" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
     INSERT INTO ATI_DELEGATE_INFO (ATI_DELEGATE_INFO_ID, ATTORNEY, ASSIGNEE,
-      START_TIME, END_TIME, PROC_DEF_ID,
-      DELEGATE_REASON)
+    START_TIME, END_TIME, PROC_DEF_ID,
+    DELEGATE_REASON,ATI_ACT_CATEGORY_ID)
     VALUES (ati_delegate_info_id_seq.Nextval, #{attorney,jdbcType=OTHER}, #{assignee,jdbcType=OTHER},
-      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{procDefId,jdbcType=OTHER},
-      #{delegateReason,jdbcType=VARCHAR})
+    #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{procDefId,jdbcType=OTHER},
+    #{delegateReason,jdbcType=VARCHAR},#{atiActCategoryId,jdbcType=DECIMAL})
   </insert>
 
-  <select id="getDelegateInfoList" resultType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
+  <select id="getDelegateInfoList" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"></include>
     FROM
-      ATI_DELEGATE_INFO
+    ATI_DELEGATE_INFO
     WHERE
-      assignee = #{assignee} AND
-      status = '1'
+    assignee = #{assignee} AND
+    status = '1'
   </select>
 
   <update id="updateDelegateInfo" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
     UPDATE ATI_DELEGATE_INFO
     SET ATTORNEY = #{attorney,jdbcType=OTHER},
-      ASSIGNEE = #{assignee,jdbcType=OTHER},
-      START_TIME = #{startTime,jdbcType=TIMESTAMP},
-      END_TIME = #{endTime,jdbcType=TIMESTAMP},
-      PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
-      DELEGATE_REASON = #{delegateReason,jdbcType=VARCHAR}
+    ASSIGNEE = #{assignee,jdbcType=OTHER},
+    START_TIME = #{startTime,jdbcType=TIMESTAMP},
+    END_TIME = #{endTime,jdbcType=TIMESTAMP},
+    PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
+    DELEGATE_REASON = #{delegateReason,jdbcType=VARCHAR},
+    ATI_ACT_CATEGORY_ID = #{atiActCategoryId,jdbcType=DECIMAL}
     WHERE ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
   </update>
 
   <update id="updateDelegateInfoStatus" parameterType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
     UPDATE
-      ATI_DELEGATE_INFO
+    ATI_DELEGATE_INFO
     SET
-      STATUS = '0'
+    STATUS = '0'
     WHERE
-      ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
+    ATI_DELEGATE_INFO_ID = #{atiDelegateInfoId,jdbcType=DECIMAL}
   </update>
 
   <select id="getDelegateInfoByLeaver" resultType="xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo">
     SELECT
     <include refid="Base_Column_List"></include>
     FROM
-      ATI_DELEGATE_INFO
+    ATI_DELEGATE_INFO
     WHERE
-      ASSIGNEE = #{assignee} OR ATTORNEY = #{assignee}
+    ASSIGNEE = #{assignee} OR ATTORNEY = #{assignee}
   </select>
 
   <update id="updateDelegateAssignee" parameterType="java.lang.String">
     UPDATE
-      ATI_DELEGATE_INFO
+    ATI_DELEGATE_INFO
     SET
-      ASSIGNEE = #{attorney}
+    ASSIGNEE = #{attorney}
     WHERE
-      ASSIGNEE = #{assignee}
+    ASSIGNEE = #{assignee}
   </update>
 
   <update id="updateDelegateAttorney" parameterType="java.lang.String">
     UPDATE
-      ATI_DELEGATE_INFO
+    ATI_DELEGATE_INFO
     SET
-      ATTORNEY = #{attorney}
+    ATTORNEY = #{attorney}
     WHERE
-      ATTORNEY = #{assignee}
+    ATTORNEY = #{assignee}
   </update>
+
 </mapper>

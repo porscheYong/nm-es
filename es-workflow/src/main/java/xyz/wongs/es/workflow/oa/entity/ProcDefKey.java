@@ -27,7 +27,7 @@ public class ProcDefKey {
     public static final String MODIFY_PROC_DEF_KEY = "modifyStaffInfo";
     public static final String[] MODIFY_TASK_DEF_KEY = {"startEvent","modify","hrAudit","hrLeaderAudit","admin","endEvent"};
 
-    public static void init() {
+    static {
         map.put(LEAVE_PROC_DEF_KEY,LEAVE_TASK_DEF_KEY);
         map.put(MODIFY_PROC_DEF_KEY,MODIFY_TASK_DEF_KEY);
     }

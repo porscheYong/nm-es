@@ -3,8 +3,8 @@ package xyz.wongs.es.workflow.oa.dao;
 import xyz.wongs.es.common.persistence.CrudDao;
 import xyz.wongs.es.common.persistence.annotation.MyBatisDao;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
+import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 
 import java.util.List;
 

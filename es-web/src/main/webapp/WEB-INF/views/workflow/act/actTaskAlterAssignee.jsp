@@ -18,10 +18,17 @@
 <form id="alterAssign" action="${ctx}/workflow/act/process/saveTaskAlterAssignee?procInstId=${procInstId}" method="post" class="breadcrumb form-search">
     <label>流程实例</label>${proInstId}
     <select name="taskDefKey">
-        <option value="hrAudit">人力资源审批</option>
-        <option value="hrLeaderAudit">分管领导审批</option>
+        <c:forEach items="${list}" var="taskDef">
+            <option value="${taskDef.id}">${taskDef.name}</option>
+        </c:forEach>
     </select>
-    <label>用户组选择</label><input type="text" id="procDefKey" name="procDefKey" value="${procDefKey}" class="input-medium"/>
+    <label>用户选择</label>
+    <div id="userRange" style="width:30%;height: 30%; position: absolute;left:20%;top: 10%;overflow: auto;border: solid;">
+    <c:forEach items="${users}" var="user">
+        <input type="checkbox" name="atiUserId" value="${user.atiUserId}">${user.name}<br/>
+    </c:forEach>
+    <input type="checkbox" name="chose" value="" onclick="selectAll()" ID="Checkbox3">allselect
+</div>
     &nbsp;<input id="btnSubmit" class="btn btn-primary" type="submit" value="保 存"/>
 </form>
 </body>

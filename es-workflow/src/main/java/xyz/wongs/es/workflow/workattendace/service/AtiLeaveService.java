@@ -1,8 +1,7 @@
-package xyz.wongs.es.workflow.oa.service;
+package xyz.wongs.es.workflow.workattendace.service;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.StringUtils;
@@ -10,8 +9,10 @@ import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiBaseForm;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
+import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
+
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
@@ -23,12 +24,12 @@ import java.util.Map;
 @Service
 public class AtiLeaveService {
 
-    @Autowired
-    private AtiBaseFormDao atiBaseFormMapper;
-    @Autowired
-    private AtiSpecificFormDao atiSpecificFormMapper;
+    @Resource
+    private AtiBaseFormDao atiBaseFormDao;
+    @Resource
+    private AtiSpecificFormDao atiSpecificFormDao;
 
-    @Autowired
+    @Resource
     private AtiTaskService atiTaskService;
 
 
@@ -51,7 +52,7 @@ public class AtiLeaveService {
             leave.setProcDefId(leave.getAct().getProcDefId());
             AtiBaseForm atiBaseForm = leave;
 
-            atiBaseFormMapper.addAtiBaseForm(atiBaseForm);
+            atiBaseFormDao.addAtiBaseForm(atiBaseForm);
 
             Long currentBaseFormId = leave.getAtiBaseFormId();
             leave.setAtiBaseFormId(currentBaseFormId);
@@ -60,7 +61,7 @@ public class AtiLeaveService {
             //Mybatis批量插入，提高效率
 //            atiSpecificFormMapper.insertSpecificForms(specificForms);
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                atiSpecificFormMapper.insert(atiSpecificForm);
+                atiSpecificFormDao.insert(atiSpecificForm);
             }
 
             //这里暂使用ATI_BASE_FORM_ID 作为 businessId
@@ -76,7 +77,7 @@ public class AtiLeaveService {
         else{
 
             for(AtiSpecificForm atiSpecificForm : specificForms) {
-                atiSpecificFormMapper.update(atiSpecificForm);
+                atiSpecificFormDao.update(atiSpecificForm);
             }
 
             leave.getAct().setComment(("yes".equals(leave.getAct().getFlag())?"[重申] ":"[销毁] ")+leave.getAct().getComment());
@@ -103,23 +104,25 @@ public class AtiLeaveService {
         // 对不同环节的业务逻辑进行操作
         String taskDefKey = leave.getAct().getTaskDefKey();
 
-        // 审核环节
-        if ("deptLeaderAudit".equals(taskDefKey)){
-            leave.setDeptLeaderText(leave.getAct().getComment());
-            atiSpecificFormMapper.updateDeptLeaderText(leave);
+        switch (taskDefKey) {
+            // 部门经理审核环节
+            case "deptLeaderAudit":
+                leave.setDeptLeaderText(leave.getAct().getComment());
+                atiSpecificFormDao.updateDeptLeaderText(leave);
+                break;
+            // 人事审核环节
+            case "hrAudit":
+                leave.setHrText(leave.getAct().getComment());
+                atiSpecificFormDao.updateHrText(leave);
+                break;
+            // 销假环节
+            case "reportBack":
+                break;
+            // 未知环节，直接退出
+            default:
+                return;
         }
-        else if ("hrAudit".equals(taskDefKey)){
-            leave.setHrText(leave.getAct().getComment());
-           atiSpecificFormMapper.updateHrText(leave);
-        }
-        else if ("reportBack".equals(taskDefKey)){
 
-        }
-
-        // 未知环节，直接返回
-        else{
-            return;
-        }
 
         // 提交流程任务
         Map<String, Object> vars = Maps.newHashMap();

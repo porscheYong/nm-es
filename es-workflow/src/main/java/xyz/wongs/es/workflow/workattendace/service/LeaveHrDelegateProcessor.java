@@ -1,4 +1,4 @@
-package xyz.wongs.es.workflow.oa.service;
+package xyz.wongs.es.workflow.workattendace.service;
 
 import com.google.common.collect.Lists;
 import org.activiti.engine.delegate.DelegateTask;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateHistory;
 import xyz.wongs.es.workflow.oa.entity.AtiDelegateInfo;
+import xyz.wongs.es.workflow.oa.service.AtiDelegateService;
 import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
 import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiRole;

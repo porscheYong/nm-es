@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
-import xyz.wongs.es.workflow.oa.entity.AtiLeave;
+import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 
 /**
  * 个性表类Service

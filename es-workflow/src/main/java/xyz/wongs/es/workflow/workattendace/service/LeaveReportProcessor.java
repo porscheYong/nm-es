@@ -1,19 +1,14 @@
-package xyz.wongs.es.workflow.oa.service;
+package xyz.wongs.es.workflow.workattendace.service;
 
-import org.activiti.engine.RuntimeService;
 import org.activiti.engine.delegate.DelegateTask;
 import org.activiti.engine.delegate.TaskListener;
-import org.activiti.engine.runtime.ProcessInstance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.wongs.es.modules.oa.dao.LeaveDao;
-import xyz.wongs.es.modules.oa.entity.Leave;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 
-import java.util.Date;
+import javax.annotation.Resource;
 
 /**
  * 销假后处理器
@@ -25,9 +20,9 @@ public class LeaveReportProcessor implements TaskListener {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
+	@Resource
 	private AtiBaseFormDao atiBaseFormMapper;
-	@Autowired
+	@Resource
 	private AtiSpecificFormDao atiSpecificFormMapper;
 	/**
 	 * 关联具体流程图规则

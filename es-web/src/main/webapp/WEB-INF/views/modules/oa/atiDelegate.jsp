@@ -28,7 +28,58 @@
             var currentTime=today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()+' '+today.getHours()+":"+today.getMinutes()+":"+today.getSeconds();
             $("#startTime").attr('value',currentTime);
             $("#endTime").attr('value',currentTime);
+
+
+            function getCategories() {
+                $.ajax({
+                    "url":"${ctx}/oa/category/findAllCategory",
+                    "type": "GET",
+                    "dataType": "json",
+                    "success": function(obj) {
+//                        $("#category").empty();
+                        var op;
+                        for (var i = 0; i < obj.data.length; i++) {
+                            op = "<option value='"
+                                + obj.data[i].atiActCategoryId
+                                + "'>"
+                                + obj.data[i].name
+                                + "</option>";
+                            $("#category").append(op);
+                        }
+
+                    }
+                });
+
+                getProcDefinition();
+            }
+
+            getCategories();
+
+            function getProcDefinition() {
+                var atiActCategoryId = $("#category").val();
+                $.ajax({
+                    "url":"${ctx}/oa/category/findAllDefinition",
+					"data":"atiActCategoryId=" + atiActCategoryId,
+                    "type": "GET",
+					"dataType":"json",
+                    "success": function(obj) {
+//                        $("#procDefId").empty();
+                        var op;
+                        for (var i = 0; i < obj.data.length; i++) {
+                            op = "<option value=" + obj.data[i].ID_ + ">"
+                                + obj.data[i].NAME_ + "</option>";
+                            $("#procDefId").append(op);
+                        }
+
+                    }
+                });
+            }
+
+            $("#category").bind("change",getProcDefinition);
+
         });
+
+
 
 
 		<%--$.ajax({--%>
@@ -94,7 +145,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td class="tit">代理流程</td>
+				<td class="tit">流程分类</td>
 				<td colspan="5">
 					<%--<div>--%>
 						<%--<form:select path="procDefId" class="input-medium">--%>
@@ -102,13 +153,28 @@
 							<%--<form:options items="${fns:getDictList('act_type')}" itemLabel="label" itemValue="value" htmlEscape="false"/>--%>
 						<%--</form:select>--%>
 					<%--</div>--%>
-					<%--<sys:treeselect id="delegateProcDefId" name="procDefId" value="" labelName="" labelValue=""--%>
-									<%--title="delegateProcDefId" url="${ctx}/oa/delegate/getProcDefIdList"></sys:treeselect>--%>
-					<select id="delegate_activities" name="procDefId" class="control-label">
-						<option value="0">全部流程</option>
-						<option value="leave:22:de13aa0cb04d4c9d97d51d386486775b">请假流程</option>
-						<option value="test_audit:5:9547c30464054e7d935b17991e415aad">调薪流程</option>
-					</select>
+					<%--<sys:treeselect id="delegateProcDefId" name="delegateInfo.procDefId" value="${delegateInfo.procDefId}" labelName="" labelValue=""--%>
+									<%--title="流程" url="/oa/category/treeData"></sys:treeselect>--%>
+					<%--<select id="delegate_activities" name="procDefId" class="control-label">--%>
+						<%--<option value="0">全部流程</option>--%>
+						<%--<option value="leave:22:de13aa0cb04d4c9d97d51d386486775b">请假流程</option>--%>
+						<%--<option value="test_audit:5:9547c30464054e7d935b17991e415aad">调薪流程</option>--%>
+					<%--</select>--%>
+					<form:select id="category" path="atiActCategoryId" class="control-label">
+						<option value="0">
+							----- 请选择 -----
+						</option>
+					</form:select>
+				</td>
+			</tr>
+			<tr>
+				<td class="tit">流程列表</td>
+				<td colspan="5">
+					<form:select id="procDefId" path="procDefId" class="control-label">
+						<option value="0">
+							----- 请选择 -----
+						</option>
+					</form:select>
 				</td>
 			</tr>
 			<tr>

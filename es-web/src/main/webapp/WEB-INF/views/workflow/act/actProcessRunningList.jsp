@@ -63,8 +63,8 @@
 			<c:forEach items="${page.list}" var="procIns">
 				<tr>
 					<td>${procIns.id}</td>
-					<td>${procIns.processInstanceId}</td>
-					<td>${procIns.processDefinitionId}</td>
+					<td><a href="${ctx}/workflow/act/process/alterAssignee?procInstId=${procIns.id}">${procIns.processInstanceId}</a></td>
+					<td><a href="${ctx}/workflow/act/process/alterAssignee?procInstId=${procIns.id}">${procIns.processDefinitionId}</a></td>
 					<td><a href="${ctx}/workflow/act/process/alterAssignee?procInstId=${procIns.id}">${procIns.activityId}</a></td>
 					<td>${procIns.suspended}</td>
 					<td>
