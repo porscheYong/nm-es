@@ -29,7 +29,7 @@ public class CustomerActGroupEntityService extends GroupEntityManager {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Override
 	public Group createNewGroup(String groupId) {
 		return new GroupEntity(groupId);
