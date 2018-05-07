@@ -28,10 +28,10 @@ public class DocUnitCase extends BaseUnit {
     private static Logger logger = LoggerFactory.getLogger(DocUnitCase.class);
 
     //批量测试：true；单例测试：false
-    private final static Boolean FLAG = true;
+    private final static Boolean FLAG = false;
 
     //public static final String SUFFIX="G:\\UECC/";
-    public static final String SUFFIX="D:\\workspace\\nm_documnet\\UECC/";
+    public static final String SUFFIX="F:\\LO\\psnjob/";
     @Autowired
     DocumentService documentService;
 
@@ -125,8 +125,6 @@ public class DocUnitCase extends BaseUnit {
     public Document makeInfoDoc(){
         Document document = new Document();
         document.setFlag((short)0);
-        document.setMonthId("201712");
-        document.setShortName("LDAPM_MPW_WA_DATA");
         return  document;
     }
 

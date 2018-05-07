@@ -109,7 +109,8 @@
 		<property name="username" value="${jdbc.username}"/>
 		<property name="password" value="${jdbc.password}"/>
 	</bean>-->
-	<!--JarsLink  -->
+	<!--JarsLink
 	<bean name="moduleLoader" class="com.alipay.jarslink.api.impl.ModuleLoaderImpl"></bean>
 	<bean name="moduleManager" class="com.alipay.jarslink.api.impl.ModuleManagerImpl"></bean>
+	-->
 </beans>

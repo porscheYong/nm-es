@@ -1,808 +1,858 @@
 package xyz.wongs.es.mpw.psnjob.entity;
 
 import xyz.wongs.es.common.persistence.DataEntity;
-import xyz.wongs.es.mpw.post.entity.LdapmMpwOmPost;
 
 import java.math.BigDecimal;
 
 public class LdapmMpwHiPsnjob extends DataEntity<LdapmMpwHiPsnjob> {
-    private Integer monthId;
 
-    private String unitId;
+        private Integer monthId;
 
-    private BigDecimal assgid;
+        private String unitId;
 
-    private String begindate;
+        private BigDecimal assgid;
 
-    private String clerkcode;
+        private String begindate;
 
-    private String creationtime;
+        private String clerkcode;
 
-    private String creator;
+        private String creationtime;
 
-    private BigDecimal dataoriginflag;
+        private String creator;
 
-    private String deposemode;
+        private BigDecimal dataoriginflag;
 
-    private Long dr;
+        private String deposemode;
 
-    private String enddate;
+        private Long dr;
 
-    private String endflag;
+        private String enddate;
 
-    private String ismainjob;
+        private String endflag;
 
-    private String jobglbdef1;
+        private String ismainjob;
 
-    private String jobglbdef10;
+        private String jobglbdef1;
 
-    private String jobglbdef2;
+        private String jobglbdef10;
 
-    private String jobglbdef3;
+        private String jobglbdef2;
 
-    private String jobglbdef4;
+        private String jobglbdef3;
 
-    private String jobglbdef5;
+        private String jobglbdef4;
 
-    private String jobglbdef6;
+        private String jobglbdef5;
 
-    private String jobglbdef7;
+        private String jobglbdef6;
 
-    private String jobglbdef8;
+        private String jobglbdef7;
 
-    private String jobglbdef9;
+        private String jobglbdef8;
 
-    private String jobmode;
+        private String jobglbdef9;
 
-    private String lastflag;
+        private String jobmode;
 
-    private String memo;
+        private String lastflag;
 
-    private String modifiedtime;
+        private String memo;
 
-    private String modifier;
+        private String modifiedtime;
 
-    private String occupation;
+        private String modifier;
 
-    private String oribillpk;
+        private String occupation;
 
-    private String oribilltype;
+        private String oribillpk;
 
-    private String pkDept;
+        private String oribilltype;
 
-    private String pkDeptV;
+        private String pkDept;
 
-    private String pkGroup;
+        private String pkDeptV;
 
-    private String pkHrgroup;
+        private String pkGroup;
 
-    private String pkHrorg;
+        private String pkHrgroup;
 
-    private String pkJob;
+        private String pkHrorg;
 
-    private String pkJobType;
+        private String pkJob;
 
-    private String pkJobgrade;
+        private String pkJobType;
 
-    private String pkJobrank;
+        private String pkJobgrade;
 
-    private String pkOrg;
+        private String pkJobrank;
 
-    private String pkOrgV;
+        private String pkOrg;
 
-    private String pkPost;
+        private String pkOrgV;
 
-    private String pkPostseries;
+        private String pkPost;
 
-    private String pkPsncl;
+        private String pkPostseries;
 
-    private String pkPsndoc;
+        private String pkPsncl;
 
-    private String pkPsnjob;
+        private String pkPsndoc;
 
-    private String pkPsnorg;
+        private String pkPsnjob;
 
-    private String poststat;
+        private String pkPsnorg;
 
-    private BigDecimal psntype;
+        private String poststat;
 
-    private BigDecimal recordnum;
+        private BigDecimal psntype;
 
-    private String series;
+        private BigDecimal recordnum;
 
-    private BigDecimal showorder;
+        private String series;
 
-    private String trialFlag;
+        private BigDecimal showorder;
 
-    private BigDecimal trialType;
+        private String trialFlag;
 
-    private BigDecimal trnsevent;
+        private BigDecimal trialType;
 
-    private String trnsreason;
+        private BigDecimal trnsevent;
 
-    private String trnstype;
+        private String trnsreason;
 
-    private String ts;
+        private String trnstype;
 
-    private String worktype;
+        private String ts;
 
-    private String glbdef1;
+        private String worktype;
 
-    private String glbdef2;
+        private String glbdef1;
 
-    private String glbdef3;
+        private String glbdef2;
 
-    private String glbdef4;
+        private String glbdef3;
 
-    private String glbdef5;
+        private String glbdef4;
 
-    private String glbdef6;
+        private String glbdef5;
 
-    private String glbdef7;
+        private String glbdef6;
 
-    private String glbdef8;
+        private String glbdef7;
 
-    private String jobglbdef12;
+        private String glbdef8;
 
-    private String jobglbdef13;
+        private String jobglbdef12;
 
-    private String jobglbdef14;
+        private String jobglbdef13;
 
-    private String jobglbdef15;
+        private String jobglbdef14;
 
-    private String jobglbdef16;
+        private String jobglbdef15;
 
-    private String jobglbdef17;
+        private String jobglbdef16;
 
-    private String jobglbdef18;
+        private String jobglbdef17;
 
-    private String jobglbdef19;
+        private String jobglbdef18;
 
-    private String oaUid;
+        private String jobglbdef19;
 
-    private String glbdef9;
+        private String oaUid;
 
-    private String glbdef10;
+        private String glbdef9;
 
-    private String jobglbdef21;
+        private String glbdef10;
 
-    public Integer getMonthId() {
-        return monthId;
-    }
+        private String jobglbdef21;
 
-    public void setMonthId(Integer monthId) {
-        this.monthId = monthId;
-    }
+        private String jobglbdef22;
 
-    public String getUnitId() {
-        return unitId;
-    }
+        private String jobglbdef23;
 
-    public void setUnitId(String unitId) {
-        this.unitId = unitId == null ? null : unitId.trim();
-    }
+        private String jobglbdef24;
 
-    public BigDecimal getAssgid() {
-        return assgid;
-    }
+        private String jobglbdef25;
 
-    public void setAssgid(BigDecimal assgid) {
-        this.assgid = assgid;
-    }
+        private String jobglbdef26;
 
-    public String getBegindate() {
-        return begindate;
-    }
+        public Integer getMonthId() {
+            return monthId;
+        }
 
-    public void setBegindate(String begindate) {
-        this.begindate = begindate == null ? null : begindate.trim();
-    }
+        public void setMonthId(Integer monthId) {
+            this.monthId = monthId;
+        }
 
-    public String getClerkcode() {
-        return clerkcode;
-    }
+        public String getUnitId() {
+            return unitId;
+        }
 
-    public void setClerkcode(String clerkcode) {
-        this.clerkcode = clerkcode == null ? null : clerkcode.trim();
-    }
+        public void setUnitId(String unitId) {
+            this.unitId = unitId == null ? null : unitId.trim();
+        }
 
-    public String getCreationtime() {
-        return creationtime;
-    }
+        public BigDecimal getAssgid() {
+            return assgid;
+        }
 
-    public void setCreationtime(String creationtime) {
-        this.creationtime = creationtime == null ? null : creationtime.trim();
-    }
+        public void setAssgid(BigDecimal assgid) {
+            this.assgid = assgid;
+        }
 
-    public String getCreator() {
-        return creator;
-    }
+        public String getBegindate() {
+            return begindate;
+        }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
+        public void setBegindate(String begindate) {
+            this.begindate = begindate == null ? null : begindate.trim();
+        }
 
-    public BigDecimal getDataoriginflag() {
-        return dataoriginflag;
-    }
+        public String getClerkcode() {
+            return clerkcode;
+        }
 
-    public void setDataoriginflag(BigDecimal dataoriginflag) {
-        this.dataoriginflag = dataoriginflag;
-    }
+        public void setClerkcode(String clerkcode) {
+            this.clerkcode = clerkcode == null ? null : clerkcode.trim();
+        }
 
-    public String getDeposemode() {
-        return deposemode;
-    }
+        public String getCreationtime() {
+            return creationtime;
+        }
 
-    public void setDeposemode(String deposemode) {
-        this.deposemode = deposemode == null ? null : deposemode.trim();
-    }
+        public void setCreationtime(String creationtime) {
+            this.creationtime = creationtime == null ? null : creationtime.trim();
+        }
 
-    public Long getDr() {
-        return dr;
-    }
+        public String getCreator() {
+            return creator;
+        }
 
-    public void setDr(Long dr) {
-        this.dr = dr;
-    }
+        public void setCreator(String creator) {
+            this.creator = creator == null ? null : creator.trim();
+        }
 
-    public String getEnddate() {
-        return enddate;
-    }
+        public BigDecimal getDataoriginflag() {
+            return dataoriginflag;
+        }
 
-    public void setEnddate(String enddate) {
-        this.enddate = enddate == null ? null : enddate.trim();
-    }
+        public void setDataoriginflag(BigDecimal dataoriginflag) {
+            this.dataoriginflag = dataoriginflag;
+        }
 
-    public String getEndflag() {
-        return endflag;
-    }
+        public String getDeposemode() {
+            return deposemode;
+        }
 
-    public void setEndflag(String endflag) {
-        this.endflag = endflag == null ? null : endflag.trim();
-    }
+        public void setDeposemode(String deposemode) {
+            this.deposemode = deposemode == null ? null : deposemode.trim();
+        }
 
-    public String getIsmainjob() {
-        return ismainjob;
-    }
+        public Long getDr() {
+            return dr;
+        }
 
-    public void setIsmainjob(String ismainjob) {
-        this.ismainjob = ismainjob == null ? null : ismainjob.trim();
-    }
+        public void setDr(Long dr) {
+            this.dr = dr;
+        }
 
-    public String getJobglbdef1() {
-        return jobglbdef1;
-    }
+        public String getEnddate() {
+            return enddate;
+        }
 
-    public void setJobglbdef1(String jobglbdef1) {
-        this.jobglbdef1 = jobglbdef1 == null ? null : jobglbdef1.trim();
-    }
+        public void setEnddate(String enddate) {
+            this.enddate = enddate == null ? null : enddate.trim();
+        }
 
-    public String getJobglbdef10() {
-        return jobglbdef10;
-    }
+        public String getEndflag() {
+            return endflag;
+        }
 
-    public void setJobglbdef10(String jobglbdef10) {
-        this.jobglbdef10 = jobglbdef10 == null ? null : jobglbdef10.trim();
-    }
+        public void setEndflag(String endflag) {
+            this.endflag = endflag == null ? null : endflag.trim();
+        }
 
-    public String getJobglbdef2() {
-        return jobglbdef2;
-    }
+        public String getIsmainjob() {
+            return ismainjob;
+        }
 
-    public void setJobglbdef2(String jobglbdef2) {
-        this.jobglbdef2 = jobglbdef2 == null ? null : jobglbdef2.trim();
-    }
+        public void setIsmainjob(String ismainjob) {
+            this.ismainjob = ismainjob == null ? null : ismainjob.trim();
+        }
 
-    public String getJobglbdef3() {
-        return jobglbdef3;
-    }
+        public String getJobglbdef1() {
+            return jobglbdef1;
+        }
 
-    public void setJobglbdef3(String jobglbdef3) {
-        this.jobglbdef3 = jobglbdef3 == null ? null : jobglbdef3.trim();
-    }
+        public void setJobglbdef1(String jobglbdef1) {
+            this.jobglbdef1 = jobglbdef1 == null ? null : jobglbdef1.trim();
+        }
 
-    public String getJobglbdef4() {
-        return jobglbdef4;
-    }
+        public String getJobglbdef10() {
+            return jobglbdef10;
+        }
 
-    public void setJobglbdef4(String jobglbdef4) {
-        this.jobglbdef4 = jobglbdef4 == null ? null : jobglbdef4.trim();
-    }
+        public void setJobglbdef10(String jobglbdef10) {
+            this.jobglbdef10 = jobglbdef10 == null ? null : jobglbdef10.trim();
+        }
 
-    public String getJobglbdef5() {
-        return jobglbdef5;
-    }
+        public String getJobglbdef2() {
+            return jobglbdef2;
+        }
 
-    public void setJobglbdef5(String jobglbdef5) {
-        this.jobglbdef5 = jobglbdef5 == null ? null : jobglbdef5.trim();
-    }
+        public void setJobglbdef2(String jobglbdef2) {
+            this.jobglbdef2 = jobglbdef2 == null ? null : jobglbdef2.trim();
+        }
 
-    public String getJobglbdef6() {
-        return jobglbdef6;
-    }
+        public String getJobglbdef3() {
+            return jobglbdef3;
+        }
 
-    public void setJobglbdef6(String jobglbdef6) {
-        this.jobglbdef6 = jobglbdef6 == null ? null : jobglbdef6.trim();
-    }
+        public void setJobglbdef3(String jobglbdef3) {
+            this.jobglbdef3 = jobglbdef3 == null ? null : jobglbdef3.trim();
+        }
 
-    public String getJobglbdef7() {
-        return jobglbdef7;
-    }
+        public String getJobglbdef4() {
+            return jobglbdef4;
+        }
 
-    public void setJobglbdef7(String jobglbdef7) {
-        this.jobglbdef7 = jobglbdef7 == null ? null : jobglbdef7.trim();
-    }
+        public void setJobglbdef4(String jobglbdef4) {
+            this.jobglbdef4 = jobglbdef4 == null ? null : jobglbdef4.trim();
+        }
 
-    public String getJobglbdef8() {
-        return jobglbdef8;
-    }
+        public String getJobglbdef5() {
+            return jobglbdef5;
+        }
 
-    public void setJobglbdef8(String jobglbdef8) {
-        this.jobglbdef8 = jobglbdef8 == null ? null : jobglbdef8.trim();
-    }
+        public void setJobglbdef5(String jobglbdef5) {
+            this.jobglbdef5 = jobglbdef5 == null ? null : jobglbdef5.trim();
+        }
 
-    public String getJobglbdef9() {
-        return jobglbdef9;
-    }
+        public String getJobglbdef6() {
+            return jobglbdef6;
+        }
 
-    public void setJobglbdef9(String jobglbdef9) {
-        this.jobglbdef9 = jobglbdef9 == null ? null : jobglbdef9.trim();
-    }
+        public void setJobglbdef6(String jobglbdef6) {
+            this.jobglbdef6 = jobglbdef6 == null ? null : jobglbdef6.trim();
+        }
 
-    public String getJobmode() {
-        return jobmode;
-    }
+        public String getJobglbdef7() {
+            return jobglbdef7;
+        }
 
-    public void setJobmode(String jobmode) {
-        this.jobmode = jobmode == null ? null : jobmode.trim();
-    }
+        public void setJobglbdef7(String jobglbdef7) {
+            this.jobglbdef7 = jobglbdef7 == null ? null : jobglbdef7.trim();
+        }
 
-    public String getLastflag() {
-        return lastflag;
-    }
+        public String getJobglbdef8() {
+            return jobglbdef8;
+        }
 
-    public void setLastflag(String lastflag) {
-        this.lastflag = lastflag == null ? null : lastflag.trim();
-    }
+        public void setJobglbdef8(String jobglbdef8) {
+            this.jobglbdef8 = jobglbdef8 == null ? null : jobglbdef8.trim();
+        }
 
-    public String getMemo() {
-        return memo;
-    }
+        public String getJobglbdef9() {
+            return jobglbdef9;
+        }
 
-    public void setMemo(String memo) {
-        this.memo = memo == null ? null : memo.trim();
-    }
+        public void setJobglbdef9(String jobglbdef9) {
+            this.jobglbdef9 = jobglbdef9 == null ? null : jobglbdef9.trim();
+        }
 
-    public String getModifiedtime() {
-        return modifiedtime;
-    }
+        public String getJobmode() {
+            return jobmode;
+        }
 
-    public void setModifiedtime(String modifiedtime) {
-        this.modifiedtime = modifiedtime == null ? null : modifiedtime.trim();
-    }
+        public void setJobmode(String jobmode) {
+            this.jobmode = jobmode == null ? null : jobmode.trim();
+        }
 
-    public String getModifier() {
-        return modifier;
-    }
+        public String getLastflag() {
+            return lastflag;
+        }
 
-    public void setModifier(String modifier) {
-        this.modifier = modifier == null ? null : modifier.trim();
-    }
+        public void setLastflag(String lastflag) {
+            this.lastflag = lastflag == null ? null : lastflag.trim();
+        }
 
-    public String getOccupation() {
-        return occupation;
-    }
+        public String getMemo() {
+            return memo;
+        }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation == null ? null : occupation.trim();
-    }
+        public void setMemo(String memo) {
+            this.memo = memo == null ? null : memo.trim();
+        }
 
-    public String getOribillpk() {
-        return oribillpk;
-    }
+        public String getModifiedtime() {
+            return modifiedtime;
+        }
 
-    public void setOribillpk(String oribillpk) {
-        this.oribillpk = oribillpk == null ? null : oribillpk.trim();
-    }
+        public void setModifiedtime(String modifiedtime) {
+            this.modifiedtime = modifiedtime == null ? null : modifiedtime.trim();
+        }
 
-    public String getOribilltype() {
-        return oribilltype;
-    }
+        public String getModifier() {
+            return modifier;
+        }
 
-    public void setOribilltype(String oribilltype) {
-        this.oribilltype = oribilltype == null ? null : oribilltype.trim();
-    }
+        public void setModifier(String modifier) {
+            this.modifier = modifier == null ? null : modifier.trim();
+        }
 
-    public String getPkDept() {
-        return pkDept;
-    }
+        public String getOccupation() {
+            return occupation;
+        }
 
-    public void setPkDept(String pkDept) {
-        this.pkDept = pkDept == null ? null : pkDept.trim();
-    }
+        public void setOccupation(String occupation) {
+            this.occupation = occupation == null ? null : occupation.trim();
+        }
 
-    public String getPkDeptV() {
-        return pkDeptV;
-    }
+        public String getOribillpk() {
+            return oribillpk;
+        }
 
-    public void setPkDeptV(String pkDeptV) {
-        this.pkDeptV = pkDeptV == null ? null : pkDeptV.trim();
-    }
+        public void setOribillpk(String oribillpk) {
+            this.oribillpk = oribillpk == null ? null : oribillpk.trim();
+        }
 
-    public String getPkGroup() {
-        return pkGroup;
-    }
+        public String getOribilltype() {
+            return oribilltype;
+        }
 
-    public void setPkGroup(String pkGroup) {
-        this.pkGroup = pkGroup == null ? null : pkGroup.trim();
-    }
+        public void setOribilltype(String oribilltype) {
+            this.oribilltype = oribilltype == null ? null : oribilltype.trim();
+        }
 
-    public String getPkHrgroup() {
-        return pkHrgroup;
-    }
+        public String getPkDept() {
+            return pkDept;
+        }
 
-    public void setPkHrgroup(String pkHrgroup) {
-        this.pkHrgroup = pkHrgroup == null ? null : pkHrgroup.trim();
-    }
+        public void setPkDept(String pkDept) {
+            this.pkDept = pkDept == null ? null : pkDept.trim();
+        }
 
-    public String getPkHrorg() {
-        return pkHrorg;
-    }
+        public String getPkDeptV() {
+            return pkDeptV;
+        }
 
-    public void setPkHrorg(String pkHrorg) {
-        this.pkHrorg = pkHrorg == null ? null : pkHrorg.trim();
-    }
+        public void setPkDeptV(String pkDeptV) {
+            this.pkDeptV = pkDeptV == null ? null : pkDeptV.trim();
+        }
 
-    public String getPkJob() {
-        return pkJob;
-    }
+        public String getPkGroup() {
+            return pkGroup;
+        }
 
-    public void setPkJob(String pkJob) {
-        this.pkJob = pkJob == null ? null : pkJob.trim();
-    }
+        public void setPkGroup(String pkGroup) {
+            this.pkGroup = pkGroup == null ? null : pkGroup.trim();
+        }
 
-    public String getPkJobType() {
-        return pkJobType;
-    }
+        public String getPkHrgroup() {
+            return pkHrgroup;
+        }
 
-    public void setPkJobType(String pkJobType) {
-        this.pkJobType = pkJobType == null ? null : pkJobType.trim();
-    }
+        public void setPkHrgroup(String pkHrgroup) {
+            this.pkHrgroup = pkHrgroup == null ? null : pkHrgroup.trim();
+        }
 
-    public String getPkJobgrade() {
-        return pkJobgrade;
-    }
+        public String getPkHrorg() {
+            return pkHrorg;
+        }
 
-    public void setPkJobgrade(String pkJobgrade) {
-        this.pkJobgrade = pkJobgrade == null ? null : pkJobgrade.trim();
-    }
+        public void setPkHrorg(String pkHrorg) {
+            this.pkHrorg = pkHrorg == null ? null : pkHrorg.trim();
+        }
 
-    public String getPkJobrank() {
-        return pkJobrank;
-    }
+        public String getPkJob() {
+            return pkJob;
+        }
 
-    public void setPkJobrank(String pkJobrank) {
-        this.pkJobrank = pkJobrank == null ? null : pkJobrank.trim();
-    }
+        public void setPkJob(String pkJob) {
+            this.pkJob = pkJob == null ? null : pkJob.trim();
+        }
 
-    public String getPkOrg() {
-        return pkOrg;
-    }
+        public String getPkJobType() {
+            return pkJobType;
+        }
 
-    public void setPkOrg(String pkOrg) {
-        this.pkOrg = pkOrg == null ? null : pkOrg.trim();
-    }
+        public void setPkJobType(String pkJobType) {
+            this.pkJobType = pkJobType == null ? null : pkJobType.trim();
+        }
 
-    public String getPkOrgV() {
-        return pkOrgV;
-    }
+        public String getPkJobgrade() {
+            return pkJobgrade;
+        }
 
-    public void setPkOrgV(String pkOrgV) {
-        this.pkOrgV = pkOrgV == null ? null : pkOrgV.trim();
-    }
+        public void setPkJobgrade(String pkJobgrade) {
+            this.pkJobgrade = pkJobgrade == null ? null : pkJobgrade.trim();
+        }
 
-    public String getPkPost() {
-        return pkPost;
-    }
+        public String getPkJobrank() {
+            return pkJobrank;
+        }
 
-    public void setPkPost(String pkPost) {
-        this.pkPost = pkPost == null ? null : pkPost.trim();
-    }
+        public void setPkJobrank(String pkJobrank) {
+            this.pkJobrank = pkJobrank == null ? null : pkJobrank.trim();
+        }
 
-    public String getPkPostseries() {
-        return pkPostseries;
-    }
+        public String getPkOrg() {
+            return pkOrg;
+        }
 
-    public void setPkPostseries(String pkPostseries) {
-        this.pkPostseries = pkPostseries == null ? null : pkPostseries.trim();
-    }
+        public void setPkOrg(String pkOrg) {
+            this.pkOrg = pkOrg == null ? null : pkOrg.trim();
+        }
 
-    public String getPkPsncl() {
-        return pkPsncl;
-    }
+        public String getPkOrgV() {
+            return pkOrgV;
+        }
 
-    public void setPkPsncl(String pkPsncl) {
-        this.pkPsncl = pkPsncl == null ? null : pkPsncl.trim();
-    }
+        public void setPkOrgV(String pkOrgV) {
+            this.pkOrgV = pkOrgV == null ? null : pkOrgV.trim();
+        }
 
-    public String getPkPsndoc() {
-        return pkPsndoc;
-    }
+        public String getPkPost() {
+            return pkPost;
+        }
 
-    public void setPkPsndoc(String pkPsndoc) {
-        this.pkPsndoc = pkPsndoc == null ? null : pkPsndoc.trim();
-    }
+        public void setPkPost(String pkPost) {
+            this.pkPost = pkPost == null ? null : pkPost.trim();
+        }
 
-    public String getPkPsnjob() {
-        return pkPsnjob;
-    }
+        public String getPkPostseries() {
+            return pkPostseries;
+        }
 
-    public void setPkPsnjob(String pkPsnjob) {
-        this.pkPsnjob = pkPsnjob == null ? null : pkPsnjob.trim();
-    }
+        public void setPkPostseries(String pkPostseries) {
+            this.pkPostseries = pkPostseries == null ? null : pkPostseries.trim();
+        }
 
-    public String getPkPsnorg() {
-        return pkPsnorg;
-    }
+        public String getPkPsncl() {
+            return pkPsncl;
+        }
 
-    public void setPkPsnorg(String pkPsnorg) {
-        this.pkPsnorg = pkPsnorg == null ? null : pkPsnorg.trim();
-    }
+        public void setPkPsncl(String pkPsncl) {
+            this.pkPsncl = pkPsncl == null ? null : pkPsncl.trim();
+        }
 
-    public String getPoststat() {
-        return poststat;
-    }
+        public String getPkPsndoc() {
+            return pkPsndoc;
+        }
 
-    public void setPoststat(String poststat) {
-        this.poststat = poststat == null ? null : poststat.trim();
-    }
+        public void setPkPsndoc(String pkPsndoc) {
+            this.pkPsndoc = pkPsndoc == null ? null : pkPsndoc.trim();
+        }
 
-    public BigDecimal getPsntype() {
-        return psntype;
-    }
+        public String getPkPsnjob() {
+            return pkPsnjob;
+        }
 
-    public void setPsntype(BigDecimal psntype) {
-        this.psntype = psntype;
-    }
+        public void setPkPsnjob(String pkPsnjob) {
+            this.pkPsnjob = pkPsnjob == null ? null : pkPsnjob.trim();
+        }
 
-    public BigDecimal getRecordnum() {
-        return recordnum;
-    }
+        public String getPkPsnorg() {
+            return pkPsnorg;
+        }
 
-    public void setRecordnum(BigDecimal recordnum) {
-        this.recordnum = recordnum;
-    }
+        public void setPkPsnorg(String pkPsnorg) {
+            this.pkPsnorg = pkPsnorg == null ? null : pkPsnorg.trim();
+        }
 
-    public String getSeries() {
-        return series;
-    }
+        public String getPoststat() {
+            return poststat;
+        }
 
-    public void setSeries(String series) {
-        this.series = series == null ? null : series.trim();
-    }
+        public void setPoststat(String poststat) {
+            this.poststat = poststat == null ? null : poststat.trim();
+        }
 
-    public BigDecimal getShoworder() {
-        return showorder;
-    }
+        public BigDecimal getPsntype() {
+            return psntype;
+        }
 
-    public void setShoworder(BigDecimal showorder) {
-        this.showorder = showorder;
-    }
+        public void setPsntype(BigDecimal psntype) {
+            this.psntype = psntype;
+        }
 
-    public String getTrialFlag() {
-        return trialFlag;
-    }
+        public BigDecimal getRecordnum() {
+            return recordnum;
+        }
 
-    public void setTrialFlag(String trialFlag) {
-        this.trialFlag = trialFlag == null ? null : trialFlag.trim();
-    }
+        public void setRecordnum(BigDecimal recordnum) {
+            this.recordnum = recordnum;
+        }
 
-    public BigDecimal getTrialType() {
-        return trialType;
-    }
+        public String getSeries() {
+            return series;
+        }
 
-    public void setTrialType(BigDecimal trialType) {
-        this.trialType = trialType;
-    }
+        public void setSeries(String series) {
+            this.series = series == null ? null : series.trim();
+        }
 
-    public BigDecimal getTrnsevent() {
-        return trnsevent;
-    }
+        public BigDecimal getShoworder() {
+            return showorder;
+        }
 
-    public void setTrnsevent(BigDecimal trnsevent) {
-        this.trnsevent = trnsevent;
-    }
+        public void setShoworder(BigDecimal showorder) {
+            this.showorder = showorder;
+        }
 
-    public String getTrnsreason() {
-        return trnsreason;
-    }
+        public String getTrialFlag() {
+            return trialFlag;
+        }
 
-    public void setTrnsreason(String trnsreason) {
-        this.trnsreason = trnsreason == null ? null : trnsreason.trim();
-    }
+        public void setTrialFlag(String trialFlag) {
+            this.trialFlag = trialFlag == null ? null : trialFlag.trim();
+        }
 
-    public String getTrnstype() {
-        return trnstype;
-    }
+        public BigDecimal getTrialType() {
+            return trialType;
+        }
 
-    public void setTrnstype(String trnstype) {
-        this.trnstype = trnstype == null ? null : trnstype.trim();
-    }
+        public void setTrialType(BigDecimal trialType) {
+            this.trialType = trialType;
+        }
 
-    public String getTs() {
-        return ts;
-    }
+        public BigDecimal getTrnsevent() {
+            return trnsevent;
+        }
 
-    public void setTs(String ts) {
-        this.ts = ts == null ? null : ts.trim();
-    }
+        public void setTrnsevent(BigDecimal trnsevent) {
+            this.trnsevent = trnsevent;
+        }
 
-    public String getWorktype() {
-        return worktype;
-    }
+        public String getTrnsreason() {
+            return trnsreason;
+        }
 
-    public void setWorktype(String worktype) {
-        this.worktype = worktype == null ? null : worktype.trim();
-    }
+        public void setTrnsreason(String trnsreason) {
+            this.trnsreason = trnsreason == null ? null : trnsreason.trim();
+        }
 
-    public String getGlbdef1() {
-        return glbdef1;
-    }
+        public String getTrnstype() {
+            return trnstype;
+        }
 
-    public void setGlbdef1(String glbdef1) {
-        this.glbdef1 = glbdef1 == null ? null : glbdef1.trim();
-    }
+        public void setTrnstype(String trnstype) {
+            this.trnstype = trnstype == null ? null : trnstype.trim();
+        }
 
-    public String getGlbdef2() {
-        return glbdef2;
-    }
+        public String getTs() {
+            return ts;
+        }
 
-    public void setGlbdef2(String glbdef2) {
-        this.glbdef2 = glbdef2 == null ? null : glbdef2.trim();
-    }
+        public void setTs(String ts) {
+            this.ts = ts == null ? null : ts.trim();
+        }
 
-    public String getGlbdef3() {
-        return glbdef3;
-    }
+        public String getWorktype() {
+            return worktype;
+        }
 
-    public void setGlbdef3(String glbdef3) {
-        this.glbdef3 = glbdef3 == null ? null : glbdef3.trim();
-    }
+        public void setWorktype(String worktype) {
+            this.worktype = worktype == null ? null : worktype.trim();
+        }
 
-    public String getGlbdef4() {
-        return glbdef4;
-    }
+        public String getGlbdef1() {
+            return glbdef1;
+        }
 
-    public void setGlbdef4(String glbdef4) {
-        this.glbdef4 = glbdef4 == null ? null : glbdef4.trim();
-    }
+        public void setGlbdef1(String glbdef1) {
+            this.glbdef1 = glbdef1 == null ? null : glbdef1.trim();
+        }
 
-    public String getGlbdef5() {
-        return glbdef5;
-    }
+        public String getGlbdef2() {
+            return glbdef2;
+        }
 
-    public void setGlbdef5(String glbdef5) {
-        this.glbdef5 = glbdef5 == null ? null : glbdef5.trim();
-    }
+        public void setGlbdef2(String glbdef2) {
+            this.glbdef2 = glbdef2 == null ? null : glbdef2.trim();
+        }
 
-    public String getGlbdef6() {
-        return glbdef6;
-    }
+        public String getGlbdef3() {
+            return glbdef3;
+        }
 
-    public void setGlbdef6(String glbdef6) {
-        this.glbdef6 = glbdef6 == null ? null : glbdef6.trim();
-    }
+        public void setGlbdef3(String glbdef3) {
+            this.glbdef3 = glbdef3 == null ? null : glbdef3.trim();
+        }
 
-    public String getGlbdef7() {
-        return glbdef7;
-    }
+        public String getGlbdef4() {
+            return glbdef4;
+        }
 
-    public void setGlbdef7(String glbdef7) {
-        this.glbdef7 = glbdef7 == null ? null : glbdef7.trim();
-    }
+        public void setGlbdef4(String glbdef4) {
+            this.glbdef4 = glbdef4 == null ? null : glbdef4.trim();
+        }
 
-    public String getGlbdef8() {
-        return glbdef8;
-    }
+        public String getGlbdef5() {
+            return glbdef5;
+        }
 
-    public void setGlbdef8(String glbdef8) {
-        this.glbdef8 = glbdef8 == null ? null : glbdef8.trim();
-    }
+        public void setGlbdef5(String glbdef5) {
+            this.glbdef5 = glbdef5 == null ? null : glbdef5.trim();
+        }
 
-    public String getJobglbdef12() {
-        return jobglbdef12;
-    }
+        public String getGlbdef6() {
+            return glbdef6;
+        }
 
-    public void setJobglbdef12(String jobglbdef12) {
-        this.jobglbdef12 = jobglbdef12 == null ? null : jobglbdef12.trim();
-    }
+        public void setGlbdef6(String glbdef6) {
+            this.glbdef6 = glbdef6 == null ? null : glbdef6.trim();
+        }
 
-    public String getJobglbdef13() {
-        return jobglbdef13;
-    }
+        public String getGlbdef7() {
+            return glbdef7;
+        }
 
-    public void setJobglbdef13(String jobglbdef13) {
-        this.jobglbdef13 = jobglbdef13 == null ? null : jobglbdef13.trim();
-    }
+        public void setGlbdef7(String glbdef7) {
+            this.glbdef7 = glbdef7 == null ? null : glbdef7.trim();
+        }
 
-    public String getJobglbdef14() {
-        return jobglbdef14;
-    }
+        public String getGlbdef8() {
+            return glbdef8;
+        }
 
-    public void setJobglbdef14(String jobglbdef14) {
-        this.jobglbdef14 = jobglbdef14 == null ? null : jobglbdef14.trim();
-    }
+        public void setGlbdef8(String glbdef8) {
+            this.glbdef8 = glbdef8 == null ? null : glbdef8.trim();
+        }
 
-    public String getJobglbdef15() {
-        return jobglbdef15;
-    }
+        public String getJobglbdef12() {
+            return jobglbdef12;
+        }
 
-    public void setJobglbdef15(String jobglbdef15) {
-        this.jobglbdef15 = jobglbdef15 == null ? null : jobglbdef15.trim();
-    }
+        public void setJobglbdef12(String jobglbdef12) {
+            this.jobglbdef12 = jobglbdef12 == null ? null : jobglbdef12.trim();
+        }
 
-    public String getJobglbdef16() {
-        return jobglbdef16;
-    }
+        public String getJobglbdef13() {
+            return jobglbdef13;
+        }
 
-    public void setJobglbdef16(String jobglbdef16) {
-        this.jobglbdef16 = jobglbdef16 == null ? null : jobglbdef16.trim();
-    }
+        public void setJobglbdef13(String jobglbdef13) {
+            this.jobglbdef13 = jobglbdef13 == null ? null : jobglbdef13.trim();
+        }
 
-    public String getJobglbdef17() {
-        return jobglbdef17;
-    }
+        public String getJobglbdef14() {
+            return jobglbdef14;
+        }
 
-    public void setJobglbdef17(String jobglbdef17) {
-        this.jobglbdef17 = jobglbdef17 == null ? null : jobglbdef17.trim();
-    }
+        public void setJobglbdef14(String jobglbdef14) {
+            this.jobglbdef14 = jobglbdef14 == null ? null : jobglbdef14.trim();
+        }
 
-    public String getJobglbdef18() {
-        return jobglbdef18;
-    }
+        public String getJobglbdef15() {
+            return jobglbdef15;
+        }
 
-    public void setJobglbdef18(String jobglbdef18) {
-        this.jobglbdef18 = jobglbdef18 == null ? null : jobglbdef18.trim();
-    }
+        public void setJobglbdef15(String jobglbdef15) {
+            this.jobglbdef15 = jobglbdef15 == null ? null : jobglbdef15.trim();
+        }
 
-    public String getJobglbdef19() {
-        return jobglbdef19;
-    }
+        public String getJobglbdef16() {
+            return jobglbdef16;
+        }
 
-    public void setJobglbdef19(String jobglbdef19) {
-        this.jobglbdef19 = jobglbdef19 == null ? null : jobglbdef19.trim();
-    }
+        public void setJobglbdef16(String jobglbdef16) {
+            this.jobglbdef16 = jobglbdef16 == null ? null : jobglbdef16.trim();
+        }
 
-    public String getOaUid() {
-        return oaUid;
-    }
+        public String getJobglbdef17() {
+            return jobglbdef17;
+        }
 
-    public void setOaUid(String oaUid) {
-        this.oaUid = oaUid == null ? null : oaUid.trim();
-    }
+        public void setJobglbdef17(String jobglbdef17) {
+            this.jobglbdef17 = jobglbdef17 == null ? null : jobglbdef17.trim();
+        }
 
-    public String getGlbdef9() {
-        return glbdef9;
-    }
+        public String getJobglbdef18() {
+            return jobglbdef18;
+        }
 
-    public void setGlbdef9(String glbdef9) {
-        this.glbdef9 = glbdef9 == null ? null : glbdef9.trim();
-    }
+        public void setJobglbdef18(String jobglbdef18) {
+            this.jobglbdef18 = jobglbdef18 == null ? null : jobglbdef18.trim();
+        }
 
-    public String getGlbdef10() {
-        return glbdef10;
-    }
+        public String getJobglbdef19() {
+            return jobglbdef19;
+        }
 
-    public void setGlbdef10(String glbdef10) {
-        this.glbdef10 = glbdef10 == null ? null : glbdef10.trim();
-    }
+        public void setJobglbdef19(String jobglbdef19) {
+            this.jobglbdef19 = jobglbdef19 == null ? null : jobglbdef19.trim();
+        }
 
-    public String getJobglbdef21() {
-        return jobglbdef21;
-    }
+        public String getOaUid() {
+            return oaUid;
+        }
 
-    public void setJobglbdef21(String jobglbdef21) {
-        this.jobglbdef21 = jobglbdef21 == null ? null : jobglbdef21.trim();
-    }
+        public void setOaUid(String oaUid) {
+            this.oaUid = oaUid == null ? null : oaUid.trim();
+        }
+
+        public String getGlbdef9() {
+            return glbdef9;
+        }
+
+        public void setGlbdef9(String glbdef9) {
+            this.glbdef9 = glbdef9 == null ? null : glbdef9.trim();
+        }
+
+        public String getGlbdef10() {
+            return glbdef10;
+        }
+
+        public void setGlbdef10(String glbdef10) {
+            this.glbdef10 = glbdef10 == null ? null : glbdef10.trim();
+        }
+
+        public String getJobglbdef21() {
+            return jobglbdef21;
+        }
+
+        public void setJobglbdef21(String jobglbdef21) {
+            this.jobglbdef21 = jobglbdef21 == null ? null : jobglbdef21.trim();
+        }
+
+        public String getJobglbdef22() {
+            return jobglbdef22;
+        }
+
+        public void setJobglbdef22(String jobglbdef22) {
+            this.jobglbdef22 = jobglbdef22 == null ? null : jobglbdef22.trim();
+        }
+
+        public String getJobglbdef23() {
+            return jobglbdef23;
+        }
+
+        public void setJobglbdef23(String jobglbdef23) {
+            this.jobglbdef23 = jobglbdef23 == null ? null : jobglbdef23.trim();
+        }
+
+        public String getJobglbdef24() {
+            return jobglbdef24;
+        }
+
+        public void setJobglbdef24(String jobglbdef24) {
+            this.jobglbdef24 = jobglbdef24 == null ? null : jobglbdef24.trim();
+        }
+
+        public String getJobglbdef25() {
+            return jobglbdef25;
+        }
+
+        public void setJobglbdef25(String jobglbdef25) {
+            this.jobglbdef25 = jobglbdef25 == null ? null : jobglbdef25.trim();
+        }
+
+        public String getJobglbdef26() {
+            return jobglbdef26;
+        }
+
+        public void setJobglbdef26(String jobglbdef26) {
+            this.jobglbdef26 = jobglbdef26 == null ? null : jobglbdef26.trim();
+        }
 }

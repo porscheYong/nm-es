@@ -82,6 +82,11 @@
     <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
     <result column="GLBDEF10" jdbcType="VARCHAR" property="glbdef10" />
     <result column="JOBGLBDEF21" jdbcType="VARCHAR" property="jobglbdef21" />
+    <result column="JOBGLBDEF22" jdbcType="VARCHAR" property="jobglbdef22" />
+    <result column="JOBGLBDEF23" jdbcType="VARCHAR" property="jobglbdef23" />
+    <result column="JOBGLBDEF24" jdbcType="VARCHAR" property="jobglbdef24" />
+    <result column="JOBGLBDEF25" jdbcType="VARCHAR" property="jobglbdef25" />
+    <result column="JOBGLBDEF26" jdbcType="VARCHAR" property="jobglbdef26" />
   </resultMap>
   <insert id="insertBatch" parameterType="java.util.List">
 
@@ -111,7 +116,9 @@
     JOBGLBDEF13, JOBGLBDEF14, JOBGLBDEF15,
     JOBGLBDEF16, JOBGLBDEF17, JOBGLBDEF18,
     JOBGLBDEF19, OA_UID, GLBDEF9,
-    GLBDEF10, JOBGLBDEF21)
+    GLBDEF10, JOBGLBDEF21, JOBGLBDEF22,
+    JOBGLBDEF23, JOBGLBDEF24, JOBGLBDEF25,
+    JOBGLBDEF26)
     select cd.* from(
     <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
       select
@@ -141,66 +148,72 @@
       #{item.jobglbdef13,jdbcType=VARCHAR}, #{item.jobglbdef14,jdbcType=VARCHAR}, #{item.jobglbdef15,jdbcType=VARCHAR},
       #{item.jobglbdef16,jdbcType=VARCHAR}, #{item.jobglbdef17,jdbcType=VARCHAR}, #{item.jobglbdef18,jdbcType=VARCHAR},
       #{item.jobglbdef19,jdbcType=VARCHAR}, #{item.oaUid,jdbcType=VARCHAR}, #{item.glbdef9,jdbcType=VARCHAR},
-      #{item.glbdef10,jdbcType=VARCHAR}, #{item.jobglbdef21,jdbcType=VARCHAR}
+      #{item.glbdef10,jdbcType=VARCHAR}, #{item.jobglbdef21,jdbcType=VARCHAR}, #{item.jobglbdef22,jdbcType=VARCHAR},
+      #{item.jobglbdef23,jdbcType=VARCHAR}, #{item.jobglbdef24,jdbcType=VARCHAR}, #{item.jobglbdef25,jdbcType=VARCHAR},
+      #{item.jobglbdef26,jdbcType=VARCHAR}
       from dual
     </foreach>
     ) cd
   </insert>
   <insert id="insert" parameterType="LdapmMpwHiPsnjob">
-    insert into LDAPM_MPW_HI_PSNJOB (MONTH_ID, UNIT_ID, ASSGID, 
-      BEGINDATE, CLERKCODE, CREATIONTIME, 
-      CREATOR, DATAORIGINFLAG, DEPOSEMODE, 
-      DR, ENDDATE, ENDFLAG, 
-      ISMAINJOB, JOBGLBDEF1, JOBGLBDEF10, 
-      JOBGLBDEF2, JOBGLBDEF3, JOBGLBDEF4, 
-      JOBGLBDEF5, JOBGLBDEF6, JOBGLBDEF7, 
-      JOBGLBDEF8, JOBGLBDEF9, JOBMODE, 
-      LASTFLAG, MEMO, MODIFIEDTIME, 
-      MODIFIER, OCCUPATION, ORIBILLPK, 
-      ORIBILLTYPE, PK_DEPT, PK_DEPT_V, 
-      PK_GROUP, PK_HRGROUP, PK_HRORG, 
-      PK_JOB, PK_JOB_TYPE, PK_JOBGRADE, 
-      PK_JOBRANK, PK_ORG, PK_ORG_V, 
-      PK_POST, PK_POSTSERIES, PK_PSNCL, 
-      PK_PSNDOC, PK_PSNJOB, PK_PSNORG, 
-      POSTSTAT, PSNTYPE, RECORDNUM, 
-      SERIES, SHOWORDER, TRIAL_FLAG, 
-      TRIAL_TYPE, TRNSEVENT, TRNSREASON, 
-      TRNSTYPE, TS, WORKTYPE, 
-      GLBDEF1, GLBDEF2, GLBDEF3, 
-      GLBDEF4, GLBDEF5, GLBDEF6, 
-      GLBDEF7, GLBDEF8, JOBGLBDEF12, 
-      JOBGLBDEF13, JOBGLBDEF14, JOBGLBDEF15, 
-      JOBGLBDEF16, JOBGLBDEF17, JOBGLBDEF18, 
-      JOBGLBDEF19, OA_UID, GLBDEF9, 
-      GLBDEF10, JOBGLBDEF21)
-    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, 
-      #{begindate,jdbcType=VARCHAR}, #{clerkcode,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, 
-      #{creator,jdbcType=VARCHAR}, #{dataoriginflag,jdbcType=DECIMAL}, #{deposemode,jdbcType=VARCHAR}, 
-      #{dr,jdbcType=DECIMAL}, #{enddate,jdbcType=VARCHAR}, #{endflag,jdbcType=VARCHAR}, 
-      #{ismainjob,jdbcType=VARCHAR}, #{jobglbdef1,jdbcType=VARCHAR}, #{jobglbdef10,jdbcType=VARCHAR}, 
-      #{jobglbdef2,jdbcType=VARCHAR}, #{jobglbdef3,jdbcType=VARCHAR}, #{jobglbdef4,jdbcType=VARCHAR}, 
-      #{jobglbdef5,jdbcType=VARCHAR}, #{jobglbdef6,jdbcType=VARCHAR}, #{jobglbdef7,jdbcType=VARCHAR}, 
-      #{jobglbdef8,jdbcType=VARCHAR}, #{jobglbdef9,jdbcType=VARCHAR}, #{jobmode,jdbcType=VARCHAR}, 
-      #{lastflag,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, 
-      #{modifier,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{oribillpk,jdbcType=VARCHAR}, 
-      #{oribilltype,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, #{pkDeptV,jdbcType=VARCHAR}, 
-      #{pkGroup,jdbcType=VARCHAR}, #{pkHrgroup,jdbcType=VARCHAR}, #{pkHrorg,jdbcType=VARCHAR}, 
-      #{pkJob,jdbcType=VARCHAR}, #{pkJobType,jdbcType=VARCHAR}, #{pkJobgrade,jdbcType=VARCHAR}, 
-      #{pkJobrank,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkOrgV,jdbcType=VARCHAR}, 
-      #{pkPost,jdbcType=VARCHAR}, #{pkPostseries,jdbcType=VARCHAR}, #{pkPsncl,jdbcType=VARCHAR}, 
-      #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR}, 
-      #{poststat,jdbcType=VARCHAR}, #{psntype,jdbcType=DECIMAL}, #{recordnum,jdbcType=DECIMAL}, 
-      #{series,jdbcType=VARCHAR}, #{showorder,jdbcType=DECIMAL}, #{trialFlag,jdbcType=VARCHAR}, 
-      #{trialType,jdbcType=DECIMAL}, #{trnsevent,jdbcType=DECIMAL}, #{trnsreason,jdbcType=VARCHAR}, 
-      #{trnstype,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{worktype,jdbcType=VARCHAR}, 
-      #{glbdef1,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{glbdef3,jdbcType=VARCHAR}, 
-      #{glbdef4,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR}, 
-      #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, #{jobglbdef12,jdbcType=VARCHAR}, 
-      #{jobglbdef13,jdbcType=VARCHAR}, #{jobglbdef14,jdbcType=VARCHAR}, #{jobglbdef15,jdbcType=VARCHAR}, 
-      #{jobglbdef16,jdbcType=VARCHAR}, #{jobglbdef17,jdbcType=VARCHAR}, #{jobglbdef18,jdbcType=VARCHAR}, 
-      #{jobglbdef19,jdbcType=VARCHAR}, #{oaUid,jdbcType=VARCHAR}, #{glbdef9,jdbcType=VARCHAR}, 
-      #{glbdef10,jdbcType=VARCHAR}, #{jobglbdef21,jdbcType=VARCHAR})
+    insert into LDAPM_MPW_HI_PSNJOB (MONTH_ID, UNIT_ID, ASSGID,
+      BEGINDATE, CLERKCODE, CREATIONTIME,
+      CREATOR, DATAORIGINFLAG, DEPOSEMODE,
+      DR, ENDDATE, ENDFLAG,
+      ISMAINJOB, JOBGLBDEF1, JOBGLBDEF10,
+      JOBGLBDEF2, JOBGLBDEF3, JOBGLBDEF4,
+      JOBGLBDEF5, JOBGLBDEF6, JOBGLBDEF7,
+      JOBGLBDEF8, JOBGLBDEF9, JOBMODE,
+      LASTFLAG, MEMO, MODIFIEDTIME,
+      MODIFIER, OCCUPATION, ORIBILLPK,
+      ORIBILLTYPE, PK_DEPT, PK_DEPT_V,
+      PK_GROUP, PK_HRGROUP, PK_HRORG,
+      PK_JOB, PK_JOB_TYPE, PK_JOBGRADE,
+      PK_JOBRANK, PK_ORG, PK_ORG_V,
+      PK_POST, PK_POSTSERIES, PK_PSNCL,
+      PK_PSNDOC, PK_PSNJOB, PK_PSNORG,
+      POSTSTAT, PSNTYPE, RECORDNUM,
+      SERIES, SHOWORDER, TRIAL_FLAG,
+      TRIAL_TYPE, TRNSEVENT, TRNSREASON,
+      TRNSTYPE, TS, WORKTYPE,
+      GLBDEF1, GLBDEF2, GLBDEF3,
+      GLBDEF4, GLBDEF5, GLBDEF6,
+      GLBDEF7, GLBDEF8, JOBGLBDEF12,
+      JOBGLBDEF13, JOBGLBDEF14, JOBGLBDEF15,
+      JOBGLBDEF16, JOBGLBDEF17, JOBGLBDEF18,
+      JOBGLBDEF19, OA_UID, GLBDEF9,
+      GLBDEF10, JOBGLBDEF21, JOBGLBDEF22,
+    JOBGLBDEF23, JOBGLBDEF24, JOBGLBDEF25,
+    JOBGLBDEF26)
+    values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL},
+      #{begindate,jdbcType=VARCHAR}, #{clerkcode,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR},
+      #{creator,jdbcType=VARCHAR}, #{dataoriginflag,jdbcType=DECIMAL}, #{deposemode,jdbcType=VARCHAR},
+      #{dr,jdbcType=DECIMAL}, #{enddate,jdbcType=VARCHAR}, #{endflag,jdbcType=VARCHAR},
+      #{ismainjob,jdbcType=VARCHAR}, #{jobglbdef1,jdbcType=VARCHAR}, #{jobglbdef10,jdbcType=VARCHAR},
+      #{jobglbdef2,jdbcType=VARCHAR}, #{jobglbdef3,jdbcType=VARCHAR}, #{jobglbdef4,jdbcType=VARCHAR},
+      #{jobglbdef5,jdbcType=VARCHAR}, #{jobglbdef6,jdbcType=VARCHAR}, #{jobglbdef7,jdbcType=VARCHAR},
+      #{jobglbdef8,jdbcType=VARCHAR}, #{jobglbdef9,jdbcType=VARCHAR}, #{jobmode,jdbcType=VARCHAR},
+      #{lastflag,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR},
+      #{modifier,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{oribillpk,jdbcType=VARCHAR},
+      #{oribilltype,jdbcType=VARCHAR}, #{pkDept,jdbcType=VARCHAR}, #{pkDeptV,jdbcType=VARCHAR},
+      #{pkGroup,jdbcType=VARCHAR}, #{pkHrgroup,jdbcType=VARCHAR}, #{pkHrorg,jdbcType=VARCHAR},
+      #{pkJob,jdbcType=VARCHAR}, #{pkJobType,jdbcType=VARCHAR}, #{pkJobgrade,jdbcType=VARCHAR},
+      #{pkJobrank,jdbcType=VARCHAR}, #{pkOrg,jdbcType=VARCHAR}, #{pkOrgV,jdbcType=VARCHAR},
+      #{pkPost,jdbcType=VARCHAR}, #{pkPostseries,jdbcType=VARCHAR}, #{pkPsncl,jdbcType=VARCHAR},
+      #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR}, #{pkPsnorg,jdbcType=VARCHAR},
+      #{poststat,jdbcType=VARCHAR}, #{psntype,jdbcType=DECIMAL}, #{recordnum,jdbcType=DECIMAL},
+      #{series,jdbcType=VARCHAR}, #{showorder,jdbcType=DECIMAL}, #{trialFlag,jdbcType=VARCHAR},
+      #{trialType,jdbcType=DECIMAL}, #{trnsevent,jdbcType=DECIMAL}, #{trnsreason,jdbcType=VARCHAR},
+      #{trnstype,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, #{worktype,jdbcType=VARCHAR},
+      #{glbdef1,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{glbdef3,jdbcType=VARCHAR},
+      #{glbdef4,jdbcType=VARCHAR}, #{glbdef5,jdbcType=VARCHAR}, #{glbdef6,jdbcType=VARCHAR},
+      #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, #{jobglbdef12,jdbcType=VARCHAR},
+      #{jobglbdef13,jdbcType=VARCHAR}, #{jobglbdef14,jdbcType=VARCHAR}, #{jobglbdef15,jdbcType=VARCHAR},
+      #{jobglbdef16,jdbcType=VARCHAR}, #{jobglbdef17,jdbcType=VARCHAR}, #{jobglbdef18,jdbcType=VARCHAR},
+      #{jobglbdef19,jdbcType=VARCHAR}, #{oaUid,jdbcType=VARCHAR}, #{glbdef9,jdbcType=VARCHAR},
+      #{glbdef10,jdbcType=VARCHAR}, #{jobglbdef21,jdbcType=VARCHAR},#{jobglbdef22,jdbcType=VARCHAR},
+      #{jobglbdef23,jdbcType=VARCHAR}, #{jobglbdef24,jdbcType=VARCHAR}, #{jobglbdef25,jdbcType=VARCHAR},
+      #{jobglbdef26,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="LdapmMpwHiPsnjob">
     insert into LDAPM_MPW_HI_PSNJOB
@@ -445,6 +458,21 @@
       <if test="jobglbdef21 != null">
         JOBGLBDEF21,
       </if>
+      <if test="jobglbdef22 != null">
+        JOBGLBDEF22,
+      </if>
+      <if test="jobglbdef23 != null">
+        JOBGLBDEF23,
+      </if>
+      <if test="jobglbdef24 != null">
+        JOBGLBDEF24,
+      </if>
+      <if test="jobglbdef25 != null">
+        JOBGLBDEF25,
+      </if>
+      <if test="jobglbdef26 != null">
+        JOBGLBDEF26,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="monthId != null">
@@ -686,6 +714,21 @@
       </if>
       <if test="jobglbdef21 != null">
         #{jobglbdef21,jdbcType=VARCHAR},
+      </if>
+      <if test="jobglbdef22 != null">
+        #{jobglbdef22,jdbcType=VARCHAR},
+      </if>
+      <if test="jobglbdef23 != null">
+        #{jobglbdef23,jdbcType=VARCHAR},
+      </if>
+      <if test="jobglbdef24 != null">
+        #{jobglbdef24,jdbcType=VARCHAR},
+      </if>
+      <if test="jobglbdef25 != null">
+        #{jobglbdef25,jdbcType=VARCHAR},
+      </if>
+      <if test="jobglbdef26 != null">
+        #{jobglbdef26,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>

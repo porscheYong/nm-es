@@ -29,7 +29,7 @@
         </javaClientGenerator>
 
         <!--schema="${jdbc.userId}"-->
-        <table tableName="TB_PSNJOB_SORT" domainObjectName="TbPsnJobSort"
+        <table tableName="LDAPM_MPW_HI_PSNJOBF" domainObjectName="LdapmMpwHiPsnjob"
                schema="${jdbc.userId}"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">

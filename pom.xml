@@ -586,23 +586,7 @@
             <version>1.13</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alipay.jarslink</groupId>
-            <artifactId>jarslink-api</artifactId>
-            <version>1.5.0.20180213</version>
-            <exclusions>
-<!--                <exclusion>
-                    <groupId>commons-lang</groupId>
-                    <artifactId>commons-lang</artifactId>
-                </exclusion>-->
-
-            </exclusions>
-        </dependency>
-
     </dependencies>
-
-
-
 
     <build>
 
