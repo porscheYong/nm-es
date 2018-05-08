@@ -106,27 +106,15 @@ public class AtiTaskController extends BaseController {
 	}
 
 
-	/**
-	 * 签收任务传入userId参数页面
-	 * @param act
-	 * @param session
-	 * @return
-	 */
-	@RequestMapping(value = "/claimNeedName")
-	public String claimNeedName(Act act,HttpSession session) {
-		session.setAttribute("act",act);
-		return "modules/act/actClaimNeedName";
 
-	}
 	/**
 	 * 签收任务
 	 */
 	@RequestMapping(value = "claim")
 	@ResponseBody
-	public String claim(String userId,HttpSession session) {
+	public String claim(Act act,String userId) {
 		//需要传入一个userId参数,String
-//		String userId = "34";
-		Act act = (Act) session.getAttribute("act");
+		userId = "34";
 		atiTaskService.claim(act.getTaskId(), userId);
 		return "true";
 	}

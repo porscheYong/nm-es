@@ -46,6 +46,7 @@ public class OaBaseTaskListenerService {
         String processDefinitionId = delegateTask.getProcessDefinitionId();
 
         String assignee;
+        String attorney = "";
         for(AtiUser atiUser : users) {
             assignee = String.valueOf(atiUser.getAtiUserId());
 
@@ -55,7 +56,7 @@ public class OaBaseTaskListenerService {
 
                     //设置一个流程委托
                     if(processDefinitionId.equals(delegateInfo.getProcDefId())) {
-                        setDelegateForTask(delegateInfo,assignee,delegateTask,users);
+                        attorney = setDelegateForTask(delegateInfo,assignee,delegateTask,users);
                         continue;
                     }
 
@@ -73,6 +74,11 @@ public class OaBaseTaskListenerService {
             }
 
         }
+
+        if(!"".equals(attorney)) {
+            users.add(userService.getUserByUserId(Long.valueOf(attorney)));
+        }
+
     }
 
 
@@ -82,16 +88,17 @@ public class OaBaseTaskListenerService {
      * @param assignee
      * @param delegateTask
      */
-    public void setDelegateForTask(AtiDelegateInfo delegateInfo, String assignee, DelegateTask delegateTask,List<AtiUser> users) {
+    public String setDelegateForTask(AtiDelegateInfo delegateInfo, String assignee, DelegateTask delegateTask,List<AtiUser> users) {
         String attorney = (String) delegateInfo.getAttorney();
         delegateTask.addCandidateUser(attorney);
-        users.add(userService.getUserByUserId(Long.valueOf(attorney)));
 
         AtiDelegateHistory delegateHistory = new AtiDelegateHistory(assignee,attorney,new Date(),
                 delegateTask.getProcessInstanceId(),delegateTask.getId(),delegateTask.getTaskDefinitionKey(),
                 delegateInfo.getDelegateReason(),delegateInfo.getStatus());
 
         atiDelegateService.saveDelegateHistory(delegateHistory);
+
+        return attorney;
     }
 
 

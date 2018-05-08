@@ -90,7 +90,7 @@ public class AtiModifyStaffInfoService {
      */
     public String getFormKey(AtiModifyStaffInfo modifyStaffInfo) {
 
-        String view = "";
+        String view = "modifyStaffInfoForm";
 
         // 查看审批申请单
         if (StringUtils.isNotBlank(modifyStaffInfo.getId())){
