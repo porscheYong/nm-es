@@ -64,7 +64,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 30 20 6 * ?")
+//    @Scheduled(cron = "0 30 20 7 * ?")
     public void DataParseInputTimeByMonth(){
         //month:为每月的账期
         String month = DateUtils.getMonth(0);
@@ -90,7 +90,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 15 14 * * ?")
+    //@Scheduled(cron = "0 15 14 * * ?")
     public void DataParseInputTimeByDay(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
