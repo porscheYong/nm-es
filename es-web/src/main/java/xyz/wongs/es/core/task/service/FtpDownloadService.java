@@ -84,7 +84,7 @@ public class FtpDownloadService {
         String remotePath = "MonthData";
         String contains="."+month+".";
 
-        List<Document> documents = getData(localPath,remotePath,contains);
+        List<Document> documents = getData(localPath,remotePath,contains,true);
         if(CollectionUtils.isNotEmpty(documents)){
             logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());
             compareToTables(false,documents.get(0).getMonthId());
@@ -97,7 +97,7 @@ public class FtpDownloadService {
      * @Description: 每天14点
      * @Mod:
      */
-    @Scheduled(cron = "0 00 14 * * ?")
+    @Scheduled(cron = "0 00 17 * * ?")
     public void dayData(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
@@ -105,7 +105,7 @@ public class FtpDownloadService {
         String localPath = SUFFFIX+"DayData"+ File.separator+year+ File.separator+month+ File.separator+day+File.separator;
         String remotePath = "DayData";
         String contains="."+day+".";
-        List<Document> documents = getData(localPath,remotePath,contains);
+        List<Document> documents = getData(localPath,remotePath,contains,false);
         if(CollectionUtils.isNotEmpty(documents)){
             logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());
             compareToTables(true,documents.get(0).getMonthId());
@@ -153,14 +153,15 @@ public class FtpDownloadService {
      * @param localPath    本地存储的目录
      * @param remotePath   远程目录
      * @param contains 过滤器中使用文件名匹配的字符
+     * @param flag 用于决定是否最终下载文件本体
      * @Mod:
      */
-    public List<Document> getData(String localPath, String remotePath, String contains){
+    public List<Document> getData(String localPath, String remotePath, String contains,Boolean flag){
         logger.error("获取文件中 ，本地路径 "+localPath+" 远程路径 "+remotePath);
         Ftp fp = getEnvironment();
         List<Document> documents = null;
         try {
-            documents = FileDocUtil.getFileAndDownload(fp, contains, localPath, remotePath);
+            documents = FileDocUtil.getFileAndDownload(fp, contains, localPath, remotePath,flag);
             if(CollectionUtils.isEmpty(documents)){
                 return null;
             }

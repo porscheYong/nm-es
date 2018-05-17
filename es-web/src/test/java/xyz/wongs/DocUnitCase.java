@@ -180,7 +180,7 @@ public class DocUnitCase extends BaseUnit {
         String localPath = SUFFIX+"DayData"+ File.separator+year+ File.separator+month+ File.separator+day+File.separator;
         String remotePath = "DayData";
         String contains="."+day+".";
-        List<Document> documents = ftpDownloadService.getData(localPath,remotePath,contains);
+        List<Document> documents = ftpDownloadService.getData(localPath,remotePath,contains,true);
 //        logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());
         if(CollectionUtils.isNotEmpty(documents)){
             logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());

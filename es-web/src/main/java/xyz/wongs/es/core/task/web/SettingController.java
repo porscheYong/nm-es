@@ -1,6 +1,5 @@
 package xyz.wongs.es.core.task.web;
 
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +17,10 @@ import xyz.wongs.es.core.task.service.FtpDownloadService;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @Description :
@@ -126,7 +128,7 @@ public class SettingController extends BaseController {
                     }
 
                     //下载文件
-                    ftpDownloadService.getData(localPath, remotePath, contains);
+                    ftpDownloadService.getData(localPath, remotePath, contains,true);
                     list = documentService.findList(document);
                 }
             }

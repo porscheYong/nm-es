@@ -119,9 +119,10 @@ public class FileDocUtil {
      * @param contains      文件名的匹配过滤条件
      * @param localPath     下载到本地的目录
      * @param remoteBaseDir 远程访问的目录
+     * @param flag 是否下载文件本体
      * @throws Exception
      */
-    public static List<Document> getFileAndDownload(Ftp f, String contains, String localPath, String remoteBaseDir) throws Exception {
+    public static List<Document> getFileAndDownload(Ftp f, String contains, String localPath, String remoteBaseDir,Boolean flag) throws Exception {
 
         List<Document> documents = null;
         try {
@@ -160,21 +161,22 @@ public class FileDocUtil {
 
                 String fileName = ftpf.getName();
                 String shortName = fileName.substring(0,fileName.indexOf("."));
-                OutputStream outputStream = new FileOutputStream(localPath + fileName);
-                ftpClinet.retrieveFile(ftpf.getName(), outputStream);
+                //根据条件，判断是否要下载文件到目录，否则只对文件名做一次记录
+                if(flag){
+                    OutputStream outputStream = new FileOutputStream(localPath + fileName);
+                    ftpClinet.retrieveFile(ftpf.getName(), outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                }
                 //下载完成，写入存量表
-//                if(ok){
                 String[] str = fileName.split("\\.");
                 String monthId = str[2];
                 if(fileName.endsWith("gz")){
-//                        Document doc = new Document(shortName,fileName,localPath + fileName,DateUtils.formatDateTime(new Date()),1);
                     Document doc = new Document(shortName,fileName,monthId.replaceAll("\\.",""),localPath + fileName,(short)0, DateUtils.formatDateTime(new Date()));
                     documents.add(doc);
                 }
-//                }
 
-                outputStream.flush();
-                outputStream.close();
+
             }
         } catch (IOException e) {
             logger.error("文件读取错误。");
