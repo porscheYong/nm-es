@@ -104,40 +104,44 @@ public class AtiStaffEntryController extends BaseController {
     public String testStartAtiLeave(AtiStaffEntry staffEntry) {
 
         String procDefId = (String) staffEntry.getProcDefId();
+        //将信息封装成json格式
+        String resultOk =  "{\"result\":\"1\",\"message\":\"success\"}";
+        String resultError =  "{\"result\":\"0\",\"message\":\"error\"}";
         if(procDefId == null || procDefId.isEmpty()) {
-            return "fail";
+            return resultError;
         }
 
         String formSender = String.valueOf(staffEntry.getFormSender());
         if(formSender == null || formSender.isEmpty()){
-            return "fail";
+            return resultError;
         }
 
         String formTheme = (String) staffEntry.getFormTheme();
         if(formTheme == null || formTheme.isEmpty()) {
-            return  "fail";
+            return  resultError;
         }
 
         String urgent = staffEntry.getUrgent();
         if(urgent == null || urgent.isEmpty()) {
-            return "fail";
+            return resultError;
         }
 
         String formContent = (String) staffEntry.getFormContent();
         if(formContent == null || formContent.isEmpty()) {
-            return "fail";
+            return resultError;
         }
 
         String staffId = String.valueOf(staffEntry.getStaffId());
         if(staffId == null || staffId.isEmpty()) {
-            return "fail";
+            return resultError;
         }
 
         String atiCategoryId = String.valueOf(staffEntry.getAtiActCategoryId());
         if(atiCategoryId == null || atiCategoryId.isEmpty()){
-            return  "fail";
+            return  resultError;
         }
         atiStaffEntryService.save(staffEntry);
-        return "success";
+
+        return resultOk;
     }
 }
