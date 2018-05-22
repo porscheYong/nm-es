@@ -1,5 +1,6 @@
 package xyz.wongs.es.workflow.modifystaffinfo.web;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,8 +8,8 @@ import xyz.wongs.es.common.web.BaseController;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.modifystaffinfo.service.AtiStaffEntryService;
+import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
 import xyz.wongs.es.workflow.oa.service.AtiSpecificFormService;
-import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 
 import javax.annotation.Resource;
 
@@ -18,7 +19,7 @@ import javax.annotation.Resource;
  * @date 2018/5/22
  */
 @Controller
-@RequestMapping(value = "${adminPath}/oa/staffEntry")
+@RequestMapping(value = "/oa/staffEntry")
 public class AtiStaffEntryController extends BaseController {
 
     @Resource
@@ -32,15 +33,15 @@ public class AtiStaffEntryController extends BaseController {
      * @return
      */
     @ModelAttribute
-    public AtiModifyStaffInfo get(@RequestParam(required=false) Long id){
-        AtiModifyStaffInfo modifyStaffInfo = null;
+    public AtiStaffEntry get(@RequestParam(required=false) Long id){
+        AtiStaffEntry staffEntry = null;
         if(id != null) {
-            modifyStaffInfo = specificFormService.getAtiModifyStaffInfoByBaseFormId(id);
+            staffEntry = specificFormService.getAtiStaffEntryByBaseFormId(id);
         }
-        if (modifyStaffInfo == null){
-            modifyStaffInfo = new AtiModifyStaffInfo();
+        if (staffEntry == null){
+            staffEntry = new AtiStaffEntry();
         }
-        return modifyStaffInfo;
+        return staffEntry;
     }
 
 
@@ -66,6 +67,29 @@ public class AtiStaffEntryController extends BaseController {
     public String save(AtiStaffEntry staffEntry) {
 
         atiStaffEntryService.save(staffEntry);
+        return "redirect:" + adminPath + "/act/task/todoNeedName/";
+    }
+
+
+    /**
+     * 工单执行（完成任务）
+     * @param staffEntry
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "saveAudit")
+    public String saveAudit(AtiStaffEntry staffEntry, Model model) {
+        System.out.println("当前环节：" + staffEntry.getAct().getTaskName());
+        //系统管理员不用添加意见
+        if(!staffEntry.getAct().getTaskDefKey().equals(ProcDefKey.ENTRY_TASK_DEF_KEY[4])) {
+            if (StringUtils.isBlank(staffEntry.getAct().getFlag())
+                    || StringUtils.isBlank(staffEntry.getAct().getComment())){
+                addMessage(model, "请填写审核意见。");
+                return form(staffEntry, model);
+            }
+        }
+
+        atiStaffEntryService.auditSave(staffEntry);
         return "redirect:" + adminPath + "/act/task/todoNeedName/";
     }
 

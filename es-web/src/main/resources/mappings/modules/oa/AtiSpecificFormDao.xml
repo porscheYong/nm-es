@@ -166,4 +166,16 @@
     where bf.ati_base_form_id = #{atiBaseFormId}
   </select>
 
+  <select id="getAtiStaffEntryByBaseFormId" resultType="xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry">
+      select bf.*,sf.ati_act_category_id,sf.staff_id
+    from ati_base_form bf
+    left join
+      (select ati_base_form_id,ati_act_category_id,
+      max(case parameter when 'STAFF_ID' then param_value end) as STAFF_ID
+      from ati_specific_form
+      group by ati_base_form_id,ati_act_category_id) sf
+    on bf.ati_base_form_id = sf.ati_base_form_id
+    where bf.ati_base_form_id = #{atiBaseFormId}
+  </select>
+
 </mapper>

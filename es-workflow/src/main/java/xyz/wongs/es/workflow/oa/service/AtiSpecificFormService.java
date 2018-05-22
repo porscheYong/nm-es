@@ -3,6 +3,7 @@ package xyz.wongs.es.workflow.oa.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
+import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 
@@ -34,5 +35,10 @@ public class AtiSpecificFormService {
      */
     public AtiModifyStaffInfo getAtiModifyStaffInfoByBaseFormId(Long id) {
         return atiSpecificFormMapper.getAtiModifyStaffInfoByBaseFormId(id);
+    }
+
+
+    public AtiStaffEntry getAtiStaffEntryByBaseFormId(Long id) {
+        return atiSpecificFormMapper.getAtiStaffEntryByBaseFormId(id);
     }
 }

@@ -3,6 +3,7 @@ package xyz.wongs.es.workflow.oa.dao;
 import xyz.wongs.es.common.persistence.CrudDao;
 import xyz.wongs.es.common.persistence.annotation.MyBatisDao;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
+import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.oa.entity.AtiSpecificForm;
 import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 
@@ -47,4 +48,12 @@ public interface AtiSpecificFormDao extends CrudDao<AtiSpecificForm> {
      * @return
      */
     AtiModifyStaffInfo getAtiModifyStaffInfoByBaseFormId(Long atiBaseFormId);
+
+    /**
+     * 通过ati_base_form_id 获取虚拟对象 atiStaffEntry
+     * @param atiBaseFormId
+     * @return
+     */
+    AtiStaffEntry getAtiStaffEntryByBaseFormId(Long atiBaseFormId);
+
 }

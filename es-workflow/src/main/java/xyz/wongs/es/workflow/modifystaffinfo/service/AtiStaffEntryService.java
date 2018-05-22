@@ -1,10 +1,12 @@
 package xyz.wongs.es.workflow.modifystaffinfo.service;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
+import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
@@ -13,6 +15,7 @@ import xyz.wongs.es.workflow.oa.entity.ProcDefKey;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 人员入职Service
@@ -79,6 +82,26 @@ public class AtiStaffEntryService {
             atiTaskService.complete(staffEntry.getAct().getTaskId(), staffEntry.getAct().getProcInsId(),
                     staffEntry.getAct().getComment(), (String) staffEntry.getFormTheme(), null);
         }
+    }
+
+
+
+    /**
+     * 审核审批保存
+     * @param staffEntry
+     */
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
+    public void auditSave(AtiStaffEntry staffEntry) {
+
+        List<AtiSpecificForm> specificForms = getSpecificForms(staffEntry);
+
+        // 设置意见
+        staffEntry.getAct().setComment(("yes".equals(staffEntry.getAct().getFlag())?"[同意] ":"[驳回] ")+staffEntry.getAct().getComment());
+
+        // 提交流程任务
+        Map<String, Object> vars = Maps.newHashMap();
+        vars.put("pass", "yes".equals(staffEntry.getAct().getFlag())? "1" : "0");
+        atiTaskService.complete(staffEntry.getAct().getTaskId(), staffEntry.getAct().getProcInsId(), staffEntry.getAct().getComment(), vars);
     }
 
 
