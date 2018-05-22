@@ -240,8 +240,7 @@ public class AtiTaskController extends BaseController {
 	 */
 	@RequestMapping(value = "/actTaskTodo")
 	@ResponseBody
-	public ResponseResult<List<Task>> testActTodo(String assignName) {
-		ResponseResult<List<Task>> result = new ResponseResult<List<Task>>();
+	public List<Task> testActTodo(String assignName) {
 
 		if(assignName==null || assignName.isEmpty()) {
 			return null;
@@ -250,10 +249,7 @@ public class AtiTaskController extends BaseController {
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
 				.includeProcessVariables().active().orderByTaskCreateTime().desc();
 		List<Task> toClaimList = toClaimQuery.list();
-		result.setData(toClaimList);
-		result.setState(ResponseResult.STATE_OK);
-		result.setMessage("成功");
-		return result;
+		return toClaimList;
 
 
 	}
