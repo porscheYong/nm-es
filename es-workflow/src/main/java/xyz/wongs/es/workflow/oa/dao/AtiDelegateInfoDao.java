@@ -27,7 +27,7 @@ public interface AtiDelegateInfoDao extends CrudDao<AtiDelegateInfo> {
      * @param assignee
      * @return
      */
-    List<AtiDelegateInfo> getDelegateInfoList(Object assignee);
+    List<AtiDelegateInfo> getDelegateInfoList(String assignee);
 
 
     /**

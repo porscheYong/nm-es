@@ -103,7 +103,7 @@ public class AtiTaskService extends BaseService {
 	 * @param title			流程标题，显示在待办任务标题
 	 * @return 流程实例ID
 	 */
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false,rollbackFor = Exception.class)
 	public String startProcess(String procDefKey, String businessTable, String businessId, String title, AtiBaseForm atiBaseForm) {
 		Map<String, Object> vars = Maps.newHashMap();
 		return startProcess(procDefKey, businessTable, businessId, title, vars,atiBaseForm);

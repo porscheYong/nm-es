@@ -34,7 +34,7 @@ public class AtiDelegateService {
      * @param assignee
      * @return
      */
-    public List<AtiDelegateInfo> getDelegateInfoList(Object assignee) {
+    public List<AtiDelegateInfo> getDelegateInfoList(String assignee) {
         return atiDelegateInfoDao.getDelegateInfoList(assignee);
 
     }

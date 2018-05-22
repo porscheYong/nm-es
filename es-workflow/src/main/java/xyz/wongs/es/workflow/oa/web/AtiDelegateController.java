@@ -35,7 +35,7 @@ public class AtiDelegateController extends BaseController {
     @RequestMapping(value = "/list")
     public String getDelegateList(Object assignee,Model model) {
         assignee = "31";
-        List<AtiDelegateInfo> delegateInfoList = atiDelegateService.getDelegateInfoList(assignee);
+        List<AtiDelegateInfo> delegateInfoList = atiDelegateService.getDelegateInfoList((String) assignee);
         model.addAttribute("delegateInfoList",delegateInfoList);
         List<AtiActCategory> categories = categoryService.findAllCategory();
         model.addAttribute("categories",categories);
