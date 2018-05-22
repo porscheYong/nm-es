@@ -45,6 +45,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>shiroFilter</filter-name>
+		<!--拦截/a/*-->
 		<url-pattern>/a/*</url-pattern>
 	</filter-mapping>
 
