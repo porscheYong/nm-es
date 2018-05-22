@@ -182,6 +182,7 @@ public class AtiTaskService extends BaseService {
 		// 查询列表
 		List<Task> todoList = todoTaskQuery.list();
 		for (Task task : todoList) {
+
 			Act e = new Act();
 			e.setTask(task);
 			e.setVars(task.getProcessVariables());
@@ -194,7 +195,6 @@ public class AtiTaskService extends BaseService {
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(name)
 				.includeProcessVariables().active().orderByTaskCreateTime().desc();
 
-		// 设置查询条件
 		if (StringUtils.isNotBlank(act.getProcDefKey())){
 			toClaimQuery.processDefinitionKey(act.getProcDefKey());
 		}
@@ -204,6 +204,7 @@ public class AtiTaskService extends BaseService {
 		if (act.getEndDate() != null){
 			toClaimQuery.taskCreatedBefore(act.getEndDate());
 		}
+		// 设置查询条件
 
 		// 查询列表
 		List<Task> toClaimList = toClaimQuery.list();

@@ -3,6 +3,9 @@
  */
 package xyz.wongs.es.workflow.act.web;
 
+import org.activiti.engine.TaskService;
+import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,7 @@ import xyz.wongs.es.modules.act.utils.ActUtils;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.entity.AtiActCategory;
+import xyz.wongs.es.workflow.oa.entity.ResponseResult;
 import xyz.wongs.es.workflow.oa.service.AtiActCategoryService;
 
 import javax.annotation.Resource;
@@ -30,13 +34,15 @@ import java.util.List;
  * @version 2013-11-03
  */
 @Controller
-@RequestMapping(value = "${adminPath}/act/task")
+@RequestMapping(value = "/act/task")
 public class AtiTaskController extends BaseController {
 
 	@Autowired
 	private AtiTaskService atiTaskService;
 	@Autowired
 	private AtiActCategoryService categoryService;
+	@Autowired
+	private TaskService taskService;
 
 
 	/**
@@ -226,22 +232,30 @@ public class AtiTaskController extends BaseController {
 	}
 
 
+
 	/**
-	 * 待办任务测试接口
-	 * @param act
+	 * 待办任务测试
 	 * @param assignName
 	 * @return
 	 */
-	@RequestMapping(value = "/testActTodo")
-	public String testActTodo(Act act,String assignName,Model model) {
+	@RequestMapping(value = "/actTaskTodo")
+	@ResponseBody
+	public ResponseResult<List<Task>> testActTodo(String assignName) {
+		ResponseResult<List<Task>> result = new ResponseResult<List<Task>>();
 
 		if(assignName==null || assignName.isEmpty()) {
-			return "assignName==null || assignName.isEmpty() ->false";
+			return null;
 		}
 
-		List<Act> list = atiTaskService.todoList(act,assignName);
-		model.addAttribute("list",list);
-		return "modules/act/actTaskTodoList";
+		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
+				.includeProcessVariables().active().orderByTaskCreateTime().desc();
+		List<Task> toClaimList = toClaimQuery.list();
+		result.setData(toClaimList);
+		result.setState(ResponseResult.STATE_OK);
+		result.setMessage("成功");
+		return result;
+
+
 	}
 
 
