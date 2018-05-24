@@ -10,12 +10,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import xyz.wongs.es.common.persistence.Page;
 import xyz.wongs.es.common.web.BaseController;
 import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.modules.act.utils.ActUtils;
+import xyz.wongs.es.modules.act.utils.ProcessDefCache;
 import xyz.wongs.es.modules.sys.utils.UserUtils;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.entity.AtiActCategory;
@@ -26,6 +29,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -238,10 +242,11 @@ public class AtiTaskController extends BaseController {
 	 * @param assignName
 	 * @return
 	 */
-	@RequestMapping(value = "/actTaskTodo")
+	@RequestMapping(value = "/actTaskTodo",method = RequestMethod.GET)
 	@ResponseBody
-	public List<Task> testActTodo(String assignName) {
-
+	public ResponseResult<List<Act>> testActTodo(String assignName) {
+		ResponseResult<List<Act>> result = new ResponseResult<List<Act>>();
+		List<Act> acts = new ArrayList<>();
 		if(assignName==null || assignName.isEmpty()) {
 			return null;
 		}
@@ -249,7 +254,31 @@ public class AtiTaskController extends BaseController {
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
 				.includeProcessVariables().active().orderByTaskCreateTime().desc();
 		List<Task> toClaimList = toClaimQuery.list();
-		return toClaimList;
+		for (Task task : toClaimList) {
+			Act e = new Act();
+			e.setTask(task);
+			e.setVars(task.getProcessVariables());
+			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
+			e.setStatus("claim");
+			acts.add(e);
+		}
+
+		TaskQuery todoTaskQuery = taskService.createTaskQuery().taskAssignee(assignName).active()
+				.includeProcessVariables().orderByTaskCreateTime().desc();
+		List<Task> todoList = todoTaskQuery.list();
+		for (Task task : todoList) {
+			Act e = new Act();
+			e.setTask(task);
+			e.setVars(task.getProcessVariables());
+			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
+			e.setStatus("todo");
+			acts.add(e);
+		}
+
+		result.setData(acts);
+		result.setState(ResponseResult.STATE_OK);
+		result.setMessage("success");
+		return result;
 
 
 	}

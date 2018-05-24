@@ -18,7 +18,7 @@ import java.util.List;
  * @date 2018/4/20
  */
 @Controller
-@RequestMapping(value = "/${adminPath}/oa/delegate")
+@RequestMapping(value = "/oa/delegate")
 public class AtiDelegateController extends BaseController {
 
     @Autowired

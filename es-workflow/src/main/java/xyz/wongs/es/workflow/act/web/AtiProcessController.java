@@ -45,7 +45,7 @@ import java.util.Map;
  * @date 2018/4/23
  */
 @Controller
-@RequestMapping(value = "/${adminPath}/workflow/act/process")
+@RequestMapping(value = "/workflow/act/process")
 public class AtiProcessController extends BaseController {
 
     @Autowired
@@ -78,7 +78,7 @@ public class AtiProcessController extends BaseController {
     /**
      * 运行中的实例列表
      */
-    @RequiresPermissions("act:process:edit")
+//    @RequiresPermissions("act:process:edit")
     @RequestMapping(value = "/running")
     public String runningList(String procInsId, String procDefKey, HttpServletRequest request, HttpServletResponse response, Model model) {
         Page<ProcessInstance> page = atiProcessService.runningList(new Page<ProcessInstance>(request, response), procInsId, procDefKey);

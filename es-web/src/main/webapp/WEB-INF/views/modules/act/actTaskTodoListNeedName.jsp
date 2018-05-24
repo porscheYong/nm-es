@@ -5,7 +5,7 @@
 	<title>待办任务</title>
 </head>
 <body>
-	<form action="${ctx}/act/task/todo/">
+	<form action="${pageContext.request.contextPath}/act/task/todo/">
 		请输入userId:<input id="name" name="userId" type="text" />
 		<input type="submit" value="确定"/>
 	</form>

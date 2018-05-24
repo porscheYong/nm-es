@@ -12,10 +12,10 @@
 		 * 签收任务
 		 */
 		function claim(taskId) {
-			$.get('${ctx}/act/task/claim' ,{taskId: taskId}, function(data) {
+			$.get('${pageContext.request.contextPath}/act/task/claim' ,{taskId: taskId}, function(data) {
 				if (data == 'true'){
 		        	top.$.jBox.tip('签收完成');
-		            location = '${ctx}/act/task/todoNeedName/';
+		            location = '${pageContext.request.contextPath}/act/task/todoNeedName/';
 				}else{
 		        	top.$.jBox.tip('签收失败');
 				}
@@ -25,12 +25,12 @@
 </head>
 <body>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="${ctx}/act/task/todoNeedName/">待办任务</a></li>
-		<li><a href="${ctx}/act/task/historic/">已办任务</a></li>
-		<li><a href="${ctx}/act/task/process/">新建任务</a></li>
-		<li><a href="${ctx}/oa/delegate/list/">代理设置</a></li>
+		<li class="active"><a href="${pageContext.request.contextPath}/act/task/todoNeedName/">待办任务</a></li>
+		<li><a href="${pageContext.request.contextPath}/act/task/historic/">已办任务</a></li>
+		<li><a href="${pageContext.request.contextPath}/act/task/process/">新建任务</a></li>
+		<li><a href="${pageContext.request.contextPath}/oa/delegate/list/">代理设置</a></li>
 	</ul>
-	<form:form id="searchForm" modelAttribute="act" action="${ctx}/act/task/todo/" method="get" class="breadcrumb form-search">
+	<form:form id="searchForm" modelAttribute="act" action="${pageContext.request.contextPath}/act/task/todo/" method="get" class="breadcrumb form-search">
 		<div>
 			<label>流程类型：&nbsp;</label>
 			<form:select path="procDefKey" class="input-medium">
@@ -74,7 +74,7 @@
 							<a href="javascript:claim('${task.id}');" title="签收任务">${fns:abbr(not empty act.vars.map.title ? act.vars.map.title : task.id, 60)}</a>
 						</c:if>
 						<c:if test="${not empty task.assignee}">
-							<a href="${ctx}/act/task/form?taskId=${task.id}&taskName=${fns:urlEncode(task.name)}&taskDefKey=${task.taskDefinitionKey}&procInsId=${task.processInstanceId}&procDefId=${task.processDefinitionId}&status=${status}">${fns:abbr(not empty vars.map.title ? vars.map.title : task.id, 60)}</a>
+							<a href="${pageContext.request.contextPath}/act/task/form?taskId=${task.id}&taskName=${fns:urlEncode(task.name)}&taskDefKey=${task.taskDefinitionKey}&procInsId=${task.processInstanceId}&procDefId=${task.processDefinitionId}&status=${status}">${fns:abbr(not empty vars.map.title ? vars.map.title : task.id, 60)}</a>
 						</c:if>
 					</td>
 					<td>
@@ -90,13 +90,13 @@
 						</c:if>
 						<c:if test="${not empty task.assignee}"><%--
 							<a href="${ctx}${procExecUrl}/exec/${task.taskDefinitionKey}?procInsId=${task.processInstanceId}&act.taskId=${task.id}">办理</a> --%>
-							<a href="${ctx}/act/task/form?taskId=${task.id}&taskName=${fns:urlEncode(task.name)}&taskDefKey=${task.taskDefinitionKey}&procInsId=${task.processInstanceId}&procDefId=${task.processDefinitionId}&status=${status}">任务办理</a>
+							<a href="${pageContext.request.contextPath}/act/task/form?taskId=${task.id}&taskName=${fns:urlEncode(task.name)}&taskDefKey=${task.taskDefinitionKey}&procInsId=${task.processInstanceId}&procDefId=${task.processDefinitionId}&status=${status}">任务办理</a>
 						</c:if>
-						<shiro:hasPermission name="act:process:edit">
+						<%--<shiro:hasPermission name="act:process:edit">--%>
 							<c:if test="${empty task.executionId}">
-								<a href="${ctx}/act/task/deleteTask?taskId=${task.id}&reason=" onclick="return promptx('删除任务','删除原因',this.href);">删除任务</a>
+								<a href="${pageContext.request.contextPath}/act/task/deleteTask?taskId=${task.id}&reason=" onclick="return promptx('删除任务','删除原因',this.href);">删除任务</a>
 							</c:if>
-						</shiro:hasPermission>
+						<%--</shiro:hasPermission>--%>
 						<a target="_blank" href="${pageContext.request.contextPath}/act/diagram-viewer?processDefinitionId=${task.processDefinitionId}&processInstanceId=${task.processInstanceId}">跟踪</a><%-- 
 						<a target="_blank" href="${ctx}/act/task/trace/photo/${task.processDefinitionId}/${task.executionId}">跟踪2</a> 
 						<a target="_blank" href="${ctx}/act/task/trace/info/${task.processInstanceId}">跟踪信息</a> --%>

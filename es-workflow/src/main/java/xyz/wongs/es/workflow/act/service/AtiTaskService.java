@@ -136,6 +136,8 @@ public class AtiTaskService extends BaseService {
 			vars.put("title", title);
 			//添加申请人
 			vars.put("applyUser",userId);
+			//添加工单内容
+			vars.put("content",atiBaseForm.getFormContent());
 		}
 		
 		// 启动流程
