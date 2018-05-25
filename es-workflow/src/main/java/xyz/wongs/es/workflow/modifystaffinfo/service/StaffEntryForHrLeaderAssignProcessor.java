@@ -56,7 +56,7 @@ public class StaffEntryForHrLeaderAssignProcessor extends OaBaseTaskListenerServ
 //
 //        addNames(hrLeaderUsers,names,delegateTask);
 
-        delegateTask.addCandidateUser("zhangyong");
+        delegateTask.addCandidateUser("n15012302");
 
 
 

@@ -60,7 +60,7 @@ public class AtiProcessController extends BaseController {
     /**
      * 流程定义列表
      */
-    @RequiresPermissions("act:process:edit")
+//    @RequiresPermissions("act:process:edit")
     @RequestMapping(value = {"list", ""})
     public String processList(String category, HttpServletRequest request, HttpServletResponse response, Model model) {
 		/*
@@ -153,7 +153,7 @@ public class AtiProcessController extends BaseController {
     /**
      * 部署流程
      */
-    @RequiresPermissions("act:process:edit")
+//    @RequiresPermissions("act:process:edit")
     @RequestMapping(value = "/deploy", method= RequestMethod.GET)
     public String deploy(Model model, AtiActCategory category) {
         model.addAttribute("category",category);
@@ -165,7 +165,7 @@ public class AtiProcessController extends BaseController {
      * @param file
      * @return
      */
-    @RequiresPermissions("act:process:edit")
+//    @RequiresPermissions("act:process:edit")
     @RequestMapping(value = "/deploy", method=RequestMethod.POST)
     public String deploy(@Value("#{APP_PROP['activiti.export.diagram.path']}") String exportDir,
                          String category, MultipartFile file, RedirectAttributes redirectAttributes) {

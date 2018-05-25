@@ -34,7 +34,7 @@
 <body>
 	<ul class="nav nav-tabs">
 		<li><a href="${ctx}/workflow/act/process/">流程管理</a></li>
-		<li><a href="${ctx}/workflow/act/process/deploy/">部署流程</a></li>
+		<li><a href="${pageContext.request.contextPath}/workflow/act/process/deploy/">部署流程</a></li>
 		<li class="active"><a href="${ctx}/workflow/act/process/running/">运行中的流程</a></li>
 	</ul>
 	<form id="searchForm" action="${ctx}/workflow/act/process/running/" method="post" class="breadcrumb form-search">

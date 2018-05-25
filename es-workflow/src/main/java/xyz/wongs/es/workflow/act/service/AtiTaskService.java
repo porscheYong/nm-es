@@ -123,8 +123,8 @@ public class AtiTaskService extends BaseService {
 
 
 		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-		Long userId = atiBaseForm.getFormSender();
-		identityService.setAuthenticatedUserId(String.valueOf(userId));
+//		Long userId = atiBaseForm.getFormSender();
+		identityService.setAuthenticatedUserId("wangyiren");
 		
 		// 设置流程变量
 		if (vars == null){
@@ -135,7 +135,7 @@ public class AtiTaskService extends BaseService {
 		if (StringUtils.isNotBlank(title)){
 			vars.put("title", title);
 			//添加申请人
-			vars.put("applyUser",userId);
+//			vars.put("applyUser",userId);
 			//添加工单内容
 			vars.put("content",atiBaseForm.getFormContent());
 		}
