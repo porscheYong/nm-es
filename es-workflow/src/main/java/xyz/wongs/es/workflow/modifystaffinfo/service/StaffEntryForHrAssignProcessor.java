@@ -55,7 +55,7 @@ public class StaffEntryForHrAssignProcessor extends OaBaseTaskListenerService im
 //
 //        addNames(hrUsers,names,delegateTask);
 
-        delegateTask.addCandidateUser("hr");
+        delegateTask.addCandidateUser("fanjie");
 
 
         //如果有任务委托，添加委托人

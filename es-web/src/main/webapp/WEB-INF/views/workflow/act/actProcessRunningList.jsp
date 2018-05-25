@@ -68,11 +68,11 @@
 					<td><a href="${ctx}/workflow/act/process/alterAssignee?procInstId=${procIns.id}">${procIns.activityId}</a></td>
 					<td>${procIns.suspended}</td>
 					<td>
-						<shiro:hasPermission name="act:process:edit">
+						<%--<shiro:hasPermission name="act:process:edit">--%>
 							<a href="${ctx}/act/process/deleteProcIns?procInsId=${procIns.processInstanceId}&reason=" onclick="return promptx('删除流程','删除原因',this.href);">删除流程</a>
 							&nbsp;
 							<a href="${ctx}/act/task/taskBack?procInstId=${procIns.processInstanceId}">回退</a>
-						</shiro:hasPermission>&nbsp;
+						<%--</shiro:hasPermission>&nbsp;--%>
 					</td>
 				</tr>
 			</c:forEach>
