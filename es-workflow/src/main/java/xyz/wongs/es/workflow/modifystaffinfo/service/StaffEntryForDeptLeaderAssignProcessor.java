@@ -54,7 +54,7 @@ public class StaffEntryForDeptLeaderAssignProcessor extends OaBaseTaskListenerSe
 
 //        addNames(deptLeaderUsers,names,delegateTask);
 
-        delegateTask.addCandidateUser("n15020476");
+        delegateTask.addCandidateUser("n15000510");
 
 
         //如果有任务委托，添加委托人
