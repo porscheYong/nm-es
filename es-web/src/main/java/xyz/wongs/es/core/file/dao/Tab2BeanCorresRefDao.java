@@ -12,7 +12,10 @@ import java.util.List;
 public interface Tab2BeanCorresRefDao extends CrudDao<Tab2BeanCorresRef> {
     int deleteByPrimaryKey(String tableName);
 
+    @Override
     int insert(Tab2BeanCorresRef record);
+
+    int getCount();
 
     int insertSelective(Tab2BeanCorresRef record);
 

@@ -35,6 +35,12 @@
     FROM TAB2BEAN_CORRESREF t
   </select>
 
+  <select id="getCount" resultType="java.lang.Integer">
+    SELECT
+    COUNT(1)
+    FROM TAB2BEAN_CORRESREF t
+  </select>
+
   <select id="findNotExists" resultType="Tab2BeanCorresRef">
     SELECT
     <include refid="Base_Column_List"/>

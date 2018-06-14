@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.DateUtils;
@@ -183,6 +182,28 @@ public class DataParseIntoDBService {
                 documents.add(doc);
             }
         }
+
+        //当下载的文件数量与实际标准文件数量不一致时候，清空当前列表，不再导入数据库
+        if(!documentIntegrityCheck(documents))  {
+            documents.clear();
+        }
         return documents;
+    }
+
+    /**
+     * 判断即将导入库的文件列表与规范标准文件列表数量是否一致
+     * @method      documentIntegrityCheck
+     * @author      WCNGS@QQ.COM
+     * @version
+     * @see
+     * @param documents
+     * @return      void
+     * @exception
+     * @date        2018/6/14 9:34
+     */
+    public boolean documentIntegrityCheck(List<Document> documents){
+         int counts = tab2BeanCorresRefService.getCount();
+         int docCounts = documents.size();
+         return counts==docCounts?true:false;
     }
 }

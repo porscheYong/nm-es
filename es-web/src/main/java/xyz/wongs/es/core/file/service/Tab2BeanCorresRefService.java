@@ -74,4 +74,9 @@ public class Tab2BeanCorresRefService extends CrudService<Tab2BeanCorresRefDao, 
         return tab2BeanCorresRefDao.findByEntityName(entityName);
     }
 
+
+    public int getCount(){
+        return tab2BeanCorresRefDao.getCount();
+    }
+
 }
