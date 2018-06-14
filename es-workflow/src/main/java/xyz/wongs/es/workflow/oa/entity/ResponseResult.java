@@ -10,6 +10,9 @@ public class ResponseResult<T> implements Serializable {
 
 	public static final int STATE_OK = 1;
 	public static final int STATE_ERROR = -1;
+	public static final int PARAM_REQUIRED_ERROR = -2;
+	public static final int USER_NOT_EXISTED_ERROR = -3;
+
 	private static final long serialVersionUID = 3007905603382119416L;
 
 	private int state;

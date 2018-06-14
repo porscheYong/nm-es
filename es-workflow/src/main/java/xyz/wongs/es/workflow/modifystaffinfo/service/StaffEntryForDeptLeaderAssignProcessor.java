@@ -15,6 +15,7 @@ import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public class StaffEntryForDeptLeaderAssignProcessor extends OaBaseTaskListenerSe
         List<String> names = Lists.newArrayList();
         if(deptLeaderUsers!=null) {
             addNames(deptLeaderUsers,names,delegateTask);
+            taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[2],deptLeaderUsers);
             return;
         }
 
@@ -54,15 +56,19 @@ public class StaffEntryForDeptLeaderAssignProcessor extends OaBaseTaskListenerSe
 
 //        addNames(deptLeaderUsers,names,delegateTask);
 
+        AtiUser user = atiUserDao.getUserByName("n15000510");
+        List<AtiUser> users = new ArrayList<>();
+        users.add(user);
+        deptLeaderUsers = users;
         delegateTask.addCandidateUser("n15000510");
 
 
         //如果有任务委托，添加委托人
-        if(deptLeaderUsers != null) {
-            addDelegateNames(deptLeaderUsers,delegateTask);
 
-            taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[2],deptLeaderUsers);
-        }
+        addDelegateNames(deptLeaderUsers,delegateTask);
+
+        taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[2],deptLeaderUsers);
+
 
     }
 }

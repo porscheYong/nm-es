@@ -21,9 +21,9 @@ public class LeaveReportProcessor implements TaskListener {
 	private static final long serialVersionUID = 1L;
 
 	@Resource
-	private AtiBaseFormDao atiBaseFormMapper;
+	private AtiBaseFormDao atiBaseFormDao;
 	@Resource
-	private AtiSpecificFormDao atiSpecificFormMapper;
+	private AtiSpecificFormDao atiSpecificFormDao;
 	/**
 	 * 关联具体流程图规则
 	 * 销假完成后执行，保存实际开始和结束时间
@@ -33,15 +33,15 @@ public class LeaveReportProcessor implements TaskListener {
 
 		//todo validate
 		String procInstId = delegateTask.getProcessInstanceId();
-		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
+		Long currentBaseFormId = atiBaseFormDao.getBaseFormByProcInstId(procInstId).getAtiBaseFormId();
 
 		String realStartTime = (String) delegateTask.getVariable("realityStartTime");
 		AtiSpecificForm specificFormRealStartTime = new AtiSpecificForm(currentBaseFormId,"REALITY_START_TIME",realStartTime);
-		atiSpecificFormMapper.update(specificFormRealStartTime);
+		atiSpecificFormDao.update(specificFormRealStartTime);
 
 		String realEndTime = (String) delegateTask.getVariable("realityEndTime");
 		AtiSpecificForm atiSpecificFormEndTime = new AtiSpecificForm(currentBaseFormId,"REALITY_END_TIME",realEndTime);
-		atiSpecificFormMapper.update(atiSpecificFormEndTime);
+		atiSpecificFormDao.update(atiSpecificFormEndTime);
 
 	}
 

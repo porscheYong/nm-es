@@ -1,16 +1,17 @@
-package xyz.wongs.es.workflow.modifystaffinfo.entity;
+package xyz.wongs.es.workflow.user.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * 人员信息表Entity
+ * 内蒙主数据平台人员基本信息
+ * 调用接口验证用户名
  * @author liuxiaodong
  */
 public class UecStaffInfo implements Serializable {
 
-    private static final long serialVersionUID = -2339290410294203387L;
+    private static final long serialVersionUID = 2983191101931398342L;
 
     private Long staffId;
 

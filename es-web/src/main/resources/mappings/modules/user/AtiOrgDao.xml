@@ -84,4 +84,14 @@
     ON uo.ATI_USER_ID = u.ATI_USER_ID
     WHERE u.ATI_USER_ID = #{atiUserId}
   </select>
+
+  <select id="getOrgByUserName" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM ATI_ORG g LEFT JOIN ATI_USER_ORG uo
+    ON g.ATI_ORG_ID = uo.ATI_ORG_ID
+    LEFT JOIN ATI_USER u
+    ON uo.ATI_USER_ID = u.ATI_USER_ID
+    WHERE u.NAME = #{name}
+  </select>
 </mapper>

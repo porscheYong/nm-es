@@ -178,4 +178,76 @@
     where bf.ati_base_form_id = #{atiBaseFormId}
   </select>
 
+  <select id="getOaBaseObjectByProcInstId" resultType="xyz.wongs.es.workflow.oa.entity.OaBaseObject">
+      select bf.*,sf.ati_act_category_id,sf.primary_id
+      from ati_base_form bf
+      left join
+      (select ati_base_form_id,ati_act_category_id,
+         max(case parameter when 'PRIMARY_ID' then param_value end) as PRIMARY_ID,
+          max(case parameter when 'FIRST_TEXT' then param_value end) as FIRST_TEXT,
+          max(case parameter when 'SECOND_TEXT' then param_value end) as SECOND_TEXT,
+          max(case parameter when 'THIRD_TEXT' then param_value end) as THIRD_TEXT,
+          max(case parameter when 'FOURTH_TEXT' then param_value end) as FOURTH_TEXT,
+          max(case parameter when 'FIFTH_TEXT' then param_value end) as FIFTH_TEXT
+       from ati_specific_form
+       group by ati_base_form_id,ati_act_category_id) sf
+      on bf.ati_base_form_id = sf.ati_base_form_id
+      where bf.proc_inst_id = #{procInstId}
+  </select>
+
+  <update id="updateSecondText" parameterType="xyz.wongs.es.workflow.oa.entity.OaBaseObject">
+    update ati_specific_form
+    set param_value = #{secondText}
+    where ati_base_form_id = #{atiBaseFormId}
+    and parameter = 'SECOND_TEXT'
+  </update>
+
+  <update id="updateThirdText" parameterType="xyz.wongs.es.workflow.oa.entity.OaBaseObject">
+    update ati_specific_form
+    set param_value = #{thirdText}
+    where ati_base_form_id = #{atiBaseFormId}
+    and parameter = 'THIRD_TEXT'
+  </update>
+
+  <update id="updateFourthText" parameterType="xyz.wongs.es.workflow.oa.entity.OaBaseObject">
+    update ati_specific_form
+    set param_value = #{fourthText}
+    where ati_base_form_id = #{atiBaseFormId}
+    and parameter = 'FOURTH_TEXT'
+  </update>
+
+  <select id="getSalaryment" resultType="xyz.wongs.es.workflow.salaryadjustment.entity.OutSalaryment">
+  WITH TB_S AS
+   (SELECT T0.MONTH_ID, T0.PK_DEFDOC, T0.NAME, T0.PK_DEFDOCLIST
+      FROM LDAPM_MPW_BD_DEFDOC T0)
+  SELECT JA1.PSNCODE as staffId,
+         JA1.PSNNAME as name,
+         T9.NAME as attributes,
+         JA2.NAME as company,
+         JA4.NAME as dept,
+         DECODE(JA3.PSN_STATUS, '0', '在职', '1', '退出') as status,
+         JA3.JOBNAME as position,
+         '' as positionLevel,
+         '' as salaryLevel
+    FROM LDAPM_MPW_WB_PSN_MSG JA1
+    LEFT JOIN LDAPM_MPW_ORG_ORGS JA2
+      ON (JA1.PK_ORG = JA2.PK_ORG AND JA1.MONTH_ID = JA2.MONTH_ID)
+    LEFT JOIN TB_S T5
+      ON (JA1.HIGHEST_EDUCATION = T5.PK_DEFDOC AND JA1.MONTH_ID = T5.MONTH_ID)
+    LEFT JOIN TB_S T6
+      ON (JA1.FULLTIME_EDUCATION = T6.PK_DEFDOC AND
+         JA1.MONTH_ID = T6.MONTH_ID)
+    LEFT JOIN TB_S T7
+      ON (JA1.PSN_NATURE = T7.PK_DEFDOC AND JA1.MONTH_ID = T7.MONTH_ID)
+    LEFT JOIN TB_S T8
+      ON (JA1.SEX = T8.PK_DEFDOC AND JA1.MONTH_ID = T8.MONTH_ID)
+    LEFT JOIN LDAPM_MPW_WB_PSN_WORK JA3
+      ON (JA3.PK_PSN_MSG = JA1.PK_PSN_MSG AND JA1.MONTH_ID = JA3.MONTH_ID)
+    LEFT JOIN TB_S T9
+      ON (JA3.DATASOURCES = T9.PK_DEFDOC AND JA3.MONTH_ID = T9.MONTH_ID)
+    LEFT JOIN LDAPM_MPW_ORG_DEPT JA4
+      ON (JA3.BUSIDEPT = JA4.PK_DEPT AND JA3.MONTH_ID = JA4.MONTH_ID)
+   WHERE T9.NAME = '手工录入' AND JA3.PSN_STATUS = '0'
+     AND JA1.MONTH_ID = #{monthId}
+  </select>
 </mapper>

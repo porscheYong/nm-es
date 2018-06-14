@@ -3,7 +3,7 @@
 <mapper namespace="xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao">
   <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
     <id column="ATI_BASE_FORM_ID" jdbcType="DECIMAL" property="atiBaseFormId" />
-    <result column="FORM_SENDER" jdbcType="DECIMAL" property="formSender" />
+    <result column="FORM_SENDER" jdbcType="VARCHAR" property="formSender" />
     <result column="FORM_THEME" jdbcType="OTHER" property="formTheme" />
     <result column="FORM_CONTENT" jdbcType="OTHER" property="formContent" />
     <result column="PROC_DEF_ID" jdbcType="OTHER" property="procDefId" />
@@ -53,7 +53,7 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       #{atiBaseFormId,jdbcType=DECIMAL},
       <if test="formSender != null">
-        #{formSender,jdbcType=DECIMAL},
+        #{formSender,jdbcType=VARCHAR},
       </if>
       <if test="formTheme != null">
         #{formTheme,jdbcType=OTHER},
@@ -83,7 +83,7 @@
     update ATI_BASE_FORM
     <set>
       <if test="formSender != null">
-        FORM_SENDER = #{formSender,jdbcType=DECIMAL},
+        FORM_SENDER = #{formSender,jdbcType=VARCHAR},
       </if>
       <if test="formTheme != null">
         FORM_THEME = #{formTheme,jdbcType=OTHER},
@@ -109,7 +109,7 @@
 
   <update id="updateByPrimaryKey" parameterType="xyz.wongs.es.workflow.oa.entity.AtiBaseForm">
     update ATI_BASE_FORM
-    set FORM_SENDER = #{formSender,jdbcType=DECIMAL},
+    set FORM_SENDER = #{formSender,jdbcType=VARCHAR},
       FORM_THEME = #{formTheme,jdbcType=OTHER},
       FORM_CONTENT = #{formContent,jdbcType=OTHER},
       PROC_DEF_ID = #{procDefId,jdbcType=OTHER},
@@ -119,8 +119,15 @@
     where ATI_BASE_FORM_ID = #{atiBaseFormId,jdbcType=DECIMAL}
   </update>
 
-  <select id="getBaseFormIdByProcInstId" resultType="Long">
-    SELECT ati_base_form_id
+  <select id="getBaseFormByProcInstId" resultMap="BaseResultMap">
+    SELECT
+    ATI_BASE_FORM_ID,
+    FORM_SENDER,
+    FORM_THEME,
+    FORM_CONTENT,
+    PROC_DEF_ID,
+    PROC_INST_ID,
+    URGENT
     FROM ATI_BASE_FORM
     WHERE proc_inst_id = #{procInstId}
   </select>

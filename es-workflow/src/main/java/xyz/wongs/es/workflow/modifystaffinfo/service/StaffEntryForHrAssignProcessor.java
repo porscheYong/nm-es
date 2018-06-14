@@ -14,6 +14,7 @@ import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,6 +47,8 @@ public class StaffEntryForHrAssignProcessor extends OaBaseTaskListenerService im
         List<String> names = Lists.newArrayList();
         if(hrUsers!=null) {
             addNames(hrUsers,names,delegateTask);
+            taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[3],hrUsers);
+
             return;
         }
 
@@ -54,6 +57,11 @@ public class StaffEntryForHrAssignProcessor extends OaBaseTaskListenerService im
 //        hrUsers = atiUserDao.getHrUsersByAtiUserId(atiUserId);
 //
 //        addNames(hrUsers,names,delegateTask);
+
+        AtiUser user = atiUserDao.getUserByName("n15012302");
+        List<AtiUser> users = new ArrayList<>();
+        users.add(user);
+        hrUsers = users;
 
         delegateTask.addCandidateUser("n15012302");
 

@@ -12,7 +12,7 @@ public class AtiBaseForm extends ActEntity {
     /** 表单标识 */
     private Long atiBaseFormId;
     /** 发起人ID */
-    private Long formSender;
+    private String formSender;
     /** 工单主题    */
     private Object formTheme;
     /** 表单内容    */
@@ -29,7 +29,7 @@ public class AtiBaseForm extends ActEntity {
     public AtiBaseForm() {
     }
 
-    public AtiBaseForm(Long atiBaseFormId, Long formSender, Object formTheme, Object formContent, Object procDefId, String procInstId, String urgent, String level) {
+    public AtiBaseForm(Long atiBaseFormId, String formSender, Object formTheme, Object formContent, Object procDefId, String procInstId, String urgent, String level) {
         this.atiBaseFormId = atiBaseFormId;
         this.formSender = formSender;
         this.formTheme = formTheme;
@@ -48,11 +48,11 @@ public class AtiBaseForm extends ActEntity {
         this.atiBaseFormId = atiBaseFormId;
     }
 
-    public Long getFormSender() {
+    public String getFormSender() {
         return formSender;
     }
 
-    public void setFormSender(Long formSender) {
+    public void setFormSender(String formSender) {
         this.formSender = formSender;
     }
 

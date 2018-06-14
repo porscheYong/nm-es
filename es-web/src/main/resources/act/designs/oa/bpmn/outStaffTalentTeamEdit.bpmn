@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="xyz.wongs.es.workflow.oa.staffEntry">
-  <process id="staffEntry" name="盟市人员入职" isExecutable="true">
-    <documentation>盟市人员入职流程</documentation>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="xyz.wongs.es.workflow.oa.outStaffTalentTeamEdit">
+  <process id="outStaffTalentTeamEdit" name="盟市专家队伍新增" isExecutable="true">
+    <documentation>盟市外包人员转正流程</documentation>
     <startEvent id="startEvent" name="Start" activiti:initiator="applyUserId"></startEvent>
     <userTask id="deptLeaderAudit" name="部门初审">
       <extensionElements>
@@ -32,8 +32,8 @@
     </sequenceFlow>
     <sequenceFlow id="flow15" sourceRef="exclusivegateway2" targetRef="endevent1"></sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_staffEntry">
-    <bpmndi:BPMNPlane bpmnElement="staffEntry" id="BPMNPlane_staffEntry">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_outStaffTalentTeamEdit">
+    <bpmndi:BPMNPlane bpmnElement="outStaffTalentTeamEdit" id="BPMNPlane_outStaffTalentTeamEdit">
       <bpmndi:BPMNShape bpmnElement="startEvent" id="BPMNShape_startEvent">
         <omgdc:Bounds height="35.0" width="35.0" x="80.0" y="180.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>

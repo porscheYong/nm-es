@@ -4,12 +4,8 @@ import org.activiti.engine.impl.persistence.entity.GroupEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import xyz.wongs.es.modules.sys.entity.Role;
-import xyz.wongs.es.workflow.user.dao.AtiOrgDao;
-import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
-import xyz.wongs.es.workflow.user.dao.AtiUserDao;
-import xyz.wongs.es.workflow.user.entity.AtiOrg;
-import xyz.wongs.es.workflow.user.entity.AtiRole;
-import xyz.wongs.es.workflow.user.entity.AtiUser;
+import xyz.wongs.es.workflow.user.dao.*;
+import xyz.wongs.es.workflow.user.entity.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,6 +24,10 @@ public class UserService {
     private AtiRoleDao atiRoleDao;
     @Resource
     private AtiOrgDao atiOrgDao;
+    @Resource
+    private UecStaffInfoDao uecStaffInfoDao;
+    @Resource
+    private UecOutStaffInfoDao uecOutStaffInfoDao;
 
 
     /**
@@ -70,8 +70,20 @@ public class UserService {
         return atiOrgDao.getOrgByUserId(atiUserId);
     }
 
+    public AtiOrg getOrgByName(String name) {
+        return atiOrgDao.getOrgByUserName(name);
+    }
+
     public List<AtiUser> getUsers() {
         return atiUserDao.getUsers();
+    }
+
+    public UecStaffInfo getStaffByCode(String code) {
+        return uecStaffInfoDao.getStaffByCode(code);
+    }
+
+    public UecOutStaffInfo getOutStaffByCode(String psncode) {
+        return uecOutStaffInfoDao.getOutStaffByCode(psncode);
     }
 
 

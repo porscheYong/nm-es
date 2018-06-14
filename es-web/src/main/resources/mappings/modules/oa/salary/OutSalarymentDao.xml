@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.salaryadjustment.dao.OutSalarymentDao">
+
+  <select id="getSalaryment" resultType="xyz.wongs.es.workflow.salaryadjustment.entity.OutSalaryment">
+      select V.staffId,
+           V.NAME,
+           V.sex,
+           V.attributes,
+           V.company,
+           V.dept,
+           V.status,
+           V.position,
+           V.positionLevel,
+           V.salaryLevel from VIEW_OUT_STAFF_PAY V
+    UNION ALL
+    select V1.staffId,
+           V1.NAME,
+           V1.SEX,
+           V1.attributes,
+           V1.company,
+           V1.dept,
+           V1.status,
+           V1.position,
+           V1.positionLevel,
+           V1.salaryLevel from VIEW_DISPATCH_STAFF_PAY V1
+  </select>
+
+</mapper>

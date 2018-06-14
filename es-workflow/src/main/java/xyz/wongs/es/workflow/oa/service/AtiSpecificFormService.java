@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiModifyStaffInfo;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
+import xyz.wongs.es.workflow.oa.entity.OaBaseObject;
 import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
+
+import javax.annotation.Resource;
 
 /**
  * 个性表类Service
@@ -15,8 +18,9 @@ import xyz.wongs.es.workflow.workattendace.entity.AtiLeave;
 @Service
 public class AtiSpecificFormService {
 
-    @Autowired
-    private AtiSpecificFormDao atiSpecificFormMapper;
+    @Resource
+    private AtiSpecificFormDao atiSpecificFormDao;
+
 
 
     /**
@@ -25,7 +29,7 @@ public class AtiSpecificFormService {
      * @return
      */
     public AtiLeave getAtiLeaveByBaseFormId(Long id) {
-        return atiSpecificFormMapper.getAtiLeaveByBaseFormId(id);
+        return atiSpecificFormDao.getAtiLeaveByBaseFormId(id);
     }
 
     /**
@@ -34,11 +38,44 @@ public class AtiSpecificFormService {
      * @return
      */
     public AtiModifyStaffInfo getAtiModifyStaffInfoByBaseFormId(Long id) {
-        return atiSpecificFormMapper.getAtiModifyStaffInfoByBaseFormId(id);
+        return atiSpecificFormDao.getAtiModifyStaffInfoByBaseFormId(id);
     }
 
 
     public AtiStaffEntry getAtiStaffEntryByBaseFormId(Long id) {
-        return atiSpecificFormMapper.getAtiStaffEntryByBaseFormId(id);
+        return atiSpecificFormDao.getAtiStaffEntryByBaseFormId(id);
+    }
+
+    /**
+     * 根据procInstId 获取虚拟通用对象oaBaseObject
+     * @param procInstId
+     * @return
+     */
+    public OaBaseObject getOabaseObjectByPorcInstId(String procInstId) {
+        return atiSpecificFormDao.getOaBaseObjectByProcInstId(procInstId);
+    }
+
+    /**
+     * 更新各环节审批意见
+     * @param oaBaseObject
+     */
+    public void updateFirstText(OaBaseObject oaBaseObject) {
+        atiSpecificFormDao.updateFirstText(oaBaseObject);
+    }
+
+    public void updateSecondText(OaBaseObject oaBaseObject) {
+        atiSpecificFormDao.updateSecondText(oaBaseObject);
+    }
+
+    public void updateThridText(OaBaseObject oaBaseObject) {
+        atiSpecificFormDao.updateThirdText(oaBaseObject);
+    }
+
+    public void updateFourthText(OaBaseObject oaBaseObject) {
+        atiSpecificFormDao.updateFourthText(oaBaseObject);
+    }
+
+    public void updateFifthText(OaBaseObject oaBaseObject) {
+        atiSpecificFormDao.updateFifthText(oaBaseObject);
     }
 }

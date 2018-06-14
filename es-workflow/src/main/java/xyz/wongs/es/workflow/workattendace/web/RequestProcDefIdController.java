@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by liuxiaodong on 2018/5/8.
+ * restful
+ * @author liuxiaodong
+ * @date 2018/5/8
  */
 @Controller
 @RequestMapping(value = "/repository")
@@ -18,5 +20,14 @@ public class RequestProcDefIdController {
     public String getProcDefId(@PathVariable("processDefinitionId") String processDefinitionId) {
         return processDefinitionId;
     }
+
+
+
+
+
+
+
+
+
 
 }

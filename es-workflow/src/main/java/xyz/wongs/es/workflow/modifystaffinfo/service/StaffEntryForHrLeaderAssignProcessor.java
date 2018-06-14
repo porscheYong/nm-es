@@ -47,6 +47,7 @@ public class StaffEntryForHrLeaderAssignProcessor extends OaBaseTaskListenerServ
         List<String> names = Lists.newArrayList();
         if(hrLeaderUsers!=null) {
             addNames(hrLeaderUsers,names,delegateTask);
+            taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[4],hrLeaderUsers);
             return;
         }
 

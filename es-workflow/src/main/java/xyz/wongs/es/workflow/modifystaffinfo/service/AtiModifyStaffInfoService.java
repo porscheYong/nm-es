@@ -65,7 +65,7 @@ public class AtiModifyStaffInfoService {
 
             // 启动流程
             atiTaskService.startProcess(ProcDefKey.MODIFY_PROC_DEF_KEY, ProcDefKey.ATI_BASE_FORM_KEY,
-                    atiBaseFormId, (String) modifyStaffInfo.getFormTheme(),modifyStaffInfo);
+                    atiBaseFormId, modifyStaffInfo.getAtiActCategoryId(),modifyStaffInfo);
         }
         // 重新编辑申请
         else{

@@ -69,9 +69,9 @@ public class AtiModifyStaffInfoController extends BaseController {
 		//获取流程节点对应的页面
 		String view = modifyStaffInfoService.getFormKey(modifyStaffInfo);
 
-		AtiUser applyUser = userService.getUserByUserId(modifyStaffInfo.getFormSender());
+		AtiUser applyUser = userService.getAtiUserByName(modifyStaffInfo.getFormSender());
 		model.addAttribute("applyUser",applyUser);
-		AtiOrg org = userService.getOrgByUserId(modifyStaffInfo.getFormSender());
+		AtiOrg org = userService.getOrgByName(modifyStaffInfo.getFormSender());
 		model.addAttribute("org",org);
 
 		//获取申请流程的分类

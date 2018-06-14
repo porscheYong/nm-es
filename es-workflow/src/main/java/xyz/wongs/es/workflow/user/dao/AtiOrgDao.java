@@ -17,4 +17,11 @@ public interface AtiOrgDao extends CrudDao<AtiOrg> {
      * @return
      */
     AtiOrg getOrgByUserId(Long atiUserId);
+
+    /**
+     * 通过name获取组织
+     * @param name
+     * @return
+     */
+    AtiOrg getOrgByUserName(String name);
 }

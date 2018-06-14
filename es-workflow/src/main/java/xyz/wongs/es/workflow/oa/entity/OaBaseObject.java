@@ -20,6 +20,16 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     /** 主键 */
     private Long primaryId;
 
+    private String firstText;
+
+    private String secondText;
+
+    private String thirdText;
+
+    private String fourthText;
+
+    private String fifthText;
+
     public Long getAtiSpecificFormId() {
         return atiSpecificFormId;
     }
@@ -42,5 +52,45 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
 
     public void setPrimaryId(Long primaryId) {
         this.primaryId = primaryId;
+    }
+
+    public String getFirstText() {
+        return firstText;
+    }
+
+    public void setFirstText(String firstText) {
+        this.firstText = firstText;
+    }
+
+    public String getSecondText() {
+        return secondText;
+    }
+
+    public void setSecondText(String secondText) {
+        this.secondText = secondText;
+    }
+
+    public String getThirdText() {
+        return thirdText;
+    }
+
+    public void setThirdText(String thirdText) {
+        this.thirdText = thirdText;
+    }
+
+    public String getFourthText() {
+        return fourthText;
+    }
+
+    public void setFourthText(String fourthText) {
+        this.fourthText = fourthText;
+    }
+
+    public String getFifthText() {
+        return fifthText;
+    }
+
+    public void setFifthText(String fifthText) {
+        this.fifthText = fifthText;
     }
 }

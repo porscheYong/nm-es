@@ -87,7 +87,7 @@
     where r.ROLE_CODE = #{roleCode,jdbcType=VARCHAR}
   </select>
 
-  <select id="getRolessByRoleId" resultMap="BaseResultMap">
+  <select id="getRolesByUserId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ATI_USER u

@@ -28,6 +28,6 @@ public interface AtiBaseFormDao extends CrudDao<AtiBaseForm> {
      * @param procInstId
      * @return
      */
-     Long getBaseFormIdByProcInstId(String procInstId);
+     AtiBaseForm getBaseFormByProcInstId(String procInstId);
 
 }

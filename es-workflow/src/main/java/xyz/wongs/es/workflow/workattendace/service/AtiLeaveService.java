@@ -69,7 +69,8 @@ public class AtiLeaveService {
 
 
             // 启动流程
-            atiTaskService.startProcess("leave", "ati_base_form", atiBaseFormId, leave.getReason(),leave);
+            atiTaskService.startProcess("leave", "ati_base_form",
+                    atiBaseFormId, leave.getAtiActCategoryId(),leave);
 
 
         }

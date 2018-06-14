@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.UecStaffInfoDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.UecStaffInfo">
+    <result column="STAFF_ID" jdbcType="DECIMAL" property="staffId" />
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="PK_PSNDOC" jdbcType="VARCHAR" property="pkPsndoc" />
+    <result column="PK_HRORG" jdbcType="VARCHAR" property="pkHrorg" />
+    <result column="GLBDEF2" jdbcType="VARCHAR" property="glbdef2" />
+    <result column="GLBDEF3" jdbcType="VARCHAR" property="glbdef3" />
+    <result column="GLBDEF7" jdbcType="VARCHAR" property="glbdef7" />
+    <result column="GLBDEF8" jdbcType="VARCHAR" property="glbdef8" />
+    <result column="GLBDEF9" jdbcType="VARCHAR" property="glbdef9" />
+    <result column="GLBDEF12" jdbcType="VARCHAR" property="glbdef12" />
+    <result column="GLBDEF13" jdbcType="VARCHAR" property="glbdef13" />
+    <result column="BIRTHDATE" jdbcType="VARCHAR" property="birthdate" />
+    <result column="DEF3" jdbcType="VARCHAR" property="def3" />
+    <result column="DEF4" jdbcType="VARCHAR" property="def4" />
+    <result column="HOMEPHONE" jdbcType="VARCHAR" property="homephone" />
+    <result column="IDNUMBER" jdbcType="VARCHAR" property="idnumber" />
+    <result column="IDTYPE" jdbcType="DECIMAL" property="idtype" />
+    <result column="JOINWORKDATE" jdbcType="VARCHAR" property="joinworkdate" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="OFFICEPHONE" jdbcType="VARCHAR" property="officephone" />
+    <result column="SEX" jdbcType="DECIMAL" property="sex" />
+    <result column="USEDNAME" jdbcType="VARCHAR" property="usedname" />
+    <result column="CHARACTERRPR" jdbcType="VARCHAR" property="characterrpr" />
+    <result column="FILEADDRESS" jdbcType="VARCHAR" property="fileaddress" />
+    <result column="HEALTH" jdbcType="VARCHAR" property="health" />
+    <result column="MARITAL" jdbcType="VARCHAR" property="marital" />
+    <result column="NATIONALITY" jdbcType="VARCHAR" property="nationality" />
+    <result column="NATIVEPLACE" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="CREATIONTIME" jdbcType="VARCHAR" property="creationtime" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ENABLESTATE" jdbcType="DECIMAL" property="enablestate" />
+    <result column="ISSHOPASSIST" jdbcType="VARCHAR" property="isshopassist" />
+    <result column="MODIFIEDTIME" jdbcType="VARCHAR" property="modifiedtime" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="CENSUSADDR" jdbcType="VARCHAR" property="censusaddr" />
+    <result column="DIE_DATE" jdbcType="VARCHAR" property="dieDate" />
+    <result column="DIE_REMARK" jdbcType="VARCHAR" property="dieRemark" />
+    <result column="EDU" jdbcType="VARCHAR" property="edu" />
+    <result column="ISHISKEYPSN" jdbcType="VARCHAR" property="ishiskeypsn" />
+    <result column="JOINPOLITYDATE" jdbcType="VARCHAR" property="joinpolitydate" />
+    <result column="PK_DEGREE" jdbcType="VARCHAR" property="pkDegree" />
+    <result column="POLITY" jdbcType="VARCHAR" property="polity" />
+    <result column="PROF" jdbcType="VARCHAR" property="prof" />
+    <result column="RETIREDATE" jdbcType="VARCHAR" property="retiredate" />
+    <result column="TITLETECHPOST" jdbcType="VARCHAR" property="titletechpost" />
+    <result column="PSN_UID" jdbcType="VARCHAR" property="psnUid" />
+    <result column="GLBDEF14" jdbcType="VARCHAR" property="glbdef14" />
+    <result column="GLBDEF15" jdbcType="VARCHAR" property="glbdef15" />
+    <result column="EFF_DATE" jdbcType="TIMESTAMP" property="effDate" />
+    <result column="EXP_DATE" jdbcType="TIMESTAMP" property="expDate" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_STAFF" jdbcType="DECIMAL" property="createStaff" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="UPDATE_STAFF" jdbcType="DECIMAL" property="updateStaff" />
+  </resultMap>
+  <insert id="insert" parameterType="xyz.wongs.es.workflow.user.entity.UecStaffInfo">
+    insert into UEC_STAFF_INFO (STAFF_ID, MONTH_ID, PK_PSNDOC, 
+      PK_HRORG, GLBDEF2, GLBDEF3, 
+      GLBDEF7, GLBDEF8, GLBDEF9, 
+      GLBDEF12, GLBDEF13, BIRTHDATE, 
+      DEF3, DEF4, HOMEPHONE, 
+      IDNUMBER, IDTYPE, JOINWORKDATE, 
+      MOBILE, NAME, OFFICEPHONE, 
+      SEX, USEDNAME, CHARACTERRPR, 
+      FILEADDRESS, HEALTH, MARITAL, 
+      NATIONALITY, NATIVEPLACE, PHOTO, 
+      CODE, CREATIONTIME, CREATOR, 
+      DR, EMAIL, ENABLESTATE, 
+      ISSHOPASSIST, MODIFIEDTIME, MODIFIER, 
+      PK_ORG, CENSUSADDR, DIE_DATE, 
+      DIE_REMARK, EDU, ISHISKEYPSN, 
+      JOINPOLITYDATE, PK_DEGREE, POLITY, 
+      PROF, RETIREDATE, TITLETECHPOST, 
+      PSN_UID, GLBDEF14, GLBDEF15, 
+      EFF_DATE, EXP_DATE, STATUS_CD, 
+      STATUS_DATE, CREATE_DATE, CREATE_STAFF, 
+      UPDATE_DATE, UPDATE_STAFF)
+    values (#{staffId,jdbcType=DECIMAL}, #{monthId,jdbcType=DECIMAL}, #{pkPsndoc,jdbcType=VARCHAR}, 
+      #{pkHrorg,jdbcType=VARCHAR}, #{glbdef2,jdbcType=VARCHAR}, #{glbdef3,jdbcType=VARCHAR}, 
+      #{glbdef7,jdbcType=VARCHAR}, #{glbdef8,jdbcType=VARCHAR}, #{glbdef9,jdbcType=VARCHAR}, 
+      #{glbdef12,jdbcType=VARCHAR}, #{glbdef13,jdbcType=VARCHAR}, #{birthdate,jdbcType=VARCHAR}, 
+      #{def3,jdbcType=VARCHAR}, #{def4,jdbcType=VARCHAR}, #{homephone,jdbcType=VARCHAR}, 
+      #{idnumber,jdbcType=VARCHAR}, #{idtype,jdbcType=DECIMAL}, #{joinworkdate,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{officephone,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=DECIMAL}, #{usedname,jdbcType=VARCHAR}, #{characterrpr,jdbcType=VARCHAR}, 
+      #{fileaddress,jdbcType=VARCHAR}, #{health,jdbcType=VARCHAR}, #{marital,jdbcType=VARCHAR}, 
+      #{nationality,jdbcType=VARCHAR}, #{nativeplace,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR}, #{creationtime,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=DECIMAL}, #{email,jdbcType=VARCHAR}, #{enablestate,jdbcType=DECIMAL}, 
+      #{isshopassist,jdbcType=VARCHAR}, #{modifiedtime,jdbcType=VARCHAR}, #{modifier,jdbcType=VARCHAR}, 
+      #{pkOrg,jdbcType=VARCHAR}, #{censusaddr,jdbcType=VARCHAR}, #{dieDate,jdbcType=VARCHAR}, 
+      #{dieRemark,jdbcType=VARCHAR}, #{edu,jdbcType=VARCHAR}, #{ishiskeypsn,jdbcType=VARCHAR}, 
+      #{joinpolitydate,jdbcType=VARCHAR}, #{pkDegree,jdbcType=VARCHAR}, #{polity,jdbcType=VARCHAR}, 
+      #{prof,jdbcType=VARCHAR}, #{retiredate,jdbcType=VARCHAR}, #{titletechpost,jdbcType=VARCHAR}, 
+      #{psnUid,jdbcType=VARCHAR}, #{glbdef14,jdbcType=VARCHAR}, #{glbdef15,jdbcType=VARCHAR}, 
+      #{effDate,jdbcType=TIMESTAMP}, #{expDate,jdbcType=TIMESTAMP}, #{statusCd,jdbcType=VARCHAR}, 
+      #{statusDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}, #{createStaff,jdbcType=DECIMAL}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.workflow.user.entity.UecStaffInfo">
+    insert into UEC_STAFF_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        STAFF_ID,
+      </if>
+      <if test="monthId != null">
+        MONTH_ID,
+      </if>
+      <if test="pkPsndoc != null">
+        PK_PSNDOC,
+      </if>
+      <if test="pkHrorg != null">
+        PK_HRORG,
+      </if>
+      <if test="glbdef2 != null">
+        GLBDEF2,
+      </if>
+      <if test="glbdef3 != null">
+        GLBDEF3,
+      </if>
+      <if test="glbdef7 != null">
+        GLBDEF7,
+      </if>
+      <if test="glbdef8 != null">
+        GLBDEF8,
+      </if>
+      <if test="glbdef9 != null">
+        GLBDEF9,
+      </if>
+      <if test="glbdef12 != null">
+        GLBDEF12,
+      </if>
+      <if test="glbdef13 != null">
+        GLBDEF13,
+      </if>
+      <if test="birthdate != null">
+        BIRTHDATE,
+      </if>
+      <if test="def3 != null">
+        DEF3,
+      </if>
+      <if test="def4 != null">
+        DEF4,
+      </if>
+      <if test="homephone != null">
+        HOMEPHONE,
+      </if>
+      <if test="idnumber != null">
+        IDNUMBER,
+      </if>
+      <if test="idtype != null">
+        IDTYPE,
+      </if>
+      <if test="joinworkdate != null">
+        JOINWORKDATE,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="officephone != null">
+        OFFICEPHONE,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="usedname != null">
+        USEDNAME,
+      </if>
+      <if test="characterrpr != null">
+        CHARACTERRPR,
+      </if>
+      <if test="fileaddress != null">
+        FILEADDRESS,
+      </if>
+      <if test="health != null">
+        HEALTH,
+      </if>
+      <if test="marital != null">
+        MARITAL,
+      </if>
+      <if test="nationality != null">
+        NATIONALITY,
+      </if>
+      <if test="nativeplace != null">
+        NATIVEPLACE,
+      </if>
+      <if test="photo != null">
+        PHOTO,
+      </if>
+      <if test="code != null">
+        CODE,
+      </if>
+      <if test="creationtime != null">
+        CREATIONTIME,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="dr != null">
+        DR,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="enablestate != null">
+        ENABLESTATE,
+      </if>
+      <if test="isshopassist != null">
+        ISSHOPASSIST,
+      </if>
+      <if test="modifiedtime != null">
+        MODIFIEDTIME,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="pkOrg != null">
+        PK_ORG,
+      </if>
+      <if test="censusaddr != null">
+        CENSUSADDR,
+      </if>
+      <if test="dieDate != null">
+        DIE_DATE,
+      </if>
+      <if test="dieRemark != null">
+        DIE_REMARK,
+      </if>
+      <if test="edu != null">
+        EDU,
+      </if>
+      <if test="ishiskeypsn != null">
+        ISHISKEYPSN,
+      </if>
+      <if test="joinpolitydate != null">
+        JOINPOLITYDATE,
+      </if>
+      <if test="pkDegree != null">
+        PK_DEGREE,
+      </if>
+      <if test="polity != null">
+        POLITY,
+      </if>
+      <if test="prof != null">
+        PROF,
+      </if>
+      <if test="retiredate != null">
+        RETIREDATE,
+      </if>
+      <if test="titletechpost != null">
+        TITLETECHPOST,
+      </if>
+      <if test="psnUid != null">
+        PSN_UID,
+      </if>
+      <if test="glbdef14 != null">
+        GLBDEF14,
+      </if>
+      <if test="glbdef15 != null">
+        GLBDEF15,
+      </if>
+      <if test="effDate != null">
+        EFF_DATE,
+      </if>
+      <if test="expDate != null">
+        EXP_DATE,
+      </if>
+      <if test="statusCd != null">
+        STATUS_CD,
+      </if>
+      <if test="statusDate != null">
+        STATUS_DATE,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createStaff != null">
+        CREATE_STAFF,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="updateStaff != null">
+        UPDATE_STAFF,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="staffId != null">
+        #{staffId,jdbcType=DECIMAL},
+      </if>
+      <if test="monthId != null">
+        #{monthId,jdbcType=DECIMAL},
+      </if>
+      <if test="pkPsndoc != null">
+        #{pkPsndoc,jdbcType=VARCHAR},
+      </if>
+      <if test="pkHrorg != null">
+        #{pkHrorg,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef2 != null">
+        #{glbdef2,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef3 != null">
+        #{glbdef3,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef7 != null">
+        #{glbdef7,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef8 != null">
+        #{glbdef8,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef9 != null">
+        #{glbdef9,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef12 != null">
+        #{glbdef12,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef13 != null">
+        #{glbdef13,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=VARCHAR},
+      </if>
+      <if test="def3 != null">
+        #{def3,jdbcType=VARCHAR},
+      </if>
+      <if test="def4 != null">
+        #{def4,jdbcType=VARCHAR},
+      </if>
+      <if test="homephone != null">
+        #{homephone,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null">
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idtype != null">
+        #{idtype,jdbcType=DECIMAL},
+      </if>
+      <if test="joinworkdate != null">
+        #{joinworkdate,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="officephone != null">
+        #{officephone,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="usedname != null">
+        #{usedname,jdbcType=VARCHAR},
+      </if>
+      <if test="characterrpr != null">
+        #{characterrpr,jdbcType=VARCHAR},
+      </if>
+      <if test="fileaddress != null">
+        #{fileaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="health != null">
+        #{health,jdbcType=VARCHAR},
+      </if>
+      <if test="marital != null">
+        #{marital,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null">
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="dr != null">
+        #{dr,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="enablestate != null">
+        #{enablestate,jdbcType=DECIMAL},
+      </if>
+      <if test="isshopassist != null">
+        #{isshopassist,jdbcType=VARCHAR},
+      </if>
+      <if test="modifiedtime != null">
+        #{modifiedtime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="pkOrg != null">
+        #{pkOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="censusaddr != null">
+        #{censusaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dieDate != null">
+        #{dieDate,jdbcType=VARCHAR},
+      </if>
+      <if test="dieRemark != null">
+        #{dieRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="edu != null">
+        #{edu,jdbcType=VARCHAR},
+      </if>
+      <if test="ishiskeypsn != null">
+        #{ishiskeypsn,jdbcType=VARCHAR},
+      </if>
+      <if test="joinpolitydate != null">
+        #{joinpolitydate,jdbcType=VARCHAR},
+      </if>
+      <if test="pkDegree != null">
+        #{pkDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="polity != null">
+        #{polity,jdbcType=VARCHAR},
+      </if>
+      <if test="prof != null">
+        #{prof,jdbcType=VARCHAR},
+      </if>
+      <if test="retiredate != null">
+        #{retiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="titletechpost != null">
+        #{titletechpost,jdbcType=VARCHAR},
+      </if>
+      <if test="psnUid != null">
+        #{psnUid,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef14 != null">
+        #{glbdef14,jdbcType=VARCHAR},
+      </if>
+      <if test="glbdef15 != null">
+        #{glbdef15,jdbcType=VARCHAR},
+      </if>
+      <if test="effDate != null">
+        #{effDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expDate != null">
+        #{expDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="statusCd != null">
+        #{statusCd,jdbcType=VARCHAR},
+      </if>
+      <if test="statusDate != null">
+        #{statusDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null">
+        #{createStaff,jdbcType=DECIMAL},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null">
+        #{updateStaff,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="getStaffByCode" resultMap="BaseResultMap">
+    SELECT STAFF_ID, MONTH_ID, PK_PSNDOC,
+      PK_HRORG, GLBDEF2, GLBDEF3,
+      GLBDEF7, GLBDEF8, GLBDEF9,
+      GLBDEF12, GLBDEF13, BIRTHDATE,
+      DEF3, DEF4, HOMEPHONE,
+      IDNUMBER, IDTYPE, JOINWORKDATE,
+      MOBILE, NAME, OFFICEPHONE,
+      SEX, USEDNAME, CHARACTERRPR,
+      FILEADDRESS, HEALTH, MARITAL,
+      NATIONALITY, NATIVEPLACE, PHOTO,
+      CODE, CREATIONTIME, CREATOR,
+      DR, EMAIL, ENABLESTATE,
+      ISSHOPASSIST, MODIFIEDTIME, MODIFIER,
+      PK_ORG, CENSUSADDR, DIE_DATE,
+      DIE_REMARK, EDU, ISHISKEYPSN,
+      JOINPOLITYDATE, PK_DEGREE, POLITY,
+      PROF, RETIREDATE, TITLETECHPOST,
+      PSN_UID, GLBDEF14, GLBDEF15,
+      EFF_DATE, EXP_DATE, STATUS_CD,
+      STATUS_DATE, CREATE_DATE, CREATE_STAFF,
+      UPDATE_DATE, UPDATE_STAFF
+    FROM
+     UEC_STAFF_INFO
+    WHERE
+      CODE = #{code}
+  </select>
+</mapper>

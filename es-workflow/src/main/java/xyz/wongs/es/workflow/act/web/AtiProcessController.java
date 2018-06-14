@@ -45,7 +45,7 @@ import java.util.Map;
  * @date 2018/4/23
  */
 @Controller
-@RequestMapping(value = "/workflow/act/process")
+@RequestMapping(value = "${adminPath}/workflow/act/process")
 public class AtiProcessController extends BaseController {
 
     @Autowired

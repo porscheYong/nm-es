@@ -135,7 +135,7 @@ public class Act extends BaseEntity<Act> {
 	public void setProcDef(ProcessDefinition procDef) {
 		this.procDef = procDef;
 	}
-	
+
 	public String getProcDefName() {
 		return procDef.getName();
 	}

@@ -22,10 +22,10 @@ public class ProcDefKey {
     public static final String LEAVE_PROC_DEF_KEY = "leave";
     public static final String[] LEAVE_TASK_DEF_KEY = {"startEvent","modifyApply","deptLeaderAudit","hrAudit","reportBack","endEvent"};
 
-
-
     public static final String MODIFY_PROC_DEF_KEY = "modifyStaffInfo";
     public static final String[] MODIFY_TASK_DEF_KEY = {"startEvent","modify","hrAudit","hrLeaderAudit","admin","endEvent"};
+
+
 
     public static final String ENTRY_PROC_DEF_KEY = "staffEntry";
     public static final String[] ENTRY_TASK_DEF_KEY = {"startEvent","modify","deptLeaderAudit","hrAudit","hrLeaderAudit","endEvent"};

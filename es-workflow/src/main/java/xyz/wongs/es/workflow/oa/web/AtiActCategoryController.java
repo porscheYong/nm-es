@@ -27,7 +27,7 @@ import java.util.Map;
  * @date 2018/5/2
  */
 @Controller
-@RequestMapping(value = "/oa/category")
+@RequestMapping(value = "${adminPath}/oa/category")
 public class AtiActCategoryController extends BaseController {
 
     @Resource

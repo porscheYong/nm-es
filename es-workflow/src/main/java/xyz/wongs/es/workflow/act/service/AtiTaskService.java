@@ -100,13 +100,13 @@ public class AtiTaskService extends BaseService {
 	 * @param procDefKey 流程定义KEY
 	 * @param businessTable 业务表表名
 	 * @param businessId	业务表编号
-	 * @param title			流程标题，显示在待办任务标题
+	 * @param categoryId	流程分类标识
 	 * @return 流程实例ID
 	 */
 	@Transactional(readOnly = false,rollbackFor = Exception.class)
-	public String startProcess(String procDefKey, String businessTable, String businessId, String title, AtiBaseForm atiBaseForm) {
+	public String startProcess(String procDefKey, String businessTable, String businessId, Long categoryId, AtiBaseForm atiBaseForm) {
 		Map<String, Object> vars = Maps.newHashMap();
-		return startProcess(procDefKey, businessTable, businessId, title, vars,atiBaseForm);
+		return startProcess(procDefKey, businessTable, businessId, categoryId, vars,atiBaseForm);
 	}
 	
 	/**
@@ -114,17 +114,17 @@ public class AtiTaskService extends BaseService {
 	 * @param procDefKey 流程定义KEY
 	 * @param businessTable 业务表表名
 	 * @param businessId	业务表编号
-	 * @param title			流程标题，显示在待办任务标题
+	 * @param categoryId	流程分类标识
 	 * @param vars			流程变量
 	 * @return 流程实例ID
 	 */
 	@Transactional(readOnly = false,rollbackFor = Exception.class)
-	public String startProcess(String procDefKey, String businessTable, String businessId, String title, Map<String, Object> vars,AtiBaseForm atiBaseForm) {
+	public String startProcess(String procDefKey, String businessTable, String businessId, Long categoryId, Map<String, Object> vars,AtiBaseForm atiBaseForm) {
 
 
 		// 用来设置启动流程的人员ID，引擎会自动把用户ID保存到activiti:initiator中
-//		Long userId = atiBaseForm.getFormSender();
-		identityService.setAuthenticatedUserId("wangyiren");
+		String name = atiBaseForm.getFormSender();
+		identityService.setAuthenticatedUserId(name);
 		
 		// 设置流程变量
 		if (vars == null){
@@ -132,14 +132,19 @@ public class AtiTaskService extends BaseService {
 		}
 		
 		// 设置流程标题
-		if (StringUtils.isNotBlank(title)){
-			vars.put("title", title);
-			//添加申请人
+		vars.put("title", atiBaseForm.getFormTheme());
+		//添加申请人
 //			vars.put("applyUser",userId);
-			//添加工单内容
-			vars.put("content",atiBaseForm.getFormContent());
-		}
-		
+		//添加工单内容
+		vars.put("content",atiBaseForm.getFormContent());
+		//添加流程分类
+		vars.put("categoryId",categoryId);
+		//添加流程发起时间
+		vars.put("formSenderTime",new Date());
+		//添加紧急程度
+		vars.put("urgent",atiBaseForm.getUrgent());
+		//添加工单级别
+		vars.put("level",atiBaseForm.getLevel());
 		// 启动流程
 		ProcessInstance procIns = runtimeService.startProcessInstanceByKey(procDefKey, businessTable+":"+businessId, vars);
 		
@@ -405,7 +410,8 @@ public class AtiTaskService extends BaseService {
 					List<HistoricProcessInstance> il = historyService.createHistoricProcessInstanceQuery().processInstanceId(procInsId).orderByProcessInstanceStartTime().asc().list();
 					if (il.size() > 0){
 						if (StringUtils.isNotBlank(il.get(0).getStartUserId())){
-							AtiUser user = userService.getUserByUserId(Long.valueOf(il.get(0).getStartUserId()));
+//							AtiUser user = userService.getUserByUserId(Long.valueOf(il.get(0).getStartUserId()));
+							AtiUser user = userService.getAtiUserByName(il.get(0).getStartUserId());
 							if (user != null){
 								e.setAssignee(histIns.getAssignee());
 								e.setAssigneeName((String) user.getName());

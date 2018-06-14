@@ -3,7 +3,9 @@
  */
 package xyz.wongs.es.workflow.act.web;
 
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +26,11 @@ import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.oa.entity.AtiActCategory;
 import xyz.wongs.es.workflow.oa.entity.ResponseResult;
 import xyz.wongs.es.workflow.oa.service.AtiActCategoryService;
+import xyz.wongs.es.workflow.oa.service.OaBaseObjectService;
+import xyz.wongs.es.workflow.user.entity.AtiUser;
+import xyz.wongs.es.workflow.user.entity.UecOutStaffInfo;
+import xyz.wongs.es.workflow.user.entity.UecStaffInfo;
+import xyz.wongs.es.workflow.user.service.UserService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +54,12 @@ public class AtiTaskController extends BaseController {
 	private AtiActCategoryService categoryService;
 	@Autowired
 	private TaskService taskService;
-
+	@Resource
+	private UserService userService;
+	@Resource
+	private OaBaseObjectService oaBaseObjectService;
+	@Resource
+	private RuntimeService runtimeService;
 
 	/**
 	 * 获取流程列表
@@ -163,9 +175,9 @@ public class AtiTaskController extends BaseController {
 		String userId = "刘小东-人事";
 		page = atiTaskService.historicList(page, act,userId);
 		model.addAttribute("page", page);
-		if (UserUtils.getPrincipal().isMobileLogin()){
-			return renderString(response, page);
-		}
+//		if (UserUtils.getPrincipal().isMobileLogin()){
+//			return renderString(response, page);
+//		}
 		return "modules/act/actTaskHistoricList";
 	}
 
@@ -248,7 +260,48 @@ public class AtiTaskController extends BaseController {
 		ResponseResult<List<Act>> result = new ResponseResult<List<Act>>();
 		List<Act> acts = new ArrayList<>();
 		if(assignName==null || assignName.isEmpty()) {
-			return null;
+			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+			result.setMessage("用户不存在！");
+			return result;
+		}
+		if(null == oaBaseObjectService.getIndex(assignName)) {
+			result.setMessage("用户不存在！");
+			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+			return result;
+		}
+		String code = assignName.substring(oaBaseObjectService.getIndex(assignName));
+		UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
+		UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
+		if(uecStaffInfo == null && uecOutStaffInfo == null) {
+			result.setMessage("用户不存在！");
+			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+			return result;
+		}
+
+		//校验当前活动节点候选人中是否有assignName
+
+		List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery().list();
+		boolean isAssignName = false;
+		for(ProcessInstance instance : instances) {
+			Task task = taskService.createTaskQuery().processInstanceId(instance.getId()).singleResult();
+			List<AtiUser> users = (List<AtiUser>) taskService.getVariable(task.getId(),task.getTaskDefinitionKey());
+			if(null != users && users.size()>0) {
+				for(AtiUser user : users) {
+					if(assignName.equals(user.getName())){
+						isAssignName = true;
+						break;
+					}
+				}
+				if(isAssignName) {
+					break;
+				}
+			}
+
+		}
+		if(!isAssignName) {
+			result.setMessage("用户名不存在！");
+			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+			return result;
 		}
 
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
@@ -257,6 +310,7 @@ public class AtiTaskController extends BaseController {
 		for (Task task : toClaimList) {
 			Act e = new Act();
 			e.setTask(task);
+			//监听器添加的用户变量
 			e.setVars(task.getProcessVariables());
 			e.setProcDef(ProcessDefCache.get(task.getProcessDefinitionId()));
 			e.setStatus("claim");

@@ -30,13 +30,13 @@ public class LeaveModifyProcessor implements TaskListener {
 	@Resource
 	private AtiSpecificFormDao atiSpecificFormMapper;
 	@Resource
-	private AtiBaseFormDao atiBaseFormMapper;
+	private AtiBaseFormDao AtiBaseFormDao;
 
 	@Override
 	public void notify(DelegateTask delegateTask) {
 
 		String procInstId = delegateTask.getProcessInstanceId();
-		Long currentBaseFormId = atiBaseFormMapper.getBaseFormIdByProcInstId(procInstId);
+		Long currentBaseFormId = AtiBaseFormDao.getBaseFormByProcInstId(procInstId).getAtiBaseFormId();
 //
 //		String leaveType = (String) delegateTask.getVariable("leaveType");
 //		AtiSpecificForm specificFormLeaveType = new AtiSpecificForm(currentBaseFormId,"LEAVE_TYPE",leaveType);

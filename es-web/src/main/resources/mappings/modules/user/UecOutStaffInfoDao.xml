@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.user.dao.UecOutStaffInfoDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.user.entity.UecOutStaffInfo">
+    <id column="OUT_STAFF_ID" jdbcType="DECIMAL" property="outStaffId" />
+    <result column="MONTH_ID" jdbcType="DECIMAL" property="monthId" />
+    <result column="PK_PSN_MSG" jdbcType="VARCHAR" property="pkPsnMsg" />
+    <result column="PK_ORG" jdbcType="VARCHAR" property="pkOrg" />
+    <result column="PSNCODE" jdbcType="VARCHAR" property="psncode" />
+    <result column="PSNNAME" jdbcType="VARCHAR" property="psnname" />
+    <result column="IDNUM" jdbcType="VARCHAR" property="idnum" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="BIRTHDATE" jdbcType="VARCHAR" property="birthdate" />
+    <result column="HIGHEST_EDUCATION" jdbcType="VARCHAR" property="highestEducation" />
+    <result column="FULLTIME_EDUCATION" jdbcType="VARCHAR" property="fulltimeEducation" />
+    <result column="DEGREE" jdbcType="VARCHAR" property="degree" />
+    <result column="BUSILIFE" jdbcType="VARCHAR" property="busilife" />
+    <result column="IS_SEND" jdbcType="VARCHAR" property="isSend" />
+    <result column="DR" jdbcType="DECIMAL" property="dr" />
+    <result column="MOBTELEPHONE" jdbcType="VARCHAR" property="mobtelephone" />
+    <result column="OFFICEPHONE" jdbcType="VARCHAR" property="officephone" />
+    <result column="TS" jdbcType="VARCHAR" property="ts" />
+    <result column="PK_HCMPSN_MSG" jdbcType="VARCHAR" property="pkHcmpsnMsg" />
+    <result column="PSNFLAG" jdbcType="VARCHAR" property="psnflag" />
+    <result column="ISZW" jdbcType="VARCHAR" property="iszw" />
+    <result column="ISQD" jdbcType="VARCHAR" property="isqd" />
+    <result column="EFF_DATE" jdbcType="TIMESTAMP" property="effDate" />
+    <result column="EXP_DATE" jdbcType="TIMESTAMP" property="expDate" />
+    <result column="STATUS_CD" jdbcType="VARCHAR" property="statusCd" />
+    <result column="STATUS_DATE" jdbcType="TIMESTAMP" property="statusDate" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_STAFF" jdbcType="DECIMAL" property="createStaff" />
+    <result column="UPDATE_DATE" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="UPDATE_STAFF" jdbcType="DECIMAL" property="updateStaff" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    OUT_STAFF_ID, MONTH_ID, PK_PSN_MSG, PK_ORG, PSNCODE, PSNNAME, IDNUM, SEX,
+    BIRTHDATE, HIGHEST_EDUCATION, FULLTIME_EDUCATION, DEGREE, BUSILIFE, IS_SEND, DR, 
+    MOBTELEPHONE, OFFICEPHONE, TS, PK_HCMPSN_MSG, PSNFLAG, ISZW, ISQD, EFF_DATE, EXP_DATE, 
+    STATUS_CD, STATUS_DATE, CREATE_DATE, CREATE_STAFF, UPDATE_DATE, UPDATE_STAFF
+  </sql>
+
+  <select id="getOutStaffByCode" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      UEC_OUT_STAFF_INFO T
+    WHERE
+      T.PSNCODE = #{psncode}
+  </select>
+</mapper>
