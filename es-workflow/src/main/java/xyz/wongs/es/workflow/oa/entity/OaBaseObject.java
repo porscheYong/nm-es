@@ -17,6 +17,8 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     /** 流程分类标识  */
     private Long atiActCategoryId;
 
+    private String procDefKey;
+
     /** 主键 */
     private Long primaryId;
 
@@ -92,5 +94,13 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
 
     public void setFifthText(String fifthText) {
         this.fifthText = fifthText;
+    }
+
+    public String getProcDefKey() {
+        return procDefKey;
+    }
+
+    public void setProcDefKey(String procDefKey) {
+        this.procDefKey = procDefKey;
     }
 }

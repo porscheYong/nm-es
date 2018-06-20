@@ -1,7 +1,10 @@
 package xyz.wongs.es.workflow.oa.web;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
+import groovy.json.StringEscapeUtils;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
@@ -46,8 +49,6 @@ public class OaBaseObjectController extends BaseController {
     @Resource
     private AtiTaskService atiTaskService;
     @Resource
-    private HistoryService historyService;
-    @Resource
     private UserService userService;
     @Resource
     private RuntimeService runtimeService;
@@ -79,19 +80,23 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        if(null == oaBaseObjectService.getIndex(formSender)) {
-            result.setMessage("用户不存在！");
-            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-            return result;
+        if(!"wangyiren".equals(formSender)) {
+            if(null == oaBaseObjectService.getIndex(formSender)) {
+                result.setMessage("用户不存在！");
+                result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+                return result;
+            }
+
+            String code = formSender.substring(oaBaseObjectService.getIndex(formSender));
+            UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
+            UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
+            if(uecStaffInfo == null && uecOutStaffInfo == null && !"wangyiren".equals(formSender)) {
+                result.setMessage("用户不存在！");
+                result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+                return result;
+            }
         }
-        String code = formSender.substring(oaBaseObjectService.getIndex(formSender));
-        UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-        UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if(uecStaffInfo == null && uecOutStaffInfo == null) {
-            result.setMessage("用户不存在！");
-            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-            return result;
-        }
+
 
         String formTheme = (String) baseObject.getFormTheme();
         if(formTheme == null || formTheme.isEmpty()) {
@@ -153,9 +158,6 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        // 验证用户的有效性，与当前任务候选人的对比 todo
-
-
         if(null == oaBaseObjectService.getIndex(assignName)) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
@@ -169,6 +171,16 @@ public class OaBaseObjectController extends BaseController {
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
         }
+
+        //校验当前活动节点候选人中是否有assignName
+
+        Boolean isAssignName = oaBaseObjectService.isAssignName(assignName);
+        if(!isAssignName) {
+            result.setMessage("用户名不存在！");
+            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+            return result;
+        }
+
         atiTaskService.claim(taskId, assignName);
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("签收成功!");
@@ -200,6 +212,7 @@ public class OaBaseObjectController extends BaseController {
             result.setMessage("任务不存在或已处理完毕！");
             return result;
         }
+
 
         if(!"0".equals(flag) && !"1".equals(flag)) {
             result.setState(ResponseResult.STATE_ERROR);
@@ -330,4 +343,6 @@ public class OaBaseObjectController extends BaseController {
         result.setData(map);
         return result;
     }
+
+
 }

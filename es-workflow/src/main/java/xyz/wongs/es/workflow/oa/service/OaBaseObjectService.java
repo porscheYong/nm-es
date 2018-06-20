@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
+import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,8 @@ public class OaBaseObjectService {
     private TaskService taskService;
     @Resource
     private AtiSpecificFormService atiSpecificFormService;
+    @Resource
+    private RuntimeService runtimeService;
 
 
     /**
@@ -254,13 +258,13 @@ public class OaBaseObjectService {
                     || "endEvent".equals(histIns.getActivityType())){
 
                 // 给节点增加一个序号
-                Integer actNum = actMap.get(histIns.getActivityId());
+                Integer actNum = actMap.get(histIns.getTaskId());
                 if (actNum == null){
-                    actMap.put(histIns.getActivityId(), actMap.size());
+                    actMap.put(histIns.getTaskId(), actMap.size() + 1);
                 }
 
                 HistoricFlow historicFlow = new HistoricFlow();
-                historicFlow.setActNum(actNum);
+                historicFlow.setActNum(actMap.get(histIns.getTaskId()));
                 historicFlow.setStartTime(histIns.getStartTime());
                 historicFlow.setEndTime(histIns.getEndTime());
                 historicFlow.setDuringTime(String.valueOf(histIns.getDurationInMillis()));
@@ -298,10 +302,37 @@ public class OaBaseObjectService {
         char[] chars = currentUserName.toCharArray();
         for(int i=0;i<chars.length;i++) {
             if(chars[i] >= 48 && chars[i] <= 58) {
-                System.out.print("..." + chars[i]);
+                System.out.println("..." + chars[i]);
                 return  i;
             }
         }
         return null;
+    }
+
+    /**
+     * 校验用户有效性
+     * @param assignName
+     * @return
+     */
+    public boolean isAssignName(String assignName) {
+        List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery().list();
+        boolean isAssignName = false;
+        for(ProcessInstance instance : instances) {
+            Task task = taskService.createTaskQuery().processInstanceId(instance.getId()).singleResult();
+            List<AtiUser> users = (List<AtiUser>) taskService.getVariable(task.getId(),task.getTaskDefinitionKey());
+            if(null != users && users.size()>0) {
+                for(AtiUser user : users) {
+                    if(assignName.equals(user.getName())){
+                        isAssignName = true;
+                        break;
+                    }
+                }
+                if(isAssignName) {
+                    break;
+                }
+            }
+
+        }
+        return isAssignName;
     }
 }

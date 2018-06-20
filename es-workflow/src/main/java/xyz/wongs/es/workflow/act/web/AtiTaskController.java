@@ -280,29 +280,12 @@ public class AtiTaskController extends BaseController {
 
 		//校验当前活动节点候选人中是否有assignName
 
-		List<ProcessInstance> instances = runtimeService.createProcessInstanceQuery().list();
-		boolean isAssignName = false;
-		for(ProcessInstance instance : instances) {
-			Task task = taskService.createTaskQuery().processInstanceId(instance.getId()).singleResult();
-			List<AtiUser> users = (List<AtiUser>) taskService.getVariable(task.getId(),task.getTaskDefinitionKey());
-			if(null != users && users.size()>0) {
-				for(AtiUser user : users) {
-					if(assignName.equals(user.getName())){
-						isAssignName = true;
-						break;
-					}
-				}
-				if(isAssignName) {
-					break;
-				}
-			}
-
-		}
-		if(!isAssignName) {
-			result.setMessage("用户名不存在！");
-			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-			return result;
-		}
+//		Boolean isAssignName = oaBaseObjectService.isAssignName(assignName);
+//		if(!isAssignName) {
+//			result.setMessage("用户名不存在！");
+//			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+//			return result;
+//		}
 
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
 				.includeProcessVariables().active().orderByTaskCreateTime().desc();
