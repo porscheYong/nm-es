@@ -36,7 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
  * @author liuxiaodong
  * @date 2018/5/25
  */
@@ -57,82 +56,127 @@ public class OaBaseObjectController extends BaseController {
 
 
     /**
-     *
      * 发起流程接口测试
-     * @param baseObject
+     *
+     * @param startFlowJson
      */
-    @RequestMapping(value = "/startOaBase",method = RequestMethod.POST)
+    @RequestMapping(value = "/startOaBase", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<String> testStartAtiLeave(OaBaseObject baseObject, String procDefKey) {
+    public ResponseResult<String> testStartAtiLeave(String startFlowJson) {
+
+        OaBaseObject baseObject = JSON.parseObject(startFlowJson, OaBaseObject.class);
+
+        String primaryId = baseObject.getPrimaryId() + "'}";
+        primaryId = primaryId.replaceAll(":", ":'");
+        primaryId = primaryId.replaceAll(",", "',");
+        JSONObject jsonPrimaryId = JSONObject.parseObject(primaryId);
+        if (null != jsonPrimaryId) {
+            String outStaffId = jsonPrimaryId.getString("uec_out_staff_info");
+            if (null != outStaffId && !outStaffId.isEmpty()) {
+                baseObject.setOutStaffId(outStaffId);
+            }
+            String trialId = jsonPrimaryId.getString("uec_trial");
+            if (null != trialId && !trialId.isEmpty()) {
+                baseObject.setTrialId(trialId);
+            }
+            String psnjobId = jsonPrimaryId.getString("uec_psnjob");
+            if (null != psnjobId && !psnjobId.isEmpty()) {
+                baseObject.setPsnjobId(psnjobId);
+            }
+            String retireId = jsonPrimaryId.getString("uec_retire");
+            if (null != retireId && !retireId.isEmpty()) {
+                baseObject.setRetireId(retireId);
+            }
+            String encId = jsonPrimaryId.getString("uec_enc");
+            if (null != encId && !encId.isEmpty()) {
+                baseObject.setEduId(encId);
+            }
+            String punishId = jsonPrimaryId.getString("uec_punish");
+            if (null != punishId && !punishId.isEmpty()) {
+                baseObject.setPunishId(punishId);
+            }
+            String talentTeamId = jsonPrimaryId.getString("uec_talent_team");
+            if (null != talentTeamId && !talentTeamId.isEmpty()) {
+                baseObject.setTalentTeamId(talentTeamId);
+            }
+            String eduId = jsonPrimaryId.getString("uec_doc_edu");
+            if (null != eduId && !eduId.isEmpty()) {
+                baseObject.setEduId(eduId);
+            }
+            String familyId = jsonPrimaryId.getString("uec_family");
+            if (null != familyId && !familyId.isEmpty()) {
+                baseObject.setFamilyId(familyId);
+            }
+            String titleId = jsonPrimaryId.getString("uec_title");
+            if (null != titleId && !titleId.isEmpty()) {
+                baseObject.setTitleId(titleId);
+            }
+            String partyLogId = jsonPrimaryId.getString("uec_partylog");
+            if (null != partyLogId && !partyLogId.isEmpty()) {
+                baseObject.setPartyLogId(partyLogId);
+            }
+        }
 
         ResponseResult<String> result = new ResponseResult<>();
         String procDefId = (String) baseObject.getProcDefId();
-        if(procDefId == null || procDefId.isEmpty()) {
+        if (procDefId == null || procDefId.isEmpty()) {
             result.setMessage("流程定义ID不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
 
         String formSender = baseObject.getFormSender();
-        if(formSender == null || formSender.isEmpty()){
+        if (formSender == null || formSender.isEmpty()) {
             result.setMessage("用户不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
 
-        if(!"wangyiren".equals(formSender)) {
-            if(null == oaBaseObjectService.getIndex(formSender)) {
-                result.setMessage("用户不存在！");
-                result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-                return result;
-            }
+        if (null == oaBaseObjectService.getIndex(formSender)) {
+            result.setMessage("用户不存在！");
+            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+            return result;
+        }
 
-            String code = formSender.substring(oaBaseObjectService.getIndex(formSender));
-            UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-            UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-            if(uecStaffInfo == null && uecOutStaffInfo == null && !"wangyiren".equals(formSender)) {
-                result.setMessage("用户不存在！");
-                result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-                return result;
-            }
+
+        String code = formSender.substring(oaBaseObjectService.getIndex(formSender));
+        UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
+        UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
+        if (uecStaffInfo == null && uecOutStaffInfo == null) {
+            result.setMessage("用户不存在！");
+            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
+            return result;
         }
 
 
         String formTheme = (String) baseObject.getFormTheme();
-        if(formTheme == null || formTheme.isEmpty()) {
+        if (formTheme == null || formTheme.isEmpty()) {
             result.setMessage("工单主题不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
 
         String urgent = baseObject.getUrgent();
-        if(urgent == null || urgent.isEmpty()) {
+        if (urgent == null || urgent.isEmpty()) {
             result.setMessage("紧急程度不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
 
         String formContent = (String) baseObject.getFormContent();
-        if(formContent == null || formContent.isEmpty()) {
+        if (formContent == null || formContent.isEmpty()) {
             result.setMessage("工单内容不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
 
-        String primaryId = String.valueOf(baseObject.getPrimaryId());
-        if(primaryId == null || primaryId.isEmpty()) {
-            result.setMessage("必要参数不允许为空！");
-            result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
-            return result;
-        }
-
         String atiCategoryId = String.valueOf(baseObject.getAtiActCategoryId());
-        if(atiCategoryId == null || atiCategoryId.isEmpty()){
+        if (atiCategoryId == null || atiCategoryId.isEmpty()) {
             result.setMessage("流程分类ID不允许为空！");
             result.setState(ResponseResult.PARAM_REQUIRED_ERROR);
             return result;
         }
-        String procInstId = oaBaseObjectService.save(baseObject,procDefKey);
+        String procInstId = oaBaseObjectService.save(baseObject);
 
         result.setMessage("工作流程启动成功！");
         result.setState(ResponseResult.STATE_OK);
@@ -143,22 +187,23 @@ public class OaBaseObjectController extends BaseController {
 
     /**
      * 任务签收
+     *
      * @param taskId
      * @param assignName
      * @return
      */
-    @RequestMapping(value = "/claim",method = RequestMethod.POST)
+    @RequestMapping(value = "/claim", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<Void> claim(String taskId, String assignName) {
         ResponseResult<Void> result = new ResponseResult<>();
 
-        if(assignName == null || assignName.isEmpty()) {
+        if (assignName == null || assignName.isEmpty()) {
             result.setMessage("用户不能为空！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
         }
 
-        if(null == oaBaseObjectService.getIndex(assignName)) {
+        if (null == oaBaseObjectService.getIndex(assignName)) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -166,7 +211,7 @@ public class OaBaseObjectController extends BaseController {
         String code = assignName.substring(oaBaseObjectService.getIndex(assignName));
         UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
         UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if(uecStaffInfo == null && uecOutStaffInfo == null) {
+        if (uecStaffInfo == null && uecOutStaffInfo == null) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -175,7 +220,7 @@ public class OaBaseObjectController extends BaseController {
         //校验当前活动节点候选人中是否有assignName
 
         Boolean isAssignName = oaBaseObjectService.isAssignName(assignName);
-        if(!isAssignName) {
+        if (!isAssignName) {
             result.setMessage("用户名不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -190,31 +235,32 @@ public class OaBaseObjectController extends BaseController {
 
     /**
      * 审批任务测试接口
+     *
      * @param flag
      * @param taskId
      * @param procInstId
      */
-    @RequestMapping(value = "/approvalOaBase",method = RequestMethod.POST)
+    @RequestMapping(value = "/approvalOaBase", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult<String> approvalStaffEntry(String comment, String flag,String taskId,String procInstId) {
+    public ResponseResult<String> approvalStaffEntry(String comment, String flag, String taskId, String procInstId) {
         ResponseResult<String> result = new ResponseResult<>();
 
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId)
                 .singleResult();
-        if(null == processInstance) {
+        if (null == processInstance) {
             result.setState(ResponseResult.STATE_ERROR);
             result.setMessage("任务不存在或已处理完毕！");
             return result;
         }
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
-        if(null == task) {
+        if (null == task) {
             result.setState(ResponseResult.STATE_ERROR);
             result.setMessage("任务不存在或已处理完毕！");
             return result;
         }
 
 
-        if(!"0".equals(flag) && !"1".equals(flag)) {
+        if (!"0".equals(flag) && !"1".equals(flag)) {
             result.setState(ResponseResult.STATE_ERROR);
             result.setMessage("参数非法！");
             return result;
@@ -229,25 +275,25 @@ public class OaBaseObjectController extends BaseController {
     }
 
 
-
     /**
      * 获取已办任务测试接口
+     *
      * @param assignName
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/taskHistoric",method = RequestMethod.GET)
+    @RequestMapping(value = "/taskHistoric", method = RequestMethod.GET)
     @ResponseBody
     public ResponseResult<List<HistoricTask>> historicList(String assignName) throws Exception {
-        ResponseResult<List<HistoricTask>>  result = new ResponseResult<>();
+        ResponseResult<List<HistoricTask>> result = new ResponseResult<>();
 
-        if(null == assignName || assignName.isEmpty()) {
+        if (null == assignName || assignName.isEmpty()) {
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             result.setMessage("用户不允许为空！");
             return result;
         }
 
-        if(null == oaBaseObjectService.getIndex(assignName)) {
+        if (null == oaBaseObjectService.getIndex(assignName)) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -255,7 +301,7 @@ public class OaBaseObjectController extends BaseController {
         String code = assignName.substring(oaBaseObjectService.getIndex(assignName));
         UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
         UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if(uecStaffInfo == null && uecOutStaffInfo == null) {
+        if (uecStaffInfo == null && uecOutStaffInfo == null) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -273,10 +319,11 @@ public class OaBaseObjectController extends BaseController {
 
     /**
      * 流程流转信息接口
+     *
      * @param procInstId
      * @return
      */
-   @RequestMapping(value = "/historicFlows",method = RequestMethod.GET)
+    @RequestMapping(value = "/historicFlows", method = RequestMethod.GET)
     @ResponseBody
     public ResponseResult<List<HistoricFlow>> historicFlows(String procInstId) {
         ResponseResult<List<HistoricFlow>> result = new ResponseResult<>();
@@ -312,32 +359,31 @@ public class OaBaseObjectController extends BaseController {
 
     /**
      * 当前任务候选人
+     *
      * @param procInstId
      * @return
      */
-    @RequestMapping(value = "/currentTaskAssignNames",method = RequestMethod.GET)
+    @RequestMapping(value = "/currentTaskAssignNames", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseResult<Map<String,Object>> getCurrentTaskAssignNames(String procInstId) {
-        ResponseResult<Map<String,Object>> result = new ResponseResult<>();
+    public ResponseResult<Map<String, Object>> getCurrentTaskAssignNames(String procInstId) {
+        ResponseResult<Map<String, Object>> result = new ResponseResult<>();
         Map<String, Object> map = new HashMap<>();
 
         Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
         Act e = new Act();
         e.setTask(currentTask);
-        e.setVars(currentTask.getProcessVariables());
         e.setProcDef(ProcessDefCache.get(currentTask.getProcessDefinitionId()));
-        e.setStatus("todo");
-        map.put("task",e);
+        map.put("task", e);
 
         //获取在监听器中设置的用户变量
         List<AtiUser> currentUsers = (List<AtiUser>) taskService
-                .getVariable(currentTask.getId(),currentTask.getTaskDefinitionKey());
+                .getVariable(currentTask.getId(), currentTask.getTaskDefinitionKey());
         List<String> names = Lists.newArrayList();
-        for(AtiUser user : currentUsers) {
+        for (AtiUser user : currentUsers) {
             String name = (String) user.getName();
             names.add(name);
         }
-        map.put("names",names);
+        map.put("names", names);
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("获取当前任务候选人成功！");
         result.setData(map);

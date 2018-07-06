@@ -63,10 +63,9 @@ public class OaBaseObjectService {
     /**
      * 发起流程或重新申请
      * @param baseObject
-     * @param procDefKey 流程定义key如 "staffEntry"
      */
     @Transactional(readOnly = false,rollbackFor = Exception.class)
-    public String save(OaBaseObject baseObject,String procDefKey) {
+    public String save(OaBaseObject baseObject) {
 
         List<AtiSpecificForm> specificForms = getSpecificForms(baseObject);
 
@@ -90,7 +89,7 @@ public class OaBaseObjectService {
         String businessId = String.valueOf(currentBaseFormId);
 
         // 启动流程
-        String procInstId = atiTaskService.startProcess(procDefKey, ProcDefKey.ATI_BASE_FORM_KEY,
+        String procInstId = atiTaskService.startProcess(baseObject.getProcDefKey(), ProcDefKey.ATI_BASE_FORM_KEY,
                 businessId, baseObject.getAtiActCategoryId(),baseObject);
         return procInstId;
 
@@ -105,10 +104,65 @@ public class OaBaseObjectService {
 
         List<AtiSpecificForm> specificForms = Lists.newArrayList();
 
-        AtiSpecificForm specificFormPrimaryKey = getSpecificForm(oaBaseObject);
-        specificFormPrimaryKey.setParameter("PRIMARY_ID");
-        specificFormPrimaryKey.setParamValue(String.valueOf(oaBaseObject.getPrimaryId()));
-        specificForms.add(specificFormPrimaryKey);
+        AtiSpecificForm specificFormOutStaffInfo = getSpecificForm(oaBaseObject);
+        specificFormOutStaffInfo.setParameter("OUT_STAFF_ID");
+        specificFormOutStaffInfo.setParamValue(String.valueOf(oaBaseObject.getOutStaffId()));
+        specificForms.add(specificFormOutStaffInfo);
+
+        AtiSpecificForm specificFormTrial = getSpecificForm(oaBaseObject);
+        specificFormTrial.setParameter("TRIAL_ID");
+        specificFormTrial.setParamValue(String.valueOf(oaBaseObject.getTrialId()));
+        specificForms.add(specificFormTrial);
+
+        AtiSpecificForm specificFormPsnjob = getSpecificForm(oaBaseObject);
+        specificFormPsnjob.setParameter("PSNJOB_ID");
+        specificFormPsnjob.setParamValue(String.valueOf(oaBaseObject.getPsnjobId()));
+        specificForms.add(specificFormPsnjob);
+
+        AtiSpecificForm specificFormRetire = getSpecificForm(oaBaseObject);
+        specificFormRetire.setParameter("RETIRE_ID");
+        specificFormRetire.setParamValue(String.valueOf(oaBaseObject.getRetireId()));
+        specificForms.add(specificFormRetire);
+
+        AtiSpecificForm specificFormEnc = getSpecificForm(oaBaseObject);
+        specificFormEnc.setParameter("ENC_ID");
+        specificFormEnc.setParamValue(String.valueOf(oaBaseObject.getEncId()));
+        specificForms.add(specificFormEnc);
+
+        AtiSpecificForm specificFormPunish = getSpecificForm(oaBaseObject);
+        specificFormPunish.setParameter("PUNISH_ID");
+        specificFormPunish.setParamValue(String.valueOf(oaBaseObject.getPunishId()));
+        specificForms.add(specificFormPunish);
+
+        AtiSpecificForm specificFormTalentTeam = getSpecificForm(oaBaseObject);
+        specificFormTalentTeam.setParameter("TALENT_TEAM_ID");
+        specificFormTalentTeam.setParamValue(String.valueOf(oaBaseObject.getTalentTeamId()));
+        specificForms.add(specificFormTalentTeam);
+
+        AtiSpecificForm specificFormEdu = getSpecificForm(oaBaseObject);
+        specificFormEdu.setParameter("EDU_ID");
+        specificFormEdu.setParamValue(String.valueOf(oaBaseObject.getEduId()));
+        specificForms.add(specificFormEdu);
+
+        AtiSpecificForm specificFormFamily = getSpecificForm(oaBaseObject);
+        specificFormFamily.setParameter("FAMILY_ID");
+        specificFormFamily.setParamValue(String.valueOf(oaBaseObject.getFamilyId()));
+        specificForms.add(specificFormFamily);
+
+        AtiSpecificForm specificFormTitle = getSpecificForm(oaBaseObject);
+        specificFormTitle.setParameter("TITLE_ID");
+        specificFormTitle.setParamValue(String.valueOf(oaBaseObject.getTitleId()));
+        specificForms.add(specificFormTitle);
+
+        AtiSpecificForm specificFormPartyLog = getSpecificForm(oaBaseObject);
+        specificFormPartyLog.setParameter("PARTY_LOG_ID");
+        specificFormPartyLog.setParamValue(String.valueOf(oaBaseObject.getPartyLogId()));
+        specificForms.add(specificFormPartyLog);
+
+        AtiSpecificForm specificFormPrimaryKeyHis = getSpecificForm(oaBaseObject);
+        specificFormPrimaryKeyHis.setParameter("PRIMARY_ID_HIS");
+        specificFormPrimaryKeyHis.setParamValue(String.valueOf(oaBaseObject.getPrimaryIdHis()));
+        specificForms.add(specificFormPrimaryKeyHis);
 
         AtiSpecificForm specificFormFirstText = getSpecificForm(oaBaseObject);
         specificFormFirstText.setParameter("FIRST_TEXT");
@@ -170,6 +224,7 @@ public class OaBaseObjectService {
                 historicTask.setStartTime(taskInstance.getStartTime());
                 historicTask.setEndTime(taskInstance.getEndTime());
                 historicTask.setName(taskInstance.getName());
+
 
                 historicTask.setFormSender(baseObject.getFormSender());
                 historicTask.setFormTheme(baseObject.getFormTheme());
@@ -258,13 +313,13 @@ public class OaBaseObjectService {
                     || "endEvent".equals(histIns.getActivityType())){
 
                 // 给节点增加一个序号
-                Integer actNum = actMap.get(histIns.getTaskId());
+                Integer actNum = actMap.get(histIns.getId());
                 if (actNum == null){
-                    actMap.put(histIns.getTaskId(), actMap.size() + 1);
+                    actMap.put(histIns.getId(), actMap.size() + 1);
                 }
 
                 HistoricFlow historicFlow = new HistoricFlow();
-                historicFlow.setActNum(actMap.get(histIns.getTaskId()));
+                historicFlow.setActNum(actMap.get(histIns.getId()));
                 historicFlow.setStartTime(histIns.getStartTime());
                 historicFlow.setEndTime(histIns.getEndTime());
                 historicFlow.setDuringTime(String.valueOf(histIns.getDurationInMillis()));

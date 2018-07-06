@@ -514,6 +514,7 @@
     FROM
      UEC_STAFF_INFO
     WHERE
-      CODE = #{code}
+      CODE = #{code} AND
+      STATUS_CD = 1000
   </select>
 </mapper>

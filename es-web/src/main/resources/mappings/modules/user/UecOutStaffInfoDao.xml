@@ -46,6 +46,7 @@
     FROM
       UEC_OUT_STAFF_INFO T
     WHERE
-      T.PSNCODE = #{psncode}
+      T.PSNCODE = #{psncode}  AND
+      T.STATUS_CD = 1000
   </select>
 </mapper>
