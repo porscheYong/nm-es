@@ -73,7 +73,7 @@ public class FtpDownloadService {
     /**
      * @Author: WCNGS@QQ.COM
      * @Date: 2017/12/21 11:28
-     * @Description: 每月7日20点从ftp抓取数据
+     * @Description: 每月7号20点从ftp抓取数据
      * @Mod:
      */
     @Scheduled(cron = "0 00 20 7 * ?")
@@ -94,10 +94,10 @@ public class FtpDownloadService {
     /**
      * @Author: WCNGS@QQ.COM
      * @Date: 2017/12/21 11:28
-     * @Description: 每日19点
+     * @Description: 每日14点
      * @Mod:
      */
-    @Scheduled(cron = "0 00 20 * * ?")
+    @Scheduled(cron = "0 00 14 * * ?")
     public void dayData(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
@@ -105,7 +105,7 @@ public class FtpDownloadService {
         String localPath = SUFFFIX+"DayData"+ File.separator+year+ File.separator+month+ File.separator+day+File.separator;
         String remotePath = "DayData";
         String contains="."+day+".";
-        List<Document> documents = getData(localPath,remotePath,contains,false);
+        List<Document> documents = getData(localPath,remotePath,contains,true);
         if(CollectionUtils.isNotEmpty(documents)){
             logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());
             compareToTables(true,documents.get(0).getMonthId());

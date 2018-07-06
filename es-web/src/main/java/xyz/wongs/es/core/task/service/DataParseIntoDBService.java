@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.DateUtils;
@@ -44,7 +45,7 @@ public class DataParseIntoDBService {
     @Autowired
     private InsertDataService insertDataService;
 
-    private List<Document> documents = new ArrayList<Document>(70);
+    private List<Document> documents = new ArrayList<Document>(73);
     /**
      * 生产环境
      */
@@ -63,7 +64,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-//    @Scheduled(cron = "0 30 20 7 * ?")
+    @Scheduled(cron = "0 30 20 7 * ?")
     public void DataParseInputTimeByMonth(){
         //month:为每月的账期
         String month = DateUtils.getMonth(0);
@@ -89,7 +90,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    //@Scheduled(cron = "0 15 14 * * ?")
+    @Scheduled(cron = "0 15 14 * * ?")
     public void DataParseInputTimeByDay(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
@@ -184,9 +185,9 @@ public class DataParseIntoDBService {
         }
 
         //当下载的文件数量与实际标准文件数量不一致时候，清空当前列表，不再导入数据库
-        if(!documentIntegrityCheck(documents))  {
+        /*if(!documentIntegrityCheck(documents))  {
             documents.clear();
-        }
+        }*/
         return documents;
     }
 
