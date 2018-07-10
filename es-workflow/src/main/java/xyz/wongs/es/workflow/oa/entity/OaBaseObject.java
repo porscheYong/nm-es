@@ -42,6 +42,8 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     private String titleId;
     /**	政治面貌	*/
     private String partyLogId;
+    /** 薪资变动情况  */
+    private String wadocId;
     /** 历史数据主键 */
     private String primaryIdHis;
 
@@ -221,5 +223,13 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
 
     public void setPrimaryId(String primaryId) {
         this.primaryId = primaryId;
+    }
+
+    public String getWadocId() {
+        return wadocId;
+    }
+
+    public void setWadocId(String wadocId) {
+        this.wadocId = wadocId;
     }
 }

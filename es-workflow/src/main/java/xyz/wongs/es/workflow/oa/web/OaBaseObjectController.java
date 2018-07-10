@@ -115,6 +115,10 @@ public class OaBaseObjectController extends BaseController {
             if (null != partyLogId && !partyLogId.isEmpty()) {
                 baseObject.setPartyLogId(partyLogId);
             }
+            String wadocId = jsonPrimaryId.getString("uec_psndoc_wadoc");
+            if (null != wadocId && !wadocId.isEmpty()) {
+                baseObject.setWadocId(wadocId);
+            }
         }
 
         ResponseResult<String> result = new ResponseResult<>();

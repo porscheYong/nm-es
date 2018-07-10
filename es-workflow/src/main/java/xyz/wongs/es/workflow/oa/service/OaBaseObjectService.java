@@ -159,6 +159,11 @@ public class OaBaseObjectService {
         specificFormPartyLog.setParamValue(String.valueOf(oaBaseObject.getPartyLogId()));
         specificForms.add(specificFormPartyLog);
 
+        AtiSpecificForm specificFormWaDoc = getSpecificForm(oaBaseObject);
+        specificFormWaDoc.setParameter("WADOC_ID");
+        specificFormWaDoc.setParamValue(String.valueOf(oaBaseObject.getWadocId()));
+        specificForms.add(specificFormWaDoc);
+
         AtiSpecificForm specificFormPrimaryKeyHis = getSpecificForm(oaBaseObject);
         specificFormPrimaryKeyHis.setParameter("PRIMARY_ID_HIS");
         specificFormPrimaryKeyHis.setParamValue(String.valueOf(oaBaseObject.getPrimaryIdHis()));
@@ -307,8 +312,10 @@ public class OaBaseObjectService {
                 continue;
             }
 
+
             // 只显示开始节点和结束节点，并且执行人不为空的任务
-            if (StringUtils.isNotBlank(histIns.getAssignee())
+            //只显示开始节点，结束节点，用户任务节点
+            if ("userTask".equals(histIns.getActivityType())
                     || "startEvent".equals(histIns.getActivityType())
                     || "endEvent".equals(histIns.getActivityType())){
 
