@@ -136,14 +136,7 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        if (null == oaBaseObjectService.getIndex(formSender)) {
-            result.setMessage("用户不存在！");
-            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-            return result;
-        }
-
-
-        String code = formSender.substring(oaBaseObjectService.getIndex(formSender));
+        String code = oaBaseObjectService.getCode(formSender);
         UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
         UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
         if (uecStaffInfo == null && uecOutStaffInfo == null) {
@@ -207,12 +200,7 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        if (null == oaBaseObjectService.getIndex(assignName)) {
-            result.setMessage("用户不存在！");
-            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-            return result;
-        }
-        String code = assignName.substring(oaBaseObjectService.getIndex(assignName));
+        String code = oaBaseObjectService.getCode(assignName);
         UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
         UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
         if (uecStaffInfo == null && uecOutStaffInfo == null) {
@@ -297,12 +285,7 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        if (null == oaBaseObjectService.getIndex(assignName)) {
-            result.setMessage("用户不存在！");
-            result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-            return result;
-        }
-        String code = assignName.substring(oaBaseObjectService.getIndex(assignName));
+        String code = oaBaseObjectService.getCode(assignName);
         UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
         UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
         if (uecStaffInfo == null && uecOutStaffInfo == null) {

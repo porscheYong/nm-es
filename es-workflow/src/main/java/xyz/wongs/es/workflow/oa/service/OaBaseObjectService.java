@@ -356,19 +356,12 @@ public class OaBaseObjectService {
     }
 
     /**
-     * 用户名获取其中code值第一个数字位置
+     * 用户名获取其中code值
      * @param currentUserName
      * @return
      */
-    public Integer getIndex(String currentUserName) {
-        char[] chars = currentUserName.toCharArray();
-        for(int i=0;i<chars.length;i++) {
-            if(chars[i] >= 48 && chars[i] <= 58) {
-                System.out.println("..." + chars[i]);
-                return  i;
-            }
-        }
-        return null;
+    public String getCode(String currentUserName) {
+            return currentUserName.substring(1);
     }
 
     /**
