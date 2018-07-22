@@ -341,6 +341,7 @@
     <result column="F_243" jdbcType="DECIMAL" property="f243" />
     <result column="F_244" jdbcType="DECIMAL" property="f244" />
     <result column="F_245" jdbcType="DECIMAL" property="f245" />
+      <result column="APPROVEDATE" jdbcType="VARCHAR" property="approveDate"/>
   </resultMap>
 
 
@@ -436,7 +437,7 @@
     F_234, F_235, PK_BANKDOC1,
     F_236, F_237, F_238, F_239,
     F_240, F_241, F_242, F_243,
-    F_244, F_245)
+    F_244, F_245, APPROVEDATE)
     select cd.* from(
     <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
       select
@@ -530,7 +531,7 @@
       #{item.f234,jdbcType=DECIMAL}, #{item.f235,jdbcType=DECIMAL}, #{item.pkBankdoc1,jdbcType=VARCHAR},
       #{item.f236,jdbcType=DECIMAL}, #{item.f237,jdbcType=DECIMAL}, #{item.f238,jdbcType=DECIMAL}, #{item.f239,jdbcType=DECIMAL},
       #{item.f240,jdbcType=DECIMAL}, #{item.f241,jdbcType=DECIMAL}, #{item.f242,jdbcType=DECIMAL}, #{item.f243,jdbcType=DECIMAL},
-      #{item.f244,jdbcType=DECIMAL}, #{item.f245,jdbcType=DECIMAL}
+      #{item.f244,jdbcType=DECIMAL}, #{item.f245,jdbcType=DECIMAL}, #{item.APPROVEDATE,jdbcType=VARCHAR}
       from dual
     </foreach>
     ) cd
@@ -626,7 +627,7 @@
     F_234, F_235, PK_BANKDOC1,
     F_236, F_237, F_238, F_239,
     F_240, F_241, F_242, F_243,
-    F_244, F_245)
+    F_244, F_245, APPROVEDATE)
     values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL},
     #{c1,jdbcType=VARCHAR}, #{c10,jdbcType=VARCHAR}, #{c11,jdbcType=VARCHAR}, #{c12,jdbcType=VARCHAR},
     #{c13,jdbcType=VARCHAR}, #{c14,jdbcType=VARCHAR}, #{c15,jdbcType=VARCHAR}, #{c16,jdbcType=VARCHAR},
@@ -717,7 +718,7 @@
     #{f234,jdbcType=DECIMAL}, #{f235,jdbcType=DECIMAL}, #{pkBankdoc1,jdbcType=VARCHAR},
     #{f236,jdbcType=DECIMAL}, #{f237,jdbcType=DECIMAL}, #{f238,jdbcType=DECIMAL}, #{f239,jdbcType=DECIMAL},
     #{f240,jdbcType=DECIMAL}, #{f241,jdbcType=DECIMAL}, #{f242,jdbcType=DECIMAL}, #{f243,jdbcType=DECIMAL},
-    #{f244,jdbcType=DECIMAL}, #{f245,jdbcType=DECIMAL})
+    #{f244,jdbcType=DECIMAL}, #{f245,jdbcType=DECIMAL}, #{approveDate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="LdapmMpwWaData">
     insert into LDAPM_MPW_WA_DATA
@@ -1739,6 +1740,9 @@
       <if test="f245 != null">
         F_245,
       </if>
+        <if test="approveDate != null">
+            APPROVEDATE,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="monthId != null">
@@ -2758,6 +2762,9 @@
       <if test="f245 != null">
         #{f245,jdbcType=DECIMAL},
       </if>
+        <if test="approveDate != null">
+            #{approveDate,jdbcType=VARCHAR},
+        </if>
     </trim>
   </insert>
 </mapper>

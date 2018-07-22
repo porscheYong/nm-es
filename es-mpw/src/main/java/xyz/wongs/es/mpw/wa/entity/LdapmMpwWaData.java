@@ -684,6 +684,16 @@ public class LdapmMpwWaData extends DataEntity<LdapmMpwWaData> {
 
     private BigDecimal f245;
 
+    private String approveDate;
+
+    public void setApproveDate(String approveDate) {
+        this.approveDate = approveDate;
+    }
+
+    public String getApproveDate() {
+        return approveDate;
+    }
+
     public Integer getMonthId() {
         return monthId;
     }
