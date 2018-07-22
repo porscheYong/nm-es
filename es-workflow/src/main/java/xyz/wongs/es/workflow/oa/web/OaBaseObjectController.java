@@ -72,53 +72,77 @@ public class OaBaseObjectController extends BaseController {
         JSONObject jsonPrimaryId = JSONObject.parseObject(primaryId);
         if (null != jsonPrimaryId) {
             String outStaffId = jsonPrimaryId.getString("uec_out_staff_info");
-            if (null != outStaffId && !outStaffId.isEmpty()) {
-                baseObject.setOutStaffId(outStaffId);
-            }
+            baseObject.setOutStaffId(outStaffId);
+
             String trialId = jsonPrimaryId.getString("uec_trial");
-            if (null != trialId && !trialId.isEmpty()) {
-                baseObject.setTrialId(trialId);
-            }
+            baseObject.setTrialId(trialId);
+
             String psnjobId = jsonPrimaryId.getString("uec_psnjob");
-            if (null != psnjobId && !psnjobId.isEmpty()) {
-                baseObject.setPsnjobId(psnjobId);
-            }
+            baseObject.setPsnjobId(psnjobId);
+
             String retireId = jsonPrimaryId.getString("uec_retire");
-            if (null != retireId && !retireId.isEmpty()) {
-                baseObject.setRetireId(retireId);
-            }
+            baseObject.setRetireId(retireId);
+
             String encId = jsonPrimaryId.getString("uec_enc");
-            if (null != encId && !encId.isEmpty()) {
-                baseObject.setEduId(encId);
-            }
+            baseObject.setEncId(encId);
+
             String punishId = jsonPrimaryId.getString("uec_punish");
-            if (null != punishId && !punishId.isEmpty()) {
-                baseObject.setPunishId(punishId);
-            }
+            baseObject.setPunishId(punishId);
+
             String talentTeamId = jsonPrimaryId.getString("uec_talent_team");
-            if (null != talentTeamId && !talentTeamId.isEmpty()) {
-                baseObject.setTalentTeamId(talentTeamId);
-            }
+            baseObject.setTalentTeamId(talentTeamId);
+
             String eduId = jsonPrimaryId.getString("uec_doc_edu");
-            if (null != eduId && !eduId.isEmpty()) {
-                baseObject.setEduId(eduId);
-            }
+            baseObject.setEduId(eduId);
+
             String familyId = jsonPrimaryId.getString("uec_family");
-            if (null != familyId && !familyId.isEmpty()) {
-                baseObject.setFamilyId(familyId);
-            }
+            baseObject.setFamilyId(familyId);
+
             String titleId = jsonPrimaryId.getString("uec_title");
-            if (null != titleId && !titleId.isEmpty()) {
-                baseObject.setTitleId(titleId);
-            }
+            baseObject.setTitleId(titleId);
+
             String partyLogId = jsonPrimaryId.getString("uec_partylog");
-            if (null != partyLogId && !partyLogId.isEmpty()) {
-                baseObject.setPartyLogId(partyLogId);
-            }
+            baseObject.setPartyLogId(partyLogId);
+
             String wadocId = jsonPrimaryId.getString("uec_psndoc_wadoc");
-            if (null != wadocId && !wadocId.isEmpty()) {
-                baseObject.setWadocId(wadocId);
-            }
+            baseObject.setWadocId(wadocId);
+
+            String outStaffIdHis = jsonPrimaryId.getString("uec_out_staff_info_his");
+            baseObject.setOutStaffIdHis(outStaffIdHis);
+
+            String trialIdHis = jsonPrimaryId.getString("uec_trial_his");
+            baseObject.setTrialIdHis(trialIdHis);
+
+            String psnjobIdHis = jsonPrimaryId.getString("uec_psnjob_his");
+            baseObject.setPsnjobIdHis(psnjobIdHis);
+
+            String retireIdHis = jsonPrimaryId.getString("uec_retire_his");
+            baseObject.setRetireIdHis(retireIdHis);
+
+            String encIdHis = jsonPrimaryId.getString("uec_enc_his");
+            baseObject.setEncIdHis(encIdHis);
+
+            String punishIdHis = jsonPrimaryId.getString("uec_punish_his");
+            baseObject.setPunishIdHis(punishIdHis);
+
+            String talentTeamIdHis = jsonPrimaryId.getString("uec_talent_team_his");
+            baseObject.setTalentTeamIdHis(talentTeamIdHis);
+
+            String eduIdHis = jsonPrimaryId.getString("uec_doc_edu_his");
+            baseObject.setEduIdHis(eduIdHis);
+
+            String familyIdHis = jsonPrimaryId.getString("uec_family_his");
+            baseObject.setFamilyIdHis(familyIdHis);
+
+            String titleIdHis = jsonPrimaryId.getString("uec_title_his");
+            baseObject.setTitleIdHis(titleIdHis);
+
+            String partyLogIdHis = jsonPrimaryId.getString("uec_partylog_his");
+            baseObject.setPartyLogIdHis(partyLogIdHis);
+
+            String wadocIdHis = jsonPrimaryId.getString("uec_psndoc_wadoc_his");
+            baseObject.setWadocIdHis(wadocIdHis);
+
         }
 
         ResponseResult<String> result = new ResponseResult<>();
@@ -276,7 +300,7 @@ public class OaBaseObjectController extends BaseController {
      */
     @RequestMapping(value = "/taskHistoric", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseResult<List<HistoricTask>> historicList(String assignName) throws Exception {
+    public ResponseResult<List<HistoricTask>> historicList(String assignName, String categoryId, String startTime, String endTime) throws Exception {
         ResponseResult<List<HistoricTask>> result = new ResponseResult<>();
 
         if (null == assignName || assignName.isEmpty()) {
@@ -294,7 +318,7 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        List<HistoricTask> historicTasks = oaBaseObjectService.getHistToricTaskList(assignName);
+        List<HistoricTask> historicTasks = oaBaseObjectService.getHistToricTaskList(assignName, categoryId, startTime, endTime);
 
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("success");

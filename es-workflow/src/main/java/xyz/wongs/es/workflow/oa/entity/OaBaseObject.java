@@ -47,6 +47,31 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     /** 历史数据主键 */
     private String primaryIdHis;
 
+    /**	基本信息	*/
+    private String outStaffIdHis;
+    /**	转正	*/
+    private String trialIdHis;
+    /**	任制	*/
+    private String psnjobIdHis;
+    /**	离退	*/
+    private String retireIdHis;
+    /**	奖励	*/
+    private String encIdHis;
+    /**	惩罚	*/
+    private String punishIdHis;
+    /**	专业人才队伍	*/
+    private String talentTeamIdHis;
+    /**	教育经历	*/
+    private String eduIdHis;
+    /**	人员家庭	*/
+    private String familyIdHis;
+    /**	专业技术职务	*/
+    private String titleIdHis;
+    /**	政治面貌	*/
+    private String partyLogIdHis;
+    /** 薪资变动情况  */
+    private String wadocIdHis;
+
     private String firstText;
 
     private String secondText;
@@ -231,5 +256,101 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
 
     public void setWadocId(String wadocId) {
         this.wadocId = wadocId;
+    }
+
+    public String getOutStaffIdHis() {
+        return outStaffIdHis;
+    }
+
+    public void setOutStaffIdHis(String outStaffIdHis) {
+        this.outStaffIdHis = outStaffIdHis;
+    }
+
+    public String getTrialIdHis() {
+        return trialIdHis;
+    }
+
+    public void setTrialIdHis(String trialIdHis) {
+        this.trialIdHis = trialIdHis;
+    }
+
+    public String getPsnjobIdHis() {
+        return psnjobIdHis;
+    }
+
+    public void setPsnjobIdHis(String psnjobIdHis) {
+        this.psnjobIdHis = psnjobIdHis;
+    }
+
+    public String getRetireIdHis() {
+        return retireIdHis;
+    }
+
+    public void setRetireIdHis(String retireIdHis) {
+        this.retireIdHis = retireIdHis;
+    }
+
+    public String getEncIdHis() {
+        return encIdHis;
+    }
+
+    public void setEncIdHis(String encIdHis) {
+        this.encIdHis = encIdHis;
+    }
+
+    public String getPunishIdHis() {
+        return punishIdHis;
+    }
+
+    public void setPunishIdHis(String punishIdHis) {
+        this.punishIdHis = punishIdHis;
+    }
+
+    public String getTalentTeamIdHis() {
+        return talentTeamIdHis;
+    }
+
+    public void setTalentTeamIdHis(String talentTeamIdHis) {
+        this.talentTeamIdHis = talentTeamIdHis;
+    }
+
+    public String getEduIdHis() {
+        return eduIdHis;
+    }
+
+    public void setEduIdHis(String eduIdHis) {
+        this.eduIdHis = eduIdHis;
+    }
+
+    public String getFamilyIdHis() {
+        return familyIdHis;
+    }
+
+    public void setFamilyIdHis(String familyIdHis) {
+        this.familyIdHis = familyIdHis;
+    }
+
+    public String getTitleIdHis() {
+        return titleIdHis;
+    }
+
+    public void setTitleIdHis(String titleIdHis) {
+        this.titleIdHis = titleIdHis;
+    }
+
+    public String getPartyLogIdHis() {
+        return partyLogIdHis;
+    }
+
+    public void setPartyLogIdHis(String partyLogIdHis) {
+        this.partyLogIdHis = partyLogIdHis;
+    }
+
+    public String getWadocIdHis() {
+        return wadocIdHis;
+    }
+
+    public void setWadocIdHis(String wadocIdHis) {
+        this.wadocIdHis = wadocIdHis;
     }
 }
