@@ -531,7 +531,7 @@
       #{item.f234,jdbcType=DECIMAL}, #{item.f235,jdbcType=DECIMAL}, #{item.pkBankdoc1,jdbcType=VARCHAR},
       #{item.f236,jdbcType=DECIMAL}, #{item.f237,jdbcType=DECIMAL}, #{item.f238,jdbcType=DECIMAL}, #{item.f239,jdbcType=DECIMAL},
       #{item.f240,jdbcType=DECIMAL}, #{item.f241,jdbcType=DECIMAL}, #{item.f242,jdbcType=DECIMAL}, #{item.f243,jdbcType=DECIMAL},
-      #{item.f244,jdbcType=DECIMAL}, #{item.f245,jdbcType=DECIMAL}, #{item.APPROVEDATE,jdbcType=VARCHAR}
+      #{item.f244,jdbcType=DECIMAL}, #{item.f245,jdbcType=DECIMAL}, #{item.approveDate,jdbcType=VARCHAR}
       from dual
     </foreach>
     ) cd
@@ -718,7 +718,8 @@
     #{f234,jdbcType=DECIMAL}, #{f235,jdbcType=DECIMAL}, #{pkBankdoc1,jdbcType=VARCHAR},
     #{f236,jdbcType=DECIMAL}, #{f237,jdbcType=DECIMAL}, #{f238,jdbcType=DECIMAL}, #{f239,jdbcType=DECIMAL},
     #{f240,jdbcType=DECIMAL}, #{f241,jdbcType=DECIMAL}, #{f242,jdbcType=DECIMAL}, #{f243,jdbcType=DECIMAL},
-    #{f244,jdbcType=DECIMAL}, #{f245,jdbcType=DECIMAL}, #{approveDate,jdbcType=VARCHAR})
+    #{f244,jdbcType=DECIMAL}, #{f245,jdbcType=DECIMAL}, #{approveDate,jdbcType=VARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="LdapmMpwWaData">
     insert into LDAPM_MPW_WA_DATA
