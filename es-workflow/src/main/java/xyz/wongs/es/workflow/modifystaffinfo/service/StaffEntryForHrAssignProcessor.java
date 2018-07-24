@@ -46,24 +46,23 @@ public class StaffEntryForHrAssignProcessor extends OaBaseTaskListenerService im
                 getProcessInstanceId(),processDefinition.getKey() + ProcDefKey.ENTRY_TASK_DEF_KEY[3]);
         List<String> names = Lists.newArrayList();
         if(hrUsers!=null) {
-            addNames(hrUsers,names,delegateTask);
+            addAssignNames(hrUsers,names,delegateTask);
             taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[3],hrUsers);
 
             return;
         }
 
         //本流程该节点的候选人为：发起人所在部门的人力资源部
-//        Long  atiUserId = (Long) delegateTask.getVariable("applyUser");
-//        hrUsers = atiUserDao.getHrUsersByAtiUserId(atiUserId);
-//
-//        addNames(hrUsers,names,delegateTask);
+        String applyUserName = (String) delegateTask.getVariable("applyUserId");
+        hrUsers = atiUserDao.getHrUsersByName(applyUserName);
 
-        AtiUser user = atiUserDao.getUserByName("n15012302");
-        List<AtiUser> users = new ArrayList<>();
-        users.add(user);
-        hrUsers = users;
+        addAssignNames(hrUsers,names,delegateTask);
 
-        delegateTask.addCandidateUser("n15012302");
+//        AtiUser user = atiUserDao.getUserByName("n15012302");
+//        List<AtiUser> users = new ArrayList<>();
+//        users.add(user);
+//        hrUsers = users;
+//        delegateTask.addCandidateUser("n15012302");
 
 
         //如果有任务委托，添加委托人

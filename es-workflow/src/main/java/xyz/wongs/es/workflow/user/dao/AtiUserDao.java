@@ -36,6 +36,27 @@ public interface AtiUserDao extends CrudDao<AtiUser> {
      */
     List<AtiUser> getUsersByGroup(Long atiGroupId);
 
+    /**
+     * 流程发起人所在组织的主管用户
+     * @param name
+     * @return
+     */
+    List<AtiUser> getDeptLeaderUsersByName(String name);
+
+    /**
+     * 流程发起人所在组织的人事用户
+     * @param name
+     * @return
+     */
+    List<AtiUser> getHrUsersByName(String name);
+
+    /**
+     * 流程发起人所在组织的人事用户
+     * @param name
+     * @return
+     */
+    List<AtiUser> getHrLeaderUsersByName(String name);
+
 
     /**
      * 流程发起人所在组织的人事用户

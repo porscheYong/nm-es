@@ -36,6 +36,13 @@ public class OaBaseTaskListenerService {
        delegateTask.addCandidateUsers(names);
     }
 
+    public void addAssignNames(List<AtiUser> users, List<String> names, DelegateTask delegateTask) {
+        for(AtiUser user : users) {
+            names.add((String) user.getName());
+        }
+        delegateTask.addCandidateUsers(names);
+    }
+
 
     /**
      * 有任务委托，则添加委托人

@@ -56,6 +56,57 @@
       g.ATI_GROUP_ID = #{atiGroupId}
   </select>
 
+  <select id="getDeptLeaderUsersByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ati_user u left join ati_user_role ur
+    on u.ati_user_id = ur.ati_user_id
+    left join ati_role r on ur.ati_role_id = r.ati_role_id
+    left join ati_user_org uo on uo.ati_user_id = u.ati_user_id
+    left join ati_org o on uo.ati_org_id = o.ati_org_id
+    where r.role_code='3000' and
+    o.ati_org_id in (
+    select g.ati_org_id
+    from ati_user u left join ati_user_org uo
+    on u.ati_user_id = uo.ati_user_id
+    left join ati_org  g on uo.ati_org_id = g.ati_org_id
+    where u.name= #{name})
+  </select>
+
+  <select id="getHrUsersByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ati_user u left join ati_user_role ur
+    on u.ati_user_id = ur.ati_user_id
+    left join ati_role r on ur.ati_role_id = r.ati_role_id
+    left join ati_user_org uo on uo.ati_user_id = u.ati_user_id
+    left join ati_org o on uo.ati_org_id = o.ati_org_id
+    where r.role_code='2000' and
+    o.ati_org_id in (
+    select g.ati_org_id
+    from ati_user u left join ati_user_org uo
+    on u.ati_user_id = uo.ati_user_id
+    left join ati_org  g on uo.ati_org_id = g.ati_org_id
+    where u.name= #{name})
+  </select>
+
+  <select id="getHrLeaderUsersByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from ati_user u left join ati_user_role ur
+    on u.ati_user_id = ur.ati_user_id
+    left join ati_role r on ur.ati_role_id = r.ati_role_id
+    left join ati_user_org uo on uo.ati_user_id = u.ati_user_id
+    left join ati_org o on uo.ati_org_id = o.ati_org_id
+    where r.role_code='1000' and
+    o.ati_org_id in (
+    select g.ati_org_id
+    from ati_user u left join ati_user_org uo
+    on u.ati_user_id = uo.ati_user_id
+    left join ati_org  g on uo.ati_org_id = g.ati_org_id
+    where u.name= #{name})
+  </select>
+
   <select id="getHrUsersByAtiUserId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

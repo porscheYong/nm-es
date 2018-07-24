@@ -45,22 +45,22 @@ public class StaffEntryForDeptLeaderAssignProcessor extends OaBaseTaskListenerSe
         List<AtiUser> deptLeaderUsers = (List<AtiUser>) runtimeService.getVariable(delegateTask.getProcessInstanceId(),processDefinition.getKey() + ProcDefKey.ENTRY_TASK_DEF_KEY[2]);
         List<String> names = Lists.newArrayList();
         if(deptLeaderUsers!=null) {
-            addNames(deptLeaderUsers,names,delegateTask);
+            addAssignNames(deptLeaderUsers,names,delegateTask);
             taskService.setVariable(delegateTask.getId(),ProcDefKey.ENTRY_TASK_DEF_KEY[2],deptLeaderUsers);
             return;
         }
 
         //本流程该节点的候选人为：
-//        Long  atiUserId = (Long) delegateTask.getVariable("applyUser");
-//        deptLeaderUsers = atiUserDao.getHrUsersByAtiUserId(atiUserId);
+        String  applyUserName = (String) delegateTask.getVariable("applyUserId");
+        deptLeaderUsers = atiUserDao.getDeptLeaderUsersByName(applyUserName);
 
-//        addNames(deptLeaderUsers,names,delegateTask);
+        addAssignNames(deptLeaderUsers,names,delegateTask);
 
-        AtiUser user = atiUserDao.getUserByName("n15000510");
-        List<AtiUser> users = new ArrayList<>();
-        users.add(user);
-        deptLeaderUsers = users;
-        delegateTask.addCandidateUser("n15000510");
+//        AtiUser user = atiUserDao.getUserByName("n15000510");
+//        List<AtiUser> users = new ArrayList<>();
+//        users.add(user);
+//        deptLeaderUsers = users;
+//        delegateTask.addCandidateUser("n15000510");
 
 
         //如果有任务委托，添加委托人
