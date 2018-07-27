@@ -56,7 +56,7 @@
       g.ATI_GROUP_ID = #{atiGroupId}
   </select>
 
-  <select id="getDeptLeaderUsersByName" resultMap="BaseResultMap">
+  <select id="getDeptLeaderUsersByNo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ati_user u left join ati_user_role ur
@@ -70,10 +70,10 @@
     from ati_user u left join ati_user_org uo
     on u.ati_user_id = uo.ati_user_id
     left join ati_org  g on uo.ati_org_id = g.ati_org_id
-    where u.name= #{name})
+    where u.no= #{no})
   </select>
 
-  <select id="getHrUsersByName" resultMap="BaseResultMap">
+  <select id="getHrUsersByNo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ati_user u left join ati_user_role ur
@@ -87,10 +87,10 @@
     from ati_user u left join ati_user_org uo
     on u.ati_user_id = uo.ati_user_id
     left join ati_org  g on uo.ati_org_id = g.ati_org_id
-    where u.name= #{name})
+    where u.no= #{no})
   </select>
 
-  <select id="getHrLeaderUsersByName" resultMap="BaseResultMap">
+  <select id="getHrLeaderUsersByNo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from ati_user u left join ati_user_role ur
@@ -104,7 +104,7 @@
     from ati_user u left join ati_user_org uo
     on u.ati_user_id = uo.ati_user_id
     left join ati_org  g on uo.ati_org_id = g.ati_org_id
-    where u.name= #{name})
+    where u.no= #{no})
   </select>
 
   <select id="getHrUsersByAtiUserId" resultMap="BaseResultMap">

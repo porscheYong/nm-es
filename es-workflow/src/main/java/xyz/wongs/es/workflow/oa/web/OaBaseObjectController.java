@@ -107,6 +107,9 @@ public class OaBaseObjectController extends BaseController {
             String wadocId = jsonPrimaryId.getString("uec_psndoc_wadoc");
             baseObject.setWadocId(wadocId);
 
+            String assId = jsonPrimaryId.getString("uec_ass");
+            baseObject.setAssId(assId);
+
             String outStaffIdHis = jsonPrimaryId.getString("uec_out_staff_info_his");
             baseObject.setOutStaffIdHis(outStaffIdHis);
 
@@ -142,6 +145,9 @@ public class OaBaseObjectController extends BaseController {
 
             String wadocIdHis = jsonPrimaryId.getString("uec_psndoc_wadoc_his");
             baseObject.setWadocIdHis(wadocIdHis);
+
+            String assIdHis = jsonPrimaryId.getString("uec_ass_his");
+            baseObject.setAssIdHis(assIdHis);
 
         }
 

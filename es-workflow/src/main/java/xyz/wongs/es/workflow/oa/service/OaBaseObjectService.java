@@ -253,6 +253,18 @@ public class OaBaseObjectService {
             specificFormWaDoc.setParamValue(String.valueOf(oaBaseObject.getWadocIdHis()));
             specificForms.add(specificFormWaDoc);
         }
+        if (null != oaBaseObject.getAssId() && !oaBaseObject.getAssId().isEmpty()) {
+            AtiSpecificForm specificFormAss = getSpecificForm(oaBaseObject);
+            specificFormAss.setParameter("ASS_ID");
+            specificFormAss.setParamValue(oaBaseObject.getAssId());
+            specificForms.add(specificFormAss);
+        }
+        if (null != oaBaseObject.getAssIdHis() && !oaBaseObject.getAssIdHis().isEmpty()) {
+            AtiSpecificForm specificFormAss = getSpecificForm(oaBaseObject);
+            specificFormAss.setParameter("ASS_ID_HIS");
+            specificFormAss.setParamValue(oaBaseObject.getAssIdHis());
+            specificForms.add(specificFormAss);
+        }
 
         AtiSpecificForm specificFormPrimaryKeyHis = getSpecificForm(oaBaseObject);
         specificFormPrimaryKeyHis.setParameter("PRIMARY_ID_HIS");
