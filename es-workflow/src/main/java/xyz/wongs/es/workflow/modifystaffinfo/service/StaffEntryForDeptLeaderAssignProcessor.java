@@ -52,7 +52,7 @@ public class StaffEntryForDeptLeaderAssignProcessor extends OaBaseTaskListenerSe
 
         //本流程该节点的候选人为：
         String  applyUserName = (String) delegateTask.getVariable("applyUserId");
-        deptLeaderUsers = atiUserDao.getDeptLeaderUsersByName(applyUserName);
+        deptLeaderUsers = atiUserDao.getDeptLeaderUsersByNo(applyUserName);
 
         addAssignNames(deptLeaderUsers,names,delegateTask);
 

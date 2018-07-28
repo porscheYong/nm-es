@@ -53,7 +53,7 @@ public class StaffEntryForHrLeaderAssignProcessor extends OaBaseTaskListenerServ
 
         //本流程该节点的候选人为：
         String applyUserName = (String) delegateTask.getVariable("applyUserId");
-        hrLeaderUsers = atiUserDao.getHrLeaderUsersByName(applyUserName);
+        hrLeaderUsers = atiUserDao.getHrLeaderUsersByNo(applyUserName);
 
         addNames(hrLeaderUsers,names,delegateTask);
 
