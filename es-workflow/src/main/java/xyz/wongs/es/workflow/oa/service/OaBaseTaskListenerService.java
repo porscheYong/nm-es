@@ -38,7 +38,7 @@ public class OaBaseTaskListenerService {
 
     public void addAssignNames(List<AtiUser> users, List<String> names, DelegateTask delegateTask) {
         for(AtiUser user : users) {
-            names.add((String) user.getName());
+            names.add(user.getNo());
         }
         delegateTask.addCandidateUsers(names);
     }

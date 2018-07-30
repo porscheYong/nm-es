@@ -30,6 +30,13 @@ public interface AtiUserDao extends CrudDao<AtiUser> {
     List<AtiUser> getUsersByRoleId(Long atiRoleId);
 
     /**
+     * 通过员工账号查找用户
+     * @param no
+     * @return
+     */
+    AtiUser getUserByNo(String no);
+
+    /**
      * 取出组中人员
      * @param atiGroupId
      * @return

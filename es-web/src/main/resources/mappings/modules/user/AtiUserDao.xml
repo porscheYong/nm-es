@@ -56,6 +56,15 @@
       g.ATI_GROUP_ID = #{atiGroupId}
   </select>
 
+  <select id="getUserByNo" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+    ATI_USER u
+    WHERE
+    u.no = #{no}
+  </select>
+
   <select id="getDeptLeaderUsersByNo" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

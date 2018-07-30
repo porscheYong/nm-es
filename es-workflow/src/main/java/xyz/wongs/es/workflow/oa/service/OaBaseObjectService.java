@@ -574,7 +574,7 @@ public class OaBaseObjectService {
             List<AtiUser> users = (List<AtiUser>) taskService.getVariable(task.getId(), task.getTaskDefinitionKey());
             if (null != users && users.size() > 0) {
                 for (AtiUser user : users) {
-                    if (assignName.equals(user.getName())) {
+                    if (assignName.equals(user.getNo())) {
                         isAssignName = true;
                         break;
                     }

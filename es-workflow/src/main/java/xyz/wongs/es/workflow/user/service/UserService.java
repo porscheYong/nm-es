@@ -86,5 +86,9 @@ public class UserService {
         return uecOutStaffInfoDao.getOutStaffByCode(psncode);
     }
 
+    public AtiUser getUserByNo(String no) {
+        return atiUserDao.getUserByNo(no);
+    }
+
 
 }
