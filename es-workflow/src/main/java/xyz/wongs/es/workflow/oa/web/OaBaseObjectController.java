@@ -24,6 +24,7 @@ import xyz.wongs.es.workflow.oa.entity.HistoricTask;
 import xyz.wongs.es.workflow.oa.entity.OaBaseObject;
 import xyz.wongs.es.workflow.oa.entity.ResponseResult;
 import xyz.wongs.es.workflow.oa.service.OaBaseObjectService;
+import xyz.wongs.es.workflow.user.dao.AtiUserDao;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 import xyz.wongs.es.workflow.user.entity.UecOutStaffInfo;
 import xyz.wongs.es.workflow.user.entity.UecStaffInfo;
@@ -53,6 +54,8 @@ public class OaBaseObjectController extends BaseController {
     private RuntimeService runtimeService;
     @Resource
     private TaskService taskService;
+    @Resource
+    private AtiUserDao atiUserDao;
 
 
     /**
@@ -166,15 +169,12 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        String code = oaBaseObjectService.getCode(formSender);
-        UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-        UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if (uecStaffInfo == null && uecOutStaffInfo == null) {
-            result.setMessage("用户不存在！");
+        AtiUser user = userService.getUserByNo(formSender);
+        if (user == null) {
+            result.setMessage("当前用户不允许发起流程！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
         }
-
 
         String formTheme = (String) baseObject.getFormTheme();
         if (formTheme == null || formTheme.isEmpty()) {
@@ -230,10 +230,8 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        String code = oaBaseObjectService.getCode(assignName);
-        UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-        UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if (uecStaffInfo == null && uecOutStaffInfo == null) {
+        AtiUser user = atiUserDao.getUserByNo(assignName);
+        if (user == null) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -315,10 +313,8 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        String code = oaBaseObjectService.getCode(assignName);
-        UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-        UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-        if (uecStaffInfo == null && uecOutStaffInfo == null) {
+        AtiUser user = userService.getUserByNo(assignName);
+        if (user == null) {
             result.setMessage("用户不存在！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -397,7 +393,7 @@ public class OaBaseObjectController extends BaseController {
                 .getVariable(currentTask.getId(), currentTask.getTaskDefinitionKey());
         List<String> names = Lists.newArrayList();
         for (AtiUser user : currentUsers) {
-            String name = (String) user.getName();
+            String name = user.getNo();
             names.add(name);
         }
         map.put("names", names);

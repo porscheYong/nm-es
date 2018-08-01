@@ -259,29 +259,13 @@ public class AtiTaskController extends BaseController {
 	public ResponseResult<List<Act>> testActTodo(String assignName) {
 		ResponseResult<List<Act>> result = new ResponseResult<List<Act>>();
 		List<Act> acts = new ArrayList<>();
-		if(assignName==null || assignName.isEmpty()) {
+
+		AtiUser user = userService.getUserByNo(assignName);
+		if (user == null) {
 			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-			result.setMessage("用户不存在！");
+			result.setMessage("用户不存在");
 			return result;
 		}
-
-		String code = oaBaseObjectService.getCode(assignName);
-		UecStaffInfo uecStaffInfo = userService.getStaffByCode(code);
-		UecOutStaffInfo uecOutStaffInfo = userService.getOutStaffByCode(code);
-		if(uecStaffInfo == null && uecOutStaffInfo == null) {
-			result.setMessage("用户不存在！");
-			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-			return result;
-		}
-
-		//校验当前活动节点候选人中是否有assignName
-
-//		Boolean isAssignName = oaBaseObjectService.isAssignName(assignName);
-//		if(!isAssignName) {
-//			result.setMessage("用户名不存在！");
-//			result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
-//			return result;
-//		}
 
 		TaskQuery toClaimQuery = taskService.createTaskQuery().taskCandidateUser(assignName)
 				.includeProcessVariables().active().orderByTaskCreateTime().desc();
