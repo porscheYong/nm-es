@@ -46,6 +46,8 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     private String wadocId;
     /** 考核信息    */
     private String assId;
+    /** 职业资格管理  */
+    private String nationdutyId;
 
     /** 历史数据主键 */
     private String primaryIdHis;
@@ -76,6 +78,8 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     private String wadocIdHis;
     /** 考核信息    */
     private String assIdHis;
+    /** 职业资格管理  */
+    private String nationdutyIdHis;
 
     private String firstText;
 
@@ -373,5 +377,21 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
 
     public void setAssIdHis(String assIdHis) {
         this.assIdHis = assIdHis;
+    }
+
+    public String getNationdutyId() {
+        return nationdutyId;
+    }
+
+    public void setNationdutyId(String nationdutyId) {
+        this.nationdutyId = nationdutyId;
+    }
+
+    public String getNationdutyIdHis() {
+        return nationdutyIdHis;
+    }
+
+    public void setNationdutyIdHis(String nationdutyIdHis) {
+        this.nationdutyIdHis = nationdutyIdHis;
     }
 }

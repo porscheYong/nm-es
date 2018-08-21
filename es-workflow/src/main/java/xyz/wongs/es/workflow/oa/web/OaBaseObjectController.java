@@ -73,6 +73,10 @@ public class OaBaseObjectController extends BaseController {
         primaryId = primaryId.replaceAll(":", ":'");
         primaryId = primaryId.replaceAll(",", "',");
         JSONObject jsonPrimaryId = JSONObject.parseObject(primaryId);
+        /**
+         * uec_doc_edu,uec_family,uec_title,uec_nationduty,uec_enc,uec_punish,uec_partylog
+         * 这些表增加时可能会增加多条记录，获取的字符串以A-B-C表示
+         */
         if (null != jsonPrimaryId) {
             String outStaffId = jsonPrimaryId.getString("uec_out_staff_info");
             baseObject.setOutStaffId(outStaffId);
@@ -113,6 +117,9 @@ public class OaBaseObjectController extends BaseController {
             String assId = jsonPrimaryId.getString("uec_ass");
             baseObject.setAssId(assId);
 
+            String nationdutyId = jsonPrimaryId.getString("uec_nationduty");
+            baseObject.setNationdutyId(nationdutyId);
+
             String outStaffIdHis = jsonPrimaryId.getString("uec_out_staff_info_his");
             baseObject.setOutStaffIdHis(outStaffIdHis);
 
@@ -151,6 +158,9 @@ public class OaBaseObjectController extends BaseController {
 
             String assIdHis = jsonPrimaryId.getString("uec_ass_his");
             baseObject.setAssIdHis(assIdHis);
+
+            String nationdutyIdHis = jsonPrimaryId.getString("uec_nationduty_his");
+            baseObject.setNationdutyIdHis(nationdutyIdHis);
 
         }
 

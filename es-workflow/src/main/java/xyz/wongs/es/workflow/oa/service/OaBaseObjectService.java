@@ -265,6 +265,18 @@ public class OaBaseObjectService {
             specificFormAss.setParamValue(oaBaseObject.getAssIdHis());
             specificForms.add(specificFormAss);
         }
+        if (null != oaBaseObject.getNationdutyId() && !oaBaseObject.getNationdutyId().isEmpty()) {
+            AtiSpecificForm specificFormNationduty = getSpecificForm(oaBaseObject);
+            specificFormNationduty.setParameter("NATIONDUTY_ID");
+            specificFormNationduty.setParamValue(oaBaseObject.getNationdutyId());
+            specificForms.add(specificFormNationduty);
+        }
+        if (null != oaBaseObject.getNationdutyIdHis() && !oaBaseObject.getNationdutyIdHis().isEmpty()) {
+            AtiSpecificForm specificFormNationdutyHis = getSpecificForm(oaBaseObject);
+            specificFormNationdutyHis.setParameter("NATIONDUTY_ID_HIS");
+            specificFormNationdutyHis.setParamValue(oaBaseObject.getNationdutyIdHis());
+            specificForms.add(specificFormNationdutyHis);
+        }
 
         AtiSpecificForm specificFormPrimaryKeyHis = getSpecificForm(oaBaseObject);
         specificFormPrimaryKeyHis.setParameter("PRIMARY_ID_HIS");
