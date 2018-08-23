@@ -24,8 +24,9 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     private String outStaffId;
     /**	转正	*/
     private String trialId;
-    /**	任制	*/
-    private String psnjobId;
+    /**	任职	*/
+    private String psnjobIdModify;
+    private String psnjobIdAdd;
     /**	离退	*/
     private String retireId;
     /**	奖励	*/
@@ -171,12 +172,20 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
         this.trialId = trialId;
     }
 
-    public String getPsnjobId() {
-        return psnjobId;
+    public String getPsnjobIdModify() {
+        return psnjobIdModify;
     }
 
-    public void setPsnjobId(String psnjobId) {
-        this.psnjobId = psnjobId;
+    public void setPsnjobIdModify(String psnjobIdModify) {
+        this.psnjobIdModify = psnjobIdModify;
+    }
+
+    public String getPsnjobIdAdd() {
+        return psnjobIdAdd;
+    }
+
+    public void setPsnjobIdAdd(String psnjobIdAdd) {
+        this.psnjobIdAdd = psnjobIdAdd;
     }
 
     public String getRetireId() {

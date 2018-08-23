@@ -133,10 +133,16 @@ public class OaBaseObjectService {
             specificFormTrial.setParamValue(String.valueOf(oaBaseObject.getTrialIdHis()));
             specificForms.add(specificFormTrial);
         }
-        if (null != oaBaseObject.getPsnjobId() && !oaBaseObject.getPsnjobId().isEmpty()) {
+        if (null != oaBaseObject.getPsnjobIdModify() && !oaBaseObject.getPsnjobIdModify().isEmpty()) {
             AtiSpecificForm specificFormPsnjob = getSpecificForm(oaBaseObject);
-            specificFormPsnjob.setParameter("PSNJOB_ID");
-            specificFormPsnjob.setParamValue(String.valueOf(oaBaseObject.getPsnjobId()));
+            specificFormPsnjob.setParameter("PSNJOB_ID_MODIFY");
+            specificFormPsnjob.setParamValue(String.valueOf(oaBaseObject.getPsnjobIdModify()));
+            specificForms.add(specificFormPsnjob);
+        }
+        if (null != oaBaseObject.getPsnjobIdAdd() && !oaBaseObject.getPsnjobIdAdd().isEmpty()) {
+            AtiSpecificForm specificFormPsnjob = getSpecificForm(oaBaseObject);
+            specificFormPsnjob.setParameter("PSNJOB_ID_ADD");
+            specificFormPsnjob.setParamValue(String.valueOf(oaBaseObject.getPsnjobIdAdd()));
             specificForms.add(specificFormPsnjob);
         }
         if (null != oaBaseObject.getPsnjobIdHis() && !oaBaseObject.getPsnjobIdHis().isEmpty()) {

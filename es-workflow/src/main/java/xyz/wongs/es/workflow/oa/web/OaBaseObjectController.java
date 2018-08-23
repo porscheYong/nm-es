@@ -84,8 +84,12 @@ public class OaBaseObjectController extends BaseController {
             String trialId = jsonPrimaryId.getString("uec_trial");
             baseObject.setTrialId(trialId);
 
-            String psnjobId = jsonPrimaryId.getString("uec_psnjob");
-            baseObject.setPsnjobId(psnjobId);
+            // 修改任职信息添加的id
+            String psnjobIdOfModify = jsonPrimaryId.getString("uec_psnjob_modi");
+            baseObject.setPsnjobIdModify(psnjobIdOfModify);
+            // 添加任职信息添加的id
+            String psnjobIdOfAdd = jsonPrimaryId.getString("uec_psnjob_add");
+            baseObject.setPsnjobIdAdd(psnjobIdOfAdd);
 
             String retireId = jsonPrimaryId.getString("uec_retire");
             baseObject.setRetireId(retireId);
