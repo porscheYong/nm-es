@@ -109,6 +109,20 @@ public class OaBaseObjectService {
 
         List<AtiSpecificForm> specificForms = Lists.newArrayList();
 
+        if (null != oaBaseObject.getStaffId() && !oaBaseObject.getStaffId().isEmpty()) {
+            AtiSpecificForm specificFormStaffInfo = getSpecificForm(oaBaseObject);
+            specificFormStaffInfo.setParameter("STAFF_ID");
+            specificFormStaffInfo.setParamValue(String.valueOf(oaBaseObject.getStaffId()));
+            specificForms.add(specificFormStaffInfo);
+        }
+
+        if (null != oaBaseObject.getStaffIdHis() && !oaBaseObject.getStaffIdHis().isEmpty()) {
+            AtiSpecificForm specificFormStaffInfo = getSpecificForm(oaBaseObject);
+            specificFormStaffInfo.setParameter("STAFF_ID_HIS");
+            specificFormStaffInfo.setParamValue(String.valueOf(oaBaseObject.getStaffIdHis()));
+            specificForms.add(specificFormStaffInfo);
+        }
+
         if (null != oaBaseObject.getOutStaffId() && !oaBaseObject.getOutStaffId().isEmpty()) {
             AtiSpecificForm specificFormOutStaffInfo = getSpecificForm(oaBaseObject);
             specificFormOutStaffInfo.setParameter("OUT_STAFF_ID");
