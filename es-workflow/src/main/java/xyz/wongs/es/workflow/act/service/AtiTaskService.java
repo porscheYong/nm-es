@@ -162,7 +162,7 @@ public class AtiTaskService extends BaseService {
         atiActDao.updateProcInstIdByBaseFormId(act.getProcInsId(), atiBaseForm.getAtiBaseFormId());
 
         // 更新历史表
-        //todo
+        atiActDao.setAssigneeForActHiActinst(act.getProcInsId(), name);
 
         return act.getProcInsId();
     }

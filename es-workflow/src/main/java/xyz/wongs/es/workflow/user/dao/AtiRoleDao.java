@@ -29,4 +29,11 @@ public interface AtiRoleDao extends CrudDao<AtiRole> {
      */
     List<AtiRole> getRolesByUserId(String UserId);
 
+    /**
+     * 获取用户角色
+     * @param no
+     * @return
+     */
+    AtiRole getRoleByNo(String no);
+
 }

@@ -7,5 +7,11 @@
 			proc_inst_id = #{procInstId}
 		WHERE ati_base_form_id = #{atiBaseFormId}
 	</update>
+
+	<update id="setAssigneeForActHiActinst" parameterType="java.lang.String">
+		UPDATE act_hi_actinst
+		SET assignee_ = #{assignee}
+		WHERE proc_inst_id_ = #{procInstId} and act_id_ = 'startEvent'
+	</update>
 	
 </mapper>

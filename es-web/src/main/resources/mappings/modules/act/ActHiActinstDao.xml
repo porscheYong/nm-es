@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.workflow.act.dao.ActHiActinstDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.workflow.act.entity.ActHiActinst">
+    <id column="ID_" jdbcType="OTHER" property="id" />
+    <result column="PROC_DEF_ID_" jdbcType="OTHER" property="procDefId" />
+    <result column="PROC_INST_ID_" jdbcType="OTHER" property="procInstId" />
+    <result column="EXECUTION_ID_" jdbcType="OTHER" property="executionId" />
+    <result column="ACT_ID_" jdbcType="OTHER" property="actId" />
+    <result column="TASK_ID_" jdbcType="OTHER" property="taskId" />
+    <result column="CALL_PROC_INST_ID_" jdbcType="OTHER" property="callProcInstId" />
+    <result column="ACT_NAME_" jdbcType="OTHER" property="actName" />
+    <result column="ACT_TYPE_" jdbcType="OTHER" property="actType" />
+    <result column="ASSIGNEE_" jdbcType="OTHER" property="assignee" />
+    <result column="START_TIME_" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="END_TIME_" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="DURATION_" jdbcType="DECIMAL" property="duration" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID_, PROC_DEF_ID_, PROC_INST_ID_, EXECUTION_ID_, ACT_ID_, TASK_ID_, CALL_PROC_INST_ID_, 
+    ACT_NAME_, ACT_TYPE_, ASSIGNEE_, START_TIME_, END_TIME_, DURATION_
+  </sql>
+
+  <select id="findAllActHiActinstByAssignee" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM
+      act_hi_actinst
+    WHERE
+      assignee_ = #{assignee}
+
+  </select>
+
+
+
+
+</mapper>
