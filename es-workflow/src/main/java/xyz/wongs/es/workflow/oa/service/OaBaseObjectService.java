@@ -19,11 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.utils.StringUtils;
 import xyz.wongs.es.modules.act.entity.Act;
 import xyz.wongs.es.modules.act.utils.ProcessDefCache;
+import xyz.wongs.es.workflow.act.dao.ActHiActinstDao;
+import xyz.wongs.es.workflow.act.entity.ActHiActinst;
 import xyz.wongs.es.workflow.act.service.AtiTaskService;
 import xyz.wongs.es.workflow.modifystaffinfo.entity.AtiStaffEntry;
 import xyz.wongs.es.workflow.oa.dao.AtiBaseFormDao;
 import xyz.wongs.es.workflow.oa.dao.AtiSpecificFormDao;
 import xyz.wongs.es.workflow.oa.entity.*;
+import xyz.wongs.es.workflow.user.dao.AtiRoleDao;
+import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 import xyz.wongs.es.workflow.user.service.UserService;
 
@@ -61,6 +65,10 @@ public class OaBaseObjectService {
     private AtiSpecificFormService atiSpecificFormService;
     @Resource
     private RuntimeService runtimeService;
+    @Resource
+    private ActHiActinstDao actHiActinstDao;
+    @Resource
+    private AtiRoleDao atiRoleDao;
 
 
     /**
@@ -108,6 +116,20 @@ public class OaBaseObjectService {
     public List<AtiSpecificForm> getSpecificForms(OaBaseObject oaBaseObject) {
 
         List<AtiSpecificForm> specificForms = Lists.newArrayList();
+
+        if (null != oaBaseObject.getStaffId() && !oaBaseObject.getStaffId().isEmpty()) {
+            AtiSpecificForm specificFormStaffInfo = getSpecificForm(oaBaseObject);
+            specificFormStaffInfo.setParameter("STAFF_ID");
+            specificFormStaffInfo.setParamValue(String.valueOf(oaBaseObject.getStaffId()));
+            specificForms.add(specificFormStaffInfo);
+        }
+
+        if (null != oaBaseObject.getStaffIdHis() && !oaBaseObject.getStaffIdHis().isEmpty()) {
+            AtiSpecificForm specificFormStaffInfo = getSpecificForm(oaBaseObject);
+            specificFormStaffInfo.setParameter("STAFF_ID_HIS");
+            specificFormStaffInfo.setParamValue(String.valueOf(oaBaseObject.getStaffIdHis()));
+            specificForms.add(specificFormStaffInfo);
+        }
 
         if (null != oaBaseObject.getOutStaffId() && !oaBaseObject.getOutStaffId().isEmpty()) {
             AtiSpecificForm specificFormOutStaffInfo = getSpecificForm(oaBaseObject);
@@ -329,109 +351,234 @@ public class OaBaseObjectService {
 
 
     public List<HistoricTask> getHistToricTaskList(String assignName, String categoryId, String startTime, String endTime) {
-        HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery()
-                .taskAssignee(assignName).finished().includeProcessVariables()
-                .orderByHistoricTaskInstanceEndTime().desc();
 
         List<HistoricTask> historicTasks = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        AtiRole atiRole = atiRoleDao.getRoleByNo(assignName);
+        // 非发起人
         try {
-            if (null == categoryId || categoryId.isEmpty()) {
-                if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
+            if (!"4000".equals(atiRole.getRoleCode())) {
+                HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery()
+                        .taskAssignee(assignName).finished().includeProcessVariables()
+                        .orderByHistoricTaskInstanceEndTime().desc();
+
+                if (null == categoryId || categoryId.isEmpty()) {
+                    if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                historicTasks.add(historicTask);
+                            }
                         }
                     }
-                }
-                if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedBefore(sdf.parse(endTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            if (taskInstance.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                    if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedBefore(sdf.parse(endTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                if (taskInstance.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedAfter(sdf.parse(startTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                if (taskInstance.getStartTime().getTime() >= sdf.parse(startTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedAfter(sdf.parse(startTime))
+                                .taskCompletedBefore(sdf.parse(endTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
                                 HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
                                 historicTasks.add(historicTask);
                             }
                         }
                     }
                 }
-                if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedAfter(sdf.parse(startTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            if (taskInstance.getStartTime().getTime() >= sdf.parse(startTime).getTime()) {
+                if (null != categoryId && !categoryId.isEmpty()) {
+                    if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId", Long.valueOf(categoryId)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                historicTasks.add(historicTask);
+                            }
+                        }
+                    }
+                    if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId", Long.valueOf(categoryId))
+                                .taskCompletedBefore(sdf.parse(endTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                historicTasks.add(historicTask);
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId", Long.valueOf(categoryId))
+                                .taskCompletedAfter(sdf.parse(startTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
+                                HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
+                                historicTasks.add(historicTask);
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId", Long.valueOf(categoryId))
+                                .taskCompletedAfter(sdf.parse(startTime)).taskCompletedBefore(sdf.parse(endTime)).list();
+                        if (null == histList || histList.size() == 0) {
+                            return null;
+                        }
+                        for (HistoricTaskInstance taskInstance : histList) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
+                            if (null != baseObject) {
                                 HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
                                 historicTasks.add(historicTask);
                             }
                         }
                     }
                 }
-                if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.taskCompletedAfter(sdf.parse(startTime))
-                            .taskCompletedBefore(sdf.parse(endTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
+
+            } else {
+                List<ActHiActinst> hiActinsts = actHiActinstDao.findAllActHiActinstByAssignee(assignName);
+                if (null == hiActinsts || hiActinsts.size() == 0) {
+                    return null;
+                }
+                if (null == categoryId || categoryId.isEmpty()) {
+                    if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                historicTasks.add(historicTask);
+                            }
+                        }
+                    }
+                    if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (actHiActinst.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (actHiActinst.getStartTime().getTime() >= sdf.parse(startTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (actHiActinst.getStartTime().getTime() >= sdf.parse(startTime).getTime() && actHiActinst.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
                         }
                     }
                 }
-            }
-            if (null != categoryId && !categoryId.isEmpty()) {
-                if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId",Long.valueOf(categoryId)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
+                if (null != categoryId && !categoryId.isEmpty()) {
+                    if ((null == startTime || startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (categoryId.equals(baseObject.getAtiActCategoryId().toString())) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (categoryId.equals(baseObject.getAtiActCategoryId().toString()) && actHiActinst.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (categoryId.equals(baseObject.getAtiActCategoryId().toString()) && actHiActinst.getStartTime().getTime() >= sdf.parse(startTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
+                        }
+                    }
+                    if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
+                        for (ActHiActinst actHiActinst : hiActinsts) {
+                            OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(actHiActinst.getProcInstId().toString());
+                            if (null != baseObject) {
+                                if (categoryId.equals(baseObject.getAtiActCategoryId().toString()) && actHiActinst.getStartTime().getTime() >= sdf.parse(startTime).getTime() && actHiActinst.getEndTime().getTime() <= sdf.parse(endTime).getTime()) {
+                                    HistoricTask historicTask = setHistoricTask(actHiActinst, baseObject);
+                                    historicTasks.add(historicTask);
+                                }
+                            }
                         }
                     }
                 }
-                if ((null == startTime || startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId",Long.valueOf(categoryId))
-                            .taskCompletedBefore(sdf.parse(endTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
-                        }
-                    }
-                }
-                if ((null != startTime && !startTime.isEmpty()) && (null == endTime || endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId",Long.valueOf(categoryId))
-                            .taskCompletedAfter(sdf.parse(startTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
-                        }
-                    }
-                }
-                if ((null != startTime && !startTime.isEmpty()) && (null != endTime && !endTime.isEmpty())) {
-                    List<HistoricTaskInstance> histList = histTaskQuery.processVariableValueEquals("categoryId",Long.valueOf(categoryId))
-                            .taskCompletedAfter(sdf.parse(startTime)).taskCompletedBefore(sdf.parse(endTime)).list();
-                    for (HistoricTaskInstance taskInstance : histList) {
-                        OaBaseObject baseObject = atiSpecificFormDao.getOaBaseObjectByProcInstId(taskInstance.getProcessInstanceId());
-                        if (null != baseObject) {
-                            HistoricTask historicTask = setHistoricTask(taskInstance, baseObject);
-                            historicTasks.add(historicTask);
-                        }
-                    }
-                }
+
             }
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         return historicTasks;
     }
 
@@ -452,6 +599,28 @@ public class OaBaseObjectService {
 
         List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().
                 processDefinitionId(taskInstance.getProcessDefinitionId()).list();
+        historicTask.setProcDefName(list.get(0).getName());
+
+        return historicTask;
+    }
+
+    private HistoricTask setHistoricTask(ActHiActinst actHiActinst, OaBaseObject baseObject) {
+        HistoricTask historicTask = new HistoricTask();
+        historicTask.setProcessDefinitionId(actHiActinst.getProcDefId().toString());
+        historicTask.setProcessInstanceId(actHiActinst.getProcInstId().toString());
+        historicTask.setAssignee(actHiActinst.getAssignee().toString());
+        historicTask.setDurationInMillis(actHiActinst.getDuration().longValue());
+        historicTask.setStartTime(actHiActinst.getStartTime());
+        historicTask.setEndTime(actHiActinst.getEndTime());
+        historicTask.setName(actHiActinst.getActName().toString());
+
+        historicTask.setFormSender(baseObject.getFormSender());
+        historicTask.setFormTheme(baseObject.getFormTheme());
+        historicTask.setFormContent(baseObject.getFormContent());
+        historicTask.setAtiCategoryId(baseObject.getAtiActCategoryId());
+
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().
+                processDefinitionId(actHiActinst.getProcDefId().toString()).list();
         historicTask.setProcDefName(list.get(0).getName());
 
         return historicTask;

@@ -78,6 +78,9 @@ public class OaBaseObjectController extends BaseController {
          * 这些表增加时可能会增加多条记录，获取的字符串以A-B-C表示
          */
         if (null != jsonPrimaryId) {
+            String staffId = jsonPrimaryId.getString("uec_staff_info");
+            baseObject.setStaffId(staffId);
+
             String outStaffId = jsonPrimaryId.getString("uec_out_staff_info");
             baseObject.setOutStaffId(outStaffId);
 
@@ -123,6 +126,9 @@ public class OaBaseObjectController extends BaseController {
 
             String nationdutyId = jsonPrimaryId.getString("uec_nationduty");
             baseObject.setNationdutyId(nationdutyId);
+
+            String staffIdHis = jsonPrimaryId.getString("uec_staff_info_his");
+            baseObject.setStaffIdHis(staffIdHis);
 
             String outStaffIdHis = jsonPrimaryId.getString("uec_out_staff_info_his");
             baseObject.setOutStaffIdHis(outStaffIdHis);

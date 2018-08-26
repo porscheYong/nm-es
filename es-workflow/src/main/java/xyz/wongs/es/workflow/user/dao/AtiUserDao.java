@@ -3,6 +3,7 @@ package xyz.wongs.es.workflow.user.dao;
 import xyz.wongs.es.common.persistence.CrudDao;
 import xyz.wongs.es.common.persistence.annotation.MyBatisDao;
 import xyz.wongs.es.workflow.user.entity.AtiGroup;
+import xyz.wongs.es.workflow.user.entity.AtiRole;
 import xyz.wongs.es.workflow.user.entity.AtiUser;
 
 import java.util.List;
@@ -84,5 +85,7 @@ public interface AtiUserDao extends CrudDao<AtiUser> {
      * @return
      */
     List<AtiUser> getUsers();
+
+
 
 }
