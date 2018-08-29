@@ -190,7 +190,7 @@ public class OaBaseObjectController extends BaseController {
         }
 
         AtiUser user = userService.getUserByNo(formSender);
-        if (user == null) {
+        if (user == null || "n18004840170".equals(baseObject.getFormSender()) || "N13514713646".equals(baseObject.getFormSender())) {
             result.setMessage("当前用户不允许发起流程！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -400,28 +400,27 @@ public class OaBaseObjectController extends BaseController {
     @ResponseBody
     public ResponseResult<Map<String, Object>> getCurrentTaskAssignNames(String procInstId) {
         ResponseResult<Map<String, Object>> result = new ResponseResult<>();
-        Map<String, Object> map = new HashMap<>();
-
-        Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
-        Act e = new Act();
-        e.setTask(currentTask);
-        e.setProcDef(ProcessDefCache.get(currentTask.getProcessDefinitionId()));
-        map.put("task", e);
-
-        //获取在监听器中设置的用户变量
-        List<AtiUser> currentUsers = (List<AtiUser>) taskService
-                .getVariable(currentTask.getId(), currentTask.getTaskDefinitionKey());
-        List<String> names = Lists.newArrayList();
-        for (AtiUser user : currentUsers) {
-            String name = user.getNo();
-            names.add(name);
-        }
-        map.put("names", names);
+        Map<String, Object> map = oaBaseObjectService.getCurrentTaskAssignNames(procInstId);
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("获取当前任务候选人成功！");
         result.setData(map);
         return result;
     }
 
+
+    @RequestMapping(value = "/testProcInstOver", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseResult<String> testProcInstOver(String procInstId) {
+        ResponseResult<String> result = new ResponseResult<>();
+        String string = null;
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
+        if (null != processInstance) {
+            string = processInstance.getId();
+        }
+        result.setState(ResponseResult.STATE_OK);
+        result.setMessage("获取当前任务候选人成功！");
+        result.setData(string);
+        return result;
+    }
 
 }

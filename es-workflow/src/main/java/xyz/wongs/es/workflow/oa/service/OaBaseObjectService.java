@@ -35,6 +35,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -601,6 +602,14 @@ public class OaBaseObjectService {
                 processDefinitionId(taskInstance.getProcessDefinitionId()).list();
         historicTask.setProcDefName(list.get(0).getName());
 
+        String procInstId = baseObject.getProcInstId();
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
+        if (null != processInstance) {
+            Map<String, Object> map = getCurrentTaskAssignNames(procInstId);
+            List<String> names = (List<String>) map.get("names");
+            historicTask.setCurrentCandidate(names.get(0));
+        }
+
         return historicTask;
     }
 
@@ -609,7 +618,9 @@ public class OaBaseObjectService {
         historicTask.setProcessDefinitionId(actHiActinst.getProcDefId().toString());
         historicTask.setProcessInstanceId(actHiActinst.getProcInstId().toString());
         historicTask.setAssignee(actHiActinst.getAssignee().toString());
-        historicTask.setDurationInMillis(actHiActinst.getDuration().longValue());
+        if(null != actHiActinst.getDuration()) {
+            historicTask.setDurationInMillis(actHiActinst.getDuration().longValue());
+        }
         historicTask.setStartTime(actHiActinst.getStartTime());
         historicTask.setEndTime(actHiActinst.getEndTime());
         historicTask.setName(actHiActinst.getActName().toString());
@@ -622,6 +633,19 @@ public class OaBaseObjectService {
         List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().
                 processDefinitionId(actHiActinst.getProcDefId().toString()).list();
         historicTask.setProcDefName(list.get(0).getName());
+
+        String procInstId = baseObject.getProcInstId();
+        ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
+        if (null != processInstance) {
+            if ("modify".equals(processInstance.getActivityId())) {
+                historicTask.setCurrentCandidate(baseObject.getFormSender());
+            } else {
+                Map<String, Object> map = getCurrentTaskAssignNames(procInstId);
+                List<String> names = (List<String>) map.get("names");
+                historicTask.setCurrentCandidate(names.get(0));
+            }
+        }
+
 
         return historicTask;
     }
@@ -712,6 +736,7 @@ public class OaBaseObjectService {
                 historicFlow.setStartTime(histIns.getStartTime());
                 historicFlow.setEndTime(histIns.getEndTime());
                 historicFlow.setDuringTime(String.valueOf(histIns.getDurationInMillis()));
+
                 historicFlow.setTaskDefKey(histIns.getActivityName());
 
                 if ("startEvent".equals(histIns.getActivityId())) {
@@ -773,5 +798,40 @@ public class OaBaseObjectService {
 
         }
         return isAssignName;
+    }
+
+    /**
+     * 当前任务与候选人
+     * @param procInstId
+     * @return
+     */
+    public Map<String, Object> getCurrentTaskAssignNames(String procInstId) {
+        Map<String, Object> map = new HashMap<>();
+
+        Task currentTask = taskService.createTaskQuery().processInstanceId(procInstId).singleResult();
+        Act e = new Act();
+        e.setTask(currentTask);
+        e.setProcDef(ProcessDefCache.get(currentTask.getProcessDefinitionId()));
+        map.put("task", e);
+
+        List<String> names = Lists.newArrayList();
+
+        if ("modify".equals(currentTask.getTaskDefinitionKey())) {
+            String formSender = (String) runtimeService.getVariable(procInstId, "applyUserId");
+            names.add(formSender);
+            map.put("names",names);
+            return map;
+        }
+        //获取在监听器中设置的用户变量
+        List<AtiUser> currentUsers = (List<AtiUser>) taskService
+                .getVariable(currentTask.getId(), currentTask.getTaskDefinitionKey());
+        if(null != currentUsers && currentUsers.size() > 0) {
+            for (AtiUser user : currentUsers) {
+                String name = user.getNo();
+                names.add(name);
+            }
+            map.put("names", names);
+        }
+        return map;
     }
 }

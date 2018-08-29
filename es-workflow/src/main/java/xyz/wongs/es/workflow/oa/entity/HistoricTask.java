@@ -29,6 +29,8 @@ public class HistoricTask implements Serializable {
      */
     private String name;
 
+    // 当前审批人
+    private String currentCandidate;
 
     private String assignee;
 
@@ -136,5 +138,13 @@ public class HistoricTask implements Serializable {
 
     public void setAtiCategoryId(Long atiCategoryId) {
         this.atiCategoryId = atiCategoryId;
+    }
+
+    public String getCurrentCandidate() {
+        return currentCandidate;
+    }
+
+    public void setCurrentCandidate(String currentCandidate) {
+        this.currentCandidate = currentCandidate;
     }
 }
