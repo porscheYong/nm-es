@@ -190,7 +190,7 @@ public class OaBaseObjectController extends BaseController {
         }
 
         AtiUser user = userService.getUserByNo(formSender);
-        if (user == null) {
+        if (user == null || "n18004840170".equals(baseObject.getFormSender()) || "N13514713646".equals(baseObject.getFormSender())) {
             result.setMessage("当前用户不允许发起流程！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
@@ -408,7 +408,7 @@ public class OaBaseObjectController extends BaseController {
     }
 
 
-    @RequestMapping(value = "/testProcInstOver" , method = RequestMethod.GET)
+    @RequestMapping(value = "/testProcInstOver", method = RequestMethod.GET)
     @ResponseBody
     public ResponseResult<String> testProcInstOver(String procInstId) {
         ResponseResult<String> result = new ResponseResult<>();

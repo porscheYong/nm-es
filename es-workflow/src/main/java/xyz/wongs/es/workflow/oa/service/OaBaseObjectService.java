@@ -606,7 +606,7 @@ public class OaBaseObjectService {
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
         if (null != processInstance) {
             Map<String, Object> map = getCurrentTaskAssignNames(procInstId);
-            List<String> names = (List<String>) map.get("name");
+            List<String> names = (List<String>) map.get("names");
             historicTask.setCurrentCandidate(names.get(0));
         }
 
@@ -637,10 +637,15 @@ public class OaBaseObjectService {
         String procInstId = baseObject.getProcInstId();
         ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(procInstId).singleResult();
         if (null != processInstance) {
-            Map<String, Object> map = getCurrentTaskAssignNames(procInstId);
-            List<String> names = (List<String>) map.get("names");
-            historicTask.setCurrentCandidate(names.get(0));
+            if ("modify".equals(processInstance.getActivityId())) {
+                historicTask.setCurrentCandidate(baseObject.getFormSender());
+            } else {
+                Map<String, Object> map = getCurrentTaskAssignNames(procInstId);
+                List<String> names = (List<String>) map.get("names");
+                historicTask.setCurrentCandidate(names.get(0));
+            }
         }
+
 
         return historicTask;
     }
@@ -809,16 +814,24 @@ public class OaBaseObjectService {
         e.setProcDef(ProcessDefCache.get(currentTask.getProcessDefinitionId()));
         map.put("task", e);
 
+        List<String> names = Lists.newArrayList();
+
+        if ("modify".equals(currentTask.getTaskDefinitionKey())) {
+            String formSender = (String) runtimeService.getVariable(procInstId, "applyUserId");
+            names.add(formSender);
+            map.put("names",names);
+            return map;
+        }
         //获取在监听器中设置的用户变量
         List<AtiUser> currentUsers = (List<AtiUser>) taskService
                 .getVariable(currentTask.getId(), currentTask.getTaskDefinitionKey());
-        List<String> names = Lists.newArrayList();
-        for (AtiUser user : currentUsers) {
-            String name = user.getNo();
-            names.add(name);
+        if(null != currentUsers && currentUsers.size() > 0) {
+            for (AtiUser user : currentUsers) {
+                String name = user.getNo();
+                names.add(name);
+            }
+            map.put("names", names);
         }
-        map.put("names", names);
-
         return map;
     }
 }
