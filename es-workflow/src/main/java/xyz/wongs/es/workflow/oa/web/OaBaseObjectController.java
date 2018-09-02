@@ -190,7 +190,7 @@ public class OaBaseObjectController extends BaseController {
         }
 
         AtiUser user = userService.getUserByNo(formSender);
-        if (user == null || "n18004840170".equals(baseObject.getFormSender()) || "N13514713646".equals(baseObject.getFormSender())) {
+        if (user == null || "n18004840170".equals(baseObject.getFormSender()) || "n13514713646".equals(baseObject.getFormSender())) {
             result.setMessage("当前用户不允许发起流程！");
             result.setState(ResponseResult.USER_NOT_EXISTED_ERROR);
             return result;
