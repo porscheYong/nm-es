@@ -356,8 +356,9 @@ public class OaBaseObjectService {
         List<HistoricTask> historicTasks = new ArrayList<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         AtiRole atiRole = atiRoleDao.getRoleByNo(assignName);
-        // 非发起人
+
         try {
+            // 非发起人
             if (!"4000".equals(atiRole.getRoleCode())) {
                 HistoricTaskInstanceQuery histTaskQuery = historyService.createHistoricTaskInstanceQuery()
                         .taskAssignee(assignName).finished().includeProcessVariables()
@@ -481,6 +482,7 @@ public class OaBaseObjectService {
                 }
 
             } else {
+                // 发起人
                 List<ActHiActinst> hiActinsts = actHiActinstDao.findAllActHiActinstByAssignee(assignName);
                 if (null == hiActinsts || hiActinsts.size() == 0) {
                     return null;
