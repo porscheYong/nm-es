@@ -118,8 +118,12 @@ public class OaBaseObjectController extends BaseController {
             String partyLogId = jsonPrimaryId.getString("uec_partylog");
             baseObject.setPartyLogId(partyLogId);
 
-            String wadocId = jsonPrimaryId.getString("uec_psndoc_wadoc");
-            baseObject.setWadocId(wadocId);
+            /** 修改薪资添加的id  */
+            String wadocIdModify = jsonPrimaryId.getString("uec_psndoc_wadoc_modi");
+            baseObject.setWadocIdModify(wadocIdModify);
+            /** 添加薪资添加的id   */
+            String wadocIdAdd = jsonPrimaryId.getString("uec_psndoc_wadoc_add");
+            baseObject.setWadocIdAdd(wadocIdAdd);
 
             String assId = jsonPrimaryId.getString("uec_ass");
             baseObject.setAssId(assId);
@@ -266,7 +270,14 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        atiTaskService.claim(taskId, assignName);
+        try {
+            atiTaskService.claim(taskId, assignName);
+        } catch (Exception e) {
+            result.setState(ResponseResult.STATE_ERROR);
+            result.setMessage("任务不存在或已处理完毕！");
+            e.printStackTrace();
+            return result;
+        }
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("签收成功!");
         return result;
@@ -306,7 +317,14 @@ public class OaBaseObjectController extends BaseController {
             return result;
         }
 
-        oaBaseObjectService.saveAudit(comment, flag, taskId, procInstId);
+        try {
+            oaBaseObjectService.saveAudit(comment, flag, taskId, procInstId);
+        } catch (Exception e) {
+            result.setState(ResponseResult.STATE_ERROR);
+            result.setMessage("任务不存在或已处理完毕！");
+            e.printStackTrace();
+            return result;
+        }
 
         result.setState(ResponseResult.STATE_OK);
         result.setMessage("任务已处理完毕！");

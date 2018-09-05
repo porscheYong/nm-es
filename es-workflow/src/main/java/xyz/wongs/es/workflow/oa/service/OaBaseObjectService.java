@@ -270,10 +270,16 @@ public class OaBaseObjectService {
             specificFormPartyLog.setParamValue(String.valueOf(oaBaseObject.getPartyLogIdHis()));
             specificForms.add(specificFormPartyLog);
         }
-        if (null != oaBaseObject.getWadocId() && !oaBaseObject.getWadocId().isEmpty()) {
+        if (null != oaBaseObject.getWadocIdAdd() && !oaBaseObject.getWadocIdAdd().isEmpty()) {
             AtiSpecificForm specificFormWaDoc = getSpecificForm(oaBaseObject);
-            specificFormWaDoc.setParameter("WADOC_ID");
-            specificFormWaDoc.setParamValue(String.valueOf(oaBaseObject.getWadocId()));
+            specificFormWaDoc.setParameter("WADOC_ID_ADD");
+            specificFormWaDoc.setParamValue(String.valueOf(oaBaseObject.getWadocIdAdd()));
+            specificForms.add(specificFormWaDoc);
+        }
+        if (null != oaBaseObject.getWadocIdModify() && !oaBaseObject.getWadocIdModify().isEmpty()) {
+            AtiSpecificForm specificFormWaDoc = getSpecificForm(oaBaseObject);
+            specificFormWaDoc.setParameter("WADOC_ID_MODIFY");
+            specificFormWaDoc.setParamValue(String.valueOf(oaBaseObject.getWadocIdModify()));
             specificForms.add(specificFormWaDoc);
         }
         if (null != oaBaseObject.getWadocIdHis() && !oaBaseObject.getWadocIdHis().isEmpty()) {
