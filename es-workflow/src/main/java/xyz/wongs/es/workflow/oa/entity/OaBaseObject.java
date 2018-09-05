@@ -45,7 +45,8 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
     /**	政治面貌	*/
     private String partyLogId;
     /** 薪资变动情况  */
-    private String wadocId;
+    private String wadocIdModify;
+    private String wadocIdAdd;
     /** 考核信息    */
     private String assId;
     /** 职业资格管理  */
@@ -270,12 +271,20 @@ public class OaBaseObject extends AtiBaseForm implements Serializable {
         this.primaryId = primaryId;
     }
 
-    public String getWadocId() {
-        return wadocId;
+    public String getWadocIdModify() {
+        return wadocIdModify;
     }
 
-    public void setWadocId(String wadocId) {
-        this.wadocId = wadocId;
+    public void setWadocIdModify(String wadocIdModify) {
+        this.wadocIdModify = wadocIdModify;
+    }
+
+    public String getWadocIdAdd() {
+        return wadocIdAdd;
+    }
+
+    public void setWadocIdAdd(String wadocIdAdd) {
+        this.wadocIdAdd = wadocIdAdd;
     }
 
     public String getOutStaffIdHis() {
