@@ -18,6 +18,7 @@ public class ASmsWaitSend extends DataEntity<ASmsWaitSend> {
      * @date
      */
     public ASmsWaitSend(){
+        //1065920500282 最新的发送号码源，将10001换成1065920500282
         this.srcTermid="10001";
         this.mtServType="96";
         this.sendPriority=Short.valueOf("2");
