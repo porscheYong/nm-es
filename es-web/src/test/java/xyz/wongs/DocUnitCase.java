@@ -1,21 +1,26 @@
 package xyz.wongs;
 
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import xyz.wongs.es.common.utils.DateUtils;
 import xyz.wongs.es.common.utils.SpringContextHolder;
+import xyz.wongs.es.contact.msg.service.ASmsWaitSendService;
 import xyz.wongs.es.core.file.entity.Document;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
 import xyz.wongs.es.core.file.service.DocumentService;
 import xyz.wongs.es.core.file.service.InsertDataService;
 import xyz.wongs.es.core.file.service.Tab2BeanCorresRefService;
 import xyz.wongs.es.core.task.service.FtpDownloadService;
+import xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb;
+import xyz.wongs.es.zbData.pay.service.OutstaffPayYearendawardZbService;
 
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,10 +33,10 @@ public class DocUnitCase extends BaseUnit {
     private static Logger logger = LoggerFactory.getLogger(DocUnitCase.class);
 
     //批量测试：true；单例测试：false
-    private final static Boolean FLAG = false;
+    private final static Boolean FLAG = true;
 
     //public static final String SUFFIX="G:\\UECC/";
-    public static final String SUFFIX="F:\\LO\\psnjob/";
+    public static final String SUFFIX="F:\\FTP";
     @Autowired
     DocumentService documentService;
 
@@ -62,7 +67,7 @@ public class DocUnitCase extends BaseUnit {
 //        documentService = (DocumentService) ctx.getBean("documentService");
 //        assertNotNull(documentService);
         File file = new File(SUFFIX);
-        readFile(file);
+        readFile(file,".DAT.gz");
         if(!FLAG){
             if(CollectionUtils.isNotEmpty(documents))   {
                 documentService.batchInsert(documents) ;
@@ -94,12 +99,12 @@ public class DocUnitCase extends BaseUnit {
             Document document = makeInfoDoc();
             docs = documentService.findList(document);
         } else{
-            docs = readFile(new File(SUFFIX));
+            docs = readFile(new File(SUFFIX),".DAT.gz");
         }
         if(!CollectionUtils.isNotEmpty(docs))   {
             return;
         }
-
+        
         for (Document doc : docs) {
             logger.error("开始导入："+doc.getShortName());
             Tab2BeanCorresRef t2C = tab2BeanCorresRefService.find(doc.getShortName());
@@ -140,7 +145,7 @@ public class DocUnitCase extends BaseUnit {
      * @exception
      * @date        2018/1/18 22:32
      */
-    public List<Document> readFile(File file){
+    public List<Document> readFile(File file,String format){
 
         File[] files =  file.listFiles();
         if(null == files){
@@ -148,10 +153,10 @@ public class DocUnitCase extends BaseUnit {
         }
         for (File f : files) {
              if(f.isDirectory()){
-                 readFile(f);
+                 readFile(f,format);
              } else{
                  final String fileName = f.getName();
-                 if(!fileName.endsWith("DAT.gz")) {
+                 if(!fileName.endsWith(format)) {
                      continue;
                  }
                  final String shortName = fileName.substring(0,fileName.indexOf("."));
@@ -185,6 +190,34 @@ public class DocUnitCase extends BaseUnit {
         if(CollectionUtils.isNotEmpty(documents)){
             logger.error("Local Path:"+localPath+"; gz files counts is "+documents.size());
             ftpDownloadService.compareToTables(true,documents.get(0).getMonthId());
+        }
+    }
+
+    /**
+     * @Author Wang Yiren
+     * @Description //TODO 测试.csv格式数据写入
+     * @Date 17:59 2018/10/22
+     * @Param []
+     * @return void
+     **/
+    @Test
+    public void testZbData(){
+        org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
+        SecurityUtils.setSecurityManager(securityManager);
+
+        List<Document> docs;
+        docs = readFile(new File(SUFFIX),".csv");
+        if(!CollectionUtils.isNotEmpty(docs))   {
+            return;
+        }
+        for (Document doc : docs) {
+            logger.error("开始导入："+doc.getShortName());
+            Tab2BeanCorresRef t2C = tab2BeanCorresRefService.find(doc.getShortName());
+            int returnCns = insertDataService.readCsvDate(t2C.getServiceName(),doc.getPath(), t2C.getEntityName());
+            doc.setFlag((short)1);
+            doc.setExuCounts(new Long(returnCns));
+            logger.error(doc.getShortName()+" ,导入完毕共入库数据量："+returnCns);
+            documentService.updateByPrimaryKeySelective(doc);
         }
     }
 

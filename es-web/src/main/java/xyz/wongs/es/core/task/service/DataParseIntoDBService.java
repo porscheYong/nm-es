@@ -36,6 +36,10 @@ public class DataParseIntoDBService {
 
     private static Logger logger = LoggerFactory.getLogger(DataParseIntoDBService.class);
 
+    public static final String CSV = ".csv";
+
+    public static final String GZ = ".DAT.gz";
+
     @Autowired
     private DocumentService documentService;
 
@@ -108,6 +112,36 @@ public class DataParseIntoDBService {
     }
 
     /**
+     * @Description: 定时任务：定时向数据库导入当天数据：每天9点42分
+     * @method      dataInsertDataBase
+     * @author      Wang Yiren
+     * @version
+     * @see
+     * @date        2018/1/28 17:47
+     */
+    @Scheduled(cron = "0 51 09 * * ?")
+    public void csvDataParseInputDB(){
+        org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
+        SecurityUtils.setSecurityManager(securityManager);
+
+        String path = "F:\\FTP";
+        List<Document> docs;
+        docs = readFile(new File(path),CSV);
+        if(!CollectionUtils.isNotEmpty(docs))   {
+            return;
+        }
+        for (Document doc : docs) {
+            logger.error("开始导入："+doc.getShortName());
+            Tab2BeanCorresRef t2C = tab2BeanCorresRefService.find(doc.getShortName());
+            int returnCns = insertDataService.readCsvDate(t2C.getServiceName(),doc.getPath(), t2C.getEntityName());
+            doc.setFlag((short)1);
+            doc.setExuCounts(new Long(returnCns));
+            logger.error(doc.getShortName()+" ,导入完毕共入库数据量："+returnCns);
+            documentService.updateByPrimaryKeySelective(doc);
+        }
+    }
+
+    /**
      * @Description: 根据每天下发数据文件所在的具体位置，将下发数据导入至数据库
      * @method      dataInsertDataBase
      * @author      Wang Yiren
@@ -125,7 +159,7 @@ public class DataParseIntoDBService {
 
         List<Document> docs = null;
         if(null != file){
-            docs = readFile(file);
+            docs = readFile(file,GZ);
             if(!CollectionUtils.isNotEmpty(docs))   {
                 return;
             }
@@ -164,17 +198,17 @@ public class DataParseIntoDBService {
      * @exception
      * @date        2018/1/28 17:47
      */
-    public List<Document> readFile(File file){
+    public List<Document> readFile(File file, String format){
         File[] files =  file.listFiles();
         if(null == files){
             return null;
         }
         for (File f : files) {
             if(f.isDirectory()){
-                readFile(f);
+                readFile(f,format);
             } else{
                 final String fileName = f.getName();
-                if(!fileName.endsWith("DAT.gz")) {
+                if(!fileName.endsWith(format)) {
                     continue;
                 }
                 final String shortName = fileName.substring(0,fileName.indexOf("."));

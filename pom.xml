@@ -591,6 +591,20 @@
             <version>1.13</version>
         </dependency>
 
+        <!--解析.csv-->
+        <dependency>
+            <groupId>net.sourceforge.javacsv</groupId>
+            <artifactId>javacsv</artifactId>
+            <version>2.1</version>
+        </dependency>
+
+        <!--解析.csv-->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>4.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -50,7 +50,7 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	/**
 	 * @Author Wang Yiren
 	 * @Description //TODO 单条语句插入
-	 * @Date 15:58 2018/10/23
+	 * @Date 16:00 2018/10/23
 	 * @Param [entity]
 	 * @return int
 	 **/
