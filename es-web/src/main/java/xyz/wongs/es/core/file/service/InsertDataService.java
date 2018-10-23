@@ -1,5 +1,6 @@
 package xyz.wongs.es.core.file.service;
 
+import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,8 @@ import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.contact.msg.service.ASmsWaitSendService;
 import xyz.wongs.es.core.file.FileDocUtil;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
+import xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb;
+import xyz.wongs.es.zbData.pay.service.OutstaffPayYearendawardZbService;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -130,6 +133,63 @@ public class InsertDataService {
         }
         return returnCns;
     }
+
+    /**
+     * @Author Wang Yiren
+     * @Description //TODO 读取并解析.csv格式的数据
+     * @Date 12:46 2018/10/22
+     * @param beanName    Spring容器中serviceBean的名称，用于依赖注入</br>
+     * @param pathName    存储文件的本地路径名称
+     * @param clazzName   实体Bean的类名称，所在包路径，例如：xyz.wongs.es.mpw.psndoc.entity.LdapmMpwBdPsndoc
+     * @return int        返回实际导入库中数据的总量
+     * @return int
+     **/
+    public int readCsvDate(String beanName,String pathName,String clazzName) {
+        //文件记录数
+        int returnCns = 0;
+        File fr = new File(pathName);
+        //获取文件流
+        FileInputStream fis = null;
+        BufferedReader br = null;
+        CrudService crudService = SpringContextHolder.getBean(beanName);
+        try {
+            fis = new FileInputStream(fr);
+            //将流整体读取
+            br = new BufferedReader(new InputStreamReader(fis,ENCODING));
+            // 获取类名和对象
+            Class<?> clazz = Class.forName(clazzName);
+            DataEntity dataEntity =  (DataEntity)clazz.newInstance();
+            //将.csv中的数据与对象绑定
+            List<Object> beans = new CsvToBeanBuilder<Object>(br)
+                    .withType(dataEntity.getClass()).build().parse();
+            //执行merge into操作
+            crudService.mergeInto(beans);
+            returnCns = beans.size();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            logger.error("文件："+beanName+"未找到！");
+        } catch (IOException e) {
+            logger.error("文件："+beanName+" IO异常");
+        } catch (ClassNotFoundException e) {
+            logger.error("文件："+beanName+" 类没有找到");
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } finally {
+            if(br != null && fis != null){
+                try {
+                    br.close();
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return returnCns;
+    }
+
 
     /**
      * 方法实现说明
