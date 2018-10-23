@@ -59,6 +59,10 @@ public class DataParseIntoDBService {
      * 开发环境，本地数据解析入库地址E:\UECC
      */
 //    public static final String SUFFIX="E:\\UECC/";
+    /**
+     * 本地环境CSV地址
+     **/
+    private static String CSVPATH = "F:\\FTP";
 
     /**
      * @Description: 定时任务：定时向数据库导入当月数据：每月6日20点30分进行数据写库
@@ -119,14 +123,13 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 51 09 * * ?")
+    @Scheduled(cron = "0 04 17 * * ?")
     public void csvDataParseInputDB(){
         org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
         SecurityUtils.setSecurityManager(securityManager);
 
-        String path = "F:\\FTP";
-        List<Document> docs;
-        docs = readFile(new File(path),CSV);
+        List<Document> docs = null;
+        docs = readFile(new File(CSVPATH),CSV);
         if(!CollectionUtils.isNotEmpty(docs))   {
             return;
         }

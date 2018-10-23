@@ -162,8 +162,18 @@ public class InsertDataService {
             //将.csv中的数据与对象绑定
             List<Object> beans = new CsvToBeanBuilder<Object>(br)
                     .withType(dataEntity.getClass()).build().parse();
-            //执行merge into操作
-            crudService.mergeInto(beans);
+            //解决数据量过大插入报错：Cause: java.sql.SQLSyntaxErrorException: ORA-01745: 无效的主机/绑定变量名
+            //采用分批插入数据
+            if(beans.size() <= 200){
+                //执行merge into操作
+                crudService.mergeInto(beans);
+            } else{
+                int times = (int)Math.ceil( beans.size()/200.0);
+                for(int i=0; i<times; i++ ){
+                    logger.error("分批插入:"+ i);
+                    crudService.mergeInto(beans.subList(i*200, Math.min((i+1)*200, beans.size())));
+                }
+            }
             returnCns = beans.size();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
