@@ -168,7 +168,7 @@ public class InsertDataService {
                 //执行merge into操作
                 crudService.mergeInto(beans);
             } else{
-                int times = (int)Math.ceil( beans.size()/200.0);
+                int times = (int)Math.ceil(beans.size()/200.0);
                 for(int i=0; i<times; i++ ){
                     logger.error("分批插入:"+ i);
                     crudService.mergeInto(beans.subList(i*200, Math.min((i+1)*200, beans.size())));
