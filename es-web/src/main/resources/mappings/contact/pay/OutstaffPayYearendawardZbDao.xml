@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbData.pay.dao.OutstaffPayYearendawardZbDao">
+    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb">
+        <result column="PAY_YEAR_ID" jdbcType="DECIMAL" property="payYearId" />
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+        <result column="IDENTITY_CARD" jdbcType="VARCHAR" property="identityCard" />
+        <result column="SEX" jdbcType="VARCHAR" property="sex" />
+        <result column="JOB_RANK" jdbcType="VARCHAR" property="jobRank" />
+        <result column="JOB_WAGES_RANK" jdbcType="VARCHAR" property="jobWagesRank" />
+        <result column="POST_SEQUENCE" jdbcType="VARCHAR" property="postSequence" />
+        <result column="INJURY" jdbcType="VARCHAR" property="injury" />
+        <result column="ANNUAL_BONUS" jdbcType="DECIMAL" property="annualBonus" />
+        <result column="EMPHASIS_ZX_REWARD" jdbcType="DECIMAL" property="emphasisZxReward" />
+        <result column="SUPER_HARVEST_REWARD" jdbcType="DECIMAL" property="superHarvestReward" />
+        <result column="YEAR_ZX_REW" jdbcType="DECIMAL" property="yearZxRew" />
+        <result column="YEAR_HONOUR_REW" jdbcType="DECIMAL" property="yearHonourRew" />
+        <result column="YEAR_OTHER" jdbcType="DECIMAL" property="yearOther" />
+        <result column="ATTENDANCE_DEDUCTION" jdbcType="DECIMAL" property="attendanceDeduction" />
+        <result column="TOTAL_DUE" jdbcType="DECIMAL" property="totalDue" />
+        <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+        <result column="THIS_BUTTON_NUMB" jdbcType="DECIMAL" property="thisButtonNumb" />
+        <result column="THIS_BUTTON_AMOUNT" jdbcType="DECIMAL" property="thisButtonAmount" />
+        <result column="ACTUAL_HAIR_SUM" jdbcType="DECIMAL" property="actualHairSum" />
+    </resultMap>
+
+    <insert id="insert" parameterType="xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb">
+      insert into OUTSTAFF_PAY_YEARENDAWARD_ZB (PAY_YEAR_ID, LOGIN_NAME, USER_NAME,
+      IDENTITY_CARD, SEX, JOB_RANK,
+      JOB_WAGES_RANK, POST_SEQUENCE, INJURY,
+      ANNUAL_BONUS, EMPHASIS_ZX_REWARD, SUPER_HARVEST_REWARD,
+      YEAR_ZX_REW, YEAR_HONOUR_REW, YEAR_OTHER,
+      ATTENDANCE_DEDUCTION, TOTAL_DUE, REMARK,
+      THIS_BUTTON_NUMB, THIS_BUTTON_AMOUNT, ACTUAL_HAIR_SUM
+      )
+    values (
+      #{payYearId,jdbcType=DECIMAL}, #{loginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+      #{identityCard,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{jobRank,jdbcType=VARCHAR},
+      #{jobWagesRank,jdbcType=VARCHAR}, #{postSequence,jdbcType=VARCHAR}, #{injury,jdbcType=VARCHAR},
+      #{annualBonus,jdbcType=DECIMAL}, #{emphasisZxReward,jdbcType=DECIMAL}, #{superHarvestReward,jdbcType=DECIMAL},
+      #{yearZxRew,jdbcType=DECIMAL}, #{yearHonourRew,jdbcType=DECIMAL}, #{yearOther,jdbcType=DECIMAL},
+      #{attendanceDeduction,jdbcType=DECIMAL}, #{totalDue,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR},
+      #{thisButtonNumb,jdbcType=DECIMAL}, #{thisButtonAmount,jdbcType=DECIMAL}, #{actualHairSum,jdbcType=DECIMAL}
+      )
+    </insert>
+
+    <insert id="mergeInto" parameterType="java.util.List">
+        merge into OUTSTAFF_PAY_YEARENDAWARD_ZB a
+        using (
+            <foreach collection="list" item="item" index="index" separator="union" >
+              SELECT
+                #{item.payYearId,jdbcType=DECIMAL} as payYearId,
+                #{item.loginName,jdbcType=VARCHAR} as loginName,
+                #{item.userName,jdbcType=VARCHAR} as userName,
+                #{item.identityCard,jdbcType=VARCHAR} as identityCard,
+                #{item.sex,jdbcType=VARCHAR} as sex,
+                #{item.jobRank,jdbcType=VARCHAR} as jobRank,
+                #{item.jobWagesRank,jdbcType=VARCHAR} as jobWagesRank,
+                #{item.postSequence,jdbcType=VARCHAR} as postSequence,
+                #{item.injury,jdbcType=VARCHAR} as injury,
+                #{item.annualBonus,jdbcType=DECIMAL} as annualBonus,
+                #{item.emphasisZxReward,jdbcType=DECIMAL} as emphasisZxReward,
+                #{item.superHarvestReward,jdbcType=DECIMAL} as superHarvestReward,
+                #{item.yearZxRew,jdbcType=DECIMAL} as yearZxRew,
+                #{item.yearHonourRew,jdbcType=DECIMAL} as yearHonourRew,
+                #{item.yearOther,jdbcType=DECIMAL} as yearOther,
+                #{item.attendanceDeduction,jdbcType=DECIMAL} as attendanceDeduction,
+                #{item.totalDue,jdbcType=DECIMAL} as totalDue,
+                #{item.remark,jdbcType=VARCHAR} as remark,
+                #{item.thisButtonNumb,jdbcType=DECIMAL} as thisButtonNumb,
+                #{item.thisButtonAmount,jdbcType=DECIMAL} as thisButtonAmount,
+                #{item.actualHairSum,jdbcType=DECIMAL} as actualHairSum
+                FROM dual
+            </foreach>
+          ) T
+        on (a.PAY_YEAR_ID = T.payYearId)
+        WHEN matched THEN
+          UPDATE SET
+          a.LOGIN_NAME = T.loginName,
+          a.USER_NAME = T.userName,
+          a.IDENTITY_CARD = T.identityCard,
+          a.SEX = T.sex,
+          a.JOB_RANK = T.jobRank,
+          a.JOB_WAGES_RANK = T.jobWagesRank,
+          a.POST_SEQUENCE = T.postSequence,
+          a.INJURY = T.injury,
+          a.ANNUAL_BONUS = T.annualBonus,
+          a.EMPHASIS_ZX_REWARD = T.emphasisZxReward,
+          a.SUPER_HARVEST_REWARD = T.superHarvestReward,
+          a.YEAR_ZX_REW = T.yearZxRew,
+          a.YEAR_HONOUR_REW = T.yearHonourRew,
+          a.YEAR_OTHER = T.yearOther,
+          a.ATTENDANCE_DEDUCTION = T.attendanceDeduction,
+          a.TOTAL_DUE = T.totalDue,
+          a.REMARK = T.remark,
+          a.THIS_BUTTON_NUMB = T.thisButtonNumb,
+          a.THIS_BUTTON_AMOUNT = T.thisButtonAmount,
+          a.ACTUAL_HAIR_SUM = T.actualHairSum
+        WHEN not matched THEN
+          INSERT(PAY_YEAR_ID, LOGIN_NAME, USER_NAME,IDENTITY_CARD, SEX, JOB_RANK,
+      JOB_WAGES_RANK, POST_SEQUENCE, INJURY,ANNUAL_BONUS, EMPHASIS_ZX_REWARD, SUPER_HARVEST_REWARD,
+      YEAR_ZX_REW, YEAR_HONOUR_REW, YEAR_OTHER,ATTENDANCE_DEDUCTION, TOTAL_DUE, REMARK,
+      THIS_BUTTON_NUMB, THIS_BUTTON_AMOUNT, ACTUAL_HAIR_SUM)
+          VALUES(T.payYearId,T.loginName,T.userName,T.identityCard,T.sex,T.jobRank,T.jobWagesRank,
+        T.postSequence,T.injury,T.annualBonus,T.emphasisZxReward,T.superHarvestReward,T.yearZxRew,
+        T.yearHonourRew,T.yearOther,T.attendanceDeduction,T.totalDue,T.remark,T.thisButtonNumb,
+        T.thisButtonAmount,T.actualHairSum)
+    </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into OUTSTAFF_PAY_YEARENDAWARD_ZB (PAY_YEAR_ID,
+        LOGIN_NAME, USER_NAME,
+        IDENTITY_CARD, SEX, JOB_RANK,
+        JOB_WAGES_RANK, POST_SEQUENCE, INJURY,
+        ANNUAL_BONUS, EMPHASIS_ZX_REWARD, SUPER_HARVEST_REWARD,
+        YEAR_ZX_REW, YEAR_HONOUR_REW, YEAR_OTHER,
+        ATTENDANCE_DEDUCTION, TOTAL_DUE, REMARK,
+        THIS_BUTTON_NUMB, THIS_BUTTON_AMOUNT, ACTUAL_HAIR_SUM
+        )
+        <foreach collection="list" item="item" index="index"  open="(" close=")" separator="union">
+            SELECT
+            #{item.payYearId,jdbcType=DECIMAL}, #{item.loginName,jdbcType=VARCHAR}, #{item.userName,jdbcType=VARCHAR},
+            #{item.identityCard,jdbcType=VARCHAR}, #{item.sex,jdbcType=VARCHAR}, #{item.jobRank,jdbcType=VARCHAR},
+            #{item.jobWagesRank,jdbcType=VARCHAR}, #{item.postSequence,jdbcType=VARCHAR}, #{item.injury,jdbcType=VARCHAR},
+            #{item.annualBonus,jdbcType=DECIMAL}, #{item.emphasisZxReward,jdbcType=DECIMAL}, #{item.superHarvestReward,jdbcType=DECIMAL},
+            #{item.yearZxRew,jdbcType=DECIMAL}, #{item.yearHonourRew,jdbcType=DECIMAL}, #{item.yearOther,jdbcType=DECIMAL},
+            #{item.attendanceDeduction,jdbcType=DECIMAL}, #{item.totalDue,jdbcType=DECIMAL}, #{item.remark,jdbcType=VARCHAR},
+            #{item.thisButtonNumb,jdbcType=DECIMAL}, #{item.thisButtonAmount,jdbcType=DECIMAL},
+            #{item.actualHairSum,jdbcType=DECIMAL}
+            from dual
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb">
+        insert into OUTSTAFF_PAY_YEARENDAWARD_ZB
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="payYearId != null">
+                PAY_YEAR_ID,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="identityCard != null">
+                IDENTITY_CARD,
+            </if>
+            <if test="sex != null">
+                SEX,
+            </if>
+            <if test="jobRank != null">
+                JOB_RANK,
+            </if>
+            <if test="jobWagesRank != null">
+                JOB_WAGES_RANK,
+            </if>
+            <if test="postSequence != null">
+                POST_SEQUENCE,
+            </if>
+            <if test="injury != null">
+                INJURY,
+            </if>
+            <if test="annualBonus != null">
+                ANNUAL_BONUS,
+            </if>
+            <if test="emphasisZxReward != null">
+                EMPHASIS_ZX_REWARD,
+            </if>
+            <if test="superHarvestReward != null">
+                SUPER_HARVEST_REWARD,
+            </if>
+            <if test="yearZxRew != null">
+                YEAR_ZX_REW,
+            </if>
+            <if test="yearHonourRew != null">
+                YEAR_HONOUR_REW,
+            </if>
+            <if test="yearOther != null">
+                YEAR_OTHER,
+            </if>
+            <if test="attendanceDeduction != null">
+                ATTENDANCE_DEDUCTION,
+            </if>
+            <if test="totalDue != null">
+                TOTAL_DUE,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="thisButtonNumb != null">
+                THIS_BUTTON_NUMB,
+            </if>
+            <if test="thisButtonAmount != null">
+                THIS_BUTTON_AMOUNT,
+            </if>
+            <if test="actualHairSum != null">
+                ACTUAL_HAIR_SUM,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="payYearId != null">
+                #{payYearId,jdbcType=DECIMAL},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="identityCard != null">
+                #{identityCard,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="jobRank != null">
+                #{jobRank,jdbcType=VARCHAR},
+            </if>
+            <if test="jobWagesRank != null">
+                #{jobWagesRank,jdbcType=VARCHAR},
+            </if>
+            <if test="postSequence != null">
+                #{postSequence,jdbcType=VARCHAR},
+            </if>
+            <if test="injury != null">
+                #{injury,jdbcType=VARCHAR},
+            </if>
+            <if test="annualBonus != null">
+                #{annualBonus,jdbcType=DECIMAL},
+            </if>
+            <if test="emphasisZxReward != null">
+                #{emphasisZxReward,jdbcType=DECIMAL},
+            </if>
+            <if test="superHarvestReward != null">
+                #{superHarvestReward,jdbcType=DECIMAL},
+            </if>
+            <if test="yearZxRew != null">
+                #{yearZxRew,jdbcType=DECIMAL},
+            </if>
+            <if test="yearHonourRew != null">
+                #{yearHonourRew,jdbcType=DECIMAL},
+            </if>
+            <if test="yearOther != null">
+                #{yearOther,jdbcType=DECIMAL},
+            </if>
+            <if test="attendanceDeduction != null">
+                #{attendanceDeduction,jdbcType=DECIMAL},
+            </if>
+            <if test="totalDue != null">
+                #{totalDue,jdbcType=DECIMAL},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="thisButtonNumb != null">
+                #{thisButtonNumb,jdbcType=DECIMAL},
+            </if>
+            <if test="thisButtonAmount != null">
+                #{thisButtonAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="actualHairSum != null">
+                #{actualHairSum,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+</mapper>
