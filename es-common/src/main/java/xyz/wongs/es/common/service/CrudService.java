@@ -46,6 +46,28 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	public int insertBatch(List<T> list){
 		return dao.insertBatch(list);
 	}
+
+	/**
+	 * @Author Wang Yiren
+	 * @Description //TODO 单条语句插入
+	 * @Date 15:58 2018/10/23
+	 * @Param [entity]
+	 * @return int
+	 **/
+    public int insert(T entity){
+	    return dao.insert(entity);
+    }
+    
+    /**
+     * @Author Wang Yiren
+     * @Description //TODO 执行merge into 操作
+     * @Date 15:58 2018/10/23
+     * @Param [list]
+     * @return int
+     **/
+    public int mergeInto(List<T> list){
+	    return dao.mergeInto(list);
+    }
 	
 	/**
 	 * 查询列表数据

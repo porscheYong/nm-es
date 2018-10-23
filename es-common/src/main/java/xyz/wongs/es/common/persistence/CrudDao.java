@@ -35,7 +35,16 @@ public interface CrudDao<T> extends BaseDao {
 	public List<T> findList(T entity);
 
 	public int insertBatch(List<T> list);
-	
+
+    /**
+     * @Author Wang Yiren
+     * @Description //TODO 执行merge into 操作
+     * @Date 15:58 2018/10/23
+     * @Param [list]
+     * @return int
+     **/
+	public int mergeInto(List<T> list);
+
 	/**
 	 * 查询所有数据列表
 	 * @param entity
