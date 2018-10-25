@@ -68,9 +68,9 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
     public int mergeInto(List<T> list){
 	    return dao.mergeInto(list);
     }
-	
 	/**
 	 * 查询列表数据
+
 	 * @param entity
 	 * @return
 	 */

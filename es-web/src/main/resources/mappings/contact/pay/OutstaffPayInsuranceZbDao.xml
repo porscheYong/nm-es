@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbData.pay.dao.OutstaffPayInsuranceZbDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.zbData.pay.entity.OutstaffPayInsuranceZb">
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+    <result column="IDENTITY_CARD" jdbcType="VARCHAR" property="identityCard" />
+    <result column="SEL_YEAR" jdbcType="VARCHAR" property="selYear" />
+    <result column="PERIOD" jdbcType="VARCHAR" property="period" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="OUTSOURCE_PAY" jdbcType="DECIMAL" property="outsourcePay" />
+    <result column="WB_POST_SALARY" jdbcType="DECIMAL" property="wbPostSalary" />
+    <result column="WB_PERFORMANCE_PAY" jdbcType="DECIMAL" property="wbPerformancePay" />
+    <result column="BENEFITS" jdbcType="DECIMAL" property="benefits" />
+    <result column="OTHER_INCOME" jdbcType="DECIMAL" property="otherIncome" />
+    <result column="WB_OTHER_COST_GR" jdbcType="DECIMAL" property="wbOtherCostGr" />
+    <result column="WB_OTHER_COST_GS" jdbcType="DECIMAL" property="wbOtherCostGs" />
+    <result column="WB_BASIC_OLD" jdbcType="DECIMAL" property="wbBasicOld" />
+    <result column="WB_BASIC_MEDICAL" jdbcType="DECIMAL" property="wbBasicMedical" />
+    <result column="WB_LOSE_WORK" jdbcType="DECIMAL" property="wbLoseWork" />
+    <result column="WB_INJURY" jdbcType="DECIMAL" property="wbInjury" />
+    <result column="WB_BIRTH" jdbcType="DECIMAL" property="wbBirth" />
+    <result column="WB_FUND" jdbcType="DECIMAL" property="wbFund" />
+    <result column="OTHER_RISKS" jdbcType="DECIMAL" property="otherRisks" />
+  </resultMap>
+
+  <insert id="insert" parameterType="xyz.wongs.es.zbData.pay.entity.OutstaffPayInsuranceZb">
+    insert into OUTSTAFF_PAY_INSURANCE_ZB (USER_NAME, LOGIN_NAME, IDENTITY_CARD, 
+      SEL_YEAR, PERIOD, COMPANY_ID, 
+      COMPANY_NAME, OUTSOURCE_PAY, WB_POST_SALARY, 
+      WB_PERFORMANCE_PAY, BENEFITS, OTHER_INCOME, 
+      WB_OTHER_COST_GR, WB_OTHER_COST_GS, WB_BASIC_OLD, 
+      WB_BASIC_MEDICAL, WB_LOSE_WORK, WB_INJURY, 
+      WB_BIRTH, WB_FUND, OTHER_RISKS
+      )
+    values (#{userName,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{identityCard,jdbcType=VARCHAR}, 
+      #{selYear,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{outsourcePay,jdbcType=DECIMAL}, #{wbPostSalary,jdbcType=DECIMAL}, 
+      #{wbPerformancePay,jdbcType=DECIMAL}, #{benefits,jdbcType=DECIMAL}, #{otherIncome,jdbcType=DECIMAL}, 
+      #{wbOtherCostGr,jdbcType=DECIMAL}, #{wbOtherCostGs,jdbcType=DECIMAL}, #{wbBasicOld,jdbcType=DECIMAL}, 
+      #{wbBasicMedical,jdbcType=DECIMAL}, #{wbLoseWork,jdbcType=DECIMAL}, #{wbInjury,jdbcType=DECIMAL}, 
+      #{wbBirth,jdbcType=DECIMAL}, #{wbFund,jdbcType=DECIMAL}, #{otherRisks,jdbcType=DECIMAL}
+      )
+  </insert>
+
+    <insert id="mergeInto" parameterType="java.util.List">
+        merge into OUTSTAFF_PAY_INSURANCE_ZB a
+        using (
+        <foreach collection="list" item="item" index="index" separator="union" >
+        SELECT
+            #{item.userName,jdbcType=VARCHAR} as userName,
+            #{item.loginName,jdbcType=VARCHAR} as loginName,
+            #{item.identityCard,jdbcType=VARCHAR} as identityCard,
+            #{item.selYear,jdbcType=VARCHAR} as selYear,
+            #{item.period,jdbcType=VARCHAR} as period,
+            #{item.companyId,jdbcType=VARCHAR} as companyId,
+            #{item.companyName,jdbcType=VARCHAR} as companyName,
+            #{item.outsourcePay,jdbcType=DECIMAL} as outsourcePay,
+            #{item.wbPostSalary,jdbcType=DECIMAL} as wbPostSalary,
+            #{item.wbPerformancePay,jdbcType=DECIMAL} as wbPerformancePay,
+            #{item.benefits,jdbcType=DECIMAL} as benefits,
+            #{item.otherIncome,jdbcType=DECIMAL} as otherIncome,
+            #{item.wbOtherCostGr,jdbcType=DECIMAL} as wbOtherCostGr,
+            #{item.wbOtherCostGs,jdbcType=DECIMAL} as wbOtherCostGs,
+            #{item.wbBasicOld,jdbcType=DECIMAL} as wbBasicOld,
+            #{item.wbBasicMedical,jdbcType=DECIMAL} as wbBasicMedical,
+            #{item.wbLoseWork,jdbcType=DECIMAL} as wbLoseWork,
+            #{item.wbInjury,jdbcType=DECIMAL} as wbInjury,
+            #{item.wbBirth,jdbcType=DECIMAL} as wbBirth,
+            #{item.wbFund,jdbcType=DECIMAL} as wbFund,
+            #{item.otherRisks,jdbcType=DECIMAL} as otherRisks
+          FROM dual
+        </foreach>
+      ) T
+      on (a.LOGIN_NAME = T.loginName)
+      WHEN matched THEN
+        UPDATE SET
+        a.USER_NAME = T.userName,
+        a.IDENTITY_CARD = T.identityCard,
+        a.SEL_YEAR = T.selYear,
+        a.PERIOD = T.period,
+        a.COMPANY_ID = T.companyId,
+        a.COMPANY_NAME = T.companyName,
+        a.OUTSOURCE_PAY = T.outsourcePay,
+        a.WB_POST_SALARY = T.wbPostSalary,
+        a.WB_PERFORMANCE_PAY = T.wbPerformancePay,
+        a.BENEFITS = T.benefits,
+        a.OTHER_INCOME = T.otherIncome,
+        a.WB_OTHER_COST_GR = T.wbOtherCostGr,
+        a.WB_OTHER_COST_GS = T.wbOtherCostGs,
+        a.WB_BASIC_OLD = T.wbBasicOld,
+        a.WB_BASIC_MEDICAL = T.wbBasicMedical,
+        a.WB_LOSE_WORK = T.wbLoseWork,
+        a.WB_INJURY = T.wbInjury,
+        a.WB_BIRTH = T.wbBirth,
+        a.WB_FUND = T.wbFund,
+        a.OTHER_RISKS = T.otherRisks
+      WHEN not matched THEN
+        insert(USER_NAME, LOGIN_NAME, IDENTITY_CARD,
+        SEL_YEAR, PERIOD, COMPANY_ID,
+        COMPANY_NAME, OUTSOURCE_PAY, WB_POST_SALARY,
+        WB_PERFORMANCE_PAY, BENEFITS, OTHER_INCOME,
+        WB_OTHER_COST_GR, WB_OTHER_COST_GS, WB_BASIC_OLD,
+        WB_BASIC_MEDICAL, WB_LOSE_WORK, WB_INJURY,
+        WB_BIRTH, WB_FUND, OTHER_RISKS
+        )
+        VALUES(T.userName, T.loginName, T.identityCard,
+            T.selYear, T.period, T.companyId,
+            T.companyName, T.outsourcePay, T.wbPostSalary,
+            T.wbPerformancePay, T.benefits, T.otherIncome,
+            T.wbOtherCostGr, T.wbOtherCostGs, T.wbBasicOld,
+            T.wbBasicMedical, T.wbLoseWork, T.wbInjury,
+            T.wbBirth, T.wbFund, T.otherRisks
+        )
+    </insert>
+
+  <insert id="insertSelective" parameterType="xyz.wongs.es.zbData.pay.entity.OutstaffPayInsuranceZb">
+    insert into OUTSTAFF_PAY_INSURANCE_ZB
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
+      </if>
+      <if test="identityCard != null">
+        IDENTITY_CARD,
+      </if>
+      <if test="selYear != null">
+        SEL_YEAR,
+      </if>
+      <if test="period != null">
+        PERIOD,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME,
+      </if>
+      <if test="outsourcePay != null">
+        OUTSOURCE_PAY,
+      </if>
+      <if test="wbPostSalary != null">
+        WB_POST_SALARY,
+      </if>
+      <if test="wbPerformancePay != null">
+        WB_PERFORMANCE_PAY,
+      </if>
+      <if test="benefits != null">
+        BENEFITS,
+      </if>
+      <if test="otherIncome != null">
+        OTHER_INCOME,
+      </if>
+      <if test="wbOtherCostGr != null">
+        WB_OTHER_COST_GR,
+      </if>
+      <if test="wbOtherCostGs != null">
+        WB_OTHER_COST_GS,
+      </if>
+      <if test="wbBasicOld != null">
+        WB_BASIC_OLD,
+      </if>
+      <if test="wbBasicMedical != null">
+        WB_BASIC_MEDICAL,
+      </if>
+      <if test="wbLoseWork != null">
+        WB_LOSE_WORK,
+      </if>
+      <if test="wbInjury != null">
+        WB_INJURY,
+      </if>
+      <if test="wbBirth != null">
+        WB_BIRTH,
+      </if>
+      <if test="wbFund != null">
+        WB_FUND,
+      </if>
+      <if test="otherRisks != null">
+        OTHER_RISKS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="identityCard != null">
+        #{identityCard,jdbcType=VARCHAR},
+      </if>
+      <if test="selYear != null">
+        #{selYear,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="outsourcePay != null">
+        #{outsourcePay,jdbcType=DECIMAL},
+      </if>
+      <if test="wbPostSalary != null">
+        #{wbPostSalary,jdbcType=DECIMAL},
+      </if>
+      <if test="wbPerformancePay != null">
+        #{wbPerformancePay,jdbcType=DECIMAL},
+      </if>
+      <if test="benefits != null">
+        #{benefits,jdbcType=DECIMAL},
+      </if>
+      <if test="otherIncome != null">
+        #{otherIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="wbOtherCostGr != null">
+        #{wbOtherCostGr,jdbcType=DECIMAL},
+      </if>
+      <if test="wbOtherCostGs != null">
+        #{wbOtherCostGs,jdbcType=DECIMAL},
+      </if>
+      <if test="wbBasicOld != null">
+        #{wbBasicOld,jdbcType=DECIMAL},
+      </if>
+      <if test="wbBasicMedical != null">
+        #{wbBasicMedical,jdbcType=DECIMAL},
+      </if>
+      <if test="wbLoseWork != null">
+        #{wbLoseWork,jdbcType=DECIMAL},
+      </if>
+      <if test="wbInjury != null">
+        #{wbInjury,jdbcType=DECIMAL},
+      </if>
+      <if test="wbBirth != null">
+        #{wbBirth,jdbcType=DECIMAL},
+      </if>
+      <if test="wbFund != null">
+        #{wbFund,jdbcType=DECIMAL},
+      </if>
+      <if test="otherRisks != null">
+        #{otherRisks,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -71,7 +71,7 @@
                 #{item.thisButtonNumb,jdbcType=DECIMAL} as thisButtonNumb,
                 #{item.thisButtonAmount,jdbcType=DECIMAL} as thisButtonAmount,
                 #{item.actualHairSum,jdbcType=DECIMAL} as actualHairSum
-                FROM dual
+              FROM dual
             </foreach>
           ) T
         on (a.PAY_YEAR_ID = T.payYearId)
@@ -99,13 +99,13 @@
           a.ACTUAL_HAIR_SUM = T.actualHairSum
         WHEN not matched THEN
           INSERT(PAY_YEAR_ID, LOGIN_NAME, USER_NAME,IDENTITY_CARD, SEX, JOB_RANK,
-      JOB_WAGES_RANK, POST_SEQUENCE, INJURY,ANNUAL_BONUS, EMPHASIS_ZX_REWARD, SUPER_HARVEST_REWARD,
-      YEAR_ZX_REW, YEAR_HONOUR_REW, YEAR_OTHER,ATTENDANCE_DEDUCTION, TOTAL_DUE, REMARK,
-      THIS_BUTTON_NUMB, THIS_BUTTON_AMOUNT, ACTUAL_HAIR_SUM)
+              JOB_WAGES_RANK, POST_SEQUENCE, INJURY,ANNUAL_BONUS, EMPHASIS_ZX_REWARD, SUPER_HARVEST_REWARD,
+              YEAR_ZX_REW, YEAR_HONOUR_REW, YEAR_OTHER,ATTENDANCE_DEDUCTION, TOTAL_DUE, REMARK,
+              THIS_BUTTON_NUMB, THIS_BUTTON_AMOUNT, ACTUAL_HAIR_SUM)
           VALUES(T.payYearId,T.loginName,T.userName,T.identityCard,T.sex,T.jobRank,T.jobWagesRank,
-        T.postSequence,T.injury,T.annualBonus,T.emphasisZxReward,T.superHarvestReward,T.yearZxRew,
-        T.yearHonourRew,T.yearOther,T.attendanceDeduction,T.totalDue,T.remark,T.thisButtonNumb,
-        T.thisButtonAmount,T.actualHairSum)
+            T.postSequence,T.injury,T.annualBonus,T.emphasisZxReward,T.superHarvestReward,T.yearZxRew,
+            T.yearHonourRew,T.yearOther,T.attendanceDeduction,T.totalDue,T.remark,T.thisButtonNumb,
+            T.thisButtonAmount,T.actualHairSum)
     </insert>
 
     <insert id="insertBatch" parameterType="java.util.List">
