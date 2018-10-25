@@ -123,7 +123,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 04 17 * * ?")
+    @Scheduled(cron = "0 59 09 * * ?")
     public void csvDataParseInputDB(){
         org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
         SecurityUtils.setSecurityManager(securityManager);

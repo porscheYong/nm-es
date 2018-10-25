@@ -1,24 +1,19 @@
 package xyz.wongs;
 
-import com.opencsv.bean.CsvToBeanBuilder;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.SecurityUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import xyz.wongs.es.common.utils.DateUtils;
 import xyz.wongs.es.common.utils.SpringContextHolder;
-import xyz.wongs.es.contact.msg.service.ASmsWaitSendService;
 import xyz.wongs.es.core.file.entity.Document;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
 import xyz.wongs.es.core.file.service.DocumentService;
 import xyz.wongs.es.core.file.service.InsertDataService;
 import xyz.wongs.es.core.file.service.Tab2BeanCorresRefService;
 import xyz.wongs.es.core.task.service.FtpDownloadService;
-import xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb;
-import xyz.wongs.es.zbData.pay.service.OutstaffPayYearendawardZbService;
 
 import java.io.*;
 import java.util.ArrayList;

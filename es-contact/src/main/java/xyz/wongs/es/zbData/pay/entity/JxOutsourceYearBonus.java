@@ -6,18 +6,18 @@ import xyz.wongs.es.common.persistence.DataEntity;
 import java.math.BigDecimal;
 
 /**
- * @ClassName: OutstaffPayYearendawardZb
- * @Description: TODO 中博提供的数据：外包薪酬--年终奖
- * @Auther: wang Yiren
- * @Date: 2018/10/21 14:57
- * @Vesion 1.0
- */
-public class OutstaffPayYearendawardZb extends DataEntity<OutstaffPayYearendawardZb> {
+ * @Author Wang Yiren
+ * @Description //TODO 中博提供的数据：外包薪酬--年终奖
+ * @Date 14:21 2018/10/25
+ * @Param 
+ * @return 
+ **/
+public class JxOutsourceYearBonus extends DataEntity<JxOutsourceYearBonus>{
     /**
      * 主键
      **/
-    @CsvBindByName(column = "pay_year_id")
-    private Long payYearId;
+    @CsvBindByName(column = "id")
+    private Integer jxYearBonusId;
     /**
      * 员工编号
      **/
@@ -101,8 +101,8 @@ public class OutstaffPayYearendawardZb extends DataEntity<OutstaffPayYearendawar
     /**
      * 备注
      **/
-    @CsvBindByName(column = "remark")
-    private String remark;
+    @CsvBindByName(column = "remarks")
+    private String remarks;
     /**
      * 本次扣税基数
      **/
@@ -119,12 +119,12 @@ public class OutstaffPayYearendawardZb extends DataEntity<OutstaffPayYearendawar
     @CsvBindByName(column = "actual_hair_sum")
     private BigDecimal actualHairSum;
 
-    public Long getPayYearId() {
-        return payYearId;
+    public Integer getJxYearBonusId() {
+        return jxYearBonusId;
     }
 
-    public void setPayYearId(Long payYearId) {
-        this.payYearId = payYearId;
+    public void setJxYearBonusId(Integer jxYearBonusId) {
+        this.jxYearBonusId = jxYearBonusId;
     }
 
     public String getLoginName() {
@@ -255,12 +255,14 @@ public class OutstaffPayYearendawardZb extends DataEntity<OutstaffPayYearendawar
         this.totalDue = totalDue;
     }
 
-    public String getRemark() {
-        return remark;
+    @Override
+    public String getRemarks() {
+        return remarks;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    @Override
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     public BigDecimal getThisButtonNumb() {
@@ -286,32 +288,4 @@ public class OutstaffPayYearendawardZb extends DataEntity<OutstaffPayYearendawar
     public void setActualHairSum(BigDecimal actualHairSum) {
         this.actualHairSum = actualHairSum;
     }
-
-    @Override
-    public String toString() {
-        return "OutstaffPayYearendawardZb{" +
-                "payYearId=" + payYearId +
-                ", loginName='" + loginName + '\'' +
-                ", userName='" + userName + '\'' +
-                ", identityCard='" + identityCard + '\'' +
-                ", sex='" + sex + '\'' +
-                ", jobRank='" + jobRank + '\'' +
-                ", jobWagesRank='" + jobWagesRank + '\'' +
-                ", postSequence='" + postSequence + '\'' +
-                ", injury='" + injury + '\'' +
-                ", annualBonus=" + annualBonus +
-                ", emphasisZxReward=" + emphasisZxReward +
-                ", superHarvestReward=" + superHarvestReward +
-                ", yearZxRew=" + yearZxRew +
-                ", yearHonourRew=" + yearHonourRew +
-                ", yearOther=" + yearOther +
-                ", attendanceDeduction=" + attendanceDeduction +
-                ", totalDue=" + totalDue +
-                ", remark='" + remark + '\'' +
-                ", thisButtonNumb=" + thisButtonNumb +
-                ", thisButtonAmount=" + thisButtonAmount +
-                ", actualHairSum=" + actualHairSum +
-                '}';
-    }
 }
-

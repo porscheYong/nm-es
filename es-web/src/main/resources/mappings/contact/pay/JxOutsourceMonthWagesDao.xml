@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbData.pay.dao.JxOutsourceMonthWagesDao">
+    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+        <result column="JX_MONTH_WAGES_ID" jdbcType="DECIMAL" property="jxMonthWagesId" />
+        <result column="GIVE_PERIOD" jdbcType="VARCHAR" property="givePeriod" />
+        <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+        <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+        <result column="PERSONNEL_TYPE" jdbcType="VARCHAR" property="personnelType" />
+        <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+        <result column="DEPT_NAME" jdbcType="VARCHAR" property="deptName" />
+        <result column="POST_NAME" jdbcType="VARCHAR" property="postName" />
+        <result column="JOB_RANK" jdbcType="VARCHAR" property="jobRank" />
+        <result column="JOB_LEVEL" jdbcType="VARCHAR" property="jobLevel" />
+        <result column="BANK_NUMBER" jdbcType="VARCHAR" property="bankNumber" />
+        <result column="JOB_WAGES" jdbcType="DECIMAL" property="jobWages" />
+        <result column="BF_JOB_WAGES" jdbcType="DECIMAL" property="bfJobWages" />
+        <result column="BK_JOB_WAGES" jdbcType="DECIMAL" property="bkJobWages" />
+        <result column="MONTH_WAGES" jdbcType="DECIMAL" property="monthWages" />
+        <result column="BFBK_MONTH_WAGES" jdbcType="DECIMAL" property="bfbkMonthWages" />
+        <result column="SUBSIDIES_SUM" jdbcType="DECIMAL" property="subsidiesSum" />
+        <result column="YEAR_END_ALLOWANCE" jdbcType="DECIMAL" property="yearEndAllowance" />
+        <result column="MONITOR_ALLOWANCE" jdbcType="DECIMAL" property="monitorAllowance" />
+        <result column="NIGHT_ALLOWANCE" jdbcType="DECIMAL" property="nightAllowance" />
+        <result column="OUTSIDE_ALLOWANCE" jdbcType="DECIMAL" property="outsideAllowance" />
+        <result column="TALENT_ALLOWANCE" jdbcType="DECIMAL" property="talentAllowance" />
+        <result column="OVERTIME_ALLOWANCE" jdbcType="DECIMAL" property="overtimeAllowance" />
+        <result column="YEAR_END_ALLOWANCES" jdbcType="DECIMAL" property="yearEndAllowances" />
+        <result column="OTHER_ALLOWANCE" jdbcType="DECIMAL" property="otherAllowance" />
+        <result column="B_OTHER_ALLOWANCE" jdbcType="DECIMAL" property="bOtherAllowance" />
+        <result column="CHECK_BUTTON" jdbcType="DECIMAL" property="checkButton" />
+        <result column="FEMALE_PROTECTION" jdbcType="DECIMAL" property="femaleProtection" />
+        <result column="SUPPLY_HEATING" jdbcType="DECIMAL" property="supplyHeating" />
+        <result column="COOLING_SUBSIDY" jdbcType="DECIMAL" property="coolingSubsidy" />
+        <result column="DIFFICULTY_SUBSIDY" jdbcType="DECIMAL" property="difficultySubsidy" />
+        <result column="DUE_SUM" jdbcType="DECIMAL" property="dueSum" />
+        <result column="BASIC_OLD_GR" jdbcType="DECIMAL" property="basicOldGr" />
+        <result column="BASIC_MEDICAL_GR" jdbcType="DECIMAL" property="basicMedicalGr" />
+        <result column="LARGE_MEDICAL_GR" jdbcType="DECIMAL" property="largeMedicalGr" />
+        <result column="LOSE_WORK_GR" jdbcType="DECIMAL" property="loseWorkGr" />
+        <result column="HOUSE_FUND_GR" jdbcType="DECIMAL" property="houseFundGr" />
+        <result column="BASIC_OLD_GR_BK" jdbcType="DECIMAL" property="basicOldGrBk" />
+        <result column="BASIC_MEDICAL_GR_BK" jdbcType="DECIMAL" property="basicMedicalGrBk" />
+        <result column="LARGE_MEDICAL_GR_BK" jdbcType="DECIMAL" property="largeMedicalGrBk" />
+        <result column="LOSE_WORK_GR_BK" jdbcType="DECIMAL" property="loseWorkGrBk" />
+        <result column="HOUSE_FUND_GR_BK" jdbcType="DECIMAL" property="houseFundGrBk" />
+        <result column="GR_INSURANCE_SUM" jdbcType="DECIMAL" property="grInsuranceSum" />
+        <result column="CALL_JS_AMOUNT" jdbcType="DECIMAL" property="callJsAmount" />
+        <result column="TRAFFIC_JS_AMOUNT" jdbcType="DECIMAL" property="trafficJsAmount" />
+        <result column="OTHER_JS_AMOUNT" jdbcType="DECIMAL" property="otherJsAmount" />
+        <result column="WAGES_TAX" jdbcType="DECIMAL" property="wagesTax" />
+        <result column="YEAR_END_TAX" jdbcType="DECIMAL" property="yearEndTax" />
+        <result column="YK_TAX" jdbcType="DECIMAL" property="ykTax" />
+        <result column="THIS_TAX" jdbcType="DECIMAL" property="thisTax" />
+        <result column="BUTTON_SUM" jdbcType="DECIMAL" property="buttonSum" />
+        <result column="AFTER_TAX" jdbcType="DECIMAL" property="afterTax" />
+        <result column="MIS_EATING" jdbcType="DECIMAL" property="misEating" />
+        <result column="FESTIVAL_BENEFITS" jdbcType="DECIMAL" property="festivalBenefits" />
+        <result column="OTHER_BENEFITS" jdbcType="DECIMAL" property="otherBenefits" />
+        <result column="BIRTHDAY_COST" jdbcType="DECIMAL" property="birthdayCost" />
+        <result column="CHECK_COST" jdbcType="DECIMAL" property="checkCost" />
+        <result column="CANTEEN_WELFARE" jdbcType="DECIMAL" property="canteenWelfare" />
+        <result column="APPEASE_REWARD" jdbcType="DECIMAL" property="appeaseReward" />
+        <result column="CHARGES_REWARD" jdbcType="DECIMAL" property="chargesReward" />
+        <result column="TRAFFIC_REWARD" jdbcType="DECIMAL" property="trafficReward" />
+        <result column="WARM_COST" jdbcType="DECIMAL" property="warmCost" />
+        <result column="RETIREMENT_COST" jdbcType="DECIMAL" property="retirementCost" />
+        <result column="COMPENSATION" jdbcType="DECIMAL" property="compensation" />
+        <result column="COMPENSATION_TAX" jdbcType="DECIMAL" property="compensationTax" />
+        <result column="THIS_TAX_DEDUCTION" jdbcType="DECIMAL" property="thisTaxDeduction" />
+        <result column="ALREADY_BUTTON_AMOUNT" jdbcType="DECIMAL" property="alreadyButtonAmount" />
+        <result column="TREAT_ADD" jdbcType="DECIMAL" property="treatAdd" />
+        <result column="TRADE_UNION_COST" jdbcType="DECIMAL" property="tradeUnionCost" />
+        <result column="BUSINESS_COST" jdbcType="DECIMAL" property="businessCost" />
+        <result column="TRAINING_COST" jdbcType="DECIMAL" property="trainingCost" />
+        <result column="SY_SYSTEM_COST" jdbcType="DECIMAL" property="sySystemCost" />
+        <result column="BASIC_OLD_DW" jdbcType="DECIMAL" property="basicOldDw" />
+        <result column="BASIC_MEDICAL_DW" jdbcType="DECIMAL" property="basicMedicalDw" />
+        <result column="LARGE_MEDICAL_DW" jdbcType="DECIMAL" property="largeMedicalDw" />
+        <result column="LOSE_WORK_DW" jdbcType="DECIMAL" property="loseWorkDw" />
+        <result column="INJURY_DW" jdbcType="DECIMAL" property="injuryDw" />
+        <result column="BIRTH_DW" jdbcType="DECIMAL" property="birthDw" />
+        <result column="HOUSE_FUND_DW" jdbcType="DECIMAL" property="houseFundDw" />
+        <result column="BASIC_OLD_DW_BJ" jdbcType="DECIMAL" property="basicOldDwBj" />
+        <result column="BASIC_MEDICAL_DW_BJ" jdbcType="DECIMAL" property="basicMedicalDwBj" />
+        <result column="LARGE_MEDICAL_DW_BJ" jdbcType="DECIMAL" property="largeMedicalDwBj" />
+        <result column="LOSE_WORK_DW_BJ" jdbcType="DECIMAL" property="loseWorkDwBj" />
+        <result column="INJURY_DW_BJ" jdbcType="DECIMAL" property="injuryDwBj" />
+        <result column="BIRTH_DW_BJ" jdbcType="DECIMAL" property="birthDwBj" />
+        <result column="HOUSE_FUND_DW_BJ" jdbcType="DECIMAL" property="houseFundDwBj" />
+        <result column="DW_INSURANCE_SUM" jdbcType="DECIMAL" property="dwInsuranceSum" />
+        <result column="ENTERPRISE_MONTH_SUM" jdbcType="DECIMAL" property="enterpriseMonthSum" />
+        <result column="PERSONNEL_COST" jdbcType="DECIMAL" property="personnelCost" />
+        <result column="MANAGEMENT_TAX" jdbcType="DECIMAL" property="managementTax" />
+        <result column="MANAGEMENT_TAX_X" jdbcType="DECIMAL" property="managementTaxX" />
+        <result column="ENTERPRISE_TAX_SUM" jdbcType="DECIMAL" property="enterpriseTaxSum" />
+        <result column="REMARKS" jdbcType="VARCHAR" property="remarks" />
+        <result column="WAGES_SUM" jdbcType="DECIMAL" property="wagesSum" />
+        <result column="MANAGEMENT_SUM" jdbcType="DECIMAL" property="managementSum" />
+        <result column="WELFARE_SUM" jdbcType="DECIMAL" property="welfareSum" />
+        <result column="BASIC_OLD_GR_JS" jdbcType="DECIMAL" property="basicOldGrJs" />
+        <result column="BASIC_OLD_DW_JS" jdbcType="DECIMAL" property="basicOldDwJs" />
+        <result column="MEDICAL_JS" jdbcType="DECIMAL" property="medicalJs" />
+        <result column="LOSE_WORK_JS" jdbcType="DECIMAL" property="loseWorkJs" />
+        <result column="INJURY_JS" jdbcType="DECIMAL" property="injuryJs" />
+        <result column="BIRTH_JS" jdbcType="DECIMAL" property="birthJs" />
+        <result column="HOUSE_FUND_JS" jdbcType="DECIMAL" property="houseFundJs" />
+        <result column="COMPENSATOR_MONTH" jdbcType="DECIMAL" property="compensatorMonth" />
+    </resultMap>
+    <insert id="insert" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+        insert into JX_OUTSOURCE_MONTH_WAGES (JX_MONTH_WAGES_ID, GIVE_PERIOD, LOGIN_NAME,
+        USER_NAME, PERSONNEL_TYPE, COMPANY_NAME,
+        DEPT_NAME, POST_NAME, JOB_RANK,
+        JOB_LEVEL, BANK_NUMBER, JOB_WAGES,
+        BF_JOB_WAGES, BK_JOB_WAGES, MONTH_WAGES,
+        BFBK_MONTH_WAGES, SUBSIDIES_SUM, YEAR_END_ALLOWANCE,
+        MONITOR_ALLOWANCE, NIGHT_ALLOWANCE, OUTSIDE_ALLOWANCE,
+        TALENT_ALLOWANCE, OVERTIME_ALLOWANCE, YEAR_END_ALLOWANCES,
+        OTHER_ALLOWANCE, B_OTHER_ALLOWANCE, CHECK_BUTTON,
+        FEMALE_PROTECTION, SUPPLY_HEATING, COOLING_SUBSIDY,
+        DIFFICULTY_SUBSIDY, DUE_SUM, BASIC_OLD_GR,
+        BASIC_MEDICAL_GR, LARGE_MEDICAL_GR, LOSE_WORK_GR,
+        HOUSE_FUND_GR, BASIC_OLD_GR_BK, BASIC_MEDICAL_GR_BK,
+        LARGE_MEDICAL_GR_BK, LOSE_WORK_GR_BK, HOUSE_FUND_GR_BK,
+        GR_INSURANCE_SUM, CALL_JS_AMOUNT, TRAFFIC_JS_AMOUNT,
+        OTHER_JS_AMOUNT, WAGES_TAX, YEAR_END_TAX,
+        YK_TAX, THIS_TAX, BUTTON_SUM,
+        AFTER_TAX, MIS_EATING, FESTIVAL_BENEFITS,
+        OTHER_BENEFITS, BIRTHDAY_COST, CHECK_COST,
+        CANTEEN_WELFARE, APPEASE_REWARD, CHARGES_REWARD,
+        TRAFFIC_REWARD, WARM_COST, RETIREMENT_COST,
+        COMPENSATION, COMPENSATION_TAX, THIS_TAX_DEDUCTION,
+        ALREADY_BUTTON_AMOUNT, TREAT_ADD, TRADE_UNION_COST,
+        BUSINESS_COST, TRAINING_COST, SY_SYSTEM_COST,
+        BASIC_OLD_DW, BASIC_MEDICAL_DW, LARGE_MEDICAL_DW,
+        LOSE_WORK_DW, INJURY_DW, BIRTH_DW,
+        HOUSE_FUND_DW, BASIC_OLD_DW_BJ, BASIC_MEDICAL_DW_BJ,
+        LARGE_MEDICAL_DW_BJ, LOSE_WORK_DW_BJ, INJURY_DW_BJ,
+        BIRTH_DW_BJ, HOUSE_FUND_DW_BJ, DW_INSURANCE_SUM,
+        ENTERPRISE_MONTH_SUM, PERSONNEL_COST, MANAGEMENT_TAX,
+        MANAGEMENT_TAX_X, ENTERPRISE_TAX_SUM, REMARKS,
+        WAGES_SUM, MANAGEMENT_SUM, WELFARE_SUM,
+        BASIC_OLD_GR_JS, BASIC_OLD_DW_JS, MEDICAL_JS,
+        LOSE_WORK_JS, INJURY_JS, BIRTH_JS,
+        HOUSE_FUND_JS, COMPENSATOR_MONTH)
+        values (#{jxMonthWagesId,jdbcType=DECIMAL}, #{givePeriod,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR},
+        #{userName,jdbcType=VARCHAR}, #{personnelType,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR},
+        #{deptName,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, #{jobRank,jdbcType=VARCHAR},
+        #{jobLevel,jdbcType=VARCHAR}, #{bankNumber,jdbcType=VARCHAR}, #{jobWages,jdbcType=DECIMAL},
+        #{bfJobWages,jdbcType=DECIMAL}, #{bkJobWages,jdbcType=DECIMAL}, #{monthWages,jdbcType=DECIMAL},
+        #{bfbkMonthWages,jdbcType=DECIMAL}, #{subsidiesSum,jdbcType=DECIMAL}, #{yearEndAllowance,jdbcType=DECIMAL},
+        #{monitorAllowance,jdbcType=DECIMAL}, #{nightAllowance,jdbcType=DECIMAL}, #{outsideAllowance,jdbcType=DECIMAL},
+        #{talentAllowance,jdbcType=DECIMAL}, #{overtimeAllowance,jdbcType=DECIMAL}, #{yearEndAllowances,jdbcType=DECIMAL},
+        #{otherAllowance,jdbcType=DECIMAL}, #{bOtherAllowance,jdbcType=DECIMAL}, #{checkButton,jdbcType=DECIMAL},
+        #{femaleProtection,jdbcType=DECIMAL}, #{supplyHeating,jdbcType=DECIMAL}, #{coolingSubsidy,jdbcType=DECIMAL},
+        #{difficultySubsidy,jdbcType=DECIMAL}, #{dueSum,jdbcType=DECIMAL}, #{basicOldGr,jdbcType=DECIMAL},
+        #{basicMedicalGr,jdbcType=DECIMAL}, #{largeMedicalGr,jdbcType=DECIMAL}, #{loseWorkGr,jdbcType=DECIMAL},
+        #{houseFundGr,jdbcType=DECIMAL}, #{basicOldGrBk,jdbcType=DECIMAL}, #{basicMedicalGrBk,jdbcType=DECIMAL},
+        #{largeMedicalGrBk,jdbcType=DECIMAL}, #{loseWorkGrBk,jdbcType=DECIMAL}, #{houseFundGrBk,jdbcType=DECIMAL},
+        #{grInsuranceSum,jdbcType=DECIMAL}, #{callJsAmount,jdbcType=DECIMAL}, #{trafficJsAmount,jdbcType=DECIMAL},
+        #{otherJsAmount,jdbcType=DECIMAL}, #{wagesTax,jdbcType=DECIMAL}, #{yearEndTax,jdbcType=DECIMAL},
+        #{ykTax,jdbcType=DECIMAL}, #{thisTax,jdbcType=DECIMAL}, #{buttonSum,jdbcType=DECIMAL},
+        #{afterTax,jdbcType=DECIMAL}, #{misEating,jdbcType=DECIMAL}, #{festivalBenefits,jdbcType=DECIMAL},
+        #{otherBenefits,jdbcType=DECIMAL}, #{birthdayCost,jdbcType=DECIMAL}, #{checkCost,jdbcType=DECIMAL},
+        #{canteenWelfare,jdbcType=DECIMAL}, #{appeaseReward,jdbcType=DECIMAL}, #{chargesReward,jdbcType=DECIMAL},
+        #{trafficReward,jdbcType=DECIMAL}, #{warmCost,jdbcType=DECIMAL}, #{retirementCost,jdbcType=DECIMAL},
+        #{compensation,jdbcType=DECIMAL}, #{compensationTax,jdbcType=DECIMAL}, #{thisTaxDeduction,jdbcType=DECIMAL},
+        #{alreadyButtonAmount,jdbcType=DECIMAL}, #{treatAdd,jdbcType=DECIMAL}, #{tradeUnionCost,jdbcType=DECIMAL},
+        #{businessCost,jdbcType=DECIMAL}, #{trainingCost,jdbcType=DECIMAL}, #{sySystemCost,jdbcType=DECIMAL},
+        #{basicOldDw,jdbcType=DECIMAL}, #{basicMedicalDw,jdbcType=DECIMAL}, #{largeMedicalDw,jdbcType=DECIMAL},
+        #{loseWorkDw,jdbcType=DECIMAL}, #{injuryDw,jdbcType=DECIMAL}, #{birthDw,jdbcType=DECIMAL},
+        #{houseFundDw,jdbcType=DECIMAL}, #{basicOldDwBj,jdbcType=DECIMAL}, #{basicMedicalDwBj,jdbcType=DECIMAL},
+        #{largeMedicalDwBj,jdbcType=DECIMAL}, #{loseWorkDwBj,jdbcType=DECIMAL}, #{injuryDwBj,jdbcType=DECIMAL},
+        #{birthDwBj,jdbcType=DECIMAL}, #{houseFundDwBj,jdbcType=DECIMAL}, #{dwInsuranceSum,jdbcType=DECIMAL},
+        #{enterpriseMonthSum,jdbcType=DECIMAL}, #{personnelCost,jdbcType=DECIMAL}, #{managementTax,jdbcType=DECIMAL},
+        #{managementTaxX,jdbcType=DECIMAL}, #{enterpriseTaxSum,jdbcType=DECIMAL}, #{remarks,jdbcType=VARCHAR},
+        #{wagesSum,jdbcType=DECIMAL}, #{managementSum,jdbcType=DECIMAL}, #{welfareSum,jdbcType=DECIMAL},
+        #{basicOldGrJs,jdbcType=DECIMAL}, #{basicOldDwJs,jdbcType=DECIMAL}, #{medicalJs,jdbcType=DECIMAL},
+        #{loseWorkJs,jdbcType=DECIMAL}, #{injuryJs,jdbcType=DECIMAL}, #{birthJs,jdbcType=DECIMAL},
+        #{houseFundJs,jdbcType=DECIMAL}, #{compensatorMonth,jdbcType=DECIMAL})
+    </insert>
+
+    <insert id="mergeInto" parameterType="java.util.List">
+        merge into JX_OUTSOURCE_MONTH_WAGES a
+        using (
+        <foreach collection="list" item="item" index="index" separator="union" >
+            SELECT
+                #{item.jxMonthWagesId,jdbcType=DECIMAL} as jxMonthWagesId,
+                #{item.givePeriod,jdbcType=VARCHAR} AS givePeriod,
+                #{item.loginName,jdbcType=VARCHAR} AS loginName,
+                #{item.userName,jdbcType=VARCHAR} AS userName,
+                #{item.personnelType,jdbcType=VARCHAR} AS personnelType,
+                #{item.companyName,jdbcType=VARCHAR} AS companyName,
+                #{item.deptName,jdbcType=VARCHAR} AS deptName,
+                #{item.postName,jdbcType=VARCHAR} AS postName,
+                #{item.jobRank,jdbcType=VARCHAR} AS jobRank,
+                #{item.jobLevel,jdbcType=VARCHAR} AS jobLevel,
+                #{item.bankNumber,jdbcType=VARCHAR} AS bankNumber,
+                #{item.jobWages,jdbcType=DECIMAL} AS jobWages,
+                #{item.bfJobWages,jdbcType=DECIMAL} AS bfJobWages,
+                #{item.bkJobWages,jdbcType=DECIMAL} AS bkJobWages,
+                #{item.monthWages,jdbcType=DECIMAL} AS monthWages,
+                #{item.bfbkMonthWages,jdbcType=DECIMAL} AS bfbkMonthWages,
+                #{item.subsidiesSum,jdbcType=DECIMAL} AS subsidiesSum,
+                #{item.yearEndAllowance,jdbcType=DECIMAL} AS yearEndAllowance,
+                #{item.monitorAllowance,jdbcType=DECIMAL} AS monitorAllowance,
+                #{item.nightAllowance,jdbcType=DECIMAL} AS nightAllowance,
+                #{item.outsideAllowance,jdbcType=DECIMAL} AS outsideAllowance,
+                #{item.talentAllowance,jdbcType=DECIMAL} AS talentAllowance,
+                #{item.overtimeAllowance,jdbcType=DECIMAL} AS overtimeAllowance,
+                #{item.yearEndAllowances,jdbcType=DECIMAL} AS yearEndAllowances,
+                #{item.otherAllowance,jdbcType=DECIMAL} AS otherAllowance,
+                #{item.bOtherAllowance,jdbcType=DECIMAL} AS bOtherAllowance,
+                #{item.checkButton,jdbcType=DECIMAL} AS checkButton,
+                #{item.femaleProtection,jdbcType=DECIMAL} AS femaleProtection,
+                #{item.supplyHeating,jdbcType=DECIMAL} AS supplyHeating,
+                #{item.coolingSubsidy,jdbcType=DECIMAL} AS coolingSubsidy,
+                #{item.difficultySubsidy,jdbcType=DECIMAL} AS difficultySubsidy,
+                #{item.dueSum,jdbcType=DECIMAL} AS dueSum,
+                #{item.basicOldGr,jdbcType=DECIMAL} AS basicOldGr,
+                #{item.basicMedicalGr,jdbcType=DECIMAL} AS basicMedicalGr,
+                #{item.largeMedicalGr,jdbcType=DECIMAL} AS largeMedicalGr,
+                #{item.loseWorkGr,jdbcType=DECIMAL} AS loseWorkGr,
+                #{item.houseFundGr,jdbcType=DECIMAL} AS houseFundGr,
+                #{item.basicOldGrBk,jdbcType=DECIMAL} AS basicOldGrBk,
+                #{item.basicMedicalGrBk,jdbcType=DECIMAL} AS basicMedicalGrBk,
+                #{item.largeMedicalGrBk,jdbcType=DECIMAL} AS largeMedicalGrBk,
+                #{item.loseWorkGrBk,jdbcType=DECIMAL} AS loseWorkGrBk,
+                #{item.houseFundGrBk,jdbcType=DECIMAL} AS houseFundGrBk,
+                #{item.grInsuranceSum,jdbcType=DECIMAL} AS grInsuranceSum,
+                #{item.callJsAmount,jdbcType=DECIMAL} AS callJsAmount,
+                #{item.trafficJsAmount,jdbcType=DECIMAL} AS trafficJsAmount,
+                #{item.otherJsAmount,jdbcType=DECIMAL} AS otherJsAmount,
+                #{item.wagesTax,jdbcType=DECIMAL} AS wagesTax,
+                #{item.yearEndTax,jdbcType=DECIMAL} AS yearEndTax,
+                #{item.ykTax,jdbcType=DECIMAL} AS ykTax,
+                #{item.thisTax,jdbcType=DECIMAL} AS thisTax,
+                #{item.buttonSum,jdbcType=DECIMAL} AS buttonSum,
+                #{item.afterTax,jdbcType=DECIMAL} AS afterTax,
+                #{item.misEating,jdbcType=DECIMAL} AS misEating,
+                #{item.festivalBenefits,jdbcType=DECIMAL} AS festivalBenefits,
+                #{item.otherBenefits,jdbcType=DECIMAL} AS otherBenefits,
+                #{item.birthdayCost,jdbcType=DECIMAL} AS birthdayCost,
+                #{item.checkCost,jdbcType=DECIMAL} AS checkCost,
+                #{item.canteenWelfare,jdbcType=DECIMAL} AS canteenWelfare,
+                #{item.appeaseReward,jdbcType=DECIMAL} AS appeaseReward,
+                #{item.chargesReward,jdbcType=DECIMAL} AS chargesReward,
+                #{item.trafficReward,jdbcType=DECIMAL} AS trafficReward,
+                #{item.warmCost,jdbcType=DECIMAL} AS warmCost,
+                #{item.retirementCost,jdbcType=DECIMAL} AS retirementCost,
+                #{item.compensation,jdbcType=DECIMAL} AS compensation,
+                #{item.compensationTax,jdbcType=DECIMAL} AS compensationTax,
+                #{item.thisTaxDeduction,jdbcType=DECIMAL} AS thisTaxDeduction,
+                #{item.alreadyButtonAmount,jdbcType=DECIMAL} AS alreadyButtonAmount,
+                #{item.treatAdd,jdbcType=DECIMAL} AS treatAdd,
+                #{item.tradeUnionCost,jdbcType=DECIMAL} AS tradeUnionCost,
+                #{item.businessCost,jdbcType=DECIMAL} AS businessCost,
+                #{item.trainingCost,jdbcType=DECIMAL} AS trainingCost,
+                #{item.sySystemCost,jdbcType=DECIMAL} AS sySystemCost,
+                #{item.basicOldDw,jdbcType=DECIMAL} AS basicOldDw,
+                #{item.basicMedicalDw,jdbcType=DECIMAL} AS basicMedicalDw,
+                #{item.largeMedicalDw,jdbcType=DECIMAL} AS largeMedicalDw,
+                #{item.loseWorkDw,jdbcType=DECIMAL} AS loseWorkDw,
+                #{item.injuryDw,jdbcType=DECIMAL} AS injuryDw,
+                #{item.birthDw,jdbcType=DECIMAL} AS birthDw,
+                #{item.houseFundDw,jdbcType=DECIMAL} AS houseFundDw,
+                #{item.basicOldDwBj,jdbcType=DECIMAL} AS basicOldDwBj,
+                #{item.basicMedicalDwBj,jdbcType=DECIMAL} AS basicMedicalDwBj,
+                #{item.largeMedicalDwBj,jdbcType=DECIMAL} AS largeMedicalDwBj,
+                #{item.loseWorkDwBj,jdbcType=DECIMAL} AS loseWorkDwBj,
+                #{item.injuryDwBj,jdbcType=DECIMAL} AS injuryDwBj,
+                #{item.birthDwBj,jdbcType=DECIMAL} AS birthDwBj,
+                #{item.houseFundDwBj,jdbcType=DECIMAL} AS houseFundDwBj,
+                #{item.dwInsuranceSum,jdbcType=DECIMAL} AS dwInsuranceSum,
+                #{item.enterpriseMonthSum,jdbcType=DECIMAL} AS enterpriseMonthSum,
+                #{item.personnelCost,jdbcType=DECIMAL} AS personnelCost,
+                #{item.managementTax,jdbcType=DECIMAL} AS managementTax,
+                #{item.managementTaxX,jdbcType=DECIMAL} AS managementTaxX,
+                #{item.enterpriseTaxSum,jdbcType=DECIMAL} AS enterpriseTaxSum,
+                #{item.remarks,jdbcType=VARCHAR} AS remarks,
+                #{item.wagesSum,jdbcType=DECIMAL} AS wagesSum,
+                #{item.managementSum,jdbcType=DECIMAL} AS managementSum,
+                #{item.welfareSum,jdbcType=DECIMAL} AS welfareSum,
+                #{item.basicOldGrJs,jdbcType=DECIMAL} AS basicOldGrJs,
+                #{item.basicOldDwJs,jdbcType=DECIMAL} AS basicOldDwJs,
+                #{item.medicalJs,jdbcType=DECIMAL} AS medicalJs,
+                #{item.loseWorkJs,jdbcType=DECIMAL} AS loseWorkJs,
+                #{item.injuryJs,jdbcType=DECIMAL} AS injuryJs,
+                #{item.birthJs,jdbcType=DECIMAL} AS birthJs,
+                #{item.houseFundJs,jdbcType=DECIMAL} AS houseFundJs,
+                #{item.compensatorMonth,jdbcType=DECIMAL} AS compensatorMonth
+            FROM dual
+        </foreach>
+        ) T
+        on (a.JX_MONTH_WAGES_ID = T.jxMonthWagesId)
+        WHEN matched THEN
+        UPDATE SET
+            a.give_period          = T.givePeriod,
+            a.login_name           = T.loginName,
+            a.user_name            = T.userName,
+            a.personnel_type       = T.personnelType,
+            a.company_name         = T.companyName,
+            a.dept_name            = T.deptName,
+            a.post_name            = T.postName,
+            a.job_rank             = T.jobRank,
+            a.job_level            = T.jobLevel,
+            a.bank_number          = T.bankNumber,
+            a.job_wages            = T.jobWages,
+            a.bf_job_wages         = T.bfJobWages,
+            a.bk_job_wages         = T.bkJobWages,
+            a.month_wages          = T.monthWages,
+            a.bfbk_month_wages     = T.bfbkMonthWages,
+            a.subsidies_sum        = T.subsidiesSum,
+            a.year_end_allowance   = T.yearEndAllowance,
+            a.monitor_allowance    = T.monitorAllowance,
+            a.night_allowance      = T.nightAllowance,
+            a.outside_allowance    = T.outsideAllowance,
+            a.talent_allowance     = T.talentAllowance,
+            a.overtime_allowance   = T.overtimeAllowance,
+            a.year_end_allowances  = T.yearEndAllowances,
+            a.other_allowance      = T.otherAllowance,
+            a.b_other_allowance    = T.bOtherAllowance,
+            a.check_button         = T.checkButton,
+            a.female_protection    = T.femaleProtection,
+            a.supply_heating       = T.supplyHeating,
+            a.cooling_subsidy      = T.coolingSubsidy,
+            a.difficulty_subsidy   = T.difficultySubsidy,
+            a.due_sum              = T.dueSum,
+            a.basic_old_gr         = T.basicOldGr,
+            a.basic_medical_gr     = T.basicMedicalGr,
+            a.large_medical_gr     = T.largeMedicalGr,
+            a.lose_work_gr         = T.loseWorkGr,
+            a.house_fund_gr        = T.houseFundGr,
+            a.basic_old_gr_bk      = T.basicOldGrBk,
+            a.basic_medical_gr_bk  = T.basicMedicalGrBk,
+            a.large_medical_gr_bk  = T.largeMedicalGrBk,
+            a.lose_work_gr_bk      = T.loseWorkGrBk,
+            a.house_fund_gr_bk     = T.houseFundGrBk,
+            a.gr_insurance_sum     = T.grInsuranceSum,
+            a.call_js_amount       = T.callJsAmount,
+            a.traffic_js_amount    = T.trafficJsAmount,
+            a.other_js_amount      = T.otherJsAmount,
+            a.wages_tax            = T.wagesTax,
+            a.year_end_tax         = T.yearEndTax,
+            a.yk_tax               = T.ykTax,
+            a.this_tax             = T.thisTax,
+            a.button_sum           = T.buttonSum,
+            a.after_tax            = T.afterTax,
+            a.mis_eating           = T.misEating,
+            a.festival_benefits    = T.festivalBenefits,
+            a.other_benefits       = T.otherBenefits,
+            a.birthday_cost        = T.birthdayCost,
+            a.check_cost           = T.checkCost,
+            a.canteen_welfare      = T.canteenWelfare,
+            a.appease_reward       = T.appeaseReward,
+            a.charges_reward       = T.chargesReward,
+            a.traffic_reward       = T.trafficReward,
+            a.warm_cost            = T.warmCost,
+            a.retirement_cost      = T.retirementCost,
+            a.compensation         = T.compensation,
+            a.compensation_tax     = T.compensationTax,
+            a.this_tax_deduction   = T.thisTaxDeduction,
+            a.already_button_amount  = T.alreadyButtonAmount,
+            a.treat_add            = T.treatAdd,
+            a.trade_union_cost     = T.tradeUnionCost,
+            a.business_cost        = T.businessCost,
+            a.training_cost        = T.trainingCost,
+            a.sy_system_cost       = T.sySystemCost,
+            a.basic_old_dw         = T.basicOldDw,
+            a.basic_medical_dw     = T.basicMedicalDw,
+            a.large_medical_dw     = T.largeMedicalDw,
+            a.lose_work_dw         = T.loseWorkDw,
+            a.injury_dw            = T.injuryDw,
+            a.birth_dw             = T.birthDw,
+            a.house_fund_dw        = T.houseFundDw,
+            a.basic_old_dw_bj      = T.basicOldDwBj,
+            a.basic_medical_dw_bj  = T.basicMedicalDwBj,
+            a.large_medical_dw_bj  = T.largeMedicalDwBj,
+            a.lose_work_dw_bj      = T.loseWorkDwBj,
+            a.injury_dw_bj         = T.injuryDwBj,
+            a.birth_dw_bj          = T.birthDwBj,
+            a.house_fund_dw_bj     = T.houseFundDwBj,
+            a.dw_insurance_sum     = T.dwInsuranceSum,
+            a.enterprise_month_sum = T.enterpriseMonthSum,
+            a.personnel_cost       = T.personnelCost,
+            a.management_tax       = T.managementTax,
+            a.management_tax_x     = T.managementTaxX,
+            a.enterprise_tax_sum   = T.enterpriseTaxSum,
+            a.remarks              = T.remarks,
+            a.wages_sum            = T.wagesSum,
+            a.management_sum       = T.managementSum,
+            a.welfare_sum          = T.welfareSum,
+            a.basic_old_gr_js      = T.basicOldGrJs,
+            a.basic_old_dw_js      = T.basicOldDwJs,
+            a.medical_js           = T.medicalJs,
+            a.lose_work_js         = T.loseWorkJs,
+            a.injury_js            = T.injuryJs,
+            a.birth_js             = T.birthJs,
+            a.house_fund_js        = T.houseFundJs,
+            a.compensator_month    = T.compensatorMonth
+        WHEN not matched THEN
+        insert(JX_MONTH_WAGES_ID, GIVE_PERIOD, LOGIN_NAME,
+            USER_NAME, PERSONNEL_TYPE, COMPANY_NAME,
+            DEPT_NAME, POST_NAME, JOB_RANK,
+            JOB_LEVEL, BANK_NUMBER, JOB_WAGES,
+            BF_JOB_WAGES, BK_JOB_WAGES, MONTH_WAGES,
+            BFBK_MONTH_WAGES, SUBSIDIES_SUM, YEAR_END_ALLOWANCE,
+            MONITOR_ALLOWANCE, NIGHT_ALLOWANCE, OUTSIDE_ALLOWANCE,
+            TALENT_ALLOWANCE, OVERTIME_ALLOWANCE, YEAR_END_ALLOWANCES,
+            OTHER_ALLOWANCE, B_OTHER_ALLOWANCE, CHECK_BUTTON,
+            FEMALE_PROTECTION, SUPPLY_HEATING, COOLING_SUBSIDY,
+            DIFFICULTY_SUBSIDY, DUE_SUM, BASIC_OLD_GR,
+            BASIC_MEDICAL_GR, LARGE_MEDICAL_GR, LOSE_WORK_GR,
+            HOUSE_FUND_GR, BASIC_OLD_GR_BK, BASIC_MEDICAL_GR_BK,
+            LARGE_MEDICAL_GR_BK, LOSE_WORK_GR_BK, HOUSE_FUND_GR_BK,
+            GR_INSURANCE_SUM, CALL_JS_AMOUNT, TRAFFIC_JS_AMOUNT,
+            OTHER_JS_AMOUNT, WAGES_TAX, YEAR_END_TAX,
+            YK_TAX, THIS_TAX, BUTTON_SUM,
+            AFTER_TAX, MIS_EATING, FESTIVAL_BENEFITS,
+            OTHER_BENEFITS, BIRTHDAY_COST, CHECK_COST,
+            CANTEEN_WELFARE, APPEASE_REWARD, CHARGES_REWARD,
+            TRAFFIC_REWARD, WARM_COST, RETIREMENT_COST,
+            COMPENSATION, COMPENSATION_TAX, THIS_TAX_DEDUCTION,
+            ALREADY_BUTTON_AMOUNT, TREAT_ADD, TRADE_UNION_COST,
+            BUSINESS_COST, TRAINING_COST, SY_SYSTEM_COST,
+            BASIC_OLD_DW, BASIC_MEDICAL_DW, LARGE_MEDICAL_DW,
+            LOSE_WORK_DW, INJURY_DW, BIRTH_DW,
+            HOUSE_FUND_DW, BASIC_OLD_DW_BJ, BASIC_MEDICAL_DW_BJ,
+            LARGE_MEDICAL_DW_BJ, LOSE_WORK_DW_BJ, INJURY_DW_BJ,
+            BIRTH_DW_BJ, HOUSE_FUND_DW_BJ, DW_INSURANCE_SUM,
+            ENTERPRISE_MONTH_SUM, PERSONNEL_COST, MANAGEMENT_TAX,
+            MANAGEMENT_TAX_X, ENTERPRISE_TAX_SUM, REMARKS,
+            WAGES_SUM, MANAGEMENT_SUM, WELFARE_SUM,
+            BASIC_OLD_GR_JS, BASIC_OLD_DW_JS, MEDICAL_JS,
+            LOSE_WORK_JS, INJURY_JS, BIRTH_JS,
+            HOUSE_FUND_JS, COMPENSATOR_MONTH
+        )
+        VALUES(
+            T.jxMonthWagesId,
+            T.givePeriod,
+            T.loginName,
+            T.userName,
+            T.personnelType,
+            T.companyName,
+            T.deptName,
+            T.postName,
+            T.jobRank,
+            T.jobLevel,
+            T.bankNumber,
+            T.jobWages,
+            T.bfJobWages,
+            T.bkJobWages,
+            T.monthWages,
+            T.bfbkMonthWages,
+            T.subsidiesSum,
+            T.yearEndAllowance,
+            T.monitorAllowance,
+            T.nightAllowance,
+            T.outsideAllowance,
+            T.talentAllowance,
+            T.overtimeAllowance,
+            T.yearEndAllowances,
+            T.otherAllowance,
+            T.bOtherAllowance,
+            T.checkButton,
+            T.femaleProtection,
+            T.supplyHeating,
+            T.coolingSubsidy,
+            T.difficultySubsidy,
+            T.dueSum,
+            T.basicOldGr,
+            T.basicMedicalGr,
+            T.largeMedicalGr,
+            T.loseWorkGr,
+            T.houseFundGr,
+            T.basicOldGrBk,
+            T.basicMedicalGrBk,
+            T.largeMedicalGrBk,
+            T.loseWorkGrBk,
+            T.houseFundGrBk,
+            T.grInsuranceSum,
+            T.callJsAmount,
+            T.trafficJsAmount,
+            T.otherJsAmount,
+            T.wagesTax,
+            T.yearEndTax,
+            T.ykTax,
+            T.thisTax,
+            T.buttonSum,
+            T.afterTax,
+            T.misEating,
+            T.festivalBenefits,
+            T.otherBenefits,
+            T.birthdayCost,
+            T.checkCost,
+            T.canteenWelfare,
+            T.appeaseReward,
+            T.chargesReward,
+            T.trafficReward,
+            T.warmCost,
+            T.retirementCost,
+            T.compensation,
+            T.compensationTax,
+            T.thisTaxDeduction,
+            T.alreadyButtonAmount,
+            T.treatAdd,
+            T.tradeUnionCost,
+            T.businessCost,
+            T.trainingCost,
+            T.sySystemCost,
+            T.basicOldDw,
+            T.basicMedicalDw,
+            T.largeMedicalDw,
+            T.loseWorkDw,
+            T.injuryDw,
+            T.birthDw,
+            T.houseFundDw,
+            T.basicOldDwBj,
+            T.basicMedicalDwBj,
+            T.largeMedicalDwBj,
+            T.loseWorkDwBj,
+            T.injuryDwBj,
+            T.birthDwBj,
+            T.houseFundDwBj,
+            T.dwInsuranceSum,
+            T.enterpriseMonthSum,
+            T.personnelCost,
+            T.managementTax,
+            T.managementTaxX,
+            T.enterpriseTaxSum,
+            T.remarks,
+            T.wagesSum,
+            T.managementSum,
+            T.welfareSum,
+            T.basicOldGrJs,
+            T.basicOldDwJs,
+            T.medicalJs,
+            T.loseWorkJs,
+            T.injuryJs,
+            T.birthJs,
+            T.houseFundJs,
+            T.compensatorMonth
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+        insert into JX_OUTSOURCE_MONTH_WAGES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jxMonthWagesId != null">
+                JX_MONTH_WAGES_ID,
+            </if>
+            <if test="givePeriod != null">
+                GIVE_PERIOD,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="personnelType != null">
+                PERSONNEL_TYPE,
+            </if>
+            <if test="companyName != null">
+                COMPANY_NAME,
+            </if>
+            <if test="deptName != null">
+                DEPT_NAME,
+            </if>
+            <if test="postName != null">
+                POST_NAME,
+            </if>
+            <if test="jobRank != null">
+                JOB_RANK,
+            </if>
+            <if test="jobLevel != null">
+                JOB_LEVEL,
+            </if>
+            <if test="bankNumber != null">
+                BANK_NUMBER,
+            </if>
+            <if test="jobWages != null">
+                JOB_WAGES,
+            </if>
+            <if test="bfJobWages != null">
+                BF_JOB_WAGES,
+            </if>
+            <if test="bkJobWages != null">
+                BK_JOB_WAGES,
+            </if>
+            <if test="monthWages != null">
+                MONTH_WAGES,
+            </if>
+            <if test="bfbkMonthWages != null">
+                BFBK_MONTH_WAGES,
+            </if>
+            <if test="subsidiesSum != null">
+                SUBSIDIES_SUM,
+            </if>
+            <if test="yearEndAllowance != null">
+                YEAR_END_ALLOWANCE,
+            </if>
+            <if test="monitorAllowance != null">
+                MONITOR_ALLOWANCE,
+            </if>
+            <if test="nightAllowance != null">
+                NIGHT_ALLOWANCE,
+            </if>
+            <if test="outsideAllowance != null">
+                OUTSIDE_ALLOWANCE,
+            </if>
+            <if test="talentAllowance != null">
+                TALENT_ALLOWANCE,
+            </if>
+            <if test="overtimeAllowance != null">
+                OVERTIME_ALLOWANCE,
+            </if>
+            <if test="yearEndAllowances != null">
+                YEAR_END_ALLOWANCES,
+            </if>
+            <if test="otherAllowance != null">
+                OTHER_ALLOWANCE,
+            </if>
+            <if test="bOtherAllowance != null">
+                B_OTHER_ALLOWANCE,
+            </if>
+            <if test="checkButton != null">
+                CHECK_BUTTON,
+            </if>
+            <if test="femaleProtection != null">
+                FEMALE_PROTECTION,
+            </if>
+            <if test="supplyHeating != null">
+                SUPPLY_HEATING,
+            </if>
+            <if test="coolingSubsidy != null">
+                COOLING_SUBSIDY,
+            </if>
+            <if test="difficultySubsidy != null">
+                DIFFICULTY_SUBSIDY,
+            </if>
+            <if test="dueSum != null">
+                DUE_SUM,
+            </if>
+            <if test="basicOldGr != null">
+                BASIC_OLD_GR,
+            </if>
+            <if test="basicMedicalGr != null">
+                BASIC_MEDICAL_GR,
+            </if>
+            <if test="largeMedicalGr != null">
+                LARGE_MEDICAL_GR,
+            </if>
+            <if test="loseWorkGr != null">
+                LOSE_WORK_GR,
+            </if>
+            <if test="houseFundGr != null">
+                HOUSE_FUND_GR,
+            </if>
+            <if test="basicOldGrBk != null">
+                BASIC_OLD_GR_BK,
+            </if>
+            <if test="basicMedicalGrBk != null">
+                BASIC_MEDICAL_GR_BK,
+            </if>
+            <if test="largeMedicalGrBk != null">
+                LARGE_MEDICAL_GR_BK,
+            </if>
+            <if test="loseWorkGrBk != null">
+                LOSE_WORK_GR_BK,
+            </if>
+            <if test="houseFundGrBk != null">
+                HOUSE_FUND_GR_BK,
+            </if>
+            <if test="grInsuranceSum != null">
+                GR_INSURANCE_SUM,
+            </if>
+            <if test="callJsAmount != null">
+                CALL_JS_AMOUNT,
+            </if>
+            <if test="trafficJsAmount != null">
+                TRAFFIC_JS_AMOUNT,
+            </if>
+            <if test="otherJsAmount != null">
+                OTHER_JS_AMOUNT,
+            </if>
+            <if test="wagesTax != null">
+                WAGES_TAX,
+            </if>
+            <if test="yearEndTax != null">
+                YEAR_END_TAX,
+            </if>
+            <if test="ykTax != null">
+                YK_TAX,
+            </if>
+            <if test="thisTax != null">
+                THIS_TAX,
+            </if>
+            <if test="buttonSum != null">
+                BUTTON_SUM,
+            </if>
+            <if test="afterTax != null">
+                AFTER_TAX,
+            </if>
+            <if test="misEating != null">
+                MIS_EATING,
+            </if>
+            <if test="festivalBenefits != null">
+                FESTIVAL_BENEFITS,
+            </if>
+            <if test="otherBenefits != null">
+                OTHER_BENEFITS,
+            </if>
+            <if test="birthdayCost != null">
+                BIRTHDAY_COST,
+            </if>
+            <if test="checkCost != null">
+                CHECK_COST,
+            </if>
+            <if test="canteenWelfare != null">
+                CANTEEN_WELFARE,
+            </if>
+            <if test="appeaseReward != null">
+                APPEASE_REWARD,
+            </if>
+            <if test="chargesReward != null">
+                CHARGES_REWARD,
+            </if>
+            <if test="trafficReward != null">
+                TRAFFIC_REWARD,
+            </if>
+            <if test="warmCost != null">
+                WARM_COST,
+            </if>
+            <if test="retirementCost != null">
+                RETIREMENT_COST,
+            </if>
+            <if test="compensation != null">
+                COMPENSATION,
+            </if>
+            <if test="compensationTax != null">
+                COMPENSATION_TAX,
+            </if>
+            <if test="thisTaxDeduction != null">
+                THIS_TAX_DEDUCTION,
+            </if>
+            <if test="alreadyButtonAmount != null">
+                ALREADY_BUTTON_AMOUNT,
+            </if>
+            <if test="treatAdd != null">
+                TREAT_ADD,
+            </if>
+            <if test="tradeUnionCost != null">
+                TRADE_UNION_COST,
+            </if>
+            <if test="businessCost != null">
+                BUSINESS_COST,
+            </if>
+            <if test="trainingCost != null">
+                TRAINING_COST,
+            </if>
+            <if test="sySystemCost != null">
+                SY_SYSTEM_COST,
+            </if>
+            <if test="basicOldDw != null">
+                BASIC_OLD_DW,
+            </if>
+            <if test="basicMedicalDw != null">
+                BASIC_MEDICAL_DW,
+            </if>
+            <if test="largeMedicalDw != null">
+                LARGE_MEDICAL_DW,
+            </if>
+            <if test="loseWorkDw != null">
+                LOSE_WORK_DW,
+            </if>
+            <if test="injuryDw != null">
+                INJURY_DW,
+            </if>
+            <if test="birthDw != null">
+                BIRTH_DW,
+            </if>
+            <if test="houseFundDw != null">
+                HOUSE_FUND_DW,
+            </if>
+            <if test="basicOldDwBj != null">
+                BASIC_OLD_DW_BJ,
+            </if>
+            <if test="basicMedicalDwBj != null">
+                BASIC_MEDICAL_DW_BJ,
+            </if>
+            <if test="largeMedicalDwBj != null">
+                LARGE_MEDICAL_DW_BJ,
+            </if>
+            <if test="loseWorkDwBj != null">
+                LOSE_WORK_DW_BJ,
+            </if>
+            <if test="injuryDwBj != null">
+                INJURY_DW_BJ,
+            </if>
+            <if test="birthDwBj != null">
+                BIRTH_DW_BJ,
+            </if>
+            <if test="houseFundDwBj != null">
+                HOUSE_FUND_DW_BJ,
+            </if>
+            <if test="dwInsuranceSum != null">
+                DW_INSURANCE_SUM,
+            </if>
+            <if test="enterpriseMonthSum != null">
+                ENTERPRISE_MONTH_SUM,
+            </if>
+            <if test="personnelCost != null">
+                PERSONNEL_COST,
+            </if>
+            <if test="managementTax != null">
+                MANAGEMENT_TAX,
+            </if>
+            <if test="managementTaxX != null">
+                MANAGEMENT_TAX_X,
+            </if>
+            <if test="enterpriseTaxSum != null">
+                ENTERPRISE_TAX_SUM,
+            </if>
+            <if test="remarks != null">
+                REMARKS,
+            </if>
+            <if test="wagesSum != null">
+                WAGES_SUM,
+            </if>
+            <if test="managementSum != null">
+                MANAGEMENT_SUM,
+            </if>
+            <if test="welfareSum != null">
+                WELFARE_SUM,
+            </if>
+            <if test="basicOldGrJs != null">
+                BASIC_OLD_GR_JS,
+            </if>
+            <if test="basicOldDwJs != null">
+                BASIC_OLD_DW_JS,
+            </if>
+            <if test="medicalJs != null">
+                MEDICAL_JS,
+            </if>
+            <if test="loseWorkJs != null">
+                LOSE_WORK_JS,
+            </if>
+            <if test="injuryJs != null">
+                INJURY_JS,
+            </if>
+            <if test="birthJs != null">
+                BIRTH_JS,
+            </if>
+            <if test="houseFundJs != null">
+                HOUSE_FUND_JS,
+            </if>
+            <if test="compensatorMonth != null">
+                COMPENSATOR_MONTH,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jxMonthWagesId != null">
+                #{jxMonthWagesId,jdbcType=DECIMAL},
+            </if>
+            <if test="givePeriod != null">
+                #{givePeriod,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="personnelType != null">
+                #{personnelType,jdbcType=VARCHAR},
+            </if>
+            <if test="companyName != null">
+                #{companyName,jdbcType=VARCHAR},
+            </if>
+            <if test="deptName != null">
+                #{deptName,jdbcType=VARCHAR},
+            </if>
+            <if test="postName != null">
+                #{postName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobRank != null">
+                #{jobRank,jdbcType=VARCHAR},
+            </if>
+            <if test="jobLevel != null">
+                #{jobLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="bankNumber != null">
+                #{bankNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="jobWages != null">
+                #{jobWages,jdbcType=DECIMAL},
+            </if>
+            <if test="bfJobWages != null">
+                #{bfJobWages,jdbcType=DECIMAL},
+            </if>
+            <if test="bkJobWages != null">
+                #{bkJobWages,jdbcType=DECIMAL},
+            </if>
+            <if test="monthWages != null">
+                #{monthWages,jdbcType=DECIMAL},
+            </if>
+            <if test="bfbkMonthWages != null">
+                #{bfbkMonthWages,jdbcType=DECIMAL},
+            </if>
+            <if test="subsidiesSum != null">
+                #{subsidiesSum,jdbcType=DECIMAL},
+            </if>
+            <if test="yearEndAllowance != null">
+                #{yearEndAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="monitorAllowance != null">
+                #{monitorAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="nightAllowance != null">
+                #{nightAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="outsideAllowance != null">
+                #{outsideAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="talentAllowance != null">
+                #{talentAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="overtimeAllowance != null">
+                #{overtimeAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="yearEndAllowances != null">
+                #{yearEndAllowances,jdbcType=DECIMAL},
+            </if>
+            <if test="otherAllowance != null">
+                #{otherAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="bOtherAllowance != null">
+                #{bOtherAllowance,jdbcType=DECIMAL},
+            </if>
+            <if test="checkButton != null">
+                #{checkButton,jdbcType=DECIMAL},
+            </if>
+            <if test="femaleProtection != null">
+                #{femaleProtection,jdbcType=DECIMAL},
+            </if>
+            <if test="supplyHeating != null">
+                #{supplyHeating,jdbcType=DECIMAL},
+            </if>
+            <if test="coolingSubsidy != null">
+                #{coolingSubsidy,jdbcType=DECIMAL},
+            </if>
+            <if test="difficultySubsidy != null">
+                #{difficultySubsidy,jdbcType=DECIMAL},
+            </if>
+            <if test="dueSum != null">
+                #{dueSum,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldGr != null">
+                #{basicOldGr,jdbcType=DECIMAL},
+            </if>
+            <if test="basicMedicalGr != null">
+                #{basicMedicalGr,jdbcType=DECIMAL},
+            </if>
+            <if test="largeMedicalGr != null">
+                #{largeMedicalGr,jdbcType=DECIMAL},
+            </if>
+            <if test="loseWorkGr != null">
+                #{loseWorkGr,jdbcType=DECIMAL},
+            </if>
+            <if test="houseFundGr != null">
+                #{houseFundGr,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldGrBk != null">
+                #{basicOldGrBk,jdbcType=DECIMAL},
+            </if>
+            <if test="basicMedicalGrBk != null">
+                #{basicMedicalGrBk,jdbcType=DECIMAL},
+            </if>
+            <if test="largeMedicalGrBk != null">
+                #{largeMedicalGrBk,jdbcType=DECIMAL},
+            </if>
+            <if test="loseWorkGrBk != null">
+                #{loseWorkGrBk,jdbcType=DECIMAL},
+            </if>
+            <if test="houseFundGrBk != null">
+                #{houseFundGrBk,jdbcType=DECIMAL},
+            </if>
+            <if test="grInsuranceSum != null">
+                #{grInsuranceSum,jdbcType=DECIMAL},
+            </if>
+            <if test="callJsAmount != null">
+                #{callJsAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="trafficJsAmount != null">
+                #{trafficJsAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="otherJsAmount != null">
+                #{otherJsAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="wagesTax != null">
+                #{wagesTax,jdbcType=DECIMAL},
+            </if>
+            <if test="yearEndTax != null">
+                #{yearEndTax,jdbcType=DECIMAL},
+            </if>
+            <if test="ykTax != null">
+                #{ykTax,jdbcType=DECIMAL},
+            </if>
+            <if test="thisTax != null">
+                #{thisTax,jdbcType=DECIMAL},
+            </if>
+            <if test="buttonSum != null">
+                #{buttonSum,jdbcType=DECIMAL},
+            </if>
+            <if test="afterTax != null">
+                #{afterTax,jdbcType=DECIMAL},
+            </if>
+            <if test="misEating != null">
+                #{misEating,jdbcType=DECIMAL},
+            </if>
+            <if test="festivalBenefits != null">
+                #{festivalBenefits,jdbcType=DECIMAL},
+            </if>
+            <if test="otherBenefits != null">
+                #{otherBenefits,jdbcType=DECIMAL},
+            </if>
+            <if test="birthdayCost != null">
+                #{birthdayCost,jdbcType=DECIMAL},
+            </if>
+            <if test="checkCost != null">
+                #{checkCost,jdbcType=DECIMAL},
+            </if>
+            <if test="canteenWelfare != null">
+                #{canteenWelfare,jdbcType=DECIMAL},
+            </if>
+            <if test="appeaseReward != null">
+                #{appeaseReward,jdbcType=DECIMAL},
+            </if>
+            <if test="chargesReward != null">
+                #{chargesReward,jdbcType=DECIMAL},
+            </if>
+            <if test="trafficReward != null">
+                #{trafficReward,jdbcType=DECIMAL},
+            </if>
+            <if test="warmCost != null">
+                #{warmCost,jdbcType=DECIMAL},
+            </if>
+            <if test="retirementCost != null">
+                #{retirementCost,jdbcType=DECIMAL},
+            </if>
+            <if test="compensation != null">
+                #{compensation,jdbcType=DECIMAL},
+            </if>
+            <if test="compensationTax != null">
+                #{compensationTax,jdbcType=DECIMAL},
+            </if>
+            <if test="thisTaxDeduction != null">
+                #{thisTaxDeduction,jdbcType=DECIMAL},
+            </if>
+            <if test="alreadyButtonAmount != null">
+                #{alreadyButtonAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="treatAdd != null">
+                #{treatAdd,jdbcType=DECIMAL},
+            </if>
+            <if test="tradeUnionCost != null">
+                #{tradeUnionCost,jdbcType=DECIMAL},
+            </if>
+            <if test="businessCost != null">
+                #{businessCost,jdbcType=DECIMAL},
+            </if>
+            <if test="trainingCost != null">
+                #{trainingCost,jdbcType=DECIMAL},
+            </if>
+            <if test="sySystemCost != null">
+                #{sySystemCost,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldDw != null">
+                #{basicOldDw,jdbcType=DECIMAL},
+            </if>
+            <if test="basicMedicalDw != null">
+                #{basicMedicalDw,jdbcType=DECIMAL},
+            </if>
+            <if test="largeMedicalDw != null">
+                #{largeMedicalDw,jdbcType=DECIMAL},
+            </if>
+            <if test="loseWorkDw != null">
+                #{loseWorkDw,jdbcType=DECIMAL},
+            </if>
+            <if test="injuryDw != null">
+                #{injuryDw,jdbcType=DECIMAL},
+            </if>
+            <if test="birthDw != null">
+                #{birthDw,jdbcType=DECIMAL},
+            </if>
+            <if test="houseFundDw != null">
+                #{houseFundDw,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldDwBj != null">
+                #{basicOldDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="basicMedicalDwBj != null">
+                #{basicMedicalDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="largeMedicalDwBj != null">
+                #{largeMedicalDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="loseWorkDwBj != null">
+                #{loseWorkDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="injuryDwBj != null">
+                #{injuryDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="birthDwBj != null">
+                #{birthDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="houseFundDwBj != null">
+                #{houseFundDwBj,jdbcType=DECIMAL},
+            </if>
+            <if test="dwInsuranceSum != null">
+                #{dwInsuranceSum,jdbcType=DECIMAL},
+            </if>
+            <if test="enterpriseMonthSum != null">
+                #{enterpriseMonthSum,jdbcType=DECIMAL},
+            </if>
+            <if test="personnelCost != null">
+                #{personnelCost,jdbcType=DECIMAL},
+            </if>
+            <if test="managementTax != null">
+                #{managementTax,jdbcType=DECIMAL},
+            </if>
+            <if test="managementTaxX != null">
+                #{managementTaxX,jdbcType=DECIMAL},
+            </if>
+            <if test="enterpriseTaxSum != null">
+                #{enterpriseTaxSum,jdbcType=DECIMAL},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=VARCHAR},
+            </if>
+            <if test="wagesSum != null">
+                #{wagesSum,jdbcType=DECIMAL},
+            </if>
+            <if test="managementSum != null">
+                #{managementSum,jdbcType=DECIMAL},
+            </if>
+            <if test="welfareSum != null">
+                #{welfareSum,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldGrJs != null">
+                #{basicOldGrJs,jdbcType=DECIMAL},
+            </if>
+            <if test="basicOldDwJs != null">
+                #{basicOldDwJs,jdbcType=DECIMAL},
+            </if>
+            <if test="medicalJs != null">
+                #{medicalJs,jdbcType=DECIMAL},
+            </if>
+            <if test="loseWorkJs != null">
+                #{loseWorkJs,jdbcType=DECIMAL},
+            </if>
+            <if test="injuryJs != null">
+                #{injuryJs,jdbcType=DECIMAL},
+            </if>
+            <if test="birthJs != null">
+                #{birthJs,jdbcType=DECIMAL},
+            </if>
+            <if test="houseFundJs != null">
+                #{houseFundJs,jdbcType=DECIMAL},
+            </if>
+            <if test="compensatorMonth != null">
+                #{compensatorMonth,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+</mapper>

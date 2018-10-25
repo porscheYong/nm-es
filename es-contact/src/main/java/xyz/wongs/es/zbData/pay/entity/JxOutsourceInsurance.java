@@ -4,7 +4,6 @@ import com.opencsv.bean.CsvBindByName;
 import xyz.wongs.es.common.persistence.DataEntity;
 
 import java.math.BigDecimal;
-
 /**
  * @Author Wang Yiren
  * @Description //TODO 中博提供的数据：外包薪酬-保险
@@ -12,7 +11,12 @@ import java.math.BigDecimal;
  * @Param
  * @return
  **/
-public class OutstaffPayInsuranceZb extends DataEntity<OutstaffPayInsuranceZb> {
+public class JxOutsourceInsurance extends DataEntity<JxOutsourceInsurance>{
+    /**
+     * 主键
+     **/
+    @CsvBindByName(column = "id")
+    private Integer jxInsuranceId;
     /**
      * 人员姓名
      **/
@@ -118,6 +122,14 @@ public class OutstaffPayInsuranceZb extends DataEntity<OutstaffPayInsuranceZb> {
      **/
     @CsvBindByName(column = "other_risks")
     private BigDecimal otherRisks;
+
+    public Integer getJxInsuranceId() {
+        return jxInsuranceId;
+    }
+
+    public void setJxInsuranceId(Integer jxInsuranceId) {
+        this.jxInsuranceId = jxInsuranceId;
+    }
 
     public String getUserName() {
         return userName;

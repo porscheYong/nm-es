@@ -13,8 +13,6 @@ import xyz.wongs.es.common.utils.SpringContextHolder;
 import xyz.wongs.es.contact.msg.service.ASmsWaitSendService;
 import xyz.wongs.es.core.file.FileDocUtil;
 import xyz.wongs.es.core.file.entity.Tab2BeanCorresRef;
-import xyz.wongs.es.zbData.pay.entity.OutstaffPayYearendawardZb;
-import xyz.wongs.es.zbData.pay.service.OutstaffPayYearendawardZbService;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -170,7 +168,7 @@ public class InsertDataService {
             } else{
                 int times = (int)Math.ceil(beans.size()/200.0);
                 for(int i=0; i<times; i++ ){
-                    logger.error("分批插入:"+ i);
+                    logger.error("分批执行merge into:"+ i);
                     crudService.mergeInto(beans.subList(i*200, Math.min((i+1)*200, beans.size())));
                 }
             }
