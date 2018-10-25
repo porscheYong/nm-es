@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbdata.assess.dao.JxPersonnelAssessDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.zbdata.assess.entity.JxPersonnelAssess">
+    <result column="JX_ASSESS_ID" jdbcType="DECIMAL" property="jxAssessId" />
+    <result column="COMPANY_ID" jdbcType="DECIMAL" property="companyId" />
+    <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="ASSESS_NAME" jdbcType="VARCHAR" property="assessName" />
+    <result column="SEL_ASSESSFREQUENCY_TYPE" jdbcType="VARCHAR" property="selAssessfrequencyType" />
+    <result column="SEL_ASSESSFREQUENCY" jdbcType="VARCHAR" property="selAssessfrequency" />
+    <result column="ASSESS_SCORE" jdbcType="DECIMAL" property="assessScore" />
+    <result column="ASSESS_GRADE" jdbcType="VARCHAR" property="assessGrade" />
+    <result column="ASSESS_DATE" jdbcType="VARCHAR" property="assessDate" />
+    <result column="YG_ZQX_COEFFICIENT_SCORE" jdbcType="DECIMAL" property="ygZqxCoefficientScore" />
+    <result column="YG_ZQX_PRI_WORK_SCORE" jdbcType="DECIMAL" property="ygZqxPriWorkScore" />
+    <result column="YG_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="ygZqxAssessScore" />
+    <result column="YG_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="ygZqxAssessGrade" />
+    <result column="YG_ND_PER_SCORE_S" jdbcType="DECIMAL" property="ygNdPerScoreS" />
+    <result column="YG_ND_EVALUATE" jdbcType="DECIMAL" property="ygNdEvaluate" />
+    <result column="YG_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="ygNdAssessScore" />
+    <result column="YG_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="ygNdAssessGrade" />
+    <result column="QBB_FZR_ZQX_PER_SCORE" jdbcType="DECIMAL" property="qbbFzrZqxPerScore" />
+    <result column="QBB_FZR_ZQX_LDL_SCORE" jdbcType="DECIMAL" property="qbbFzrZqxLdlScore" />
+    <result column="QBB_FZR_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="qbbFzrZqxAssessScore" />
+    <result column="QBB_FZR_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="qbbFzrZqxAssessGrade" />
+    <result column="QBB_FZR_ND_PER_SCORE_S" jdbcType="DECIMAL" property="qbbFzrNdPerScoreS" />
+    <result column="QBB_FZR_ND_NJ_SCORE" jdbcType="DECIMAL" property="qbbFzrNdNjScore" />
+    <result column="QBB_FZR_ND_GR_SCORE" jdbcType="DECIMAL" property="qbbFzrNdGrScore" />
+    <result column="QBB_FZR_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="qbbFzrNdAssessScore" />
+    <result column="QBB_FZR_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="qbbFzrNdAssessGrade" />
+    <result column="QBB_QT_ZQX_PER_SCORE" jdbcType="DECIMAL" property="qbbQtZqxPerScore" />
+    <result column="QBB_QT_ZQX_LDL_SCORE" jdbcType="DECIMAL" property="qbbQtZqxLdlScore" />
+    <result column="QBB_QT_ZQX_FZR_SCORE" jdbcType="DECIMAL" property="qbbQtZqxFzrScore" />
+    <result column="QBB_QT_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="qbbQtZqxAssessScore" />
+    <result column="QBB_QT_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="qbbQtZqxAssessGrade" />
+    <result column="QBB_QT_ND_PER_SCORE_S" jdbcType="DECIMAL" property="qbbQtNdPerScoreS" />
+    <result column="QBB_QT_ND_NJ_SCORE" jdbcType="DECIMAL" property="qbbQtNdNjScore" />
+    <result column="QBB_QT_ND_GR_SCORE" jdbcType="DECIMAL" property="qbbQtNdGrScore" />
+    <result column="QBB_QT_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="qbbQtNdAssessScore" />
+    <result column="QBB_QT_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="qbbQtNdAssessGrade" />
+    <result column="ZY_FZR_ZQX_PER_SCORE" jdbcType="DECIMAL" property="zyFzrZqxPerScore" />
+    <result column="ZY_FZR_ZQX_LDL_SCORE" jdbcType="DECIMAL" property="zyFzrZqxLdlScore" />
+    <result column="ZY_FZR_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="zyFzrZqxAssessScore" />
+    <result column="ZY_FZR_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="zyFzrZqxAssessGrade" />
+    <result column="ZY_FZR_ND_PER_SCORE_S" jdbcType="DECIMAL" property="zyFzrNdPerScoreS" />
+    <result column="ZY_FZR_ND_NJ_SCORE" jdbcType="DECIMAL" property="zyFzrNdNjScore" />
+    <result column="ZY_FZR_ND_GR_SCORE" jdbcType="DECIMAL" property="zyFzrNdGrScore" />
+    <result column="ZY_FZR_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="zyFzrNdAssessScore" />
+    <result column="ZY_FZR_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="zyFzrNdAssessGrade" />
+    <result column="ZY_QT_ZQX_PER_SCORE" jdbcType="DECIMAL" property="zyQtZqxPerScore" />
+    <result column="ZY_QT_ZQX_LDL_SCORE" jdbcType="DECIMAL" property="zyQtZqxLdlScore" />
+    <result column="ZY_QT_ZQX_FZR_SCORE" jdbcType="DECIMAL" property="zyQtZqxFzrScore" />
+    <result column="ZY_QT_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="zyQtZqxAssessScore" />
+    <result column="ZY_QT_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="zyQtZqxAssessGrade" />
+    <result column="ZY_QT_ND_PER_SCORE_S" jdbcType="DECIMAL" property="zyQtNdPerScoreS" />
+    <result column="ZY_QT_ND_NJ_SCORE" jdbcType="DECIMAL" property="zyQtNdNjScore" />
+    <result column="ZY_QT_ND_GR_SCORE" jdbcType="DECIMAL" property="zyQtNdGrScore" />
+    <result column="ZY_QT_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="zyQtNdAssessScore" />
+    <result column="ZY_QT_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="zyQtNdAssessGrade" />
+    <result column="MS_ZJL_ZQX_PER_SCORE" jdbcType="DECIMAL" property="msZjlZqxPerScore" />
+    <result column="MS_ZJL_ZQX_CZ_SCORE" jdbcType="DECIMAL" property="msZjlZqxCzScore" />
+    <result column="MS_ZJL_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="msZjlZqxAssessScore" />
+    <result column="MS_ZJL_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="msZjlZqxAssessGrade" />
+    <result column="MS_ZJL_ND_PER_SCORE_S" jdbcType="DECIMAL" property="msZjlNdPerScoreS" />
+    <result column="MS_ZJL_ND_NJ_SCORE" jdbcType="DECIMAL" property="msZjlNdNjScore" />
+    <result column="MS_ZJL_ND_GR_SCORE" jdbcType="DECIMAL" property="msZjlNdGrScore" />
+    <result column="MS_ZJL_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="msZjlNdAssessScore" />
+    <result column="MS_ZJL_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="msZjlNdAssessGrade" />
+    <result column="MS_QT_ZQX_PER_SCORE" jdbcType="DECIMAL" property="msQtZqxPerScore" />
+    <result column="MS_QT_ZQX_CZ_SCORE" jdbcType="DECIMAL" property="msQtZqxCzScore" />
+    <result column="MS_QT_ZQX_ZJL_SCORE" jdbcType="DECIMAL" property="msQtZqxZjlScore" />
+    <result column="MS_QT_ZQX_ASSESS_SCORE" jdbcType="DECIMAL" property="msQtZqxAssessScore" />
+    <result column="MS_QT_ZQX_ASSESS_GRADE" jdbcType="VARCHAR" property="msQtZqxAssessGrade" />
+    <result column="MS_QT_ND_PER_SCORE_S" jdbcType="DECIMAL" property="msQtNdPerScoreS" />
+    <result column="MS_QT_ND_NJ_SCORE" jdbcType="DECIMAL" property="msQtNdNjScore" />
+    <result column="MS_QT_ND_GR_SCORE" jdbcType="DECIMAL" property="msQtNdGrScore" />
+    <result column="MS_QT_ND_ASSESS_SCORE" jdbcType="DECIMAL" property="msQtNdAssessScore" />
+    <result column="MS_QT_ND_ASSESS_GRADE" jdbcType="VARCHAR" property="msQtNdAssessGrade" />
+  </resultMap>
+  <insert id="insert" parameterType="xyz.wongs.es.zbdata.assess.entity.JxPersonnelAssess">
+    insert into JX_PERSONNEL_ASSESS (JX_ASSESS_ID, COMPANY_ID, COMPANY_NAME, 
+      LOGIN_NAME, USER_NAME, ASSESS_NAME, 
+      SEL_ASSESSFREQUENCY_TYPE, SEL_ASSESSFREQUENCY, 
+      ASSESS_SCORE, ASSESS_GRADE, ASSESS_DATE, 
+      YG_ZQX_COEFFICIENT_SCORE, YG_ZQX_PRI_WORK_SCORE, 
+      YG_ZQX_ASSESS_SCORE, YG_ZQX_ASSESS_GRADE, YG_ND_PER_SCORE_S, 
+      YG_ND_EVALUATE, YG_ND_ASSESS_SCORE, YG_ND_ASSESS_GRADE, 
+      QBB_FZR_ZQX_PER_SCORE, QBB_FZR_ZQX_LDL_SCORE, QBB_FZR_ZQX_ASSESS_SCORE, 
+      QBB_FZR_ZQX_ASSESS_GRADE, QBB_FZR_ND_PER_SCORE_S, 
+      QBB_FZR_ND_NJ_SCORE, QBB_FZR_ND_GR_SCORE, QBB_FZR_ND_ASSESS_SCORE, 
+      QBB_FZR_ND_ASSESS_GRADE, QBB_QT_ZQX_PER_SCORE, 
+      QBB_QT_ZQX_LDL_SCORE, QBB_QT_ZQX_FZR_SCORE, QBB_QT_ZQX_ASSESS_SCORE, 
+      QBB_QT_ZQX_ASSESS_GRADE, QBB_QT_ND_PER_SCORE_S, 
+      QBB_QT_ND_NJ_SCORE, QBB_QT_ND_GR_SCORE, QBB_QT_ND_ASSESS_SCORE, 
+      QBB_QT_ND_ASSESS_GRADE, ZY_FZR_ZQX_PER_SCORE, ZY_FZR_ZQX_LDL_SCORE, 
+      ZY_FZR_ZQX_ASSESS_SCORE, ZY_FZR_ZQX_ASSESS_GRADE, 
+      ZY_FZR_ND_PER_SCORE_S, ZY_FZR_ND_NJ_SCORE, ZY_FZR_ND_GR_SCORE, 
+      ZY_FZR_ND_ASSESS_SCORE, ZY_FZR_ND_ASSESS_GRADE, 
+      ZY_QT_ZQX_PER_SCORE, ZY_QT_ZQX_LDL_SCORE, ZY_QT_ZQX_FZR_SCORE, 
+      ZY_QT_ZQX_ASSESS_SCORE, ZY_QT_ZQX_ASSESS_GRADE, 
+      ZY_QT_ND_PER_SCORE_S, ZY_QT_ND_NJ_SCORE, ZY_QT_ND_GR_SCORE, 
+      ZY_QT_ND_ASSESS_SCORE, ZY_QT_ND_ASSESS_GRADE, MS_ZJL_ZQX_PER_SCORE, 
+      MS_ZJL_ZQX_CZ_SCORE, MS_ZJL_ZQX_ASSESS_SCORE, MS_ZJL_ZQX_ASSESS_GRADE, 
+      MS_ZJL_ND_PER_SCORE_S, MS_ZJL_ND_NJ_SCORE, MS_ZJL_ND_GR_SCORE, 
+      MS_ZJL_ND_ASSESS_SCORE, MS_ZJL_ND_ASSESS_GRADE, 
+      MS_QT_ZQX_PER_SCORE, MS_QT_ZQX_CZ_SCORE, MS_QT_ZQX_ZJL_SCORE, 
+      MS_QT_ZQX_ASSESS_SCORE, MS_QT_ZQX_ASSESS_GRADE, 
+      MS_QT_ND_PER_SCORE_S, MS_QT_ND_NJ_SCORE, MS_QT_ND_GR_SCORE, 
+      MS_QT_ND_ASSESS_SCORE, MS_QT_ND_ASSESS_GRADE)
+    values (#{jxAssessId,jdbcType=DECIMAL}, #{companyId,jdbcType=DECIMAL}, #{companyName,jdbcType=VARCHAR}, 
+      #{loginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{assessName,jdbcType=VARCHAR}, 
+      #{selAssessfrequencyType,jdbcType=VARCHAR}, #{selAssessfrequency,jdbcType=VARCHAR}, 
+      #{assessScore,jdbcType=DECIMAL}, #{assessGrade,jdbcType=VARCHAR}, #{assessDate,jdbcType=VARCHAR}, 
+      #{ygZqxCoefficientScore,jdbcType=DECIMAL}, #{ygZqxPriWorkScore,jdbcType=DECIMAL}, 
+      #{ygZqxAssessScore,jdbcType=DECIMAL}, #{ygZqxAssessGrade,jdbcType=VARCHAR}, #{ygNdPerScoreS,jdbcType=DECIMAL}, 
+      #{ygNdEvaluate,jdbcType=DECIMAL}, #{ygNdAssessScore,jdbcType=DECIMAL}, #{ygNdAssessGrade,jdbcType=VARCHAR}, 
+      #{qbbFzrZqxPerScore,jdbcType=DECIMAL}, #{qbbFzrZqxLdlScore,jdbcType=DECIMAL}, #{qbbFzrZqxAssessScore,jdbcType=DECIMAL}, 
+      #{qbbFzrZqxAssessGrade,jdbcType=VARCHAR}, #{qbbFzrNdPerScoreS,jdbcType=DECIMAL}, 
+      #{qbbFzrNdNjScore,jdbcType=DECIMAL}, #{qbbFzrNdGrScore,jdbcType=DECIMAL}, #{qbbFzrNdAssessScore,jdbcType=DECIMAL}, 
+      #{qbbFzrNdAssessGrade,jdbcType=VARCHAR}, #{qbbQtZqxPerScore,jdbcType=DECIMAL}, 
+      #{qbbQtZqxLdlScore,jdbcType=DECIMAL}, #{qbbQtZqxFzrScore,jdbcType=DECIMAL}, #{qbbQtZqxAssessScore,jdbcType=DECIMAL}, 
+      #{qbbQtZqxAssessGrade,jdbcType=VARCHAR}, #{qbbQtNdPerScoreS,jdbcType=DECIMAL}, 
+      #{qbbQtNdNjScore,jdbcType=DECIMAL}, #{qbbQtNdGrScore,jdbcType=DECIMAL}, #{qbbQtNdAssessScore,jdbcType=DECIMAL}, 
+      #{qbbQtNdAssessGrade,jdbcType=VARCHAR}, #{zyFzrZqxPerScore,jdbcType=DECIMAL}, #{zyFzrZqxLdlScore,jdbcType=DECIMAL}, 
+      #{zyFzrZqxAssessScore,jdbcType=DECIMAL}, #{zyFzrZqxAssessGrade,jdbcType=VARCHAR}, 
+      #{zyFzrNdPerScoreS,jdbcType=DECIMAL}, #{zyFzrNdNjScore,jdbcType=DECIMAL}, #{zyFzrNdGrScore,jdbcType=DECIMAL}, 
+      #{zyFzrNdAssessScore,jdbcType=DECIMAL}, #{zyFzrNdAssessGrade,jdbcType=VARCHAR}, 
+      #{zyQtZqxPerScore,jdbcType=DECIMAL}, #{zyQtZqxLdlScore,jdbcType=DECIMAL}, #{zyQtZqxFzrScore,jdbcType=DECIMAL}, 
+      #{zyQtZqxAssessScore,jdbcType=DECIMAL}, #{zyQtZqxAssessGrade,jdbcType=VARCHAR}, 
+      #{zyQtNdPerScoreS,jdbcType=DECIMAL}, #{zyQtNdNjScore,jdbcType=DECIMAL}, #{zyQtNdGrScore,jdbcType=DECIMAL}, 
+      #{zyQtNdAssessScore,jdbcType=DECIMAL}, #{zyQtNdAssessGrade,jdbcType=VARCHAR}, #{msZjlZqxPerScore,jdbcType=DECIMAL}, 
+      #{msZjlZqxCzScore,jdbcType=DECIMAL}, #{msZjlZqxAssessScore,jdbcType=DECIMAL}, #{msZjlZqxAssessGrade,jdbcType=VARCHAR}, 
+      #{msZjlNdPerScoreS,jdbcType=DECIMAL}, #{msZjlNdNjScore,jdbcType=DECIMAL}, #{msZjlNdGrScore,jdbcType=DECIMAL}, 
+      #{msZjlNdAssessScore,jdbcType=DECIMAL}, #{msZjlNdAssessGrade,jdbcType=VARCHAR}, 
+      #{msQtZqxPerScore,jdbcType=DECIMAL}, #{msQtZqxCzScore,jdbcType=DECIMAL}, #{msQtZqxZjlScore,jdbcType=DECIMAL}, 
+      #{msQtZqxAssessScore,jdbcType=DECIMAL}, #{msQtZqxAssessGrade,jdbcType=VARCHAR}, 
+      #{msQtNdPerScoreS,jdbcType=DECIMAL}, #{msQtNdNjScore,jdbcType=DECIMAL}, #{msQtNdGrScore,jdbcType=DECIMAL}, 
+      #{msQtNdAssessScore,jdbcType=DECIMAL}, #{msQtNdAssessGrade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.assess.entity.JxPersonnelAssess">
+    insert into JX_PERSONNEL_ASSESS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jxAssessId != null">
+        JX_ASSESS_ID,
+      </if>
+      <if test="companyId != null">
+        COMPANY_ID,
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="assessName != null">
+        ASSESS_NAME,
+      </if>
+      <if test="selAssessfrequencyType != null">
+        SEL_ASSESSFREQUENCY_TYPE,
+      </if>
+      <if test="selAssessfrequency != null">
+        SEL_ASSESSFREQUENCY,
+      </if>
+      <if test="assessScore != null">
+        ASSESS_SCORE,
+      </if>
+      <if test="assessGrade != null">
+        ASSESS_GRADE,
+      </if>
+      <if test="assessDate != null">
+        ASSESS_DATE,
+      </if>
+      <if test="ygZqxCoefficientScore != null">
+        YG_ZQX_COEFFICIENT_SCORE,
+      </if>
+      <if test="ygZqxPriWorkScore != null">
+        YG_ZQX_PRI_WORK_SCORE,
+      </if>
+      <if test="ygZqxAssessScore != null">
+        YG_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="ygZqxAssessGrade != null">
+        YG_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="ygNdPerScoreS != null">
+        YG_ND_PER_SCORE_S,
+      </if>
+      <if test="ygNdEvaluate != null">
+        YG_ND_EVALUATE,
+      </if>
+      <if test="ygNdAssessScore != null">
+        YG_ND_ASSESS_SCORE,
+      </if>
+      <if test="ygNdAssessGrade != null">
+        YG_ND_ASSESS_GRADE,
+      </if>
+      <if test="qbbFzrZqxPerScore != null">
+        QBB_FZR_ZQX_PER_SCORE,
+      </if>
+      <if test="qbbFzrZqxLdlScore != null">
+        QBB_FZR_ZQX_LDL_SCORE,
+      </if>
+      <if test="qbbFzrZqxAssessScore != null">
+        QBB_FZR_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="qbbFzrZqxAssessGrade != null">
+        QBB_FZR_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="qbbFzrNdPerScoreS != null">
+        QBB_FZR_ND_PER_SCORE_S,
+      </if>
+      <if test="qbbFzrNdNjScore != null">
+        QBB_FZR_ND_NJ_SCORE,
+      </if>
+      <if test="qbbFzrNdGrScore != null">
+        QBB_FZR_ND_GR_SCORE,
+      </if>
+      <if test="qbbFzrNdAssessScore != null">
+        QBB_FZR_ND_ASSESS_SCORE,
+      </if>
+      <if test="qbbFzrNdAssessGrade != null">
+        QBB_FZR_ND_ASSESS_GRADE,
+      </if>
+      <if test="qbbQtZqxPerScore != null">
+        QBB_QT_ZQX_PER_SCORE,
+      </if>
+      <if test="qbbQtZqxLdlScore != null">
+        QBB_QT_ZQX_LDL_SCORE,
+      </if>
+      <if test="qbbQtZqxFzrScore != null">
+        QBB_QT_ZQX_FZR_SCORE,
+      </if>
+      <if test="qbbQtZqxAssessScore != null">
+        QBB_QT_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="qbbQtZqxAssessGrade != null">
+        QBB_QT_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="qbbQtNdPerScoreS != null">
+        QBB_QT_ND_PER_SCORE_S,
+      </if>
+      <if test="qbbQtNdNjScore != null">
+        QBB_QT_ND_NJ_SCORE,
+      </if>
+      <if test="qbbQtNdGrScore != null">
+        QBB_QT_ND_GR_SCORE,
+      </if>
+      <if test="qbbQtNdAssessScore != null">
+        QBB_QT_ND_ASSESS_SCORE,
+      </if>
+      <if test="qbbQtNdAssessGrade != null">
+        QBB_QT_ND_ASSESS_GRADE,
+      </if>
+      <if test="zyFzrZqxPerScore != null">
+        ZY_FZR_ZQX_PER_SCORE,
+      </if>
+      <if test="zyFzrZqxLdlScore != null">
+        ZY_FZR_ZQX_LDL_SCORE,
+      </if>
+      <if test="zyFzrZqxAssessScore != null">
+        ZY_FZR_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="zyFzrZqxAssessGrade != null">
+        ZY_FZR_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="zyFzrNdPerScoreS != null">
+        ZY_FZR_ND_PER_SCORE_S,
+      </if>
+      <if test="zyFzrNdNjScore != null">
+        ZY_FZR_ND_NJ_SCORE,
+      </if>
+      <if test="zyFzrNdGrScore != null">
+        ZY_FZR_ND_GR_SCORE,
+      </if>
+      <if test="zyFzrNdAssessScore != null">
+        ZY_FZR_ND_ASSESS_SCORE,
+      </if>
+      <if test="zyFzrNdAssessGrade != null">
+        ZY_FZR_ND_ASSESS_GRADE,
+      </if>
+      <if test="zyQtZqxPerScore != null">
+        ZY_QT_ZQX_PER_SCORE,
+      </if>
+      <if test="zyQtZqxLdlScore != null">
+        ZY_QT_ZQX_LDL_SCORE,
+      </if>
+      <if test="zyQtZqxFzrScore != null">
+        ZY_QT_ZQX_FZR_SCORE,
+      </if>
+      <if test="zyQtZqxAssessScore != null">
+        ZY_QT_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="zyQtZqxAssessGrade != null">
+        ZY_QT_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="zyQtNdPerScoreS != null">
+        ZY_QT_ND_PER_SCORE_S,
+      </if>
+      <if test="zyQtNdNjScore != null">
+        ZY_QT_ND_NJ_SCORE,
+      </if>
+      <if test="zyQtNdGrScore != null">
+        ZY_QT_ND_GR_SCORE,
+      </if>
+      <if test="zyQtNdAssessScore != null">
+        ZY_QT_ND_ASSESS_SCORE,
+      </if>
+      <if test="zyQtNdAssessGrade != null">
+        ZY_QT_ND_ASSESS_GRADE,
+      </if>
+      <if test="msZjlZqxPerScore != null">
+        MS_ZJL_ZQX_PER_SCORE,
+      </if>
+      <if test="msZjlZqxCzScore != null">
+        MS_ZJL_ZQX_CZ_SCORE,
+      </if>
+      <if test="msZjlZqxAssessScore != null">
+        MS_ZJL_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="msZjlZqxAssessGrade != null">
+        MS_ZJL_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="msZjlNdPerScoreS != null">
+        MS_ZJL_ND_PER_SCORE_S,
+      </if>
+      <if test="msZjlNdNjScore != null">
+        MS_ZJL_ND_NJ_SCORE,
+      </if>
+      <if test="msZjlNdGrScore != null">
+        MS_ZJL_ND_GR_SCORE,
+      </if>
+      <if test="msZjlNdAssessScore != null">
+        MS_ZJL_ND_ASSESS_SCORE,
+      </if>
+      <if test="msZjlNdAssessGrade != null">
+        MS_ZJL_ND_ASSESS_GRADE,
+      </if>
+      <if test="msQtZqxPerScore != null">
+        MS_QT_ZQX_PER_SCORE,
+      </if>
+      <if test="msQtZqxCzScore != null">
+        MS_QT_ZQX_CZ_SCORE,
+      </if>
+      <if test="msQtZqxZjlScore != null">
+        MS_QT_ZQX_ZJL_SCORE,
+      </if>
+      <if test="msQtZqxAssessScore != null">
+        MS_QT_ZQX_ASSESS_SCORE,
+      </if>
+      <if test="msQtZqxAssessGrade != null">
+        MS_QT_ZQX_ASSESS_GRADE,
+      </if>
+      <if test="msQtNdPerScoreS != null">
+        MS_QT_ND_PER_SCORE_S,
+      </if>
+      <if test="msQtNdNjScore != null">
+        MS_QT_ND_NJ_SCORE,
+      </if>
+      <if test="msQtNdGrScore != null">
+        MS_QT_ND_GR_SCORE,
+      </if>
+      <if test="msQtNdAssessScore != null">
+        MS_QT_ND_ASSESS_SCORE,
+      </if>
+      <if test="msQtNdAssessGrade != null">
+        MS_QT_ND_ASSESS_GRADE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jxAssessId != null">
+        #{jxAssessId,jdbcType=DECIMAL},
+      </if>
+      <if test="companyId != null">
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="companyName != null">
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="assessName != null">
+        #{assessName,jdbcType=VARCHAR},
+      </if>
+      <if test="selAssessfrequencyType != null">
+        #{selAssessfrequencyType,jdbcType=VARCHAR},
+      </if>
+      <if test="selAssessfrequency != null">
+        #{selAssessfrequency,jdbcType=VARCHAR},
+      </if>
+      <if test="assessScore != null">
+        #{assessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="assessGrade != null">
+        #{assessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="assessDate != null">
+        #{assessDate,jdbcType=VARCHAR},
+      </if>
+      <if test="ygZqxCoefficientScore != null">
+        #{ygZqxCoefficientScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ygZqxPriWorkScore != null">
+        #{ygZqxPriWorkScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ygZqxAssessScore != null">
+        #{ygZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ygZqxAssessGrade != null">
+        #{ygZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="ygNdPerScoreS != null">
+        #{ygNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="ygNdEvaluate != null">
+        #{ygNdEvaluate,jdbcType=DECIMAL},
+      </if>
+      <if test="ygNdAssessScore != null">
+        #{ygNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="ygNdAssessGrade != null">
+        #{ygNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="qbbFzrZqxPerScore != null">
+        #{qbbFzrZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrZqxLdlScore != null">
+        #{qbbFzrZqxLdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrZqxAssessScore != null">
+        #{qbbFzrZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrZqxAssessGrade != null">
+        #{qbbFzrZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="qbbFzrNdPerScoreS != null">
+        #{qbbFzrNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrNdNjScore != null">
+        #{qbbFzrNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrNdGrScore != null">
+        #{qbbFzrNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrNdAssessScore != null">
+        #{qbbFzrNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbFzrNdAssessGrade != null">
+        #{qbbFzrNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="qbbQtZqxPerScore != null">
+        #{qbbQtZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtZqxLdlScore != null">
+        #{qbbQtZqxLdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtZqxFzrScore != null">
+        #{qbbQtZqxFzrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtZqxAssessScore != null">
+        #{qbbQtZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtZqxAssessGrade != null">
+        #{qbbQtZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="qbbQtNdPerScoreS != null">
+        #{qbbQtNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtNdNjScore != null">
+        #{qbbQtNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtNdGrScore != null">
+        #{qbbQtNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtNdAssessScore != null">
+        #{qbbQtNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="qbbQtNdAssessGrade != null">
+        #{qbbQtNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="zyFzrZqxPerScore != null">
+        #{zyFzrZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrZqxLdlScore != null">
+        #{zyFzrZqxLdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrZqxAssessScore != null">
+        #{zyFzrZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrZqxAssessGrade != null">
+        #{zyFzrZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="zyFzrNdPerScoreS != null">
+        #{zyFzrNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrNdNjScore != null">
+        #{zyFzrNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrNdGrScore != null">
+        #{zyFzrNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrNdAssessScore != null">
+        #{zyFzrNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyFzrNdAssessGrade != null">
+        #{zyFzrNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="zyQtZqxPerScore != null">
+        #{zyQtZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtZqxLdlScore != null">
+        #{zyQtZqxLdlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtZqxFzrScore != null">
+        #{zyQtZqxFzrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtZqxAssessScore != null">
+        #{zyQtZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtZqxAssessGrade != null">
+        #{zyQtZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="zyQtNdPerScoreS != null">
+        #{zyQtNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtNdNjScore != null">
+        #{zyQtNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtNdGrScore != null">
+        #{zyQtNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtNdAssessScore != null">
+        #{zyQtNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="zyQtNdAssessGrade != null">
+        #{zyQtNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="msZjlZqxPerScore != null">
+        #{msZjlZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlZqxCzScore != null">
+        #{msZjlZqxCzScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlZqxAssessScore != null">
+        #{msZjlZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlZqxAssessGrade != null">
+        #{msZjlZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="msZjlNdPerScoreS != null">
+        #{msZjlNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlNdNjScore != null">
+        #{msZjlNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlNdGrScore != null">
+        #{msZjlNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlNdAssessScore != null">
+        #{msZjlNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msZjlNdAssessGrade != null">
+        #{msZjlNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="msQtZqxPerScore != null">
+        #{msQtZqxPerScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtZqxCzScore != null">
+        #{msQtZqxCzScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtZqxZjlScore != null">
+        #{msQtZqxZjlScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtZqxAssessScore != null">
+        #{msQtZqxAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtZqxAssessGrade != null">
+        #{msQtZqxAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="msQtNdPerScoreS != null">
+        #{msQtNdPerScoreS,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtNdNjScore != null">
+        #{msQtNdNjScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtNdGrScore != null">
+        #{msQtNdGrScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtNdAssessScore != null">
+        #{msQtNdAssessScore,jdbcType=DECIMAL},
+      </if>
+      <if test="msQtNdAssessGrade != null">
+        #{msQtNdAssessGrade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

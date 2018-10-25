@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="xyz.wongs.es.zbData.pay.dao.JxOutsourceYearBonusDao">
-    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbData.pay.entity.JxOutsourceYearBonus">
+<mapper namespace="xyz.wongs.es.zbdata.pay.dao.JxOutsourceYearBonusDao">
+    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbdata.pay.entity.JxOutsourceYearBonus">
         <result column="JX_YEAR_BONUS_ID" jdbcType="DECIMAL" property="jxYearBonusId" />
         <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
         <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
@@ -25,7 +25,7 @@
         <result column="ACTUAL_HAIR_SUM" jdbcType="DECIMAL" property="actualHairSum" />
     </resultMap>
 
-    <insert id="insert" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceYearBonus">
+    <insert id="insert" parameterType="xyz.wongs.es.zbdata.pay.entity.JxOutsourceYearBonus">
         insert into JX_OUTSOURCE_YEAR_BONUS (JX_YEAR_BONUS_ID, LOGIN_NAME, USER_NAME,
             IDENTITY_CARD, SEX, JOB_RANK,
             JOB_WAGES_RANK, POST_SEQUENCE, INJURY,
@@ -136,7 +136,7 @@
     </insert>
 
 
-    <insert id="insertSelective" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceYearBonus">
+    <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.pay.entity.JxOutsourceYearBonus">
         insert into JX_OUTSOURCE_YEAR_BONUS
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="jxYearBonusId != null">

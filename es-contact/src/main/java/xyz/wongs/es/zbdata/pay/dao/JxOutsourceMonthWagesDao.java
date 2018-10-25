@@ -1,8 +1,8 @@
-package xyz.wongs.es.zbData.pay.dao;
+package xyz.wongs.es.zbdata.pay.dao;
 
 import xyz.wongs.es.common.persistence.CrudDao;
 import xyz.wongs.es.common.persistence.annotation.MyBatisDao;
-import xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages;
+import xyz.wongs.es.zbdata.pay.entity.JxOutsourceMonthWages;
 
 /**
  * @Author Wang Yiren

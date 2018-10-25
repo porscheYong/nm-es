@@ -1,10 +1,10 @@
-package xyz.wongs.es.zbData.pay.service;
+package xyz.wongs.es.zbdata.pay.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.wongs.es.common.service.CrudService;
-import xyz.wongs.es.zbData.pay.dao.JxOutsourceYearBonusDao;
-import xyz.wongs.es.zbData.pay.entity.JxOutsourceYearBonus;
+import xyz.wongs.es.zbdata.pay.dao.JxOutsourceYearBonusDao;
+import xyz.wongs.es.zbdata.pay.entity.JxOutsourceYearBonus;
 
 /**
  * @ClassName: JxOutsourceYearBonusService

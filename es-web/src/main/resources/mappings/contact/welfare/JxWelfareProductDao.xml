@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbdata.welfare.dao.JxWelfareProductDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.zbdata.welfare.entity.JxWelfareProduct">
+    <result column="JX_PRODUCT_ID" jdbcType="DECIMAL" property="jxProductId" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="BRANCH_COMPANY" jdbcType="VARCHAR" property="branchCompany" />
+    <result column="HOUSE_FUND" jdbcType="DECIMAL" property="houseFund" />
+    <result column="BASIC_OLD" jdbcType="DECIMAL" property="basicOld" />
+    <result column="BASIC_MEDICAL" jdbcType="DECIMAL" property="basicMedical" />
+    <result column="BIRTH" jdbcType="DECIMAL" property="birth" />
+    <result column="INJURY" jdbcType="DECIMAL" property="injury" />
+    <result column="LOSE_WORK" jdbcType="DECIMAL" property="loseWork" />
+    <result column="MEDICAL" jdbcType="DECIMAL" property="medical" />
+    <result column="COMPANY_ANNUITY" jdbcType="DECIMAL" property="companyAnnuity" />
+    <result column="VACATION_PAID" jdbcType="DECIMAL" property="vacationPaid" />
+    <result column="COOLING_SUBSIDY" jdbcType="DECIMAL" property="coolingSubsidy" />
+    <result column="COOLING_GOODS" jdbcType="DECIMAL" property="coolingGoods" />
+    <result column="MEDICAL_KIT" jdbcType="DECIMAL" property="medicalKit" />
+    <result column="GIRL_HEALTH_GOODS" jdbcType="DECIMAL" property="girlHealthGoods" />
+    <result column="ADD_VACATION_PAID" jdbcType="DECIMAL" property="addVacationPaid" />
+    <result column="YEAR_GREET" jdbcType="DECIMAL" property="yearGreet" />
+    <result column="BIRTHDAY_GREET" jdbcType="DECIMAL" property="birthdayGreet" />
+    <result column="MARCH_EIGHT_GREET" jdbcType="DECIMAL" property="marchEightGreet" />
+    <result column="COMMERCIAL_MEDICAL" jdbcType="DECIMAL" property="commercialMedical" />
+    <result column="HEATING_GREET" jdbcType="DECIMAL" property="heatingGreet" />
+    <result column="PREVENTION_HEAT" jdbcType="DECIMAL" property="preventionHeat" />
+    <result column="HEALTH_UPGRADE" jdbcType="DECIMAL" property="healthUpgrade" />
+    <result column="RELATIVE_MEDICAL" jdbcType="DECIMAL" property="relativeMedical" />
+    <result column="PSYCHOLOGY_GOODS" jdbcType="DECIMAL" property="psychologyGoods" />
+    <result column="LUNCH_SUBSIDY" jdbcType="DECIMAL" property="lunchSubsidy" />
+    <result column="HEALTH_PRODUCTS" jdbcType="DECIMAL" property="healthProducts" />
+    <result column="EDUCATION_PRODUCTS" jdbcType="DECIMAL" property="educationProducts" />
+    <result column="ELASTICITY_PRODUCTS" jdbcType="DECIMAL" property="elasticityProducts" />
+  </resultMap>
+  <insert id="insert" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfareProduct">
+    insert into JX_WELFARE_PRODUCT (JX_PRODUCT_ID, LOGIN_NAME, USER_NAME, 
+      BRANCH_COMPANY, HOUSE_FUND, BASIC_OLD, 
+      BASIC_MEDICAL, BIRTH, INJURY, 
+      LOSE_WORK, MEDICAL, COMPANY_ANNUITY, 
+      VACATION_PAID, COOLING_SUBSIDY, COOLING_GOODS, 
+      MEDICAL_KIT, GIRL_HEALTH_GOODS, ADD_VACATION_PAID, 
+      YEAR_GREET, BIRTHDAY_GREET, MARCH_EIGHT_GREET, 
+      COMMERCIAL_MEDICAL, HEATING_GREET, PREVENTION_HEAT, 
+      HEALTH_UPGRADE, RELATIVE_MEDICAL, PSYCHOLOGY_GOODS, 
+      LUNCH_SUBSIDY, HEALTH_PRODUCTS, EDUCATION_PRODUCTS, 
+      ELASTICITY_PRODUCTS)
+    values (#{jxProductId,jdbcType=DECIMAL}, #{loginName,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{branchCompany,jdbcType=VARCHAR}, #{houseFund,jdbcType=DECIMAL}, #{basicOld,jdbcType=DECIMAL}, 
+      #{basicMedical,jdbcType=DECIMAL}, #{birth,jdbcType=DECIMAL}, #{injury,jdbcType=DECIMAL}, 
+      #{loseWork,jdbcType=DECIMAL}, #{medical,jdbcType=DECIMAL}, #{companyAnnuity,jdbcType=DECIMAL}, 
+      #{vacationPaid,jdbcType=DECIMAL}, #{coolingSubsidy,jdbcType=DECIMAL}, #{coolingGoods,jdbcType=DECIMAL}, 
+      #{medicalKit,jdbcType=DECIMAL}, #{girlHealthGoods,jdbcType=DECIMAL}, #{addVacationPaid,jdbcType=DECIMAL}, 
+      #{yearGreet,jdbcType=DECIMAL}, #{birthdayGreet,jdbcType=DECIMAL}, #{marchEightGreet,jdbcType=DECIMAL}, 
+      #{commercialMedical,jdbcType=DECIMAL}, #{heatingGreet,jdbcType=DECIMAL}, #{preventionHeat,jdbcType=DECIMAL}, 
+      #{healthUpgrade,jdbcType=DECIMAL}, #{relativeMedical,jdbcType=DECIMAL}, #{psychologyGoods,jdbcType=DECIMAL}, 
+      #{lunchSubsidy,jdbcType=DECIMAL}, #{healthProducts,jdbcType=DECIMAL}, #{educationProducts,jdbcType=DECIMAL}, 
+      #{elasticityProducts,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfareProduct">
+    insert into JX_WELFARE_PRODUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jxProductId != null">
+        JX_PRODUCT_ID,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="branchCompany != null">
+        BRANCH_COMPANY,
+      </if>
+      <if test="houseFund != null">
+        HOUSE_FUND,
+      </if>
+      <if test="basicOld != null">
+        BASIC_OLD,
+      </if>
+      <if test="basicMedical != null">
+        BASIC_MEDICAL,
+      </if>
+      <if test="birth != null">
+        BIRTH,
+      </if>
+      <if test="injury != null">
+        INJURY,
+      </if>
+      <if test="loseWork != null">
+        LOSE_WORK,
+      </if>
+      <if test="medical != null">
+        MEDICAL,
+      </if>
+      <if test="companyAnnuity != null">
+        COMPANY_ANNUITY,
+      </if>
+      <if test="vacationPaid != null">
+        VACATION_PAID,
+      </if>
+      <if test="coolingSubsidy != null">
+        COOLING_SUBSIDY,
+      </if>
+      <if test="coolingGoods != null">
+        COOLING_GOODS,
+      </if>
+      <if test="medicalKit != null">
+        MEDICAL_KIT,
+      </if>
+      <if test="girlHealthGoods != null">
+        GIRL_HEALTH_GOODS,
+      </if>
+      <if test="addVacationPaid != null">
+        ADD_VACATION_PAID,
+      </if>
+      <if test="yearGreet != null">
+        YEAR_GREET,
+      </if>
+      <if test="birthdayGreet != null">
+        BIRTHDAY_GREET,
+      </if>
+      <if test="marchEightGreet != null">
+        MARCH_EIGHT_GREET,
+      </if>
+      <if test="commercialMedical != null">
+        COMMERCIAL_MEDICAL,
+      </if>
+      <if test="heatingGreet != null">
+        HEATING_GREET,
+      </if>
+      <if test="preventionHeat != null">
+        PREVENTION_HEAT,
+      </if>
+      <if test="healthUpgrade != null">
+        HEALTH_UPGRADE,
+      </if>
+      <if test="relativeMedical != null">
+        RELATIVE_MEDICAL,
+      </if>
+      <if test="psychologyGoods != null">
+        PSYCHOLOGY_GOODS,
+      </if>
+      <if test="lunchSubsidy != null">
+        LUNCH_SUBSIDY,
+      </if>
+      <if test="healthProducts != null">
+        HEALTH_PRODUCTS,
+      </if>
+      <if test="educationProducts != null">
+        EDUCATION_PRODUCTS,
+      </if>
+      <if test="elasticityProducts != null">
+        ELASTICITY_PRODUCTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jxProductId != null">
+        #{jxProductId,jdbcType=DECIMAL},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null">
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="houseFund != null">
+        #{houseFund,jdbcType=DECIMAL},
+      </if>
+      <if test="basicOld != null">
+        #{basicOld,jdbcType=DECIMAL},
+      </if>
+      <if test="basicMedical != null">
+        #{basicMedical,jdbcType=DECIMAL},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=DECIMAL},
+      </if>
+      <if test="injury != null">
+        #{injury,jdbcType=DECIMAL},
+      </if>
+      <if test="loseWork != null">
+        #{loseWork,jdbcType=DECIMAL},
+      </if>
+      <if test="medical != null">
+        #{medical,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAnnuity != null">
+        #{companyAnnuity,jdbcType=DECIMAL},
+      </if>
+      <if test="vacationPaid != null">
+        #{vacationPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="coolingSubsidy != null">
+        #{coolingSubsidy,jdbcType=DECIMAL},
+      </if>
+      <if test="coolingGoods != null">
+        #{coolingGoods,jdbcType=DECIMAL},
+      </if>
+      <if test="medicalKit != null">
+        #{medicalKit,jdbcType=DECIMAL},
+      </if>
+      <if test="girlHealthGoods != null">
+        #{girlHealthGoods,jdbcType=DECIMAL},
+      </if>
+      <if test="addVacationPaid != null">
+        #{addVacationPaid,jdbcType=DECIMAL},
+      </if>
+      <if test="yearGreet != null">
+        #{yearGreet,jdbcType=DECIMAL},
+      </if>
+      <if test="birthdayGreet != null">
+        #{birthdayGreet,jdbcType=DECIMAL},
+      </if>
+      <if test="marchEightGreet != null">
+        #{marchEightGreet,jdbcType=DECIMAL},
+      </if>
+      <if test="commercialMedical != null">
+        #{commercialMedical,jdbcType=DECIMAL},
+      </if>
+      <if test="heatingGreet != null">
+        #{heatingGreet,jdbcType=DECIMAL},
+      </if>
+      <if test="preventionHeat != null">
+        #{preventionHeat,jdbcType=DECIMAL},
+      </if>
+      <if test="healthUpgrade != null">
+        #{healthUpgrade,jdbcType=DECIMAL},
+      </if>
+      <if test="relativeMedical != null">
+        #{relativeMedical,jdbcType=DECIMAL},
+      </if>
+      <if test="psychologyGoods != null">
+        #{psychologyGoods,jdbcType=DECIMAL},
+      </if>
+      <if test="lunchSubsidy != null">
+        #{lunchSubsidy,jdbcType=DECIMAL},
+      </if>
+      <if test="healthProducts != null">
+        #{healthProducts,jdbcType=DECIMAL},
+      </if>
+      <if test="educationProducts != null">
+        #{educationProducts,jdbcType=DECIMAL},
+      </if>
+      <if test="elasticityProducts != null">
+        #{elasticityProducts,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

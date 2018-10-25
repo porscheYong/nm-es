@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.wongs.es.zbdata.welfare.dao.JxWelfarePointsDao">
+  <resultMap id="BaseResultMap" type="xyz.wongs.es.zbdata.welfare.entity.JxWelfarePoints">
+    <result column="JX_POINTS_ID" jdbcType="DECIMAL" property="jxPointsId" />
+    <result column="LOGIN_NAME" jdbcType="DECIMAL" property="loginName" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="BRANCH_COMPANY" jdbcType="VARCHAR" property="branchCompany" />
+    <result column="START_DATE" jdbcType="DATE" property="startDate" />
+    <result column="END_DATE" jdbcType="DATE" property="endDate" />
+    <result column="HOUSE_FUND_INS" jdbcType="DECIMAL" property="houseFundIns" />
+    <result column="BASIC_OLD_INS" jdbcType="DECIMAL" property="basicOldIns" />
+    <result column="BASIC_MEDICAL_INS" jdbcType="DECIMAL" property="basicMedicalIns" />
+    <result column="BIRTH_INS" jdbcType="DECIMAL" property="birthIns" />
+    <result column="INJURY_INS" jdbcType="DECIMAL" property="injuryIns" />
+    <result column="LOSE_WORK_INS" jdbcType="DECIMAL" property="loseWorkIns" />
+    <result column="MEDICAL_INS" jdbcType="DECIMAL" property="medicalIns" />
+    <result column="COMPANY_ANNUITY_INS" jdbcType="DECIMAL" property="companyAnnuityIns" />
+    <result column="VACATION_PAID_INS" jdbcType="DECIMAL" property="vacationPaidIns" />
+    <result column="HYGIENE_HEALTH_INS" jdbcType="DECIMAL" property="hygieneHealthIns" />
+    <result column="DISTRIBUTION_INS_SUM" jdbcType="DECIMAL" property="distributionInsSum" />
+    <result column="USED_INS" jdbcType="DECIMAL" property="usedIns" />
+    <result column="REMAIN_INS" jdbcType="DECIMAL" property="remainIns" />
+    <result column="SEL_YEAR" jdbcType="VARCHAR" property="selYear" />
+    <result column="ESL_MONTH" jdbcType="VARCHAR" property="eslMonth" />
+  </resultMap>
+  <insert id="insert" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfarePoints">
+    insert into JX_WELFARE_POINTS (JX_POINTS_ID, LOGIN_NAME, USER_NAME, 
+      BRANCH_COMPANY, START_DATE, END_DATE, 
+      HOUSE_FUND_INS, BASIC_OLD_INS, BASIC_MEDICAL_INS, 
+      BIRTH_INS, INJURY_INS, LOSE_WORK_INS, 
+      MEDICAL_INS, COMPANY_ANNUITY_INS, VACATION_PAID_INS, 
+      HYGIENE_HEALTH_INS, DISTRIBUTION_INS_SUM, USED_INS, 
+      REMAIN_INS, SEL_YEAR, ESL_MONTH
+      )
+    values (#{jxPointsId,jdbcType=DECIMAL}, #{loginName,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR}, 
+      #{branchCompany,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=DATE}, 
+      #{houseFundIns,jdbcType=DECIMAL}, #{basicOldIns,jdbcType=DECIMAL}, #{basicMedicalIns,jdbcType=DECIMAL}, 
+      #{birthIns,jdbcType=DECIMAL}, #{injuryIns,jdbcType=DECIMAL}, #{loseWorkIns,jdbcType=DECIMAL}, 
+      #{medicalIns,jdbcType=DECIMAL}, #{companyAnnuityIns,jdbcType=DECIMAL}, #{vacationPaidIns,jdbcType=DECIMAL}, 
+      #{hygieneHealthIns,jdbcType=DECIMAL}, #{distributionInsSum,jdbcType=DECIMAL}, #{usedIns,jdbcType=DECIMAL}, 
+      #{remainIns,jdbcType=DECIMAL}, #{selYear,jdbcType=VARCHAR}, #{eslMonth,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfarePoints">
+    insert into JX_WELFARE_POINTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jxPointsId != null">
+        JX_POINTS_ID,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="branchCompany != null">
+        BRANCH_COMPANY,
+      </if>
+      <if test="startDate != null">
+        START_DATE,
+      </if>
+      <if test="endDate != null">
+        END_DATE,
+      </if>
+      <if test="houseFundIns != null">
+        HOUSE_FUND_INS,
+      </if>
+      <if test="basicOldIns != null">
+        BASIC_OLD_INS,
+      </if>
+      <if test="basicMedicalIns != null">
+        BASIC_MEDICAL_INS,
+      </if>
+      <if test="birthIns != null">
+        BIRTH_INS,
+      </if>
+      <if test="injuryIns != null">
+        INJURY_INS,
+      </if>
+      <if test="loseWorkIns != null">
+        LOSE_WORK_INS,
+      </if>
+      <if test="medicalIns != null">
+        MEDICAL_INS,
+      </if>
+      <if test="companyAnnuityIns != null">
+        COMPANY_ANNUITY_INS,
+      </if>
+      <if test="vacationPaidIns != null">
+        VACATION_PAID_INS,
+      </if>
+      <if test="hygieneHealthIns != null">
+        HYGIENE_HEALTH_INS,
+      </if>
+      <if test="distributionInsSum != null">
+        DISTRIBUTION_INS_SUM,
+      </if>
+      <if test="usedIns != null">
+        USED_INS,
+      </if>
+      <if test="remainIns != null">
+        REMAIN_INS,
+      </if>
+      <if test="selYear != null">
+        SEL_YEAR,
+      </if>
+      <if test="eslMonth != null">
+        ESL_MONTH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jxPointsId != null">
+        #{jxPointsId,jdbcType=DECIMAL},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=DECIMAL},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchCompany != null">
+        #{branchCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=DATE},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=DATE},
+      </if>
+      <if test="houseFundIns != null">
+        #{houseFundIns,jdbcType=DECIMAL},
+      </if>
+      <if test="basicOldIns != null">
+        #{basicOldIns,jdbcType=DECIMAL},
+      </if>
+      <if test="basicMedicalIns != null">
+        #{basicMedicalIns,jdbcType=DECIMAL},
+      </if>
+      <if test="birthIns != null">
+        #{birthIns,jdbcType=DECIMAL},
+      </if>
+      <if test="injuryIns != null">
+        #{injuryIns,jdbcType=DECIMAL},
+      </if>
+      <if test="loseWorkIns != null">
+        #{loseWorkIns,jdbcType=DECIMAL},
+      </if>
+      <if test="medicalIns != null">
+        #{medicalIns,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAnnuityIns != null">
+        #{companyAnnuityIns,jdbcType=DECIMAL},
+      </if>
+      <if test="vacationPaidIns != null">
+        #{vacationPaidIns,jdbcType=DECIMAL},
+      </if>
+      <if test="hygieneHealthIns != null">
+        #{hygieneHealthIns,jdbcType=DECIMAL},
+      </if>
+      <if test="distributionInsSum != null">
+        #{distributionInsSum,jdbcType=DECIMAL},
+      </if>
+      <if test="usedIns != null">
+        #{usedIns,jdbcType=DECIMAL},
+      </if>
+      <if test="remainIns != null">
+        #{remainIns,jdbcType=DECIMAL},
+      </if>
+      <if test="selYear != null">
+        #{selYear,jdbcType=VARCHAR},
+      </if>
+      <if test="eslMonth != null">
+        #{eslMonth,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

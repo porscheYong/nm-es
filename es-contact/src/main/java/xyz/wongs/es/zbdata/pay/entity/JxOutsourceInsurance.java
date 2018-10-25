@@ -1,4 +1,4 @@
-package xyz.wongs.es.zbData.pay.entity;
+package xyz.wongs.es.zbdata.pay.entity;
 
 import com.opencsv.bean.CsvBindByName;
 import xyz.wongs.es.common.persistence.DataEntity;

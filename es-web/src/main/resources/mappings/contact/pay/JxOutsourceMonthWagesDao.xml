@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="xyz.wongs.es.zbData.pay.dao.JxOutsourceMonthWagesDao">
-    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+<mapper namespace="xyz.wongs.es.zbdata.pay.dao.JxOutsourceMonthWagesDao">
+    <resultMap id="BaseResultMap" type="xyz.wongs.es.zbdata.pay.entity.JxOutsourceMonthWages">
         <result column="JX_MONTH_WAGES_ID" jdbcType="DECIMAL" property="jxMonthWagesId" />
         <result column="GIVE_PERIOD" jdbcType="VARCHAR" property="givePeriod" />
         <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
@@ -107,7 +107,7 @@
         <result column="HOUSE_FUND_JS" jdbcType="DECIMAL" property="houseFundJs" />
         <result column="COMPENSATOR_MONTH" jdbcType="DECIMAL" property="compensatorMonth" />
     </resultMap>
-    <insert id="insert" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+    <insert id="insert" parameterType="xyz.wongs.es.zbdata.pay.entity.JxOutsourceMonthWages">
         insert into JX_OUTSOURCE_MONTH_WAGES (JX_MONTH_WAGES_ID, GIVE_PERIOD, LOGIN_NAME,
         USER_NAME, PERSONNEL_TYPE, COMPANY_NAME,
         DEPT_NAME, POST_NAME, JOB_RANK,
@@ -543,7 +543,7 @@
         )
     </insert>
 
-    <insert id="insertSelective" parameterType="xyz.wongs.es.zbData.pay.entity.JxOutsourceMonthWages">
+    <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.pay.entity.JxOutsourceMonthWages">
         insert into JX_OUTSOURCE_MONTH_WAGES
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="jxMonthWagesId != null">
