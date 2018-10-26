@@ -42,6 +42,95 @@
       #{remainIns,jdbcType=DECIMAL}, #{selYear,jdbcType=VARCHAR}, #{eslMonth,jdbcType=VARCHAR}
       )
   </insert>
+
+    <insert id="mergeInto" parameterType="java.util.List">
+    merge into JX_WELFARE_POINTS a
+    using (
+    <foreach collection="list" item="item" index="index" separator="union" >
+    SELECT
+        #{item.jxPointsId,jdbcType=DECIMAL}  as jxPointsId,
+        #{item.loginName,jdbcType=DECIMAL}  as loginName,
+        #{item.userName,jdbcType=VARCHAR}  as userName,
+        #{item.branchCompany,jdbcType=VARCHAR}  as branchCompany,
+        #{item.startDate,jdbcType=DATE}  as startDate,
+        #{item.endDate,jdbcType=DATE}  as endDate,
+        #{item.houseFundIns,jdbcType=DECIMAL}  as houseFundIns,
+        #{item.basicOldIns,jdbcType=DECIMAL}  as basicOldIns,
+        #{item.basicMedicalIns,jdbcType=DECIMAL}  as basicMedicalIns,
+        #{item.birthIns,jdbcType=DECIMAL}  as birthIns,
+        #{item.injuryIns,jdbcType=DECIMAL}  as injuryIns,
+        #{item.loseWorkIns,jdbcType=DECIMAL}  as loseWorkIns,
+        #{item.medicalIns,jdbcType=DECIMAL}  as medicalIns,
+        #{item.companyAnnuityIns,jdbcType=DECIMAL}  as companyAnnuityIns,
+        #{item.vacationPaidIns,jdbcType=DECIMAL}  as vacationPaidIns,
+        #{item.hygieneHealthIns,jdbcType=DECIMAL}  as hygieneHealthIns,
+        #{item.distributionInsSum,jdbcType=DECIMAL}  as distributionInsSum,
+        #{item.usedIns,jdbcType=DECIMAL}  as usedIns,
+        #{item.remainIns,jdbcType=DECIMAL}  as remainIns,
+        #{item.selYear,jdbcType=VARCHAR}  as selYear,
+        #{item.eslMonth,jdbcType=VARCHAR} as eslMonth
+      FROM dual
+    </foreach>
+    ) T
+    on (a.JX_POINTS_ID = T.jxPointsId)
+    WHEN matched THEN
+    UPDATE SET
+        /*a.JX_POINTS_ID = T.jxPointsId,*/
+        a.LOGIN_NAME = T.loginName,
+        a.USER_NAME = T.userName,
+        a.BRANCH_COMPANY = T.branchCompany,
+        a.START_DATE = T.startDate,
+        a.END_DATE = T.endDate,
+        a.HOUSE_FUND_INS = T.houseFundIns,
+        a.BASIC_OLD_INS = T.basicOldIns,
+        a.BASIC_MEDICAL_INS = T.basicMedicalIns,
+        a.BIRTH_INS = T.birthIns,
+        a.INJURY_INS = T.injuryIns,
+        a.LOSE_WORK_INS = T.loseWorkIns,
+        a.MEDICAL_INS = T.medicalIns,
+        a.COMPANY_ANNUITY_INS = T.companyAnnuityIns,
+        a.VACATION_PAID_INS = T.vacationPaidIns,
+        a.HYGIENE_HEALTH_INS = T.hygieneHealthIns,
+        a.DISTRIBUTION_INS_SUM = T.distributionInsSum,
+        a.USED_INS = T.usedIns,
+        a.REMAIN_INS = T.remainIns,
+        a.SEL_YEAR = T.selYear,
+        a.ESL_MONTH = T.eslMonth
+    WHEN not matched THEN
+    insert(
+        JX_POINTS_ID, LOGIN_NAME, USER_NAME,
+        BRANCH_COMPANY, START_DATE, END_DATE,
+        HOUSE_FUND_INS, BASIC_OLD_INS, BASIC_MEDICAL_INS,
+        BIRTH_INS, INJURY_INS, LOSE_WORK_INS,
+        MEDICAL_INS, COMPANY_ANNUITY_INS, VACATION_PAID_INS,
+        HYGIENE_HEALTH_INS, DISTRIBUTION_INS_SUM, USED_INS,
+        REMAIN_INS, SEL_YEAR, ESL_MONTH
+        )
+    VALUES(
+        T.jxPointsId,
+        T.loginName,
+        T.userName,
+        T.branchCompany,
+        T.startDate,
+        T.endDate,
+        T.houseFundIns,
+        T.basicOldIns,
+        T.basicMedicalIns,
+        T.birthIns,
+        T.injuryIns,
+        T.loseWorkIns,
+        T.medicalIns,
+        T.companyAnnuityIns,
+        T.vacationPaidIns,
+        T.hygieneHealthIns,
+        T.distributionInsSum,
+        T.usedIns,
+        T.remainIns,
+        T.selYear,
+        T.eslMonth
+        )
+    </insert>
+
   <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfarePoints">
     insert into JX_WELFARE_POINTS
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -58,6 +58,129 @@
       #{lunchSubsidy,jdbcType=DECIMAL}, #{healthProducts,jdbcType=DECIMAL}, #{educationProducts,jdbcType=DECIMAL}, 
       #{elasticityProducts,jdbcType=DECIMAL})
   </insert>
+
+    <insert id="mergeInto" parameterType="java.util.List">
+    merge into JX_WELFARE_PRODUCT A
+    using (
+    <foreach collection="list" item="item" index="index" separator="union" >
+    SELECT
+        #{item.jxProductId,jdbcType=DECIMAL} as jxProductId,
+        #{item.loginName,jdbcType=VARCHAR} as loginName,
+        #{item.userName,jdbcType=VARCHAR} as userName,
+        #{item.branchCompany,jdbcType=VARCHAR} as branchCompany,
+        #{item.houseFund,jdbcType=DECIMAL} as houseFund,
+        #{item.basicOld,jdbcType=DECIMAL} as basicOld,
+        #{item.basicMedical,jdbcType=DECIMAL} as basicMedical,
+        #{item.birth,jdbcType=DECIMAL} as birth,
+        #{item.injury,jdbcType=DECIMAL} as injury,
+        #{item.loseWork,jdbcType=DECIMAL} as loseWork,
+        #{item.medical,jdbcType=DECIMAL} as medical,
+        #{item.companyAnnuity,jdbcType=DECIMAL} as companyAnnuity,
+        #{item.vacationPaid,jdbcType=DECIMAL} as vacationPaid,
+        #{item.coolingSubsidy,jdbcType=DECIMAL} as coolingSubsidy,
+        #{item.coolingGoods,jdbcType=DECIMAL} as coolingGoods,
+        #{item.medicalKit,jdbcType=DECIMAL} as medicalKit,
+        #{item.girlHealthGoods,jdbcType=DECIMAL} as girlHealthGoods,
+        #{item.addVacationPaid,jdbcType=DECIMAL} as addVacationPaid,
+        #{item.yearGreet,jdbcType=DECIMAL} as yearGreet,
+        #{item.birthdayGreet,jdbcType=DECIMAL} as birthdayGreet,
+        #{item.marchEightGreet,jdbcType=DECIMAL} as marchEightGreet,
+        #{item.commercialMedical,jdbcType=DECIMAL} as commercialMedical,
+        #{item.heatingGreet,jdbcType=DECIMAL} as heatingGreet,
+        #{item.preventionHeat,jdbcType=DECIMAL} as preventionHeat,
+        #{item.healthUpgrade,jdbcType=DECIMAL} as healthUpgrade,
+        #{item.relativeMedical,jdbcType=DECIMAL} as relativeMedical,
+        #{item.psychologyGoods,jdbcType=DECIMAL} as psychologyGoods,
+        #{item.lunchSubsidy,jdbcType=DECIMAL} as lunchSubsidy,
+        #{item.healthProducts,jdbcType=DECIMAL} as healthProducts,
+        #{item.educationProducts,jdbcType=DECIMAL} as educationProducts,
+        #{item.elasticityProducts,jdbcType=DECIMAL} as elasticityProducts
+      FROM dual
+    </foreach>
+    ) T
+    on (a.JX_PRODUCT_ID = T.jxProductId)
+    WHEN matched THEN
+    UPDATE SET
+        /*A.JX_PRODUCT_ID = 	T.jxProductId,*/
+        A.LOGIN_NAME = 	T.loginName,
+        A.USER_NAME = 	T.userName,
+        A.BRANCH_COMPANY = 	T.branchCompany,
+        A.HOUSE_FUND = 	T.houseFund,
+        A.BASIC_OLD = 	T.basicOld,
+        A.BASIC_MEDICAL = 	T.basicMedical,
+        A.BIRTH = 	T.birth,
+        A.INJURY = 	T.injury,
+        A.LOSE_WORK = 	T.loseWork,
+        A.MEDICAL = 	T.medical,
+        A.COMPANY_ANNUITY = 	T.companyAnnuity,
+        A.VACATION_PAID = 	T.vacationPaid,
+        A.COOLING_SUBSIDY = 	T.coolingSubsidy,
+        A.COOLING_GOODS = 	T.coolingGoods,
+        A.MEDICAL_KIT = 	T.medicalKit,
+        A.GIRL_HEALTH_GOODS = 	T.girlHealthGoods,
+        A.ADD_VACATION_PAID = 	T.addVacationPaid,
+        A.YEAR_GREET = 	T.yearGreet,
+        A.BIRTHDAY_GREET = 	T.birthdayGreet,
+        A.MARCH_EIGHT_GREET = 	T.marchEightGreet,
+        A.COMMERCIAL_MEDICAL = 	T.commercialMedical,
+        A.HEATING_GREET = 	T.heatingGreet,
+        A.PREVENTION_HEAT = 	T.preventionHeat,
+        A.HEALTH_UPGRADE = 	T.healthUpgrade,
+        A.RELATIVE_MEDICAL = 	T.relativeMedical,
+        A.PSYCHOLOGY_GOODS = 	T.psychologyGoods,
+        A.LUNCH_SUBSIDY = 	T.lunchSubsidy,
+        A.HEALTH_PRODUCTS = 	T.healthProducts,
+        A.EDUCATION_PRODUCTS = 	T.educationProducts,
+        A.ELASTICITY_PRODUCTS =	T.elasticityProducts
+    WHEN not matched THEN
+    insert(
+        JX_PRODUCT_ID, LOGIN_NAME, USER_NAME,
+        BRANCH_COMPANY, HOUSE_FUND, BASIC_OLD,
+        BASIC_MEDICAL, BIRTH, INJURY,
+        LOSE_WORK, MEDICAL, COMPANY_ANNUITY,
+        VACATION_PAID, COOLING_SUBSIDY, COOLING_GOODS,
+        MEDICAL_KIT, GIRL_HEALTH_GOODS, ADD_VACATION_PAID,
+        YEAR_GREET, BIRTHDAY_GREET, MARCH_EIGHT_GREET,
+        COMMERCIAL_MEDICAL, HEATING_GREET, PREVENTION_HEAT,
+        HEALTH_UPGRADE, RELATIVE_MEDICAL, PSYCHOLOGY_GOODS,
+        LUNCH_SUBSIDY, HEALTH_PRODUCTS, EDUCATION_PRODUCTS,
+        ELASTICITY_PRODUCTS
+        )
+    VALUES(
+        T.jxProductId,
+        T.loginName,
+        T.userName,
+        T.branchCompany,
+        T.houseFund,
+        T.basicOld,
+        T.basicMedical,
+        T.birth,
+        T.injury,
+        T.loseWork,
+        T.medical,
+        T.companyAnnuity,
+        T.vacationPaid,
+        T.coolingSubsidy,
+        T.coolingGoods,
+        T.medicalKit,
+        T.girlHealthGoods,
+        T.addVacationPaid,
+        T.yearGreet,
+        T.birthdayGreet,
+        T.marchEightGreet,
+        T.commercialMedical,
+        T.heatingGreet,
+        T.preventionHeat,
+        T.healthUpgrade,
+        T.relativeMedical,
+        T.psychologyGoods,
+        T.lunchSubsidy,
+        T.healthProducts,
+        T.educationProducts,
+        T.elasticityProducts
+        )
+    </insert>
+
   <insert id="insertSelective" parameterType="xyz.wongs.es.zbdata.welfare.entity.JxWelfareProduct">
     insert into JX_WELFARE_PRODUCT
     <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -196,7 +196,7 @@ public class DocUnitCase extends BaseUnit {
      * @return void
      **/
     @Test
-    public void testZbData(){
+    public void testZbdata(){
         org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
         SecurityUtils.setSecurityManager(securityManager);
 
