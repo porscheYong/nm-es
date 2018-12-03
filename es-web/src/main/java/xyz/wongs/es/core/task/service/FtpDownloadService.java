@@ -192,7 +192,8 @@ public class FtpDownloadService {
         String env = DictUtils.getValue(ENVIRONMENT);
         Boolean flag = EnumEvn.getName(env);
         if(flag){
-            fp = new Ftp("132.63.10.96", 21, "ds_ftp_815", "ds_ftp_815", ".");
+//            fp = new Ftp("132.63.10.96", 21, "ds_ftp_815", "ds_ftp_815", ".");
+            fp = new Ftp("10.254.173.122", 21, "ds_ftp_815", "ds_ftp_815", ".");
         } else{
             fp = new Ftp("123.206.118.219", 21, "uac", "AbcL0ve$%", ".");
 //            fp = new Ftp("134.64.53.52", 21, "kms", "Kms123456", ".");
