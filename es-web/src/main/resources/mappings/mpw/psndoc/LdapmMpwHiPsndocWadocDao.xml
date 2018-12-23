@@ -37,6 +37,7 @@
     <result column="ASSGID" property="assgid" jdbcType="DECIMAL" />
     <result column="DR" property="dr" jdbcType="DECIMAL" />
     <result column="TS" property="ts" jdbcType="VARCHAR" />
+      <result column="EXECUTEDATE" property="executedate" jdbcType="VARCHAR" />
   </resultMap>
   <insert id="insertBatch" parameterType="java.util.List">
 
@@ -51,7 +52,7 @@
     PK_ORG, PK_GROUP, CRITERIONVALUE,
     PK_WA_PRMLV, PK_WA_SECLV, CRT_MIN_VALUE,
     CRT_MAX_VALUE, PARTFLAG, ASSGID,
-    DR, TS)
+    DR, TS, EXECUTEDATE)
     select cd.* from(
     <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
       select
@@ -66,7 +67,7 @@
       #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.criterionvalue,jdbcType=DECIMAL},
       #{item.pkWaPrmlv,jdbcType=VARCHAR}, #{item.pkWaSeclv,jdbcType=VARCHAR}, #{item.crtMinValue,jdbcType=DECIMAL},
       #{item.crtMaxValue,jdbcType=DECIMAL}, #{item.partflag,jdbcType=VARCHAR}, #{item.assgid,jdbcType=DECIMAL},
-      #{item.dr,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}
+      #{item.dr,jdbcType=DECIMAL}, #{item.ts,jdbcType=VARCHAR}, #{item.executedate,jdbcType=VARCHAR}
       from dual
     </foreach>
     ) cd
@@ -83,7 +84,7 @@
       PK_ORG, PK_GROUP, CRITERIONVALUE, 
       PK_WA_PRMLV, PK_WA_SECLV, CRT_MIN_VALUE, 
       CRT_MAX_VALUE, PARTFLAG, ASSGID, 
-      DR, TS)
+      DR, TS, EXECUTEDATE)
     values (#{monthId,jdbcType=DECIMAL}, #{unitId,jdbcType=VARCHAR}, #{pkPsndocSub,jdbcType=VARCHAR}, 
       #{pkPsndoc,jdbcType=VARCHAR}, #{pkPsnjob,jdbcType=VARCHAR}, #{negotiationWage,jdbcType=VARCHAR}, 
       #{workflowflag,jdbcType=VARCHAR}, #{begindate,jdbcType=VARCHAR}, #{enddate,jdbcType=VARCHAR}, 
@@ -95,7 +96,7 @@
       #{pkOrg,jdbcType=VARCHAR}, #{pkGroup,jdbcType=VARCHAR}, #{criterionvalue,jdbcType=DECIMAL}, 
       #{pkWaPrmlv,jdbcType=VARCHAR}, #{pkWaSeclv,jdbcType=VARCHAR}, #{crtMinValue,jdbcType=DECIMAL}, 
       #{crtMaxValue,jdbcType=DECIMAL}, #{partflag,jdbcType=VARCHAR}, #{assgid,jdbcType=DECIMAL}, 
-      #{dr,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR})
+      #{dr,jdbcType=DECIMAL}, #{ts,jdbcType=VARCHAR}, #{executedate,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="LdapmMpwHiPsndocWadoc" >
     insert into LDAPM_MPW_HI_PSNDOC_WADOC
@@ -205,6 +206,9 @@
       <if test="ts != null" >
         TS,
       </if>
+        <if test="executedate != null" >
+            EXECUTEDATE,
+        </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="monthId != null" >
@@ -312,6 +316,9 @@
       <if test="ts != null" >
         #{ts,jdbcType=VARCHAR},
       </if>
+        <if test="executedate != null" >
+            #{executedate,jdbcType=VARCHAR},
+        </if>
     </trim>
   </insert>
 </mapper>

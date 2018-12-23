@@ -75,6 +75,8 @@ public class LdapmMpwHiPsndocWadoc extends DataEntity<LdapmMpwHiPsndocWadoc> {
 
     private String ts;
 
+    private String executedate;
+
     public Integer getMonthId() {
         return monthId;
     }
@@ -353,5 +355,13 @@ public class LdapmMpwHiPsndocWadoc extends DataEntity<LdapmMpwHiPsndocWadoc> {
 
     public void setTs(String ts) {
         this.ts = ts == null ? null : ts.trim();
+    }
+
+    public String getExecutedate() {
+        return executedate;
+    }
+
+    public void setExecutedate(String executedate) {
+        this.executedate = executedate;
     }
 }
