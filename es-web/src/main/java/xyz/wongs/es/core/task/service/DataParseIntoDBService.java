@@ -62,7 +62,7 @@ public class DataParseIntoDBService {
     /**
      * 本地环境CSV地址
      **/
-    private static String CSVPATH = "F:\\FTP";
+//    private static String CSVPATH = "F:\\FTP";
 
     /**
      * @Description: 定时任务：定时向数据库导入当月数据：每月6日20点30分进行数据写库
@@ -123,26 +123,26 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 59 09 * * ?")
-    public void csvDataParseInputDB(){
-        org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
-        SecurityUtils.setSecurityManager(securityManager);
-
-        List<Document> docs = null;
-        docs = readFile(new File(CSVPATH),CSV);
-        if(!CollectionUtils.isNotEmpty(docs))   {
-            return;
-        }
-        for (Document doc : docs) {
-            logger.error("开始导入："+doc.getShortName());
-            Tab2BeanCorresRef t2C = tab2BeanCorresRefService.find(doc.getShortName());
-            int returnCns = insertDataService.readCsvDate(t2C.getServiceName(),doc.getPath(), t2C.getEntityName());
-            doc.setFlag((short)1);
-            doc.setExuCounts(new Long(returnCns));
-            logger.error(doc.getShortName()+" ,导入完毕共入库数据量："+returnCns);
-            documentService.updateByPrimaryKeySelective(doc);
-        }
-    }
+//    @Scheduled(cron = "0 59 09 * * ?")
+//    public void csvDataParseInputDB(){
+//        org.apache.shiro.mgt.SecurityManager securityManager =SpringContextHolder.getBean("securityManager");
+//        SecurityUtils.setSecurityManager(securityManager);
+//
+//        List<Document> docs = null;
+//        docs = readFile(new File(CSVPATH),CSV);
+//        if(!CollectionUtils.isNotEmpty(docs))   {
+//            return;
+//        }
+//        for (Document doc : docs) {
+//            logger.error("开始导入："+doc.getShortName());
+//            Tab2BeanCorresRef t2C = tab2BeanCorresRefService.find(doc.getShortName());
+//            int returnCns = insertDataService.readCsvDate(t2C.getServiceName(),doc.getPath(), t2C.getEntityName());
+//            doc.setFlag((short)1);
+//            doc.setExuCounts(new Long(returnCns));
+//            logger.error(doc.getShortName()+" ,导入完毕共入库数据量："+returnCns);
+//            documentService.updateByPrimaryKeySelective(doc);
+//        }
+//    }
 
     /**
      * @Description: 根据每天下发数据文件所在的具体位置，将下发数据导入至数据库

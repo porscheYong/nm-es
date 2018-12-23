@@ -16,6 +16,7 @@ import java.math.BigDecimal;
  * 注意：本内容仅限于中电福富信息技术股份有限公司内部传阅，禁止外泄
  */
 public class LdapmMpwBdRegion extends DataEntity<LdapmMpwBdRegion> {
+
     private Integer monthId;
 
     private String unitId;
