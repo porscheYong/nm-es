@@ -97,7 +97,7 @@ public class FtpDownloadService {
      * @Description: 每日14点
      * @Mod:
      */
-    @Scheduled(cron = "0 00 14 * * ?")
+    @Scheduled(cron = "0 00 16 * * ?")
     public void dayData(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);

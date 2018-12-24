@@ -98,7 +98,7 @@ public class DataParseIntoDBService {
      * @see
      * @date        2018/1/28 17:47
      */
-    @Scheduled(cron = "0 15 14 * * ?")
+    @Scheduled(cron = "0 15 16 * * ?")
     public void dataParseInputTimeByDay(){
         String day = DateUtils.getDaySimple(-1);
         String year =  day.substring(0,4);
