@@ -63,6 +63,40 @@
       #{shortname5,jdbcType=VARCHAR}, #{shortname6,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
       #{zipcode,jdbcType=VARCHAR})
   </insert>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into LDAPM_MPW_BD_REGION (MONTH_ID, UNIT_ID, PK_REGION,
+        CODE, CREATIONTIME, CREATOR,
+        DATAORIGINFLAG, DR, ENABLESTATE,
+        INNERCODE, MEMCODE, MODIFIEDTIME,
+        MODIFIER, NAME, NAME2,
+        NAME3, NAME4, NAME5,
+        NAME6, PK_COUNTRY, PK_FATHER,
+        PK_FORMAT, PK_GROUP, PK_LANG,
+        PK_ORG, PK_TIMEZONE, SHORTNAME,
+        SHORTNAME2, SHORTNAME3, SHORTNAME4,
+        SHORTNAME5, SHORTNAME6, TS,
+        ZIPCODE)
+        select cd.* from(
+        <foreach collection="list" item="item" index="index" close=")" open="(" separator="union">
+            select
+            #{item.monthId,jdbcType=DECIMAL}, #{item.unitId,jdbcType=VARCHAR}, #{item.pkRegion,jdbcType=VARCHAR},
+            #{item.code,jdbcType=VARCHAR}, #{item.creationtime,jdbcType=VARCHAR}, #{item.creator,jdbcType=VARCHAR},
+            #{item.dataoriginflag,jdbcType=DECIMAL}, #{item.dr,jdbcType=DECIMAL}, #{item.enablestate,jdbcType=DECIMAL},
+            #{item.innercode,jdbcType=VARCHAR}, #{item.memcode,jdbcType=VARCHAR}, #{item.modifiedtime,jdbcType=VARCHAR},
+            #{item.modifier,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.name2,jdbcType=VARCHAR},
+            #{item.name3,jdbcType=VARCHAR}, #{item.name4,jdbcType=VARCHAR}, #{item.name5,jdbcType=VARCHAR},
+            #{item.name6,jdbcType=VARCHAR}, #{item.pkCountry,jdbcType=VARCHAR}, #{item.pkFather,jdbcType=VARCHAR},
+            #{item.pkFormat,jdbcType=VARCHAR}, #{item.pkGroup,jdbcType=VARCHAR}, #{item.pkLang,jdbcType=VARCHAR},
+            #{item.pkOrg,jdbcType=VARCHAR}, #{item.pkTimezone,jdbcType=VARCHAR}, #{item.shortname,jdbcType=VARCHAR},
+            #{item.shortname2,jdbcType=VARCHAR}, #{item.shortname3,jdbcType=VARCHAR}, #{item.shortname4,jdbcType=VARCHAR},
+            #{item.shortname5,jdbcType=VARCHAR}, #{item.shortname6,jdbcType=VARCHAR}, #{item.ts,jdbcType=VARCHAR},
+            #{item.zipcode,jdbcType=VARCHAR}
+            from dual
+        </foreach>
+        ) cd
+    </insert>
+
   <insert id="insertSelective" parameterType="LdapmMpwBdRegion">
     insert into LDAPM_MPW_BD_REGION
     <trim prefix="(" suffix=")" suffixOverrides=",">
