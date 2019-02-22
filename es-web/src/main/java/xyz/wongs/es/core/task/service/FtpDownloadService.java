@@ -192,10 +192,10 @@ public class FtpDownloadService {
         String env = DictUtils.getValue(ENVIRONMENT);
         Boolean flag = EnumEvn.getName(env);
         if(flag){
-            //目前内蒙ftp IP
-            fp = new Ftp("132.63.10.96", 21, "ds_ftp_815", "ds_ftp_815", ".");
-            //内蒙计划更换的ftp IP
-//            fp = new Ftp("10.254.173.122", 21, "ds_ftp_815", "ds_ftp_815", ".");
+            //内蒙ftp IP
+            //fp = new Ftp("132.63.10.96", 21, "ds_ftp_815", "ds_ftp_815", ".");
+            //内蒙计划更换的ftp IP --已经更改：2019/02/22
+            fp = new Ftp("10.142.106.68", 21, "ds_ftp_815", "ds_ftp_815", ".");
         } else{
             fp = new Ftp("123.206.118.219", 21, "uac", "AbcL0ve$%", ".");
         }
